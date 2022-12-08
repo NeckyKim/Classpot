@@ -26,15 +26,31 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
     const [choices, setChoices] = useState<string[]>(new Array(10).fill(""));
     const [numberOfChoices, setNumberOfChoices] = useState<number>(3);
 
-    console.log()
+    const [pass, setPass] = useState<boolean>(false);
+
+
 
     async function addQuestion(event: any) {
         event.preventDefault();
 
 
 
+        if (type === "객관식") {
+            if (Object.values(answer).filter(element => element === true).length) {
+                setPass(true);
+            }
 
-        if (testCode && Object.values(answer).filter(element => element === true).length) {
+            else {
+                alert("객관식 문제는 정답을 한 개 이상 설정해야 합니다.")
+            }
+        }
+
+        if (type === "참/거짓" || type === "주관식" || type === "서술형") {
+            setPass(true);
+        }
+
+
+        if (testCode && pass) {
             try {
                 await setDoc(doc(collection(dbService, "tests", testCode, "questions")), {
                     type: type,
@@ -56,10 +72,6 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                 alert("문제 추가에 실패했습니다.");
             }
         }
-
-        else {
-            alert("객관식 문제는 정답을 한 개 이상 설정해야 합니다.")
-        }
     }
 
 
@@ -70,33 +82,43 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                 유형
             </div>
 
-            <button onClick={() => {
-                setType("객관식");
-                setAnswer(new Array(10).fill(false))
-            }}>
-                객관식
-            </button>
+            <div className={styles.questionTypeContainer}>
+                <div
+                    className={type === "객관식" ? styles.questionTypeSelectedLeft : styles.questionTypeNotSelectedLeft}
+                    onClick={() => {
+                        setType("객관식");
+                        setAnswer(new Array(10).fill(false));
+                    }}>
+                    객관식
+                </div>
 
-            <button onClick={() => {
-                setType("진위형");
-                setAnswer(true);
-            }}>
-                진위형
-            </button>
+                <div
+                    className={type === "참/거짓" ? styles.questionTypeSelectedMiddle : styles.questionTypeNotSelectedMiddle}
+                    onClick={() => {
+                        setType("참/거짓");
+                        setAnswer(true);
+                    }}>
+                    참/거짓
+                </div>
 
-            <button onClick={() => {
-                setType("주관식");
-                setAnswer("");
-            }}>
-                주관식
-            </button>
+                <div
+                    className={type === "주관식" ? styles.questionTypeSelectedMiddle : styles.questionTypeNotSelectedMiddle}
+                    onClick={() => {
+                        setType("주관식");
+                        setAnswer("");
+                    }}>
+                    주관식
+                </div>
 
-            <button onClick={() => {
-                setType("서술형");
-                setAnswer("");
-            }}>
-                서술형
-            </button>
+                <div
+                    className={type === "서술형" ? styles.questionTypeSelectedRight : styles.questionTypeNotSelectedRight}
+                    onClick={() => {
+                        setType("서술형");
+                        setAnswer("");
+                    }}>
+                    서술형
+                </div>
+            </div>
 
 
 
@@ -111,8 +133,13 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                     max={100}
                     value={points}
                     onChange={(event) => { setPoints(Number(event.target.value)); }}
+                    className={styles.questionPoints}
                     required
                 />
+
+                <div className={styles.questionPointsUnit}>
+                    점
+                </div>
 
 
 
@@ -126,7 +153,6 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                     className={styles.questionBox}
                     required
                 />
-                <br /><br />
 
 
 
@@ -140,26 +166,25 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                             선택지
                         </div>
 
-                        <input type="button" value="증가 +" onClick={() => {
-                            if (numberOfChoices === 10) {
-                                alert("더 이상 선택지를 추가할 수 없습니다.");
-                            }
+                        <div className={styles.choiceButtonContainer}>
+                            <input
+                                type="button"
+                                value="증가 +"
+                                disabled={numberOfChoices === 10}
+                                onClick={() => { setNumberOfChoices(numberOfChoices + 1); }}
+                                className={styles.choiceButtonUp}
+                            />
 
-                            else {
-                                setNumberOfChoices(numberOfChoices + 1);
-                            }
-                        }} />
+                            <input
+                                type="button"
+                                value="감소 -"
+                                disabled={numberOfChoices === 3}
+                                onClick={() => { setNumberOfChoices(numberOfChoices - 1); }}
+                                className={styles.choiceButtonDown}
+                            />
+                        </div>
 
-                        <input type="button" value="감소 -" onClick={() => {
-                            if (numberOfChoices === 3) {
-                                alert("최소 3개의 선택지는 있어야합니다.");
-                            }
-
-                            else {
-                                setNumberOfChoices(numberOfChoices - 1);
-                            }
-                        }} />
-
+                        <div className={styles.choicesContainer}>
                         <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
                         <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
                         <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
@@ -170,16 +195,37 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                         {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
                         {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
                         {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                        </div>
                     </div>
                 }
 
                 {
-                    type === "진위형"
+                    type === "참/거짓"
 
                     &&
 
                     <div>
+                        <div className={styles.questionHeader}>
+                            정답
+                        </div>
 
+
+
+                        <div className={styles.answerContainer}>
+                            <div
+                                className={answer ? styles.answerTrueSelected : styles.answerTrueNotSelected}
+                                onClick={() => { setAnswer(true); }}
+                            >
+                                참
+                            </div>
+
+                            <div
+                                className={!answer ? styles.answerFalseSelected : styles.answerFalseNotSelected}
+                                onClick={() => { setAnswer(false); }}
+                            >
+                                거짓
+                            </div>
+                        </div>
                     </div>
 
                 }
@@ -190,14 +236,15 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                     &&
 
                     <div>
-                        <div>
+                        <div className={styles.questionHeader}>
                             정답
                         </div>
 
                         <input
-                            type="textbox"
+                            type="text"
                             value={answer}
                             onChange={(event) => { setAnswer(event.target.value); }}
+                            className={styles.answerBox}
                             required
                         />
                     </div>
@@ -209,24 +256,32 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                     &&
 
                     <div>
-                        서술형 문제는 정답을 설정하지 않습니다.
+                        <div className={styles.questionHeader}>
+                            정답
+                        </div>
+
+                        <div className={styles.answerBoxUnable}>
+                            서술형 문제는 정답을 설정할 수 없습니다.
+                        </div>
                     </div>
                 }
 
                 <br />
 
-                <input type="submit" value="추가하기" />
+                <input type="submit" value="추가하기" className={styles.submitButton} />
+
+                <button
+                    className={styles.cancelButton}
+                    onClick={() => {
+                        setIsAddingQuestion(false);
+                        setPoints(1);
+                        setQuestion("");
+                        setAnswer("");
+                    }}
+                >
+                    취소
+                </button>
             </form>
-
-            <button onClick={() => {
-                setIsAddingQuestion(false);
-
-                setPoints(1);
-                setQuestion("");
-                setAnswer("");
-            }}>
-                취소
-            </button>
         </div>
     )
 }

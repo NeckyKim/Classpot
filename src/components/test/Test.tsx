@@ -24,10 +24,11 @@ type TestInfoProps = {
 export default function Test({ userCode, email }: TestProps) {
     let { testCode } = useParams();
 
-    var testInfo: TestInfoProps | undefined;
-    testInfo = GetTestInfo(userCode, testCode);
+    var testInfo: TestInfoProps | undefined = GetTestInfo(userCode, testCode);
 
     var [tab, setTab] = useState<number>(1)
+
+    console.log(tab)
 
     return (
         <div>
@@ -40,23 +41,28 @@ export default function Test({ userCode, email }: TestProps) {
 
                     <div className={styles.container}>
                         <div className={styles.containerLeft}>
-                            <div className={styles.containerLeftButton} onClick={() => { setTab(1); }} >
+                            <div className={tab === 1 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(1); }} >
+                                응시 코드
+                            </div>
+
+                            <div className={tab === 2 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(2); }} >
                                 시험 설정
                             </div>
 
-                            <div className={styles.containerLeftButton} onClick={() => { setTab(2); }} >
+                            <div className={tab === 3 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(3); }} >
                                 문제 관리
                             </div>
 
-                            <div className={styles.containerLeftButton} onClick={() => { setTab(3); }} >
+                            <div className={tab === 4 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(4); }} >
                                 답안지 확인
                             </div>
                         </div>
 
                         <div className={styles.containerRight}>
-                            {tab === 1 && <div>시험 설정</div>}
-                            {tab === 2 && <QuestionTab />}
-                            {tab === 3 && <div>답안지 확인</div>}
+                            {tab === 1 && <div>응시 코드</div>}
+                            {tab === 2 && <div>시험 설정</div>}
+                            {tab === 3 && <QuestionTab />}
+                            {tab === 4 && <div>답안지 확인</div>}
                         </div>
                     </div>
 

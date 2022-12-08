@@ -1,16 +1,196 @@
 .questionHeader {
     font-size: 1rem;
     color: rgb(0, 100, 250);
+    margin-bottom: 10px;
+}
+
+.questionTypeContainer {
+    width: fit-content;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 2px;
+    margin-bottom: 50px;
+}
+
+.questionTypeSelectedLeft {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    border-radius: 5px 0px 0px 5px;
+}
+
+.questionTypeNotSelectedLeft {
+    background-color: rgb(240, 240, 240);
+    border-radius: 5px 0px 0px 5px;
+    cursor: pointer;
+}
+
+.questionTypeSelectedMiddle {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+}
+
+.questionTypeNotSelectedMiddle {
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+}
+
+.questionTypeSelectedRight {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    border-radius: 0px 5px 5px 0px;
+}
+
+.questionTypeNotSelectedRight {
+    background-color: rgb(240, 240, 240);
+    border-radius: 0px 5px 5px 0px;
+    cursor: pointer;
+}
+
+.questionPoints {
+    width: 100px;
+    height: 40px;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    padding: 10px;
+    text-align: right;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(240, 240, 240);
+}
+
+.questionPointsUnit {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.choiceButtonContainer {
+    width: fit-content;
+    height: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 60px);
+    gap: 2px;
+    margin-bottom: 10px;
+}
+
+.choiceButtonUp {
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+}
+
+.choiceButtonDown {
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+}
+
+.choiceButtonUp:enabled, .choiceButtonDown:enabled {
+    cursor: pointer;
+}
+
+.choiceButtonUp:disabled, .choiceButtonDown:disabled {
+    color: rgb(100, 100, 100);
+    background-color: rgb(220, 220, 220);
+}
+
+.choicesContainer {
+    margin-bottom: 50px;
 }
 
 .questionBox {
     width: 100%;
     height: 300px;
     font-size: 1rem;
+    margin-bottom: 50px;
     padding: 10px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: rgb(240, 240, 240);
     resize: none;
 }
 
+.answerContainer {
+    width: fit-content;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    gap: 2px;
+    margin-bottom: 50px;
+}
+
+.answerTrueSelected {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    border-radius: 5px 0px 0px 5px;
+}
+
+.answerTrueNotSelected {
+    background-color: rgb(240, 240, 240);
+    border-radius: 5px 0px 0px 5px;
+    cursor: pointer;
+}
+
+.answerFalseSelected {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    border-radius: 0px 5px 5px 0px;
+}
+
+.answerFalseNotSelected {
+    background-color: rgb(240, 240, 240);
+    border-radius: 0px 5px 5px 0px;
+    cursor: pointer;
+}
+
+.answerBox {
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(240, 240, 240);
+}
+
+.answerBoxUnable {
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    margin-bottom: 50px;
+    padding: 10px;
+    color: rgb(150, 150, 150);
+}
+
+.submitButton {
+    width: 100px;
+    height: 40px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(50, 220, 50);
+    margin-bottom: 50px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.cancelButton {
+    width: 100px;
+    height: 40px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: rgb(100, 100, 100);
+    background-color: rgb(220, 220, 220);
+    margin-bottom: 50px;
+    margin-left: 10px;
+    display: inline-block;
+}

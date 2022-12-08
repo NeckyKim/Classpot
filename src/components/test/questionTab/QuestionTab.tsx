@@ -16,24 +16,23 @@ export default function QuestionTab() {
 
     const { testCode } = useParams();
 
-    // 시험 목록 조회
+
+
+    // 질문 목록 조회
     const [questionList, setQuestionList] = useState<any>([]);
-
-
 
     if (testCode) {
         useEffect(() => {
             onSnapshot(query(collection(dbService, "tests", testCode, "questions"), orderBy("createdTime")), (snapshot) => {
                 setQuestionList(snapshot.docs.map((current) => ({
-                    testCode: current.id,
+                    questionCode: current.id,
                     ...current.data()
                 })));
             });
         }, [])
     }
 
-
-
+    console.log(questionList)
 
     return (
         <div>
@@ -87,6 +86,16 @@ export default function QuestionTab() {
                                                 {current.choices[7] && <div className={current.answer[7] ? styles.correctChoice : styles.wrongChoice}>{current.choices[7]}</div>}
                                                 {current.choices[8] && <div className={current.answer[8] ? styles.correctChoice : styles.wrongChoice}>{current.choices[8]}</div>}
                                                 {current.choices[9] && <div className={current.answer[9] ? styles.correctChoice : styles.wrongChoice}>{current.choices[9]}</div>}
+                                            </div>
+                                        }
+
+                                        {
+                                            current.type === "참/거짓"
+
+                                            &&
+
+                                            <div className={styles.correctChoice}>
+                                                {current.answer ? "참" : "거짓"}
                                             </div>
                                         }
 
