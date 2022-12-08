@@ -1,0 +1,10 @@
+.logo {
+    width: 200px;
+    display: block;
+    margin: 0px auto;
+}
+
+.intro {
+    font-size: 1.5rem;
+    color: rgb(0, 100, 250);
+}
