@@ -7,14 +7,18 @@
     color: rgb(255, 255, 255);
     background-color: rgb(50, 220, 50);
     margin-bottom: 50px;
+    cursor: pointer;
+}
+
+.questionWrapper {
+    border-bottom: 1px solid rgb(220, 220, 220);
+    margin-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 .questionContainer {
     display: grid;
     grid-template-columns: 100px 1fr;
-    margin-bottom: 50px;
-    padding-bottom: 50px;
-    border-bottom: 1px solid rgb(220, 220, 220);
 }
 
 .questionContainerLeft {
@@ -27,14 +31,20 @@
 
 .questionInfo {
     display: grid;
-    grid-template-columns: 1fr 50px;
+    grid-template-columns: 1fr 80px;
+    gap: 50px;
     margin-bottom: 25px;
+    word-break: keep-all;
+    text-align: justify;
 }
 
 .questionPoints {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
     border-radius: 5px;
-    border: 1px solid rgb(0, 100, 250);
     color: rgb(0, 100, 250);
+    background-color: rgb(200, 250, 250);
     text-align: center;
 }
 
@@ -51,4 +61,39 @@
     margin-bottom: 5px;
     border-radius: 5px;
     background-color: rgb(240, 240, 240);
+}
+
+.buttonContainer {
+    height: 30px;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 60px);
+    gap: 2px;
+    justify-content: right;
+}
+
+.editButton {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 0.9rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    cursor: pointer;
+}
+
+.deleteButton {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 0.9rem;
+    text-align: center;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    cursor: pointer;
 }

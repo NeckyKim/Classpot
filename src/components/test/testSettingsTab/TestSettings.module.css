@@ -1,0 +1,30 @@
+.header {
+    color: rgb(0, 100, 250);
+    margin-bottom: 10px;
+}
+
+.applyCodeContainer {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgb(200, 250, 250);
+    margin-bottom: 100px;
+}
+
+.applyCode {
+    font-size: 3rem;
+    font-weight: 100;
+    letter-spacing: 20px;
+    text-align: center;
+    color: rgb(0, 100, 250);
+}
+
+.applyCodeText {
+    text-align: center;
+    color: rgb(150, 150, 150);
+}
+
+.testDateContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+}

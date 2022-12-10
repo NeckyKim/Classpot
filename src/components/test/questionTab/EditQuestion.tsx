@@ -1,64 +1,71 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, setDoc, collection } from "firebase/firestore";
+import { doc, updateDoc, collection } from "firebase/firestore";
 
 import Choices from "./Choices";
 
-import styles from "./AddQuestion.module.css";
+import styles from "./EditQuestion.module.css";
 
 
 
-type AddQuestionProps = {
-    setIsAddingQuestion: any;
+type EditQuestionProps = {
+    setIsEditingQuestion: any;
+    questionInfo: any;
 }
 
-export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
+export default function EditQuestion({ setIsEditingQuestion, questionInfo }: EditQuestionProps) {
     const { testCode } = useParams();
 
-    const [type, setType] = useState<string>("객관식");
-    const [points, setPoints] = useState<number>(1);
+    const [type, setType] = useState<string>(questionInfo.type);
+    const [points, setPoints] = useState<number>(questionInfo.points);
 
-    const [question, setQuestion] = useState<string>("");
-    const [answer, setAnswer] = useState<any>(new Array(10).fill(false));
+    const [question, setQuestion] = useState<string>(questionInfo.question);
+    const [answer, setAnswer] = useState<any>(questionInfo.answer);
     const [numberOfAnswers, setNumberOfAnswers] = useState<number>(0);
 
-    const [choices, setChoices] = useState<string[]>(new Array(10).fill(""));
-    const [numberOfChoices, setNumberOfChoices] = useState<number>(3);
+    const [choices, setChoices] = useState<string[]>(questionInfo.choices);
+    const [numberOfChoices, setNumberOfChoices] = useState<number>(Object.values(questionInfo.choices).filter(element => element != "").length);
 
-
+    console.log(numberOfAnswers)
 
     useEffect(() => {
         if (type === "객관식") {
             setNumberOfAnswers(Object.values(answer).filter(element => element === true).length);
         }
+
+        else {
+            setNumberOfAnswers(1);
+        }
     }, [answer])
 
 
-    async function addQuestion(event: any) {
+
+    async function editQuestion(event: any) {
         event.preventDefault();
+
+
 
         if (testCode && numberOfAnswers) {
             try {
-                await setDoc(doc(collection(dbService, "tests", testCode, "questions")), {
+                await updateDoc(doc(dbService, "tests", testCode, "questions", questionInfo.questionCode), {
                     type: type,
                     points: points,
                     question: question,
                     answer: answer,
                     choices: choices,
-                    createdTime: Date.now()
                 })
 
-                setIsAddingQuestion(false);
+                setIsEditingQuestion(false);
                 setQuestion("");
                 setAnswer(undefined);
 
-                alert("문제가 추가되었습니다.");
+                alert("문제가 수정되었습니다.");
             }
 
             catch (error) {
-                alert("문제 추가에 실패했습니다.");
+                alert("문제 수정에 실패했습니다.");
             }
         }
 
@@ -81,7 +88,6 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                     onClick={() => {
                         setType("객관식");
                         setAnswer(new Array(10).fill(false));
-                        setNumberOfAnswers(0);
                     }}>
                     객관식
                 </div>
@@ -91,7 +97,6 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                     onClick={() => {
                         setType("참/거짓");
                         setAnswer(true);
-                        setNumberOfAnswers(1);
                     }}>
                     참/거짓
                 </div>
@@ -101,7 +106,6 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                     onClick={() => {
                         setType("주관식");
                         setAnswer("");
-                        setNumberOfAnswers(1);
                     }}>
                     주관식
                 </div>
@@ -111,7 +115,6 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                     onClick={() => {
                         setType("서술형");
                         setAnswer("");
-                        setNumberOfAnswers(1);
                     }}>
                     서술형
                 </div>
@@ -119,7 +122,7 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
 
 
 
-            <form onSubmit={addQuestion}>
+            <form onSubmit={editQuestion}>
                 <div className={styles.questionHeader}>
                     배점
                 </div>
@@ -183,16 +186,16 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                         </div>
 
                         <div className={styles.choicesContainer}>
-                        <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        {numberOfChoices >= 4 && <Choices index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 5 && <Choices index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 6 && <Choices index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 7 && <Choices index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                            <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                            <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                            {numberOfChoices >= 4 && <Choices index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 5 && <Choices index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 6 && <Choices index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 7 && <Choices index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
                         </div>
                     </div>
                 }
@@ -266,15 +269,12 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
 
                 <br />
 
-                <input type="submit" value="추가" className={styles.submitButton} />
+                <input type="submit" value="수정" className={styles.submitButton} />
 
                 <button
                     className={styles.cancelButton}
                     onClick={() => {
-                        setIsAddingQuestion(false);
-                        setPoints(1);
-                        setQuestion("");
-                        setAnswer("");
+                        setIsEditingQuestion(false);
                     }}
                 >
                     취소

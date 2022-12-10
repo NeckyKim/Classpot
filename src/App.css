@@ -24,8 +24,7 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 
-
-    transition: 0.5s
+    transition: 0.3s
 }
 
 *::-webkit-scrollbar {
