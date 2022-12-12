@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 
 import QuestionTab from "./questionTab/QuestionTab";
+import Error from "../../Error";
 
 import GetTestInfo from "../hooks/GetTestInfo";
 import HeaderBottom from "../header/HeaderBottom";
@@ -11,21 +12,13 @@ import TestSettingsTab from "./testSettingsTab/TestSettingsTab";
 
 
 
-type TestProps = {
+export default function Test({ userCode, email }: {
     userCode: string;
     email: string;
-}
-
-type TestInfoProps = {
-    userCode: string;
-    testName: string;
-    duration: number;
-}
-
-export default function Test({ userCode, email }: TestProps) {
+}) {
     let { testCode } = useParams();
 
-    var testInfo: TestInfoProps | undefined = GetTestInfo(userCode, testCode);
+    var testInfo: any | undefined = GetTestInfo(testCode);
 
     var [tab, setTab] = useState<number>(1)
 
@@ -57,8 +50,8 @@ export default function Test({ userCode, email }: TestProps) {
                             </div>
 
                             <div className={styles.containerRight}>
-                                {tab === 1 && <TestSettingsTab testInfo={testInfo} testCode={testCode}/>}
-                                {tab === 2 && <QuestionTab testInfo={testInfo} testCode={testCode}/>}
+                                {tab === 1 && <TestSettingsTab testInfo={testInfo} testCode={testCode} />}
+                                {tab === 2 && <QuestionTab testCode={testCode} />}
                                 {tab === 3 && <div>답안지 확인</div>}
                             </div>
                         </div>
@@ -66,9 +59,7 @@ export default function Test({ userCode, email }: TestProps) {
 
                     :
 
-                    <div>
-                        접근 권한이 없습니다.
-                    </div>
+                    <Error message="접근 권한이 없습니다." />
             }
         </div>
     )

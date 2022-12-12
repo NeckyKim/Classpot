@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
 
 import { dbService } from "../../../FirebaseModules";
 import { doc, deleteDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
@@ -11,14 +10,14 @@ import styles from "./QuestionTab.module.css";
 
 
 
-export default function QuestionTab({ testInfo, testCode }: { testInfo: any, testCode: any }) {
+export default function QuestionTab({ testCode }: { testCode: string | undefined }) {
     const [isAddingQuestion, setIsAddingQuestion] = useState<boolean>(false);
     const [isEditingQuestion, setIsEditingQuestion] = useState<boolean>(false);
     const [index, setIndex] = useState<number>(0);
 
 
 
-    // 질문 목록 조회
+    // 질문 목록
     const [questionList, setQuestionList] = useState<any>([]);
 
     if (testCode) {

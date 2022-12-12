@@ -10,6 +10,8 @@ type ChoicesProps = {
     setChoices: any;
 }
 
+
+
 export default function Choices({ index, answer, setAnswer, choices, setChoices }: ChoicesProps) {
     function onChangeChoices(event: any) {
         setChoices((prev: any) => {
@@ -17,7 +19,7 @@ export default function Choices({ index, answer, setAnswer, choices, setChoices 
         });
     }
 
-    
+
     function onClickAnswer(event: any) {
         setAnswer((prev: any) => {
             return { ...prev, [event.target.name]: !answer[event.target.name] }

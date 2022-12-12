@@ -8,14 +8,19 @@ import { doc, getDoc, } from "firebase/firestore";
 type TestInfoProps = {
     userCode: string;
     testName: string;
+    createdTime: number;
+    startDate: number;
     duration: number;
+    applyCode: string;
 }
 
-export default function GetTestInfo(userCode: string, testCode: any) {
+export default function GetTestInfo(testCode: any) {
     const [testInfo, settestInfo] = useState<TestInfoProps | undefined>(undefined);
 
     useEffect(() => {
-        getDoc(doc(dbService, "tests", testCode)).then((doc: any) => { settestInfo(doc.data()); });
+        getDoc(doc(dbService, "tests", testCode)).then((doc: any) => {
+            settestInfo(doc.data());
+        });
     }, []);
 
     return testInfo;

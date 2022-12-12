@@ -1,10 +1,52 @@
-.logo {
-    width: 200px;
-    display: block;
-    margin: 0px auto;
+.homeContainer {
+    width: 100vw;
+    height: calc(100vh - 70px);
+    background: linear-gradient(135deg, rgb(0, 100, 250) 10%, rgb(50, 200, 100) 90%);
+    padding-top: 30vh;
 }
 
 .intro {
-    font-size: 1.5rem;
-    color: rgb(0, 100, 250);
+    font-size: 2rem;
+    font-weight: 100;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.applyCodeInputBox {
+    width: 400px;
+    height: 80px;
+    font-size: 3rem;
+    font-weight: 100;
+    letter-spacing: 20px;
+    padding-left: 20px;
+    display: block;
+    margin: 0px auto;
+    text-align: center;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+.applyButton {
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.2rem;
+    display: block;
+    margin: 0px auto;
+    margin-top: 50px;
+    border: none;
+    border-radius: 5px;
+}
+
+.applyButton:enabled {
+    color: rgb(255, 255, 255);
+    background: linear-gradient(135deg, rgb(50, 200, 250) 10%, rgb(0, 100, 250) 90%);
+    cursor: pointer;
+}
+
+.applyButton:disabled {
+    color: rgb(100, 100, 100);
+    background: linear-gradient(135deg, rgb(150, 150, 150) 10%, rgb(120, 120, 120) 90%);
 }

@@ -10,11 +10,9 @@ import styles from "./AddQuestion.module.css";
 
 
 
-type AddQuestionProps = {
-    setIsAddingQuestion: any;
-}
 
-export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
+
+export default function AddQuestion({ setIsAddingQuestion }: { setIsAddingQuestion: any; }) {
     const { testCode } = useParams();
 
     const [type, setType] = useState<string>("객관식");
@@ -183,16 +181,16 @@ export default function AddQuestion({ setIsAddingQuestion }: AddQuestionProps) {
                         </div>
 
                         <div className={styles.choicesContainer}>
-                        <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        {numberOfChoices >= 4 && <Choices index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 5 && <Choices index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 6 && <Choices index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 7 && <Choices index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                            <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                            <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                            {numberOfChoices >= 4 && <Choices index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 5 && <Choices index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 6 && <Choices index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 7 && <Choices index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                            {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
                         </div>
                     </div>
                 }

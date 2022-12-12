@@ -6,17 +6,17 @@ import { doc, setDoc, collection } from "firebase/firestore";
 import { onSnapshot, query, where } from "firebase/firestore";
 
 import GetUserInfo from "../hooks/GetUserInfo";
+import GenerateApplyCode from "../hooks/GenerateApplyCode";
 
 import styles from "./Dashboard.module.css";
 
 
 
-type DashboardProps = {
-    userCode: string;
-    email: string;
-}
 
-export default function Dashboard({ userCode, email }: DashboardProps) {
+export default function Dashboard({ userCode, email }: {
+    userCode: string,
+    email: string
+}) {
     var userInfo = GetUserInfo(userCode);
 
 
@@ -47,7 +47,6 @@ export default function Dashboard({ userCode, email }: DashboardProps) {
 
     // 시험 목록 조회
     const [testList, setTestList] = useState<any>([]);
-    const [usedApplyCodeList, setUsedApplyCodeList] = useState<string[]>([]);
 
     useEffect(() => {
         onSnapshot(query(collection(dbService, "tests"), where("userCode", "==", userCode)), (snapshot) => {
@@ -55,18 +54,8 @@ export default function Dashboard({ userCode, email }: DashboardProps) {
                 testCode: current.id,
                 ...current.data()
             })));
-
-
         });
-
-
     }, [])
-
-
-    // 현재 사용중인 응시 번호 목록
-    useEffect(() => {
-        setUsedApplyCodeList(testList.map((row: any) => row.applyCode));
-    }, [testList])
 
 
 
@@ -75,31 +64,7 @@ export default function Dashboard({ userCode, email }: DashboardProps) {
     const [testName, setTestName] = useState<string>("");
     const [startDate, setStartDate] = useState<any>(new Date().toLocaleDateString("sv-SE") + "T" + new Date().toLocaleTimeString("en-US", { hour12: false }));
     const [duration, setDuration] = useState<number>(60);
-    const [applyCode, setApplyCode] = useState<string>("");
-
-
-
-    // 고유 응시 번호 생성
-    function generateApplyCode() {
-        while (true) {
-            let random1: string = "";
-            let random2: string = "";
-
-            for (let i: number = 0; i < 3; i++) {
-                random1 = random1 + "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(Math.floor(Math.random() * 26));
-            }
-
-            for (let i: number = 0; i < 3; i++) {
-                random2 = random2 + "0123456789".charAt(Math.floor(Math.random() * 10));
-            }
-
-            let result: string = random1 + random2;
-
-            if (!usedApplyCodeList.includes(result)) {
-                return Array.from(result).sort(() => Math.random() - 0.5).join("");
-            }
-        }
-    }
+    const [applyCode, setApplyCode] = useState<string>(GenerateApplyCode());
 
 
 
@@ -114,7 +79,7 @@ export default function Dashboard({ userCode, email }: DashboardProps) {
                 startDate: Date.parse(startDate),
                 duration: duration,
                 createdTime: Date.now(),
-                applyCode: generateApplyCode()
+                applyCode: applyCode
             })
 
             alert("시험 추가가 완료되었습니다.");
@@ -167,7 +132,7 @@ export default function Dashboard({ userCode, email }: DashboardProps) {
                                             setTestName(event.target.value);
                                         }}
                                         className={styles.testInputBox}
-                                        required 
+                                        required
                                     />
                                     <br />
 
@@ -182,7 +147,7 @@ export default function Dashboard({ userCode, email }: DashboardProps) {
                                             setStartDate(event.target.value);
                                         }}
                                         className={styles.testInputBox}
-                                        required 
+                                        required
                                     />
                                     <br />
 
@@ -196,7 +161,7 @@ export default function Dashboard({ userCode, email }: DashboardProps) {
                                             setDuration(Number(event.target.value));
                                         }}
                                         className={styles.testInputBox}
-                                        required 
+                                        required
                                     />
                                     <br />
 
@@ -208,7 +173,7 @@ export default function Dashboard({ userCode, email }: DashboardProps) {
                                     </div>
                                     <br />
 
-                                    <input type="submit" value="추가" className={styles.submitButton}/>
+                                    <input type="submit" value="추가" className={styles.submitButton} />
 
                                     <button
                                         className={styles.cancelButton}

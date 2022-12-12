@@ -11,6 +11,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Test from "./components/test/Test";
 
 import './App.css';
+import Apply from "./components/apply/Apply";
 
 
 
@@ -39,6 +40,7 @@ export default function App() {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
+                            <Route path="/apply/:testCode" element={<Apply />} />
                         </Routes>
 
 
