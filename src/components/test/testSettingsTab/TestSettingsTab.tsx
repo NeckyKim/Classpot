@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { dbService } from "../../../FirebaseModules";
 import { doc, deleteDoc, collection } from "firebase/firestore";
 
-import GenerateApplyCode from "../../hooks/GenerateApplyCode";
+import EditTestSettings from "./EditTestSettings";
 
 import styles from "./TestSettings.module.css";
+
 
 
 
@@ -18,6 +19,9 @@ export default function TestSettingsTab({ testInfo, testCode }: { testInfo: any,
     const [isDeletingTest, setIsDeletingTest] = useState<boolean>(false);
     const [deletingTestConfirm, setDeletingTestConfirm] = useState<string>("");
 
+    const [isDeleteSuccess, setIsDeleteSuccess] = useState<boolean>(false);
+    const [isDeleteFailed, setIsDeleteFailed] = useState<boolean>(false);
+
 
 
     // 시험 추가
@@ -28,15 +32,15 @@ export default function TestSettingsTab({ testInfo, testCode }: { testInfo: any,
             try {
                 await deleteDoc(doc(dbService, "tests", testCode))
 
-                navigate("/");
                 setIsDeletingTest(false);
 
-                alert("시험 삭제가 완료되었습니다.");
+                setIsDeleteSuccess(true);
             }
 
             catch (error) {
                 console.log(error);
-                alert("시험 삭제에 실패했습니다.");
+
+                setIsDeleteSuccess(true);
             }
         }
     }
@@ -50,8 +54,7 @@ export default function TestSettingsTab({ testInfo, testCode }: { testInfo: any,
 
                 &&
 
-                <div>
-                </div>
+                <EditTestSettings setIsEditingSettings={setIsEditingSettings} testInfo={testInfo} testCode={testCode} />
             }
 
 
@@ -67,8 +70,10 @@ export default function TestSettingsTab({ testInfo, testCode }: { testInfo: any,
                             시험 삭제
                         </div>
 
-                        시험을 삭제하려면 시험 이름을 입력하신 후 확인을 누르세요.<br />
-                        이 작업은 되돌릴 수 없습니다.
+                        <div className={styles.comment}>
+                            시험을 삭제하려면 시험 이름을 입력하신 후 확인을 누르세요.<br />
+                            이 작업은 되돌릴 수 없습니다.
+                        </div>
 
                         <input type="text" onChange={(event: any) => { setDeletingTestConfirm(event.target.value) }} className={styles.deleteConfirmTextBox} />
 
@@ -76,6 +81,30 @@ export default function TestSettingsTab({ testInfo, testCode }: { testInfo: any,
 
                         <input type="button" value="취소" className={styles.cancelButton} onClick={() => { setIsDeletingTest(false); }} />
                     </form>
+                </div>
+            }
+
+
+
+            {
+                isDeleteSuccess
+
+                &&
+
+                <div className={styles.background}>
+                    <div className={styles.deleteContainer}>
+                        <div className={styles.comment}>
+                            시험 삭제가 완료되었습니다.
+                        </div>
+
+                        <button className={styles.cancelButton} onClick={() => {
+                            navigate("/");
+
+                            setIsDeleteSuccess(false);
+                        }}>
+                            확인
+                        </button>
+                    </div>
                 </div>
             }
 
@@ -146,6 +175,10 @@ export default function TestSettingsTab({ testInfo, testCode }: { testInfo: any,
                             {new Date(testInfo?.startDate + testInfo?.duration * 60000).toLocaleString("ko-KR")}
                         </div>
                     </div>
+                </div>
+
+                <div onClick={() => { setIsEditingSettings(true); }} className={styles.editButton}>
+                    시험 설정 변경
                 </div>
 
 

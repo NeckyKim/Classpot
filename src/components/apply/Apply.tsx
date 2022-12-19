@@ -61,6 +61,10 @@ export default function Apply() {
                         시험 이름: {testInfo.testName}<br />
                         
                         현재 IP 주소: {ip}
+
+                        <button>
+                            
+                        </button>
                     </div>
 
                     :

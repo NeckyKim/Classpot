@@ -93,6 +93,7 @@ export default function Dashboard({ userCode, email }: {
 
         catch (error) {
             console.log(error);
+            
             alert("시험 추가에 실패했습니다.");
         }
     }

@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useParams } from "react-router";
 
 import QuestionTab from "./questionTab/QuestionTab";
-import Error from "../../Error";
+import TestSettingsTab from "./testSettingsTab/TestSettingsTab";
+import ApplicantsTab from "./applicantsTab/ApplicantsTab";
 
+import Error from "../../Error";
 import GetTestInfo from "../hooks/GetTestInfo";
 import HeaderBottom from "../header/HeaderBottom";
 
 import styles from "./Test.module.css";
-import TestSettingsTab from "./testSettingsTab/TestSettingsTab";
+
 
 
 
@@ -45,14 +47,14 @@ export default function Test({ userCode, email }: {
                                 </div>
 
                                 <div className={tab === 3 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(3); }} >
-                                    답안지 확인
+                                    응시자 관리
                                 </div>
                             </div>
 
                             <div className={styles.containerRight}>
                                 {tab === 1 && <TestSettingsTab testInfo={testInfo} testCode={testCode} />}
                                 {tab === 2 && <QuestionTab testCode={testCode} />}
-                                {tab === 3 && <div>답안지 확인</div>}
+                                {tab === 3 && <ApplicantsTab testInfo={testInfo} testCode={testCode} />}
                             </div>
                         </div>
                     </div>

@@ -10,12 +10,10 @@ import styles from "./EditQuestion.module.css";
 
 
 
-type EditQuestionProps = {
+export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
     setIsEditingQuestion: any;
     questionInfo: any;
-}
-
-export default function EditQuestion({ setIsEditingQuestion, questionInfo }: EditQuestionProps) {
+}) {
     const { testCode } = useParams();
 
     const [type, setType] = useState<string>(questionInfo.type);
