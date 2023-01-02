@@ -15,11 +15,11 @@ type TestInfoProps = {
 }
 
 export default function GetTestInfo(testCode: any) {
-    const [testInfo, settestInfo] = useState<TestInfoProps | undefined>(undefined);
+    const [testInfo, setTestInfo] = useState<TestInfoProps | undefined>(undefined);
 
     useEffect(() => {
         getDoc(doc(dbService, "tests", testCode)).then((doc: any) => {
-            settestInfo(doc.data());
+            setTestInfo(doc.data());
         });
     }, []);
 

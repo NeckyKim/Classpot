@@ -3,17 +3,15 @@ import { useEffect, useState } from "react";
 import { dbService } from "../../../FirebaseModules";
 import { doc, setDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
 
-import GenerateApplicantCode from "../../hooks/GenerateApplicantCode";
-
 
 
 export default function ApplicantsTab({ testInfo, testCode }: { testInfo: any, testCode: string | undefined }) {
-    const [applicantCode, setApplicantCode] = useState<string>(GenerateApplicantCode(testCode));
-
-
-
     // 응시자 목록
     const [applicantsList, setApplicantsList] = useState<any>([]);
+
+    const [isAddingApplicant, setIsAddingApplicant] = useState<boolean>(false);
+    const [applicantName, setApplicantName] = useState<string>("");
+
 
     if (testCode) {
         useEffect(() => {
@@ -28,17 +26,25 @@ export default function ApplicantsTab({ testInfo, testCode }: { testInfo: any, t
 
 
 
+    var answerSheet: string[] = new Array(100).fill(null);
+
+    console.log(answerSheet)
+
     async function addApplicants(event: any) {
         event.preventDefault();
 
         if (testCode) {
             try {
                 await setDoc(doc(collection(dbService, "tests", testCode, "applicants")), {
-                    userName: "",
-                    createdTime: Date.now()
+                    applicantName: applicantName,
+                    createdTime: Date.now(),
+                    answerSheet: answerSheet
                 })
 
                 alert("응시자가 추가됐습니다.");
+
+                setApplicantName("");
+                setIsAddingApplicant(false);
             }
 
             catch (error) {
@@ -51,14 +57,45 @@ export default function ApplicantsTab({ testInfo, testCode }: { testInfo: any, t
 
     return (
         <div>
-            <button onClick={addApplicants}>
+            <button onClick={() => { setIsAddingApplicant(true); }}>
                 응시자 추가
             </button>
 
             {
+                isAddingApplicant
+
+                &&
+
+                <form onSubmit={addApplicants}>
+                    <input type="text" value={applicantName} required onChange={(event: any) => { setApplicantName(event.target.value); }} />
+
+                    <input type="submit" value="추가" />
+
+                    <input type="button" value="취소" onClick={() => {
+                        setApplicantName("");
+                        setIsAddingApplicant(false);
+                    }} />
+                </form>
+            }
+
+            {
                 applicantsList.map((current: any) => (
                     <div>
-                        {current.applicantCode}
+                        {current.applicantCode} &nbsp;
+                        {current.applicantName}
+
+                        <button onClick={() => {
+                            try {
+                                navigator.clipboard.writeText(current.applicantCode);
+                                alert("응시 코드가 복사되었습니다.");
+                            }
+
+                            catch (error) {
+                                alert("응시 코드 복사에 실패하였습니다.")
+                            }
+                        }}>
+                            복사하기
+                        </button>
                     </div>
                 ))
             }

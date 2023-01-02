@@ -18,7 +18,7 @@ export default function Test({ userCode, email }: {
     userCode: string;
     email: string;
 }) {
-    let { testCode } = useParams();
+    const { testCode } = useParams();
 
     var testInfo: any | undefined = GetTestInfo(testCode);
 

@@ -10,8 +10,11 @@ import Login from "./components/login/Login";
 import Dashboard from './components/dashboard/Dashboard';
 import Test from "./components/test/Test";
 
-import './App.css';
 import Apply from "./components/apply/Apply";
+import TestMode from "./components/apply/TestMode";
+
+import './App.css';
+
 
 
 
@@ -41,6 +44,7 @@ export default function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/apply/:testCode" element={<Apply />} />
+                            <Route path="/apply/:testCode/applicant/:applicantCode" element={<TestMode />} />
                         </Routes>
 
 

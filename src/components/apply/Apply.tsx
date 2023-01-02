@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { dbService } from "../../FirebaseModules";
-import { doc, deleteDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
+import { collection, orderBy, onSnapshot, query } from "firebase/firestore";
 
 import GetTestInfo from "../hooks/GetTestInfo";
 import Error from "../../Error";
@@ -11,9 +11,9 @@ import Error from "../../Error";
 
 
 export default function Apply() {
-    var { testCode }: any = useParams();
+    const { testCode }: any = useParams();
 
-
+    var navigate = useNavigate();
 
     // 시험 정보
     var testInfo: any | undefined = GetTestInfo(testCode);
@@ -22,6 +22,9 @@ export default function Apply() {
 
     // 질문 목록
     const [questionList, setQuestionList] = useState<any>([]);
+
+    // 응시자 목록
+    const [applicantsList, setApplicantsList] = useState<any>([]);
 
     if (testCode !== null) {
         useEffect(() => {
@@ -32,19 +35,29 @@ export default function Apply() {
                 })));
             });
         }, [])
+
+        useEffect(() => {
+            onSnapshot(query(collection(dbService, "tests", testCode, "applicants"), orderBy("createdTime")), (snapshot) => {
+                setApplicantsList(snapshot.docs.map((current) => (
+                    current.id
+                )));
+            });
+        }, [])
     }
 
+    console.log(applicantsList)
+
+    const [applicantCode, setApplicantCode] = useState<string>("");
 
 
-    // IP 주소 조회
-    const [ip, setIp] = useState();
 
-    useEffect(() => {
-        axios.get('https://geolocation-db.com/json/')
-            .then((res) => {
-                setIp(res.data.IPv4)
-            })
-    }, [])
+    function checkApplicants(event: any) {
+        event.preventDefault();
+
+        if (applicantsList.includes(applicantCode)) {
+            navigate("applicant/" + applicantCode);
+        }
+    }
 
 
 
@@ -55,17 +68,15 @@ export default function Apply() {
 
                     ?
 
-                    <div>
+                    <form onSubmit={checkApplicants}>
                         {testCode}<br />
 
                         시험 이름: {testInfo.testName}<br />
-                        
-                        현재 IP 주소: {ip}
 
-                        <button>
-                            
-                        </button>
-                    </div>
+                        <input type="text" value={applicantCode} onChange={(event: any) => { setApplicantCode(event.target.value); }} />
+
+                        <input type="submit" value="응시하기" />
+                    </form>
 
                     :
 
