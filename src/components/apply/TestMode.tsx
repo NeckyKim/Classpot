@@ -93,33 +93,7 @@ export default function TestMode() {
                     ?
 
                     <form onSubmit={submitAnswerSheet} className={styles.testModeContainer}>
-                        <div className={styles.testModeContainerLeft}>
-                            {questionNumber + 1}<br />
-                            {questionList[questionNumber].question}
-                        </div>
-
-                        <div>
-                            {
-                                questionList[questionNumber].type === "객관식"
-
-                                &&
-
-                                <div>
-                                    <Choices choicesNumber={0} />
-                                    <Choices choicesNumber={1} />
-                                    <Choices choicesNumber={2} />
-                                    {questionList[questionNumber].choices[3] && <Choices choicesNumber={3} />}
-                                    {questionList[questionNumber].choices[4] && <Choices choicesNumber={4} />}
-                                    {questionList[questionNumber].choices[5] && <Choices choicesNumber={5} />}
-                                    {questionList[questionNumber].choices[6] && <Choices choicesNumber={6} />}
-                                    {questionList[questionNumber].choices[7] && <Choices choicesNumber={7} />}
-                                    {questionList[questionNumber].choices[8] && <Choices choicesNumber={8} />}
-                                    {questionList[questionNumber].choices[9] && <Choices choicesNumber={9} />}
-                                </div>
-                            }
-
-                            <input type="submit" value="제출하기" />
-
+                        <div className={styles.testModeContainerTop}>
                             <input
                                 type="button"
                                 value="이전"
@@ -143,6 +117,104 @@ export default function TestMode() {
                                     submitAnswerSheet(event);
                                 }}
                             />
+                        </div>
+
+                        <div className={styles.testModeContainerBottom}>
+                            <div className={styles.testModeContainerBottomNumbers}>
+                                {
+                                    questionList.map((current: any, index: number) => (
+                                        <div 
+                                            onClick={() => { setQuestionNumber(index); }}
+                                            className={index === questionNumber ? styles.questionNumberSelected : styles.questionNumberNotSelected}
+                                        >
+                                            {index + 1}
+                                        </div>
+                                    ))
+                                }
+                            </div>
+
+                            <div className={styles.testModeContainerBottomLeft}>
+                                <div className={styles.testModeContainerBottomLeftTop}>
+                                    {questionNumber + 1}
+                                </div>
+
+                                <div className={styles.testModeContainerBottomLeftCenter}>
+                                    {questionList[questionNumber].question}
+                                </div>
+                            </div>
+
+                            <div className={styles.testModeContainerBottomRight}>
+                                <div>
+                                {
+                                    questionList[questionNumber].type === "객관식"
+
+                                    &&
+
+                                    <div>
+                                        <Choices choicesNumber={0} />
+                                        <Choices choicesNumber={1} />
+                                        <Choices choicesNumber={2} />
+                                        {questionList[questionNumber].choices[3] && <Choices choicesNumber={3} />}
+                                        {questionList[questionNumber].choices[4] && <Choices choicesNumber={4} />}
+                                        {questionList[questionNumber].choices[5] && <Choices choicesNumber={5} />}
+                                        {questionList[questionNumber].choices[6] && <Choices choicesNumber={6} />}
+                                        {questionList[questionNumber].choices[7] && <Choices choicesNumber={7} />}
+                                        {questionList[questionNumber].choices[8] && <Choices choicesNumber={8} />}
+                                        {questionList[questionNumber].choices[9] && <Choices choicesNumber={9} />}
+                                    </div>
+                                }
+
+                                {
+                                    questionList[questionNumber].type === "참/거짓"
+
+                                    &&
+
+                                    <div>
+                                        <div
+                                            onClick={() => {
+                                                let temp = [...answerSheet];
+                                                temp[questionNumber] = true;
+                                                setAnswerSheet(temp);
+                                            }}
+                                            className={answerSheet[questionNumber] === true ? styles.choiceSelected : styles.choiceNotSelected}
+                                        >
+                                            참
+                                        </div>
+
+                                        <div
+                                            onClick={() => {
+                                                let temp = [...answerSheet];
+                                                temp[questionNumber] = false;
+                                                setAnswerSheet(temp);
+                                            }}
+                                            className={answerSheet[questionNumber] === false ? styles.choiceSelected : styles.choiceNotSelected}
+                                        >
+                                            거짓
+                                        </div>
+                                    </div>
+                                }
+
+                                {
+                                    questionList[questionNumber].type === "주관식"
+
+                                    &&
+
+                                    <textarea
+                                        value={answerSheet[questionNumber]}
+                                        onChange={(event: any) => {
+                                            let temp = [...answerSheet];
+                                            temp[questionNumber] = String(event.target.value);
+                                            setAnswerSheet(temp);
+                                        }}
+                                        className={styles.answerTextBox}
+                                    />
+                                }
+                                </div>
+
+                                <div>
+                                <input type="submit" value="제출하기" />
+                                </div>
+                            </div>
                         </div>
                     </form>
 
