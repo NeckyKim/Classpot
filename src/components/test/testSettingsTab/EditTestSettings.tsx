@@ -68,7 +68,7 @@ export default function EditTestSettings({ setIsEditingSettings, testInfo, testC
             </div>
             <input
                 type="datetime-local"
-                value={startDate}
+                value={startDate.toLocaleString("")}
                 onChange={(event) => {
                     setStartDate(event.target.value);
                 }}

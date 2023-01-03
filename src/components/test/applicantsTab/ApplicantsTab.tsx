@@ -38,6 +38,7 @@ export default function ApplicantsTab({ testInfo, testCode }: { testInfo: any, t
                 await setDoc(doc(collection(dbService, "tests", testCode, "applicants")), {
                     applicantName: applicantName,
                     createdTime: Date.now(),
+                    submittedTime: Date.now(),
                     answerSheet: answerSheet
                 })
 

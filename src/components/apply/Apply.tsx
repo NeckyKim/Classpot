@@ -45,7 +45,7 @@ export default function Apply() {
         }, [])
     }
 
-    console.log(applicantsList)
+
 
     const [applicantCode, setApplicantCode] = useState<string>("");
 
