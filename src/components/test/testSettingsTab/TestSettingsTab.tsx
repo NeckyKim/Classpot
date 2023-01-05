@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, deleteDoc, collection } from "firebase/firestore";
+import { doc, getDoc, deleteDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
 
 import EditTestSettings from "./EditTestSettings";
+import GetTestInfo from "../../hooks/GetTestInfo";
 
 import styles from "./TestSettings.module.css";
 
 
 
 
-export default function TestSettingsTab({ testInfo, testCode }: { testInfo: any, testCode: string | undefined }) {
+export default function TestSettingsTab({ testCode }: { testCode: string | undefined }) {
     const navigate = useNavigate();
 
     const [isEditingSettings, setIsEditingSettings] = useState<boolean>(false);
@@ -20,7 +21,11 @@ export default function TestSettingsTab({ testInfo, testCode }: { testInfo: any,
     const [deletingTestConfirm, setDeletingTestConfirm] = useState<string>("");
 
     const [isDeleteSuccess, setIsDeleteSuccess] = useState<boolean>(false);
-    const [isDeleteFailed, setIsDeleteFailed] = useState<boolean>(false);
+
+    
+
+    // 시험 정보
+    const testInfo: any = GetTestInfo(testCode);
 
 
 

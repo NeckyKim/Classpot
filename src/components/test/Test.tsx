@@ -20,6 +20,9 @@ export default function Test({ userCode, email }: {
 }) {
     const { testCode } = useParams();
 
+    
+
+    // 시험 정보
     var testInfo: any | undefined = GetTestInfo(testCode);
 
     var [tab, setTab] = useState<number>(1)
@@ -52,7 +55,7 @@ export default function Test({ userCode, email }: {
                             </div>
 
                             <div className={styles.containerRight}>
-                                {tab === 1 && <TestSettingsTab testInfo={testInfo} testCode={testCode} />}
+                                {tab === 1 && <TestSettingsTab testCode={testCode} />}
                                 {tab === 2 && <QuestionTab testCode={testCode} />}
                                 {tab === 3 && <ApplicantsTab testInfo={testInfo} testCode={testCode} />}
                             </div>

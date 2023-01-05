@@ -13,6 +13,7 @@ export default function ApplicantsTab({ testInfo, testCode }: { testInfo: any, t
     const [applicantName, setApplicantName] = useState<string>("");
 
 
+    
     if (testCode) {
         useEffect(() => {
             onSnapshot(query(collection(dbService, "tests", testCode, "applicants"), orderBy("createdTime")), (snapshot) => {
@@ -27,8 +28,6 @@ export default function ApplicantsTab({ testInfo, testCode }: { testInfo: any, t
 
 
     var answerSheet: string[] = new Array(100).fill(null);
-
-    console.log(answerSheet)
 
     async function addApplicants(event: any) {
         event.preventDefault();
@@ -87,7 +86,7 @@ export default function ApplicantsTab({ testInfo, testCode }: { testInfo: any, t
 
                         <button onClick={() => {
                             try {
-                                navigator.clipboard.writeText(current.applicantCode);
+                                navigator.clipboard.writeText("localhost:3000/apply/" + testCode + "/applicant/" + current.applicantCode);
                                 alert("응시 코드가 복사되었습니다.");
                             }
 

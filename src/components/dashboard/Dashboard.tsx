@@ -17,9 +17,10 @@ export default function Dashboard({ userCode, email }: {
     userCode: string,
     email: string
 }) {
+    // 사용자 정보
     var userInfo = GetUserInfo(userCode);
 
-
+    
 
     // 사용자 등록
     const [userName, setUserName] = useState<string>("");

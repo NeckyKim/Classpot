@@ -26,7 +26,7 @@ export default function Apply() {
     // 응시자 목록
     const [applicantsList, setApplicantsList] = useState<any>([]);
 
-    if (testCode !== null) {
+    if (testCode) {
         useEffect(() => {
             onSnapshot(query(collection(dbService, "tests", testCode, "questions"), orderBy("createdTime")), (snapshot) => {
                 setQuestionList(snapshot.docs.map((current) => ({
@@ -48,8 +48,6 @@ export default function Apply() {
 
 
     const [applicantCode, setApplicantCode] = useState<string>("");
-
-
 
     function checkApplicants(event: any) {
         event.preventDefault();

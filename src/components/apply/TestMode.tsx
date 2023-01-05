@@ -6,6 +6,7 @@ import { doc, getDoc, updateDoc, collection, orderBy, onSnapshot, query } from "
 
 import Error from "../../Error";
 import Notice from "./Notice";
+import GetTestInfo from "../hooks/GetTestInfo";
 
 import styles from "./TestMode.module.css";
 
@@ -18,15 +19,7 @@ export default function TestMode() {
 
 
     // 시험 정보
-    const [testInfo, setTestInfo] = useState<any>();
-
-    if (testCode) {
-        useEffect(() => {
-            getDoc(doc(dbService, "tests", testCode)).then((doc: any) => {
-                setTestInfo(doc.data());
-            });
-        }, []);
-    }
+    const testInfo: any = GetTestInfo(testCode);
 
 
 
@@ -130,7 +123,7 @@ export default function TestMode() {
         else if (currentTime > finishTime) {
             setIsTestTime("후");
 
-            if(isApplyingTest) {
+            if (isApplyingTest) {
                 submitAnswerSheet(event);
                 setIsApplyingTest(false);
             }
@@ -192,10 +185,19 @@ export default function TestMode() {
     }
 
 
-    var days = Math.floor((startTime - currentTime) / 144000000)
-    var hours = Math.floor(((startTime - currentTime) - days * 144000000) / 6000000);
-    var minutes = Math.floor(((startTime - currentTime) - hours * 6000000) / 60000);
-    var seconds = Math.floor(((startTime - currentTime) - hours * 6000000 - minutes * 60000) / 1000);
+
+    // 시험 시작 전 남은 시간
+    var daysBefore = Math.floor((startTime - currentTime) / 86400000)
+    var hoursBefore = Math.floor(((startTime - currentTime) - daysBefore * 14400000) / 3600000);
+    var minutesBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000) / 60000);
+    var secondsBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000 - minutesBefore * 60000) / 1000);
+
+
+
+    // 시험 응시 중 남은 시간
+    var hoursCurrent = Math.floor((finishTime - currentTime) / 3600000);
+    var minutesCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000) / 60000);
+    var secondsCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000 - minutesCurrent * 60000) / 1000);
 
 
 
@@ -222,12 +224,23 @@ export default function TestMode() {
                                             {testInfo.testName}
                                         </div>
 
+                                        <div className={styles.timer}>
+                                            <img className={styles.timerIcon} src={process.env.PUBLIC_URL + "/icons/clock.png"} />
+
+                                            <div className={styles.timerValue}>
+                                                {hoursCurrent !== 0 && <span>{hoursCurrent}:</span>}
+                                                {String(minutesCurrent).padStart(2, "0")}
+                                                :
+                                                {String(secondsCurrent).padStart(2, "0")}
+                                            </div>
+                                        </div>
+
                                         <div className={styles.prevNextButton}>
                                             <input
                                                 type="button"
                                                 value="이전"
-                                                disabled={questionNumber == 0}
-                                                className={styles.prevButton}
+                                                className={questionNumber !== 0 ? styles.prevButtonAble : styles.prevButtonDisabled}
+                                                style={darkMode ? (questionNumber !== 0 ? {} : { backgroundColor: "rgb(80, 80, 80)" }) : {}}
                                                 onClick={() => {
                                                     if (questionNumber !== 0) {
                                                         setQuestionNumber(questionNumber - 1);
@@ -240,8 +253,8 @@ export default function TestMode() {
                                             <input
                                                 type="button"
                                                 value="다음"
-                                                disabled={questionNumber === questionList.length - 1}
-                                                className={styles.nextButton}
+                                                className={questionNumber !== questionList.length - 1 ? styles.nextButtonAble : styles.nextButtonDisabled}
+                                                style={darkMode ? (questionNumber !== questionList.length - 1 ? {} : { backgroundColor: "rgb(80, 80, 80)" }) : {}}
                                                 onClick={() => {
                                                     if (questionNumber !== questionList.length - 1) {
                                                         setQuestionNumber(questionNumber + 1);
@@ -254,10 +267,10 @@ export default function TestMode() {
                                     </div>
 
                                     <div
-                                        className={styles.testModeContainerBottom}
+                                        className={styles.testModeContainerCenter}
                                         style={darkMode ? { borderTop: "1px solid rgb(80, 80, 80)" } : {}}
                                     >
-                                        <div className={styles.navigationNumberContainer}>
+                                        <div className={styles.testModeContainerNavigation}>
                                             <div>
                                                 {
                                                     questionList.map((current: any, index: number) => (
@@ -289,22 +302,13 @@ export default function TestMode() {
                                                     ))
                                                 }
                                             </div>
-
-                                            <div
-                                                className={styles.darkLightButton}
-                                                onClick={() => {
-                                                    setDarkMode(!darkMode);
-                                                }}
-                                            >
-                                                LO
-                                            </div>
                                         </div>
 
                                         <div
-                                            className={styles.testModeContainerBottomLeft}
+                                            className={styles.testModeContainerCenterQuestion}
                                             style={darkMode ? { borderLeft: "1px solid rgb(80, 80, 80)" } : {}}
                                         >
-                                            <div className={styles.testModeContainerBottomLeftTop}>
+                                            <div className={styles.questionHeader}>
                                                 <div className={styles.questionNumber}>
                                                     Q.{questionNumber + 1}
                                                 </div>
@@ -320,7 +324,7 @@ export default function TestMode() {
                                         </div>
 
                                         <div
-                                            className={styles.testModeContainerBottomRight}
+                                            className={styles.testModeContainerCenterAnswer}
                                             style={darkMode ? { borderLeft: "1px solid rgb(80, 80, 80)" } : {}}
                                         >
                                             <div className={styles.testModeContainerBottomRightTop}>
@@ -447,18 +451,42 @@ export default function TestMode() {
                                                     </div>
                                                 }
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <div className={styles.testModeContainerBottomRightBottom}>
-                                                <div className={styles.submittedTime}>
-                                                    최종 제출 시간 &nbsp;
-                                                    {submittedTime && new Date(submittedTime).toLocaleString("ko-KR")}
+                                    <div className={styles.testModeContainerBottom}>
+                                        {
+                                            darkMode
+
+                                                ?
+
+                                                <div className={styles.lightButton} onClick={() => { setDarkMode(!darkMode); }}>
+                                                    <img className={styles.darkLightIcon} src={process.env.PUBLIC_URL + "/icons/sun.png"} />
+
+                                                    <div className={styles.darkLightButtonText}>
+                                                        밝은 화면
+                                                    </div>
                                                 </div>
 
-                                                <input type="submit" className={styles.submitButton} value="제출하기" />
+                                                :
 
-                                                <input type="button" className={styles.exitButton} value="종료하기" />
-                                            </div>
+                                                <div className={styles.darkButton} onClick={() => { setDarkMode(!darkMode); }}>
+                                                    <img className={styles.darkLightIcon} src={process.env.PUBLIC_URL + "/icons/moon.png"} />
+
+                                                    <div className={styles.darkLightButtonText}>
+                                                        어두운 화면
+                                                    </div>
+                                                </div>
+                                        }
+
+                                        <div className={styles.submittedTime}>
+                                            최종 제출 시간 &nbsp;
+                                            {submittedTime && new Date(submittedTime).toLocaleString("ko-KR")}
                                         </div>
+
+                                        <input type="submit" className={styles.submitButton} value="제출하기" />
+
+                                        <input type="button" className={styles.exitButton} value="종료하기" />
                                     </div>
                                 </form>
 
@@ -483,7 +511,10 @@ export default function TestMode() {
                                                     &&
 
                                                     <div className={styles.noticeButtonBefore}>
-                                                        {days}일 {hours}시간 {minutes}분 {seconds}초&nbsp;
+                                                        {daysBefore !== 0 && <span>{daysBefore}일&nbsp;</span>}
+                                                        {hoursBefore !== 0 && <span>{hoursBefore}시간&nbsp;</span>}
+                                                        {minutesBefore !== 0 && <span>{minutesBefore}분&nbsp;</span>}
+                                                        {secondsBefore}초&nbsp;
                                                         후 시험 시작
                                                     </div>
                                                 }

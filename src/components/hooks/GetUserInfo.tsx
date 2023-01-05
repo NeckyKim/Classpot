@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react"
 
 import { dbService } from "../../FirebaseModules";
-import { doc, getDoc, } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 
 
 
 export default function GetUserInfo(userCode: string) {
-    const [userInfo, setUserInfo] = useState<object | undefined>(undefined);
+    const [userInfo, setUserInfo] = useState<any>(undefined);
 
     useEffect(() => {
-        getDoc(doc(dbService, "users", userCode)).then((doc: any) => {
+        onSnapshot(doc(dbService, "users", userCode), (doc) => {
             setUserInfo(doc.data());
         });
-    }, []);
+    }, [])
 
     return userInfo;
 }
