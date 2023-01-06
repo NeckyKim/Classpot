@@ -1,0 +1,121 @@
+.slide1,
+.slide2,
+.slide3 {
+    width: calc(50vw - 40px);
+    height: calc(60vh - 210px);
+}
+
+.slide1Content {
+    width: calc(50vw - 40px);
+    height: calc(20vh - 70px);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.slide1ContentLeft {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide1ContentRight {
+    height: calc(20vh - 45px);
+    line-height: calc(20vh - 45px);
+}
+
+.slide1IconContainer {
+    width: 90px;
+    height: 90px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(0, 250, 200);
+}
+
+.slide1Icon {
+    width: 100%;
+    height: 100%;
+    filter: invert();
+}
+
+.slide2,
+.slide3 {
+    display: grid;
+    grid-template-rows: 300px 1fr;
+}
+
+.slide2Top {
+    width: 500px;
+    height: 300px;
+    display: block;
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.slide3Top {
+    width: 200px;
+    height: 300px;
+    display: block;
+    margin: 0px auto;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.slide4Top {
+    width: 400px;
+    height: 300px;
+    display: block;
+    margin: 0px auto;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.slide2IconContainerLight,
+.slide2IconContainerDark {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.slide2IconContainerLight {
+    background-color: rgb(250, 200, 50);
+}
+
+.slide2IconContainerDark {
+    background-color: rgb(100, 100, 100);
+}
+
+.slide2Icon {
+    width: 100%;
+    height: 100%;
+    padding: 20%;
+    filter: invert();
+}
+
+.slide2Bottom,
+.slide3Bottom,
+.slide4Bottom {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.slide3IconContainer {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 100, 250);
+}
+
+.slide3Icon {
+    width: 100%;
+    height: 100%;
+    padding: 20%;
+    filter: invert();
+}
