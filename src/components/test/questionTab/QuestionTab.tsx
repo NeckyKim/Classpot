@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, deleteDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 
 import AddQuestion from "./AddQuestion";
 import EditQuestion from "./EditQuestion";
+import GetQuestionList from "../../hooks/GetQuestionList";
 
 import styles from "./QuestionTab.module.css";
 
 
 
-export default function QuestionTab({ testCode }: { testCode: string | undefined }) {
+export default function QuestionTab({ userCode, testCode }: { userCode: string, testCode: string | undefined }) {
     const [isAddingQuestion, setIsAddingQuestion] = useState<boolean>(false);
     const [isEditingQuestion, setIsEditingQuestion] = useState<boolean>(false);
     const [index, setIndex] = useState<number>(0);
@@ -18,18 +19,7 @@ export default function QuestionTab({ testCode }: { testCode: string | undefined
 
 
     // 질문 목록
-    const [questionList, setQuestionList] = useState<any>([]);
-
-    if (testCode) {
-        useEffect(() => {
-            onSnapshot(query(collection(dbService, "tests", testCode, "questions"), orderBy("createdTime")), (snapshot) => {
-                setQuestionList(snapshot.docs.map((current) => ({
-                    questionCode: current.id,
-                    ...current.data()
-                })));
-            });
-        }, [])
-    }
+    const questionList: any = GetQuestionList(testCode);
 
 
 
@@ -42,7 +32,7 @@ export default function QuestionTab({ testCode }: { testCode: string | undefined
 
                     ?
 
-                    <AddQuestion setIsAddingQuestion={setIsAddingQuestion} />
+                    <AddQuestion userCode={userCode} setIsAddingQuestion={setIsAddingQuestion} />
 
                     :
 
@@ -63,65 +53,22 @@ export default function QuestionTab({ testCode }: { testCode: string | undefined
 
                                     {
                                         questionList.map((current: any, index: number) => (
-                                            <div className={styles.questionWrapper}>
-                                                <div className={styles.questionContainer}>
-                                                    <div className={styles.questionContainerLeft}>
+                                            <div className={styles.questionContainer}>
+                                                <div className={styles.questionHeader}>
+                                                    <div className={styles.questionNumber}>
                                                         Q.{index + 1}
                                                     </div>
 
-                                                    <div className={styles.questionContainerRight}>
-                                                        <div className={styles.questionInfo}>
-                                                            <div className={styles.questionText}>
-                                                                {current.question}
-                                                            </div>
-
-                                                            <div className={styles.questionPoints}>
-                                                                {current.points}점
-                                                            </div>
-                                                        </div>
-
-                                                        {
-                                                            current.type === "객관식"
-
-                                                            &&
-
-                                                            <div>
-                                                                <div className={current.answer[0] ? styles.correctChoice : styles.wrongChoice}>{current.choices[0]}</div>
-                                                                <div className={current.answer[1] ? styles.correctChoice : styles.wrongChoice}>{current.choices[1]}</div>
-                                                                <div className={current.answer[2] ? styles.correctChoice : styles.wrongChoice}>{current.choices[2]}</div>
-                                                                {current.choices[3] && <div className={current.answer[3] ? styles.correctChoice : styles.wrongChoice}>{current.choices[3]}</div>}
-                                                                {current.choices[4] && <div className={current.answer[4] ? styles.correctChoice : styles.wrongChoice}>{current.choices[4]}</div>}
-                                                                {current.choices[5] && <div className={current.answer[5] ? styles.correctChoice : styles.wrongChoice}>{current.choices[5]}</div>}
-                                                                {current.choices[6] && <div className={current.answer[6] ? styles.correctChoice : styles.wrongChoice}>{current.choices[6]}</div>}
-                                                                {current.choices[7] && <div className={current.answer[7] ? styles.correctChoice : styles.wrongChoice}>{current.choices[7]}</div>}
-                                                                {current.choices[8] && <div className={current.answer[8] ? styles.correctChoice : styles.wrongChoice}>{current.choices[8]}</div>}
-                                                                {current.choices[9] && <div className={current.answer[9] ? styles.correctChoice : styles.wrongChoice}>{current.choices[9]}</div>}
-                                                            </div>
-                                                        }
-
-                                                        {
-                                                            current.type === "참/거짓"
-
-                                                            &&
-
-                                                            <div className={styles.correctChoice}>
-                                                                {current.answer ? "참" : "거짓"}
-                                                            </div>
-                                                        }
-
-                                                        {
-                                                            current.type === "주관식"
-
-                                                            &&
-
-                                                            <div className={styles.correctChoice}>
-                                                                {current.answer}
-                                                            </div>
-                                                        }
+                                                    <div className={styles.questionType}>
+                                                        {current.type}
                                                     </div>
-                                                </div>
 
-                                                <div className={styles.buttonContainer}>
+                                                    <div className={styles.questionPoints}>
+                                                        {current.points}점
+                                                    </div>
+
+                                                    <div />
+
                                                     <div
                                                         className={styles.editButton}
                                                         onClick={() => {
@@ -143,6 +90,58 @@ export default function QuestionTab({ testCode }: { testCode: string | undefined
                                                         삭제
                                                     </div>
                                                 </div>
+
+                                                <div className={styles.questionText}>
+                                                    {current.question}
+                                                </div>
+
+
+                                                {
+                                                    current.type === "객관식"
+
+                                                    &&
+
+                                                    <div>
+                                                        <div className={current.answer[0] ? styles.correctChoice : styles.wrongChoice}>{current.choices[0]}</div>
+                                                        <div className={current.answer[1] ? styles.correctChoice : styles.wrongChoice}>{current.choices[1]}</div>
+                                                        <div className={current.answer[2] ? styles.correctChoice : styles.wrongChoice}>{current.choices[2]}</div>
+                                                        {current.choices[3] && <div className={current.answer[3] ? styles.correctChoice : styles.wrongChoice}>{current.choices[3]}</div>}
+                                                        {current.choices[4] && <div className={current.answer[4] ? styles.correctChoice : styles.wrongChoice}>{current.choices[4]}</div>}
+                                                        {current.choices[5] && <div className={current.answer[5] ? styles.correctChoice : styles.wrongChoice}>{current.choices[5]}</div>}
+                                                        {current.choices[6] && <div className={current.answer[6] ? styles.correctChoice : styles.wrongChoice}>{current.choices[6]}</div>}
+                                                        {current.choices[7] && <div className={current.answer[7] ? styles.correctChoice : styles.wrongChoice}>{current.choices[7]}</div>}
+                                                        {current.choices[8] && <div className={current.answer[8] ? styles.correctChoice : styles.wrongChoice}>{current.choices[8]}</div>}
+                                                        {current.choices[9] && <div className={current.answer[9] ? styles.correctChoice : styles.wrongChoice}>{current.choices[9]}</div>}
+                                                    </div>
+                                                }
+
+                                                {
+                                                    current.type === "참/거짓"
+
+                                                    &&
+
+                                                    <div className={styles.correctChoice}>
+                                                        {current.answer ? "참" : "거짓"}
+                                                    </div>
+                                                }
+
+                                                {
+                                                    current.type === "주관식"
+
+                                                    &&
+
+                                                    <div className={styles.correctChoice}>
+                                                        {current.answer}
+                                                    </div>
+                                                }
+
+                                                {
+                                                    current.file
+
+                                                    &&
+
+                                                    <img src={current.file} width="200px" />
+                                                }
                                             </div>
                                         ))
                                     }

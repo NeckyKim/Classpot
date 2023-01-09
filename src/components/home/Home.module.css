@@ -1,7 +1,7 @@
 .homeContainer {
     width: 100vw;
     height: calc(100vh - 70px);
-    background: linear-gradient(135deg, rgb(0, 100, 250) 10%, rgb(50, 200, 100) 90%);
+    background: linear-gradient(135deg, rgb(0, 100, 250) 20%, rgb(0, 220, 220) 90%);
     padding-top: 30vh;
 }
 

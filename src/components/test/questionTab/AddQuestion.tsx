@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
+import { v4 as uuidv4 } from "uuid";
 
-import { dbService } from "../../../FirebaseModules";
+import { dbService, storageService } from "../../../FirebaseModules";
 import { doc, setDoc, collection } from "firebase/firestore";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
 import Choices from "./Choices";
 
@@ -12,7 +14,7 @@ import styles from "./AddQuestion.module.css";
 
 
 
-export default function AddQuestion({ setIsAddingQuestion }: { setIsAddingQuestion: any; }) {
+export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCode: string, setIsAddingQuestion: any; }) {
     const { testCode } = useParams();
 
     const [type, setType] = useState<string>("객관식");
@@ -25,6 +27,8 @@ export default function AddQuestion({ setIsAddingQuestion }: { setIsAddingQuesti
     const [choices, setChoices] = useState<string[]>(new Array(10).fill(""));
     const [numberOfChoices, setNumberOfChoices] = useState<number>(3);
 
+    const [file, setFile] = useState<string>("");
+
 
 
     useEffect(() => {
@@ -34,8 +38,22 @@ export default function AddQuestion({ setIsAddingQuestion }: { setIsAddingQuesti
     }, [answer])
 
 
+
+
+
+
+
+
+
     async function addQuestion(event: any) {
         event.preventDefault();
+
+        var fileURL: string = "";
+
+        if (file !== "") {
+            const response = await uploadString(ref(storageService, userCode + "/" + uuidv4()), file, "data_url");
+            fileURL = await getDownloadURL(response.ref);       
+        }
 
         if (testCode && numberOfAnswers) {
             try {
@@ -45,12 +63,14 @@ export default function AddQuestion({ setIsAddingQuestion }: { setIsAddingQuesti
                     question: question,
                     answer: answer,
                     choices: choices,
-                    createdTime: Date.now()
+                    createdTime: Date.now(),
+                    file: fileURL
                 })
 
                 setIsAddingQuestion(false);
                 setQuestion("");
                 setAnswer(undefined);
+                setFile("");
 
                 alert("문제가 추가되었습니다.");
             }
@@ -65,6 +85,42 @@ export default function AddQuestion({ setIsAddingQuestion }: { setIsAddingQuesti
         }
     }
 
+
+
+    function onFileChange(event: any) {
+        const {
+            target: { files }
+        } = event;
+
+        const theFile = files[0];
+
+        const reader = new FileReader();
+
+        reader.onloadend = (finishedEvent: any) => {
+            const {
+                currentTarget: { result },
+            } = finishedEvent;
+
+            setFile(result);
+        }
+
+        reader.readAsDataURL(theFile);
+    }
+
+    const fileInput: any = useRef();
+
+    function onClearFile() {
+        setFile("");
+
+        if (fileInput.current) {
+            fileInput.current.value = null;
+        }
+    }
+
+
+
+
+    
 
 
     return (
@@ -150,7 +206,19 @@ export default function AddQuestion({ setIsAddingQuestion }: { setIsAddingQuesti
                     required
                 />
 
+                <input type="file" accept="image/*" onChange={onFileChange} ref={fileInput} />
 
+                {
+                    file
+
+                    &&
+
+                    <div>
+                        <img src={file} width="50px" />
+
+                        <button onClick={onClearFile}>이미지 삭제</button>
+                    </div>
+                }
 
                 {
                     type === "객관식"

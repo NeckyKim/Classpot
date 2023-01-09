@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, getDoc, deleteDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
 
-import EditTestSettings from "./EditTestSettings";
 import GetTestInfo from "../../hooks/GetTestInfo";
 
 import styles from "./TestSettings.module.css";
+import Alert from "../../../Alert";
 
 
 
@@ -15,37 +15,138 @@ import styles from "./TestSettings.module.css";
 export default function TestSettingsTab({ testCode }: { testCode: string | undefined }) {
     const navigate = useNavigate();
 
-    const [isEditingSettings, setIsEditingSettings] = useState<boolean>(false);
 
-    const [isDeletingTest, setIsDeletingTest] = useState<boolean>(false);
-    const [deletingTestConfirm, setDeletingTestConfirm] = useState<string>("");
-
-    const [isDeleteSuccess, setIsDeleteSuccess] = useState<boolean>(false);
-
-    
 
     // 시험 정보
     const testInfo: any = GetTestInfo(testCode);
 
 
 
-    // 시험 추가
+    // 시험 이름 변경
+    const [isEditingTestName, setIsEditingTestName] = useState<boolean>(false);
+    const [testName, setTestName] = useState<string>(testInfo.testName);
+
+    useEffect(() => { setTestName(testInfo.testName); }, [testInfo])
+
+
+
+    // 시작 일시 변경
+    const [isEditingStartDate, setIsEditingStartDate] = useState<boolean>(false);
+    const [startDate, setStartDate] = useState<any>("");
+
+    useEffect(() => {
+        setStartDate(new Date(testInfo.startDate).toLocaleDateString("sv-SE") + "T" + new Date(testInfo.startDate).toLocaleTimeString("en-US", { hour12: false }));
+    }, [testInfo])
+
+
+
+    // 응시 시간 변경
+    const [isEditingDuration, setIsEditingDuration] = useState<boolean>(false);
+    const [duration, setDuration] = useState<any>("");
+
+    useEffect(() => { setDuration(testInfo.duration); }, [testInfo])
+
+
+
+    // 시험 삭제
+    const [isDeletingTest, setIsDeletingTest] = useState<boolean>(false);
+    const [deletingTestConfirmText, setDeletingTestConfirmText] = useState<string>("");
+    const [isDeleteSuccess, setIsDeleteSuccess] = useState<boolean>(false);
+
+
+
+    async function editTestName(event: any) {
+        event.preventDefault();
+
+        if (testCode) {
+            try {
+                await updateDoc(doc(dbService, "tests", testCode), {
+                    testName: testName,
+                })
+
+                setIsEditingTestName(false);
+            }
+
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+
+
+    async function editTestStartDate(event: any) {
+        event.preventDefault();
+
+        if (testCode) {
+            try {
+                await updateDoc(doc(dbService, "tests", testCode), {
+                    startDate: Date.parse(startDate),
+                })
+
+                setIsEditingStartDate(false);
+            }
+
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+
+
+    async function editTestDuration(event: any) {
+        event.preventDefault();
+
+        if (testCode) {
+            try {
+                await updateDoc(doc(dbService, "tests", testCode), {
+                    duration: duration,
+                })
+
+                setIsEditingDuration(false);
+            }
+
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+
+
+    async function changeFeedback(event: any) {
+        event.preventDefault();
+
+        if (testCode) {
+            try {
+                await updateDoc(doc(dbService, "tests", testCode), {
+                    feedback: !testInfo.feedback,
+                })
+
+                setIsEditingDuration(false);
+            }
+
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+
+
     async function deleteTest(event: any) {
         event.preventDefault();
 
         if (testCode) {
             try {
-                await deleteDoc(doc(dbService, "tests", testCode))
+                await deleteDoc(doc(dbService, "tests", testCode));
 
-                setIsDeletingTest(false);
-
-                setIsDeleteSuccess(true);
+                
             }
 
             catch (error) {
                 console.log(error);
-
-                setIsDeleteSuccess(true);
             }
         }
     }
@@ -54,94 +155,63 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
 
     return (
         <div>
-            {
-                isEditingSettings
-
-                &&
-
-                <EditTestSettings setIsEditingSettings={setIsEditingSettings} testInfo={testInfo} testCode={testCode} />
-            }
-
-
-
-            {
-                isDeletingTest
-
-                &&
-
-                <div className={styles.background}>
-                    <form onSubmit={deleteTest} className={styles.deleteContainer}>
-                        <div className={styles.header}>
-                            시험 삭제
-                        </div>
-
-                        <div className={styles.comment}>
-                            시험을 삭제하려면 시험 이름을 입력하신 후 확인을 누르세요.<br />
-                            이 작업은 되돌릴 수 없습니다.
-                        </div>
-
-                        <input type="text" onChange={(event: any) => { setDeletingTestConfirm(event.target.value) }} className={styles.deleteConfirmTextBox} />
-
-                        <input type="submit" disabled={!(testInfo.testName === deletingTestConfirm)} value="삭제" className={styles.deleteConfirmButton} />
-
-                        <input type="button" value="취소" className={styles.cancelButton} onClick={() => { setIsDeletingTest(false); }} />
-                    </form>
-                </div>
-            }
-
-
-
-            {
-                isDeleteSuccess
-
-                &&
-
-                <div className={styles.background}>
-                    <div className={styles.deleteContainer}>
-                        <div className={styles.comment}>
-                            시험 삭제가 완료되었습니다.
-                        </div>
-
-                        <button className={styles.cancelButton} onClick={() => {
-                            navigate("/");
-
-                            setIsDeleteSuccess(false);
-                        }}>
-                            확인
-                        </button>
-                    </div>
-                </div>
-            }
-
-
-
             <div>
                 <div className={styles.header}>
-                    응시 코드
+                    시험 이름 설정
                 </div>
 
-                <div className={styles.applyCodeContainer}>
-                    <div className={styles.applyCode}>
-                        {testInfo?.applyCode}
-                    </div>
+                <div className={styles.settingsContainer}>
+                    {
+                        isEditingTestName
 
-                    <div className={styles.applyCodeCopyButton} onClick={() => {
-                        try {
-                            navigator.clipboard.writeText(testInfo?.applyCode);
-                            alert("응시 코드가 복사되었습니다.");
-                        }
+                            ?
 
-                        catch (error) {
-                            alert("응시 코드 복사에 실패하였습니다.")
-                        }
-                    }}>
-                        복사하기
-                    </div>
+                            <form className={styles.testNameEditing} onSubmit={editTestName}>
+                                <input
+                                    type="text"
+                                    className={styles.testInputBox}
+                                    value={testName}
+                                    onChange={(event) => {
+                                        setTestName(event.target.value);
+                                    }}
+                                    required
+                                />
 
-                    <div className={styles.applyCodeText}>
-                        위의 코드를 응시자들에게 알려주세요.
-                    </div>
+                                <input
+                                    type="submit"
+                                    className={styles.editConfirmButton}
+                                    value="완료"
+                                />
+
+                                <input
+                                    type="button"
+                                    className={styles.editCancelButton}
+                                    value="취소"
+                                    onClick={() => { setIsEditingTestName(false); }}
+                                />
+                            </form>
+
+                            :
+
+                            <div className={styles.testNameNotEditing}>
+                                <div className={styles.testNameValue}>
+                                    {testInfo.testName}
+                                </div>
+
+                                <div
+                                    className={styles.editButton}
+                                    onClick={() => {
+                                        setIsEditingTestName(true);
+                                        setIsEditingStartDate(false);
+                                        setIsEditingDuration(false);
+                                    }}
+                                >
+                                    변경
+                                </div>
+                            </div>
+                    }
                 </div>
+
 
 
 
@@ -149,42 +219,162 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
                     시간 설정
                 </div>
 
-                <div className={styles.testDateContainer}>
-                    <div>
-                        <div>
-                            시작 일시
-                        </div>
-
-                        <div>
-                            {new Date(testInfo?.startDate).toLocaleString("ko-KR")}
-                        </div>
+                <div className={styles.settingsContainer}>
+                    <div className={styles.settingsHeader}>
+                        시작 일시
                     </div>
 
-                    <div>
-                        <div>
-                            응시 시간
-                        </div>
+                    {
+                        isEditingStartDate
 
-                        <div>
-                            {testInfo?.duration}분
-                        </div>
+                            ?
+
+                            <form className={styles.testDateEditing} onSubmit={editTestStartDate}>
+                                <input
+                                    type="datetime-local"
+                                    className={styles.testInputBox}
+                                    value={startDate.toLocaleString("")}
+                                    onChange={(event) => {
+                                        setStartDate(event.target.value);
+                                    }}
+                                    required
+                                />
+
+                                <input
+                                    type="submit"
+                                    className={styles.editConfirmButton}
+                                    value="완료"
+                                />
+
+                                <input
+                                    type="button"
+                                    className={styles.editCancelButton}
+                                    value="취소"
+                                    onClick={() => { setIsEditingStartDate(false); }}
+                                />
+                            </form>
+
+                            :
+
+                            <div className={styles.testDateNotEditing}>
+                                <div className={styles.testDateValue}>
+                                    {new Date(testInfo?.startDate).toLocaleString("ko-KR")}
+                                </div>
+
+                                <div
+                                    className={styles.editButton}
+                                    onClick={() => {
+                                        setIsEditingTestName(false);
+                                        setIsEditingStartDate(true);
+                                        setIsEditingDuration(false);
+                                    }}
+                                >
+                                    변경
+                                </div>
+                            </div>
+                    }
+                </div>
+
+
+
+                <div className={styles.settingsContainer}>
+                    <div className={styles.settingsHeader}>
+                        응시 시간
                     </div>
 
+                    {
+                        isEditingDuration
 
-                    <div>
-                        <div>
-                            종료 일시
-                        </div>
+                            ?
 
-                        <div>
+                            <form className={styles.testDateEditing} onSubmit={editTestDuration}>
+                                <input
+                                    type="numer"
+                                    className={styles.testInputBox}
+                                    value={duration}
+                                    onChange={(event) => {
+                                        setDuration(event.target.value);
+                                    }}
+                                    required
+                                />
+
+                                <input
+                                    type="submit"
+                                    className={styles.editConfirmButton}
+                                    value="완료"
+                                />
+
+                                <input
+                                    type="button"
+                                    className={styles.editCancelButton}
+                                    value="취소"
+                                    onClick={() => { setIsEditingDuration(false); }}
+                                />
+                            </form>
+
+                            :
+
+                            <div className={styles.testDateNotEditing}>
+                                <div className={styles.testDateValue}>
+                                    {testInfo?.duration}분
+                                </div>
+
+                                <div
+                                    className={styles.editButton}
+                                    onClick={() => {
+                                        setIsEditingTestName(false);
+                                        setIsEditingStartDate(false);
+                                        setIsEditingDuration(true);
+                                    }}
+                                >
+                                    변경
+                                </div>
+                            </div>
+                    }
+                </div>
+
+                <div className={styles.settingsContainer}>
+                    <div className={styles.settingsHeader}>
+                        종료 일시
+                    </div>
+
+                    <div className={styles.testDateNotEditing}>
+                        <div className={styles.testDateValue}>
                             {new Date(testInfo?.startDate + testInfo?.duration * 60000).toLocaleString("ko-KR")}
                         </div>
                     </div>
                 </div>
 
-                <div onClick={() => { setIsEditingSettings(true); }} className={styles.editButton}>
-                    시험 설정 변경
+
+
+                <div className={styles.header}>
+                    피드백 공개 설정
                 </div>
+
+                <div className={styles.settingsContainer}>
+                    <div className={styles.settingsHeader}>
+                        시험이 종료되면, 응시자들이 문제와 정답을 확인할 수 있습니다.
+                    </div>
+
+                    <div className={styles.feedbackButtons}>
+                        <button
+                            className={testInfo.feedback ? styles.feedbackEnabledButtonOn : styles.feedbackEnabledButtonOff}
+                            onClick={changeFeedback}
+                            disabled={testInfo.feedback === true}
+                        >
+                            공개함
+                        </button>
+
+                        <button
+                            className={!testInfo.feedback ? styles.feedbackDisabledButtonOn : styles.feedbackDisabledButtonOff}
+                            onClick={changeFeedback}
+                            disabled={testInfo.feedback === false}
+                        >
+                            공개 안 함
+                        </button>
+                    </div>
+                </div>
+
 
 
 
@@ -192,9 +382,59 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
                     시험 삭제
                 </div>
 
-                <div onClick={() => { setIsDeletingTest(true); }} className={styles.deleteButton}>
-                    시험 삭제
-                </div>
+                {
+                    isDeletingTest
+
+                        ?
+
+                        <form className={styles.deleteContainer} onSubmit={deleteTest}>
+                            시험을 삭제하려면 시험 이름을 입력하신 후 확인을 누르세요.<br />
+                            문제, 응시자 목록, 답안지가 전부 삭제됩니다.
+
+                            <div className={styles.deleteContainerHighlighted}>
+                                이 작업은 되돌릴 수 없으며, 삭제된 정보는 복구가 불가능합니다.
+                            </div>
+
+                            <input
+                                type="text"
+                                className={styles.deleteContainerInputBox}
+                                value={deletingTestConfirmText}
+                                onChange={(event) => {
+                                    setDeletingTestConfirmText(event.target.value);
+                                }}
+                            />
+
+                            <div className={styles.deleteContainerButtons}>
+                                <div />
+
+                                <input
+                                    type="submit"
+                                    className={styles.deleteConfirmButton}
+                                    value="삭제"
+                                    disabled={deletingTestConfirmText !== testInfo.testName}
+                                />
+
+                                <input
+                                    type="button"
+                                    className={styles.deleteCancelButton}
+                                    value="취소"
+                                    onClick={() => { setIsDeletingTest(false); }}
+                                />
+                            </div>
+                        </form>
+
+                        :
+
+                        <div className={styles.settingsContainer}>
+                            <div className={styles.settingsHeader}>
+                                시험을 삭제합니다. 문제, 응시자 목록, 답안지가 전부 삭제됩니다.
+                            </div>
+
+                            <div onClick={() => { setIsDeletingTest(true); }} className={styles.testDeleteButton}>
+                                시험 삭제
+                            </div>
+                        </div>
+                }
             </div>
         </div>
     )

@@ -26,7 +26,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
     const [choices, setChoices] = useState<string[]>(questionInfo.choices);
     const [numberOfChoices, setNumberOfChoices] = useState<number>(Object.values(questionInfo.choices).filter(element => element != "").length);
 
-    console.log(numberOfAnswers)
+
 
     useEffect(() => {
         if (type === "객관식") {
@@ -42,8 +42,6 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
 
     async function editQuestion(event: any) {
         event.preventDefault();
-
-
 
         if (testCode && numberOfAnswers) {
             try {

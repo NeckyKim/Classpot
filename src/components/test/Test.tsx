@@ -14,13 +14,10 @@ import styles from "./Test.module.css";
 
 
 
-export default function Test({ userCode, email }: {
-    userCode: string;
-    email: string;
-}) {
+export default function Test({ userCode, email }: { userCode: string; email: string; }) {
     const { testCode } = useParams();
 
-    
+
 
     // 시험 정보
     var testInfo: any | undefined = GetTestInfo(testCode);
@@ -52,12 +49,17 @@ export default function Test({ userCode, email }: {
                                 <div className={tab === 3 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(3); }} >
                                     응시자 관리
                                 </div>
+
+                                <div className={tab === 4 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(4); }} >
+                                    답안지 확인
+                                </div>
                             </div>
 
                             <div className={styles.containerRight}>
                                 {tab === 1 && <TestSettingsTab testCode={testCode} />}
-                                {tab === 2 && <QuestionTab testCode={testCode} />}
-                                {tab === 3 && <ApplicantsTab testInfo={testInfo} testCode={testCode} />}
+                                {tab === 2 && <QuestionTab userCode={userCode} testCode={testCode} />}
+                                {tab === 3 && <ApplicantsTab testCode={testCode} />}
+                                {tab === 4 && <div>답안지 확인</div>}
                             </div>
                         </div>
                     </div>

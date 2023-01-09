@@ -137,7 +137,7 @@
     height: 20px;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(250, 50, 50);
+    border: 2px solid rgb(250, 150, 50);
     position: absolute;
     top: -6px;
     right: -6px;
@@ -163,7 +163,7 @@
     line-height: 40px;
     border-radius: 5px;
     color: rgb(255, 255, 255);
-    background-color: rgb(250, 50, 50);
+    background-color: rgb(250, 150, 50);
     text-align: center;
     margin-right: 10px;
     padding-left: 20px;
@@ -344,13 +344,12 @@
 }
 
 .lightButton {
-    background-color: rgb(250, 170, 50);
+    background-color: rgb(255, 255, 255);
 }
 
 .darkLightIcon {
     width: 20px;
     height: 20px;
-    filter: invert();
 }
 
 .darkLightButtonText {
@@ -372,7 +371,7 @@
     line-height: 40px;
     text-align: center;
     border-radius: 5px 0px 0px 5px;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(240, 240, 240);
     cursor: pointer;
 }
 
@@ -380,7 +379,7 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(240, 240, 240);
 }
 
 .fontSizeLarge {
@@ -388,7 +387,7 @@
     line-height: 40px;
     text-align: center;
     border-radius: 0px 5px 5px 0px;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(240, 240, 240);
     cursor: pointer;
 }
 

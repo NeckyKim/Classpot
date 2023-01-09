@@ -7,6 +7,8 @@ import { doc, getDoc, updateDoc, collection, orderBy, onSnapshot, query } from "
 import Error from "../../Error";
 import Notice from "./Notice";
 import GetTestInfo from "../hooks/GetTestInfo";
+import GetQuestionList from "../hooks/GetQuestionList";
+import GetApplicantList from "../hooks/GetApplicantList";
 
 import styles from "./TestMode.module.css";
 
@@ -21,12 +23,13 @@ export default function TestMode() {
     // 시험 정보
     const testInfo: any = GetTestInfo(testCode);
 
+    // 질문 목록
+    const questionList: any = GetQuestionList(testCode);
+
 
 
     // 다크/라이트 모드 설정
     const [darkMode, setDarkMode] = useState<boolean>(false);
-
-
 
     // 글자 크기 설정
     const [fontSizeIndex, setFontSizeIndex] = useState<number>(2);
@@ -42,33 +45,8 @@ export default function TestMode() {
 
 
 
-    // 질문 목록
-    const [questionList, setQuestionList] = useState<any>([]);
-
-    if (testCode) {
-        useEffect(() => {
-            onSnapshot(query(collection(dbService, "tests", testCode, "questions"), orderBy("createdTime")), (snapshot) => {
-                setQuestionList(snapshot.docs.map((current) => ({
-                    ...current.data()
-                })));
-            });
-        }, [])
-    }
-
-
-
     // 응시자 목록
-    const [applicantsList, setApplicantsList] = useState<any>([]);
-
-    if (testCode) {
-        useEffect(() => {
-            onSnapshot(query(collection(dbService, "tests", testCode, "applicants")), (snapshot) => {
-                setApplicantsList(snapshot.docs.map((current) => (
-                    current.id
-                )));
-            });
-        }, [])
-    }
+    const applicantList: any = GetApplicantList(testCode);
 
 
 
@@ -226,7 +204,7 @@ export default function TestMode() {
     return (
         <div>
             {
-                applicantsList.includes(applicantCode)
+                applicantList.map((row: any) => row.applicantCode).includes(applicantCode)
 
                     ?
 
@@ -310,11 +288,11 @@ export default function TestMode() {
                                                             (
                                                                 current.type === "객관식"
 
-                                                                && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0
-
                                                                 && answerSheet[index] !== null
 
                                                                 && answerSheet[index] !== undefined
+
+                                                                && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0
                                                             )
 
                                                             &&
@@ -343,12 +321,14 @@ export default function TestMode() {
 
                                                             &&
 
-                                                            <img className={styles.navigationNumberChecked} src={process.env.PUBLIC_URL + "/icons/flag.png"} style={darkMode ? { backgroundColor: "rgb(50, 50, 50)" } : {}} /> 
+                                                            <img className={styles.navigationNumberChecked} src={process.env.PUBLIC_URL + "/icons/flag.png"} style={darkMode ? { backgroundColor: "rgb(50, 50, 50)" } : {}} />
                                                         }
                                                     </div>
                                                 ))
                                             }
                                         </div>
+
+
 
                                         <div className={styles.questionAnswer}>
                                             <div className={styles.questionAnswerHeader}>
@@ -367,7 +347,7 @@ export default function TestMode() {
 
                                                 <div />
 
-                                                <div 
+                                                <div
                                                     className={styles.checkQuestionButton}
                                                     onClick={() => {
                                                         if (checkedQuestions.includes(questionNumber)) {
@@ -423,6 +403,10 @@ export default function TestMode() {
                                                     style={darkMode ? { color: "rgb(255, 255, 255)", fontSize: fontSizeValue[fontSizeIndex][1] } : { fontSize: fontSizeValue[fontSizeIndex][1] }}
                                                 >
                                                     {questionList[questionNumber].question}
+
+                                                    <div>
+                                                        <img src={questionList[questionNumber].file} width="200px" />
+                                                    </div>
                                                 </div>
 
                                                 <div className={styles.answerContent}>
@@ -597,7 +581,7 @@ export default function TestMode() {
                                                 <div className={styles.lightButton} onClick={() => { setDarkMode(!darkMode); }}>
                                                     <img className={styles.darkLightIcon} src={process.env.PUBLIC_URL + "/icons/sun.png"} />
 
-                                                    <div className={styles.darkLightButtonText}>
+                                                    <div className={styles.darkLightButtonText} style={darkMode ? { color: "rgb(0, 0, 0)" } : {}}>
                                                         밝은 화면
                                                     </div>
                                                 </div>
@@ -725,10 +709,6 @@ export default function TestMode() {
 
                                                     <div className={styles.noticeContainerFinished}>
                                                         시험이 종료되었습니다.
-                                                    </div>
-
-                                                    <div className={styles.noticeButtonAfter}>
-                                                        시험 종료 후 공개되지 않은 시험
                                                     </div>
                                                 </div>
                                             }

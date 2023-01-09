@@ -5,14 +5,16 @@ import { doc, onSnapshot } from "firebase/firestore";
 
 
 
-export default function GetUserInfo(userCode: string) {
-    const [userInfo, setUserInfo] = useState<any>(undefined);
+export default function GetUserInfo(userCode: string | undefined) {
+    const [userInfo, setUserInfo] = useState<any>([]);
 
-    useEffect(() => {
-        onSnapshot(doc(dbService, "users", userCode), (doc) => {
-            setUserInfo(doc.data());
-        });
-    }, [])
+    if (userCode) {
+        useEffect(() => {
+            onSnapshot(doc(dbService, "users", userCode), (doc) => {
+                setUserInfo(doc.data());
+            });
+        }, [])
+    }
 
     return userInfo;
 }

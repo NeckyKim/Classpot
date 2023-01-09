@@ -1,0 +1,20 @@
+.alertBackground {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 3;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.alertContainer {
+    width: 500px;
+    height: 200px;
+    padding: 40px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+}

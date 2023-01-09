@@ -71,7 +71,7 @@
     height: 30px;
     display: grid;
     grid-template-columns: repeat(2, 60px);
-    gap: 2px;
+    gap: 1px;
     margin-bottom: 10px;
 }
 
@@ -178,7 +178,7 @@
     border: none;
     border-radius: 5px;
     color: rgb(255, 255, 255);
-    background-color: rgb(50, 220, 50);
+    background-color: rgb(0, 220, 220);
     margin-bottom: 50px;
     display: inline-block;
     cursor: pointer;
@@ -193,7 +193,7 @@
     color: rgb(100, 100, 100);
     background-color: rgb(220, 220, 220);
     margin-bottom: 50px;
-    margin-left: 10px;
+    margin-left: 5px;
     display: inline-block;
     cursor: pointer;
 }

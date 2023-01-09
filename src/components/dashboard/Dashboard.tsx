@@ -6,7 +6,6 @@ import { doc, setDoc, collection } from "firebase/firestore";
 import { onSnapshot, query, where } from "firebase/firestore";
 
 import GetUserInfo from "../hooks/GetUserInfo";
-import GenerateApplyCode from "../hooks/GenerateApplyCode";
 
 import styles from "./Dashboard.module.css";
 
@@ -65,7 +64,6 @@ export default function Dashboard({ userCode, email }: {
     const [testName, setTestName] = useState<string>("");
     const [startDate, setStartDate] = useState<any>(new Date().toLocaleDateString("sv-SE") + "T" + new Date().toLocaleTimeString("en-US", { hour12: false }));
     const [duration, setDuration] = useState<number>(60);
-    const [applyCode, setApplyCode] = useState<string>(GenerateApplyCode());
 
 
 
@@ -80,7 +78,6 @@ export default function Dashboard({ userCode, email }: {
                 startDate: Date.parse(startDate),
                 duration: duration,
                 createdTime: Date.now(),
-                applyCode: applyCode
             })
 
             alert("시험 추가가 완료되었습니다.");
