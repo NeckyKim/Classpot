@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, updateDoc, deleteDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 import GetTestInfo from "../../hooks/GetTestInfo";
 
-import styles from "./TestSettings.module.css";
-import Alert from "../../../Alert";
+import { toast } from "react-toastify";
 
+import styles from "./TestSettings.module.css";
 
 
 
@@ -51,7 +51,6 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
     // 시험 삭제
     const [isDeletingTest, setIsDeletingTest] = useState<boolean>(false);
     const [deletingTestConfirmText, setDeletingTestConfirmText] = useState<string>("");
-    const [isDeleteSuccess, setIsDeleteSuccess] = useState<boolean>(false);
 
 
 
@@ -64,11 +63,13 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
                     testName: testName,
                 })
 
+                toast.success("시험 이름이 변경되었습니다.");
                 setIsEditingTestName(false);
             }
 
             catch (error) {
                 console.log(error);
+                toast.error("시험 이름이 변경에 실패했습니다.");
             }
         }
     }
@@ -84,11 +85,13 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
                     startDate: Date.parse(startDate),
                 })
 
+                toast.success("시험 시작 일시가 변경되었습니다.");
                 setIsEditingStartDate(false);
             }
 
             catch (error) {
                 console.log(error);
+                toast.error("시험 시작 일시 변경에 실패했습니다.");
             }
         }
     }
@@ -104,11 +107,13 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
                     duration: duration,
                 })
 
+                toast.success("시험 응시 시간이 변경되었습니다.");
                 setIsEditingDuration(false);
             }
 
             catch (error) {
                 console.log(error);
+                toast.error("시험 응시 시간 변경에 실패했습니다.");
             }
         }
     }
@@ -124,11 +129,13 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
                     feedback: !testInfo.feedback,
                 })
 
+                toast.success("시험 피드백 공개 설정이 변경되었습니다.");
                 setIsEditingDuration(false);
             }
 
             catch (error) {
                 console.log(error);
+                toast.error("시험 피드백 공개 설정 변경에 실패했습니다.");
             }
         }
     }
@@ -142,11 +149,13 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
             try {
                 await deleteDoc(doc(dbService, "tests", testCode));
 
-                
+                navigate("/");
+                toast.success("시험이 삭제되었습니다.");
             }
 
             catch (error) {
                 console.log(error);
+                toast.error("시험 삭제에 실패했습니다.");
             }
         }
     }

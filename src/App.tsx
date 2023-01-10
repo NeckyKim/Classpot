@@ -14,8 +14,10 @@ import TestMode from "./components/apply/TestMode";
 
 import Error from "./Error";
 
-import './App.css';
+import { ToastContainer, Slide } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
+import './App.css';
 
 
 
@@ -33,8 +35,38 @@ export default function App() {
     return (
         <div>
             <BrowserRouter>
-
                 <HeaderTop loggedIn={userObject !== null} />
+
+                <ToastContainer
+                    transition={Slide}
+                    position="bottom-right"
+                    autoClose={5000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable={false}
+                    pauseOnHover={false}
+                    theme="light"
+                    style={
+                        location.pathname.includes("/apply/")
+
+                        ?
+
+                        {
+                            right: "30px",
+                            bottom: "70px"
+                        }
+
+                        :
+
+                        {
+                            right: "40px",
+                            bottom: "40px"
+                        }
+                    }
+                />
 
                 {
                     userObject === null
@@ -54,7 +86,7 @@ export default function App() {
                         <Routes>
                             <Route path="/" element={<Dashboard userCode={userObject.uid} email={userObject.email} />} />
                             <Route path="/test/:testCode" element={<Test userCode={userObject.uid} email={userObject.email} />} />
-                            <Route path="*" element={<Error message="페이지 오류 입니다."/>} />
+                            <Route path="*" element={<Error message="페이지 오류 입니다." />} />
                         </Routes>
                 }
             </BrowserRouter>

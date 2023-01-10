@@ -7,6 +7,8 @@ import { onSnapshot, query, where } from "firebase/firestore";
 
 import GetUserInfo from "../hooks/GetUserInfo";
 
+import { toast } from "react-toastify";
+
 import styles from "./Dashboard.module.css";
 
 
@@ -34,12 +36,12 @@ export default function Dashboard({ userCode, email }: {
                 email: email
             })
 
-            alert("사용자 등록이 완료되었습니다.");
+            toast.success("사용자 등록이 완료되었습니다.");
         }
 
         catch (error) {
             console.log(error);
-            alert("사용자 등록에 실패했습니다.");
+            toast.error("사용자 등록에 실패했습니다.");
         }
     }
 
@@ -80,7 +82,7 @@ export default function Dashboard({ userCode, email }: {
                 createdTime: Date.now(),
             })
 
-            alert("시험 추가가 완료되었습니다.");
+            toast.success("시험 추가가 완료되었습니다.");
 
             setTestName("");
             setStartDate(new Date().toLocaleDateString("sv-SE") + "T" + new Date().toLocaleTimeString("en-US", { hour12: false }));
@@ -91,8 +93,7 @@ export default function Dashboard({ userCode, email }: {
 
         catch (error) {
             console.log(error);
-            
-            alert("시험 추가에 실패했습니다.");
+            toast.error("시험 추가에 실패했습니다.");
         }
     }
 

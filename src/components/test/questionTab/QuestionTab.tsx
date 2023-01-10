@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import { dbService } from "../../../FirebaseModules";
+import { dbService, storageService } from "../../../FirebaseModules";
 import { doc, deleteDoc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 
 import AddQuestion from "./AddQuestion";
 import EditQuestion from "./EditQuestion";
@@ -85,6 +86,7 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
 
                                                             if (testCode && ok) {
                                                                 await deleteDoc(doc(dbService, "tests", testCode, "questions", current.questionCode));
+                                                                await deleteObject(ref(storageService, userCode + "/" + testCode + "/" + current.questionCode))
                                                             }
                                                         }}>
                                                         삭제
