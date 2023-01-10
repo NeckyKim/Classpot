@@ -48,7 +48,7 @@ export default function App() {
                     pauseOnFocusLoss={false}
                     draggable={false}
                     pauseOnHover={false}
-                    theme="light"
+                    theme="colored"
                     style={
                         location.pathname.includes("/apply/")
 
