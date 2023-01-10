@@ -156,7 +156,6 @@
     padding-bottom: 20px;
 }
 
-
 .checkQuestionButton {
     width: fit-content;
     height: 40px;
@@ -396,6 +395,7 @@
     font-size: 0.8rem;
     height: 40px;
     line-height: 40px;
+    margin-right: 5px;
     color: rgb(180, 180, 180);
 }
 
@@ -493,4 +493,18 @@
 .noticeButtonAfter {
     color: rgb(100, 100, 100);
     background-color: rgb(220, 220, 220);
+}
+
+:root {
+    --toastify-toast-width: fit-content;
+
+    --toastify-icon-color-info: rgb(0, 100, 250);
+    --toastify-icon-color-success: rgb(0, 220, 220);
+    --toastify-icon-color-warning: rgb(250, 50, 50);
+    --toastify-icon-color-error: rgb(250, 50, 50);
+}
+
+.Toastify__toast-container--bottom-right {
+    right: 240px;
+    bottom: 240px;
 }

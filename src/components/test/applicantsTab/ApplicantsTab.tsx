@@ -5,6 +5,8 @@ import { doc, setDoc, collection } from "firebase/firestore";
 
 import GetApplicantList from "../../hooks/GetApplicantList";
 
+import { toast } from "react-toastify";
+
 import styles from "./ApplicantsTab.module.css";
 
 
@@ -35,14 +37,14 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                     answerSheet: answerSheet
                 })
 
-                alert("응시자가 추가됐습니다.");
+                toast.success("응시자가 추가됐습니다.");
 
                 setApplicantName("");
                 setIsAddingApplicant(false);
             }
 
             catch (error) {
-                alert("응시자 추가에 실패했습니다.");
+                toast.error("응시자 추가에 실패했습니다.");
             }
         }
     }
@@ -125,11 +127,11 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                             onClick={() => {
                                 try {
                                     navigator.clipboard.writeText(window.location.origin + "/apply/" + testCode + "/applicant/" + current.applicantCode);
-                                    alert("응시 코드가 복사되었습니다.");
+                                    toast.success("응시 코드가 복사되었습니다.");
                                 }
 
                                 catch (error) {
-                                    alert("응시 코드 복사에 실패하였습니다.")
+                                    toast.error("응시 코드 복사에 실패하였습니다.")
                                 }
                             }}
                         >

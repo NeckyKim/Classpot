@@ -39,3 +39,46 @@ input:focus {
 textarea:focus {
     outline: none;
 }
+
+:root {
+    --toastify-toast-width: fit-content;
+
+    --toastify-color-info: rgb(0, 100, 250);
+    --toastify-color-success: rgb(0, 220, 220);
+    --toastify-color-warning: rgb(250, 50, 50);
+    --toastify-color-error: rgb(250, 50, 50);
+}
+
+.Toastify__toast {
+    padding: 20px;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    box-shadow: none;
+    color: rgb(0, 0, 0);
+}
+
+.Toastify__toast-container {
+    padding: 0px;
+}
+
+@keyframes Toastify__slideInRight {
+    from {
+        transform: translate3d(120%, 0, 0);
+        visibility: visible;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes Toastify__slideOutRight {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        visibility: hidden;
+        transform: translate3d(120%, 0, 0);
+    }
+}

@@ -6,7 +6,10 @@ import { dbService } from "../../FirebaseModules";
 import { collection, orderBy, onSnapshot, query } from "firebase/firestore";
 
 import GetTestInfo from "../hooks/GetTestInfo";
+import GetQuestionList from "../hooks/GetQuestionList";
+import GetApplicantList from "../hooks/GetApplicantList";
 import Error from "../../Error";
+
 
 
 
@@ -18,32 +21,11 @@ export default function Apply() {
     // 시험 정보
     var testInfo: any | undefined = GetTestInfo(testCode);
 
-
-
     // 질문 목록
-    const [questionList, setQuestionList] = useState<any>([]);
+    const [questionList, setQuestionList] = GetQuestionList(testCode);
 
     // 응시자 목록
-    const [applicantsList, setApplicantsList] = useState<any>([]);
-
-    if (testCode) {
-        useEffect(() => {
-            onSnapshot(query(collection(dbService, "tests", testCode, "questions"), orderBy("createdTime")), (snapshot) => {
-                setQuestionList(snapshot.docs.map((current) => ({
-                    questionCode: current.id,
-                    ...current.data()
-                })));
-            });
-        }, [])
-
-        useEffect(() => {
-            onSnapshot(query(collection(dbService, "tests", testCode, "applicants"), orderBy("createdTime")), (snapshot) => {
-                setApplicantsList(snapshot.docs.map((current) => (
-                    current.id
-                )));
-            });
-        }, [])
-    }
+    const [applicantsList, setApplicantsList] = GetApplicantList(testCode);
 
 
 

@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, updateDoc, collection } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 import Choices from "./Choices";
 
+import { toast } from "react-toastify";
+
 import styles from "./EditQuestion.module.css";
+
 
 
 
@@ -57,16 +60,17 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 setQuestion("");
                 setAnswer(undefined);
 
-                alert("문제가 수정되었습니다.");
+                toast.success("문제가 수정되었습니다.");
             }
 
             catch (error) {
-                alert("문제 수정에 실패했습니다.");
+                console.log(error);
+                toast.error("문제 수정에 실패했습니다.");
             }
         }
 
         else {
-            alert("객관식 문제는 정답을 적어도 하나 이상 설정해야 합니다.");
+            toast.error("객관식 문제는 정답을 적어도 하나 이상 설정해야 합니다.", );
         }
     }
 

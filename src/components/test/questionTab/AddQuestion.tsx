@@ -3,14 +3,14 @@ import { useParams } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 
 import { dbService, storageService } from "../../../FirebaseModules";
-import { doc, setDoc, collection } from "firebase/firestore";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import { getDownloadURL, uploadString, ref } from "firebase/storage";
 
 import Choices from "./Choices";
 
+import { toast } from "react-toastify";
+
 import styles from "./AddQuestion.module.css";
-
-
 
 
 
@@ -21,6 +21,8 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
     const [points, setPoints] = useState<number>(1);
 
     const [question, setQuestion] = useState<string>("");
+
+    
     const [answer, setAnswer] = useState<any>(new Array(10).fill(false));
     const [numberOfAnswers, setNumberOfAnswers] = useState<number>(0);
 
@@ -39,25 +41,21 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
 
 
 
-
-
-
-
-
-
     async function addQuestion(event: any) {
         event.preventDefault();
+
+        const id: string = uuidv4();
 
         var fileURL: string = "";
 
         if (file !== "") {
-            const response = await uploadString(ref(storageService, userCode + "/" + uuidv4()), file, "data_url");
+            const response = await uploadString(ref(storageService, userCode + "/" + testCode + "/" + id), file, "data_url");
             fileURL = await getDownloadURL(response.ref);       
         }
 
         if (testCode && numberOfAnswers) {
             try {
-                await setDoc(doc(collection(dbService, "tests", testCode, "questions")), {
+                await setDoc(doc(dbService, "tests", testCode, "questions", id), {
                     type: type,
                     points: points,
                     question: question,
@@ -72,16 +70,16 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                 setAnswer(undefined);
                 setFile("");
 
-                alert("문제가 추가되었습니다.");
+                toast.success("문제가 추가되었습니다.");
             }
 
             catch (error) {
-                alert("문제 추가에 실패했습니다.");
+                toast.error("문제 추가에 실패했습니다.");
             }
         }
 
         else {
-            alert("객관식 문제는 정답을 적어도 하나 이상 설정해야 합니다.");
+            toast.error("객관식 문제는 정답을 적어도 하나 이상 설정해야 합니다.");
         }
     }
 
@@ -118,9 +116,6 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
     }
 
 
-
-
-    
 
 
     return (
