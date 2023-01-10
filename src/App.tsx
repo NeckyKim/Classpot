@@ -49,6 +49,7 @@ export default function App() {
                     draggable={false}
                     pauseOnHover={false}
                     theme="colored"
+                    limit={1}
                     style={
                         location.pathname.includes("/apply/")
 

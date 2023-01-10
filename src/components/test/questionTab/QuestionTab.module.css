@@ -81,6 +81,12 @@
     text-align: justify;
 }
 
+.questionImage {
+    display: block;
+    margin: 0px auto;
+    padding: 40px;
+}
+
 .editButton {
     width: 60px;
     height: 30px;

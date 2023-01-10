@@ -7,6 +7,8 @@ import { browserSessionPersistence } from "firebase/auth";
 
 import { GoogleAuthProvider } from "firebase/auth";
 
+import styles from "./Login.module.css";
+
 
 
 export default function Login() {
@@ -22,7 +24,7 @@ export default function Login() {
                     return signInWithPopup(auth, new GoogleAuthProvider());
                 })
 
-                navigate("/");
+            navigate("/");
         }
 
         catch (error) {
@@ -33,10 +35,22 @@ export default function Login() {
 
 
     return (
-        <div>
-            <button name="google" onClick={onSocialClick}>
-                로그인
-            </button>
+        <div className={styles.loginWrapper}>
+            <div className={styles.loginContainer}>
+                    <div className={styles.loginHeader}>
+                        login
+                    </div>
+
+                    <div className={styles.loginGuide}>
+                        별도의 회원 가입 없이<br />
+                        Google 계정으로 간편하게<br />
+                        이용하실 수 있습니다.
+                    </div>
+                    
+                    <button className={styles.loginButton} name="google" onClick={onSocialClick}>
+                        로그인
+                    </button>
+            </div>
         </div>
     )
 }

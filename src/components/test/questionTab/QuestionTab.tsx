@@ -43,7 +43,7 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
 
                                 ?
 
-                                <EditQuestion setIsEditingQuestion={setIsEditingQuestion} questionInfo={questionList[index]} />
+                                <EditQuestion userCode={userCode} setIsEditingQuestion={setIsEditingQuestion} questionInfo={questionList[index]} />
 
                                 :
 
@@ -97,6 +97,17 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                     {current.question}
                                                 </div>
 
+                                                {
+                                                    current.imageFile
+
+                                                    &&
+
+                                                    <img 
+                                                        src={current.imageFile} 
+                                                        width={current.imageSize * 25 + "%"}
+                                                        className={styles.questionImage}
+                                                    />
+                                                }
 
                                                 {
                                                     current.type === "객관식"
@@ -135,14 +146,6 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                     <div className={styles.correctChoice}>
                                                         {current.answer}
                                                     </div>
-                                                }
-
-                                                {
-                                                    current.file
-
-                                                    &&
-
-                                                    <img src={current.file} width="200px" />
                                                 }
                                             </div>
                                         ))

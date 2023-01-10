@@ -14,7 +14,7 @@ import styles from "./AddQuestion.module.css";
 
 
 
-export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCode: string, setIsAddingQuestion: any; }) {
+export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCode: string, setIsAddingQuestion: any }) {
     const { testCode } = useParams();
 
     const [type, setType] = useState<string>("객관식");
@@ -22,7 +22,7 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
 
     const [question, setQuestion] = useState<string>("");
 
-    
+
     const [answer, setAnswer] = useState<any>(new Array(10).fill(false));
     const [numberOfAnswers, setNumberOfAnswers] = useState<number>(0);
 
@@ -30,6 +30,7 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
     const [numberOfChoices, setNumberOfChoices] = useState<number>(3);
 
     const [file, setFile] = useState<string>("");
+    const [imageSize, setImageSize] = useState<number>(1);
 
 
 
@@ -50,7 +51,7 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
 
         if (file !== "") {
             const response = await uploadString(ref(storageService, userCode + "/" + testCode + "/" + id), file, "data_url");
-            fileURL = await getDownloadURL(response.ref);       
+            fileURL = await getDownloadURL(response.ref);
         }
 
         if (testCode && numberOfAnswers) {
@@ -62,7 +63,8 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                     answer: answer,
                     choices: choices,
                     createdTime: Date.now(),
-                    file: fileURL
+                    imageFile: fileURL,
+                    imageSize: imageSize 
                 })
 
                 setIsAddingQuestion(false);
@@ -107,6 +109,8 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
 
     const fileInput: any = useRef();
 
+
+
     function onClearFile() {
         setFile("");
 
@@ -114,7 +118,6 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
             fileInput.current.value = null;
         }
     }
-
 
 
 
@@ -201,19 +204,93 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                     required
                 />
 
-                <input type="file" accept="image/*" onChange={onFileChange} ref={fileInput} />
 
-                {
-                    file
 
-                    &&
+                <div className={styles.questionHeader}>
+                    이미지
+                </div>
 
-                    <div>
-                        <img src={file} width="50px" />
 
-                        <button onClick={onClearFile}>이미지 삭제</button>
-                    </div>
-                }
+                <div className={styles.imageContainer}>
+                    {
+                        file
+
+                            ?
+
+                            <div className={styles.imagePreviewContainer}>
+                                <img
+                                    src={file}
+                                    width={imageSize * 200 + "px"}
+                                    className={styles.imagePreview}
+                                />
+
+                                <div className={styles.imagePreviewContainerBottom}>
+                                    <div 
+                                        className={styles.imageSizeButton} 
+                                        onClick={() => { setImageSize(1); }}
+                                        style={imageSize === 1 ? {backgroundColor: "rgb(0, 100, 250", color: "rgb(255, 255, 255)"} : {}}
+                                    >
+                                        25%
+                                    </div>
+
+                                    <div 
+                                        className={styles.imageSizeButton} 
+                                        onClick={() => { setImageSize(2); }}
+                                        style={imageSize === 2 ? {backgroundColor: "rgb(0, 100, 250", color: "rgb(255, 255, 255)"} : {}}
+                                    >
+                                        50%
+                                    </div>
+
+                                    <div 
+                                        className={styles.imageSizeButton} 
+                                        onClick={() => { setImageSize(3); }}
+                                        style={imageSize === 3 ? {backgroundColor: "rgb(0, 100, 250", color: "rgb(255, 255, 255)"} : {}}
+                                    >
+                                        75%
+                                    </div>
+
+                                    <div 
+                                        className={styles.imageSizeButton} 
+                                        onClick={() => { setImageSize(4); }}
+                                        style={imageSize === 4 ? {backgroundColor: "rgb(0, 100, 250", color: "rgb(255, 255, 255)"} : {}}
+                                    >
+                                        100%
+                                    </div>
+
+                                    <div />
+
+                                    <button
+                                        onClick={onClearFile}
+                                        className={styles.imageUploadDeleteButton}
+                                    >
+                                        이미지 삭제
+                                    </button>
+                                </div>
+                            </div>
+
+                            :
+
+                            <div>
+                                <label htmlFor="file">
+                                    <div className={styles.imageUploadDeleteButton}>
+                                        이미지 업로드
+                                    </div>
+                                </label>
+
+                                <input 
+                                    type="file" 
+                                    name="file"
+                                    accept="image/*"
+                                    id="file"
+                                    onChange={onFileChange}
+                                    ref={fileInput}
+                                    className={styles.imageUploader}
+                                />
+                            </div>
+                    }
+                </div>
+
+
 
                 {
                     type === "객관식"

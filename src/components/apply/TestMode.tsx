@@ -67,11 +67,16 @@ export default function TestMode() {
 
 
 
+    // 답안 변경 여부
+    const [modified, setModified] = useState<boolean>(false);
+
+
+
     // 답안지 제출하기
     async function submitAnswerSheet(event: any) {
         event.preventDefault();
 
-        if (testCode && applicantCode) {
+        if (testCode && applicantCode && modified) {
             try {
                 await updateDoc(doc(dbService, "tests", testCode, "applicants", applicantCode), {
                     answerSheet: answerSheet,
@@ -81,6 +86,8 @@ export default function TestMode() {
                 toast.success("답안지가 제출되었습니다.", {
                     
                 });
+
+                setModified(false);
                 setSubmittedTime(Date.now());
             }
 
@@ -133,18 +140,16 @@ export default function TestMode() {
     const [isApplyingTest, setIsApplyingTest] = useState<boolean>(false);
     const [questionNumber, setQuestionNumber] = useState<number>(0);
 
-
-    console.log(questionList[questionNumber])
-
     useEffect(() => {
         var temp = [...answerSheet];
 
-        if (questionList.length > 0 && questionList[questionNumber].type === "객관식" && (answerSheet[questionNumber] === null || typeof(answerSheet[questionNumber]) !== "object")) {
+        if (questionList.length > 0 && questionList[questionNumber].type === "객관식" && answerSheet[questionNumber] === null) {
             temp[questionNumber] = { 0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false }
 
             setAnswerSheet(temp);
         }
-    }, [questionList])
+    }, [questionNumber])
+
 
 
     // 객관식 선택지 컴포넌트
@@ -181,7 +186,7 @@ export default function TestMode() {
                     }
 
                     setAnswerSheet(temp);
-
+                    setModified(true);
                 }}
             >
                 {questionList[questionNumber].choices[choicesNumber]}
@@ -431,9 +436,11 @@ export default function TestMode() {
                                                     >
                                                         {questionList[questionNumber].question}
 
-                                                        <div>
-                                                            <img src={questionList[questionNumber].file} width="200px" />
-                                                        </div>
+                                                        <img 
+                                                            src={questionList[questionNumber].imageFile}
+                                                            width={questionList[questionNumber].imageSize * 25 + "%"}
+                                                            className={styles.questionImage} 
+                                                        />
                                                     </div>
 
                                                     <div className={styles.answerContent}>
@@ -484,6 +491,7 @@ export default function TestMode() {
                                                                     onClick={() => {
                                                                         let temp = [...answerSheet];
                                                                         temp[questionNumber] = true;
+                                                                        setModified(true);
                                                                         setAnswerSheet(temp);
                                                                     }}
                                                                 >
@@ -512,6 +520,7 @@ export default function TestMode() {
                                                                     onClick={() => {
                                                                         let temp = [...answerSheet];
                                                                         temp[questionNumber] = false;
+                                                                        setModified(true);
                                                                         setAnswerSheet(temp);
                                                                     }}
                                                                 >
@@ -547,6 +556,7 @@ export default function TestMode() {
                                                                 onChange={(event: any) => {
                                                                     let temp = [...answerSheet];
                                                                     temp[questionNumber] = String(event.target.value);
+                                                                    setModified(true);
                                                                     setAnswerSheet(temp);
                                                                 }}
                                                             />
@@ -583,6 +593,7 @@ export default function TestMode() {
                                                                     onChange={(event: any) => {
                                                                         let temp = [...answerSheet];
                                                                         temp[questionNumber] = String(event.target.value);
+                                                                        setModified(true);
                                                                         setAnswerSheet(temp);
                                                                     }}
                                                                 />

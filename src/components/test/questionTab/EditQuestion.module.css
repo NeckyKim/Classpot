@@ -66,6 +66,84 @@
     margin-left: 5px;
 }
 
+
+.questionBox {
+    width: 100%;
+    height: 300px;
+    font-size: 1rem;
+    margin-bottom: 50px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(240, 240, 240);
+    resize: none;
+    word-break: keep-all;
+    text-align: justify;
+}
+
+
+.imageContainer {
+    border-radius: 5px;
+    margin-bottom: 50px;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+}
+
+.imageUploadDeleteButton {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    text-align: center;
+    cursor: pointer;
+}
+
+.imageUploader {
+    display: none;
+}
+
+.imagePreviewContainer {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 40px;
+    gap: 20px;
+    align-items: center;
+    justify-items: center;
+}
+
+.imagePreviewContainerBottom {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 80px) 1fr 120px;
+    gap: 1px;
+}
+
+.imagePreview {
+    text-align: center;
+}
+
+.imageSizeButton {
+    font-size: 0.8rem;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
+    text-align: center;
+    background-color: rgb(220, 220, 220);
+}
+
+.imageSizeButton:nth-child(1) {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.imageSizeButton:nth-child(4) {
+    border-radius: 0px 5px 5px 0px;
+}
+
 .choiceButtonContainer {
     width: fit-content;
     height: 30px;
@@ -102,20 +180,6 @@
 
 .choicesContainer {
     margin-bottom: 50px;
-}
-
-.questionBox {
-    width: 100%;
-    height: 300px;
-    font-size: 1rem;
-    margin-bottom: 50px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(240, 240, 240);
-    resize: none;
-    word-break: keep-all;
-    text-align: justify;
 }
 
 .answerContainer {
