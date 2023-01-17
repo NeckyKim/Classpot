@@ -5,6 +5,7 @@ import { dbService } from "../../FirebaseModules";
 import { doc, setDoc, collection } from "firebase/firestore";
 import { onSnapshot, query, where } from "firebase/firestore";
 
+import GenerateApplyCode from "../hooks/GenerateApplyCode";
 import GetUserInfo from "../hooks/GetUserInfo";
 
 import { toast } from "react-toastify";
@@ -67,6 +68,8 @@ export default function Dashboard({ userCode, email }: {
     const [startDate, setStartDate] = useState<any>(new Date().toLocaleDateString("sv-SE") + "T" + new Date().toLocaleTimeString("en-US", { hour12: false }));
     const [duration, setDuration] = useState<number>(60);
 
+    const applyCode = GenerateApplyCode();
+
 
 
     // 시험 추가
@@ -80,6 +83,7 @@ export default function Dashboard({ userCode, email }: {
                 startDate: Date.parse(startDate),
                 duration: duration,
                 createdTime: Date.now(),
+                applyCode: applyCode
             })
 
             toast.success("시험 추가가 완료되었습니다.");

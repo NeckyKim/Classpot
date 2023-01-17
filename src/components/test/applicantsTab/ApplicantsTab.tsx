@@ -3,6 +3,7 @@ import { useState } from "react";
 import { dbService } from "../../../FirebaseModules";
 import { doc, setDoc, collection } from "firebase/firestore";
 
+import GenerateApplicantCode from "../../hooks/GenerateApplicantCode";
 import GetApplicantList from "../../hooks/GetApplicantList";
 
 import { toast } from "react-toastify";
@@ -19,6 +20,7 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
     const [applicantName, setApplicantName] = useState<string>("");
     const [applicantEmail, setApplicantEmail] = useState<string>("");
 
+    const magicCode = GenerateApplicantCode(testCode);
 
 
 
@@ -31,10 +33,10 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
             try {
                 await setDoc(doc(collection(dbService, "tests", testCode, "applicants")), {
                     applicantName: applicantName,
-                    applicantEmail: applicantEmail,
                     createdTime: Date.now(),
                     submittedTime: Date.now(),
-                    answerSheet: answerSheet
+                    answerSheet: answerSheet,
+                    magicCode: magicCode
                 })
 
                 toast.success("응시자가 추가됐습니다.");
@@ -68,10 +70,6 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                             이름
                         </div>
 
-                        <div>
-                            이메일
-                        </div>
-
                         <div />
 
                         <div />
@@ -81,14 +79,6 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                             value={applicantName}
                             className={styles.addApplicantInputBox}
                             onChange={(event: any) => { setApplicantName(event.target.value); }}
-                            required
-                        />
-
-                        <input
-                            type="email"
-                            value={applicantEmail}
-                            className={styles.addApplicantInputBox}
-                            onChange={(event: any) => { setApplicantEmail(event.target.value); }}
                             required
                         />
 
@@ -114,24 +104,20 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                             {current.applicantName}
                         </div>
 
-                        <div className={styles.applicantEmail}>
-                            {current.applicantEmail}
+                        <div className={styles.applicantCode}>
+                            {current.magicCode}
                         </div>
-
-                        <button className={styles.sendEmailButton}>
-                            이메일 전송
-                        </button>
 
                         <button
                             className={styles.copyURLButton}
                             onClick={() => {
                                 try {
                                     navigator.clipboard.writeText(window.location.origin + "/apply/" + testCode + "/applicant/" + current.applicantCode);
-                                    toast.success("응시 코드가 복사되었습니다.");
+                                    toast.success("응시자 주소가 복사되었습니다.");
                                 }
 
                                 catch (error) {
-                                    toast.error("응시 코드 복사에 실패하였습니다.")
+                                    toast.error("응시자 주소 복사에 실패하였습니다.")
                                 }
                             }}
                         >

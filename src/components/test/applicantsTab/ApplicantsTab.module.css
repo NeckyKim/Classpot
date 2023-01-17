@@ -16,7 +16,7 @@
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
     display: grid;
-    grid-template-columns: 1fr 1fr 100px 100px;
+    grid-template-columns: 1fr 100px 100px;
     gap: 5px;
 }
 
@@ -55,7 +55,7 @@
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
     display: grid;
-    grid-template-columns: fit-content(100%) 1fr fit-content(100%) fit-content(100%) fit-content(100%) fit-content(100%);
+    grid-template-columns: fit-content(100%) 1fr repeat(3, fit-content(100%));
     gap: 5px;
 }
 
@@ -69,13 +69,13 @@
     line-height: 40px;
 }
 
-.applicantEmail {
-    font-size: 1rem;
+.applicantCode {
+    font-size: 1.5rem;
     font-weight: 100;
     height: 40px;
     line-height: 40px;
     margin-left: 10px;
-    color: rgb(150, 150, 150);
+    color: rgb(0, 220, 220);
 }
 
 .sendEmailButton {

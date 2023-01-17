@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { dbService } from "../../FirebaseModules";
-import { collection } from "firebase/firestore";
-import { onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 import styles from "./Home.module.css";
 
@@ -52,7 +51,6 @@ export default function Home() {
             />
 
             <button
-                type="button"
                 className={styles.applyButton}
                 disabled={applyCode.length !== 5}
                 onClick={() => {

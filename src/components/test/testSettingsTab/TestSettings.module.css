@@ -25,7 +25,8 @@
     line-height: 40px;
 }
 
-.testNameValue {
+.testNameValue,
+.applyCodeValue {
     font-size: 1.4rem;
     height: 40px;
     line-height: 40px;
@@ -37,7 +38,13 @@
     gap: 5px;
 }
 
-.testNameNotEditing {
+.testNameNotEditing,
+.applyCode {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+}
+
+.applyCode {
     display: grid;
     grid-template-columns: 1fr 100px;
 }
@@ -67,7 +74,8 @@
     padding-right: 10px;
 }
 
-.editButton {
+.editButton,
+.applyCodeCopyButton {
     width: 100%;
     height: 40px;
     line-height: 40px;
