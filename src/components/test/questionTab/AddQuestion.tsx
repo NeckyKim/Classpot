@@ -76,6 +76,7 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
             }
 
             catch (error) {
+                console.log(error);
                 toast.error("문제 추가에 실패했습니다.");
             }
         }

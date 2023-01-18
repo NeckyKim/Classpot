@@ -84,6 +84,7 @@ export default function EditQuestion({ userCode, setIsEditingQuestion, questionI
                 setIsEditingQuestion(false);
                 setQuestion("");
                 setAnswer(undefined);
+                setFile("");
 
                 toast.success("문제가 수정되었습니다.");
             }
@@ -95,7 +96,7 @@ export default function EditQuestion({ userCode, setIsEditingQuestion, questionI
         }
 
         else {
-            toast.error("객관식 문제는 정답을 적어도 하나 이상 설정해야 합니다.",);
+            toast.error("객관식 문제는 정답을 적어도 하나 이상 설정해야 합니다.");
         }
     }
 
