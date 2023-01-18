@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 
 import QuestionTab from "./questionTab/QuestionTab";
-import TestSettingsTab from "./testSettingsTab/TestSettingsTab";
+import SettingsTab from "./settingsTab/SettingsTab";
 import ApplicantsTab from "./applicantsTab/ApplicantsTab";
 
 import Error from "../../Error";
@@ -56,7 +56,7 @@ export default function Test({ userCode, email }: { userCode: string; email: str
                             </div>
 
                             <div className={styles.containerRight}>
-                                {tab === 1 && <TestSettingsTab testCode={testCode} />}
+                                {tab === 1 && <SettingsTab testCode={testCode} />}
                                 {tab === 2 && <QuestionTab userCode={userCode} testCode={testCode} />}
                                 {tab === 3 && <ApplicantsTab testCode={testCode} />}
                                 {tab === 4 && <div>답안지 확인</div>}

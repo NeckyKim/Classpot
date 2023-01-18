@@ -29,24 +29,42 @@
     background-color: rgb(240, 240, 240);
 }
 
-.addConfirmButton {
-    width: 100%;
+.addConfirmButton,
+.editConfirmButton {
+    width: 100px;
     height: 40px;
     font-size: 1rem;
+    text-align: center;
     border: none;
     border-radius: 5px;
     background-color: rgb(0, 220, 220);
     color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 
-.addCancelButton {
-    width: 100%;
+.addCancelButton,
+.editCancelButton,
+.deleteConfirmButton {
+    width: 100px;
     height: 40px;
     font-size: 1rem;
+    text-align: center;
     border: none;
     border-radius: 5px;
     background-color: rgb(250, 50, 50);
     color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.deleteCancelButton {
+    width: 100px;
+    height: 40px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
 }
 
 .applicantContainer {
@@ -54,13 +72,40 @@
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
+}
+
+.applicantContainer:nth-child(2) {
+    margin-top: 40px;
+}
+
+.applicantContainerTop {
     display: grid;
     grid-template-columns: fit-content(100%) 1fr repeat(3, fit-content(100%));
     gap: 5px;
 }
 
-.applicantContainer:nth-child(2) {
-    margin-top: 40px;
+.applicantContainerEdit {
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%);
+    gap: 5px;
+}
+
+.applicantContainerDelete {
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%);
+    gap: 5px;
 }
 
 .applicantName {
@@ -78,15 +123,6 @@
     color: rgb(0, 220, 220);
 }
 
-.sendEmailButton {
-    width: 150px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-}
-
 .copyURLButton {
     width: 150px;
     font-size: 1rem;
@@ -94,6 +130,7 @@
     border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
+    cursor: pointer;
 }
 
 .editButton {
@@ -103,6 +140,7 @@
     border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 220, 220);
+    cursor: pointer;
 }
 
 .deleteButton {
@@ -112,4 +150,5 @@
     border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(250, 50, 50);
+    cursor: pointer;
 }

@@ -12,32 +12,27 @@ import GetApplicantList from "../hooks/GetApplicantList";
 
 import { toast } from "react-toastify";
 
-import styles from "./TestMode.module.css";
+import styles from "./ApplyMode.module.css";
 
 
 
 
-export default function TestMode() {
+export default function ApplyMode() {
     const { testCode } = useParams();
     const { applicantCode } = useParams();
 
 
 
     // 시험 정보
-    const testInfo: any = GetTestInfo(testCode); 
+    const testInfo: any = GetTestInfo(testCode);
 
     // 응시자 정보
-    const applicantInfo: any = GetApplicantInfo({testCode, applicantCode});
-
-
+    const applicantInfo: any = GetApplicantInfo({ testCode, applicantCode });
 
     // 질문 목록
     const questionList: any = GetQuestionList(testCode);
 
 
-
-    // 다크/라이트 모드 설정
-    const [darkMode, setDarkMode] = useState<boolean>(false);
 
     // 글자 크기 설정
     const [fontSizeIndex, setFontSizeIndex] = useState<number>(3);
@@ -90,7 +85,7 @@ export default function TestMode() {
                 })
 
                 toast.success("답안지가 제출되었습니다.", {
-                    
+
                 });
 
                 setModified(false);
@@ -164,22 +159,6 @@ export default function TestMode() {
             <div
                 className={(answerSheet[questionNumber] || {})[choicesNumber] ? styles.choiceSelected : styles.choiceNotSelected}
 
-                style={darkMode ? (
-                    !(answerSheet[questionNumber] || {})[choicesNumber]
-
-                        ?
-
-                        {
-                            color: "rgb(255, 255, 255)",
-                            backgroundColor: "rgb(60, 60, 60)",
-                            fontSize: fontSizeValue[fontSizeIndex][1]
-                        }
-
-                        :
-
-                        { fontSize: fontSizeValue[fontSizeIndex][1] }
-                ) : { fontSize: fontSizeValue[fontSizeIndex][1] }}
-
                 onClick={() => {
                     var temp = [...answerSheet];
 
@@ -222,6 +201,16 @@ export default function TestMode() {
 
 
 
+    // 종료하기
+    const [isExitingTest, setIsExitingTest] = useState<boolean>(false);
+
+
+
+    // 푼 문제
+    var solvedQuestions: any = [];
+
+
+
     return (
         <div>
             {
@@ -235,28 +224,14 @@ export default function TestMode() {
 
                                 ?
 
-                                <form
-                                    onSubmit={submitAnswerSheet}
-                                    className={styles.testModeContainer}
-                                    style={darkMode ? { backgroundColor: "rgb(40, 40, 40)" } : { backgroundColor: "rgb(255, 255, 255)" }}
-                                >
-                                    <div className={styles.testModeContainerTop}>
-                                        <div className={styles.testName} style={darkMode ? { color: "rgb(255, 255, 255)" } : {}}>
+                                <form onSubmit={submitAnswerSheet} className={styles.applyModeContainer}>
+                                    <div className={styles.applyModeContainerTop}>
+                                        <div className={styles.testName}>
                                             {testInfo.testName}
                                         </div>
 
-                                        <div className={styles.testTotalQuestions}>
-                                            <img className={styles.testTotalIcons} src={process.env.PUBLIC_URL + "/icons/question.png"} />
-
-                                            총 {questionList.length}문제
-                                        </div>
-
-                                        <div className={styles.testTotalPoints}>
-                                            <img className={styles.testTotalIcons} src={process.env.PUBLIC_URL + "/icons/points.png"} />
-
-                                            만점 {questionList.length > 0 && questionList.map((row: any) => row.points).reduce(function add(sum: number, cur: number) {
-                                                return sum + cur
-                                            })}점
+                                        <div className={styles.applicantName}>
+                                            {applicantInfo.applicantName}
                                         </div>
 
                                         <div className={styles.timer}>
@@ -273,11 +248,8 @@ export default function TestMode() {
 
 
 
-                                    <div
-                                        className={styles.testModeContainerCenter}
-                                        style={darkMode ? { borderTop: "1px solid rgb(80, 80, 80)", borderBottom: "1px solid rgb(80, 80, 80)" } : {}}
-                                    >
-                                        <div className={styles.navigation} style={darkMode ? { borderRight: "1px solid rgb(80, 80, 80)" } : {}}>
+                                    <div className={styles.applyModeContainerCenter}>
+                                        <div className={styles.navigation}>
                                             {
                                                 questionList.length > 0
 
@@ -286,21 +258,6 @@ export default function TestMode() {
                                                 questionList.map((current: any, index: number) => (
                                                     <div
                                                         className={index === questionNumber ? styles.navigationNumberSelected : styles.navigationNumberNotSelected}
-
-                                                        style={darkMode ? (
-                                                            !(index === questionNumber)
-
-                                                                ?
-
-                                                                {
-                                                                    color: "rgb(255, 255, 255)",
-                                                                    backgroundColor: "rgb(60, 60, 60)"
-                                                                }
-
-                                                                :
-
-                                                                {}
-                                                        ) : {}}
 
                                                         onClick={() => {
                                                             setQuestionNumber(index);
@@ -322,7 +279,7 @@ export default function TestMode() {
 
                                                             &&
 
-                                                            <img className={styles.navigationNumberSolved} src={process.env.PUBLIC_URL + "/icons/check.png"} style={darkMode ? { backgroundColor: "rgb(50, 50, 50)" } : {}} />
+                                                            <img className={styles.navigationNumberSolved} src={process.env.PUBLIC_URL + "/icons/check.png"} />
                                                         }
 
                                                         {
@@ -338,7 +295,7 @@ export default function TestMode() {
 
                                                             &&
 
-                                                            <img className={styles.navigationNumberSolved} src={process.env.PUBLIC_URL + "/icons/check.png"} style={darkMode ? { backgroundColor: "rgb(50, 50, 50)" } : {}} />
+                                                            <img className={styles.navigationNumberSolved} src={process.env.PUBLIC_URL + "/icons/check.png"} />
                                                         }
 
                                                         {
@@ -346,7 +303,7 @@ export default function TestMode() {
 
                                                             &&
 
-                                                            <img className={styles.navigationNumberChecked} src={process.env.PUBLIC_URL + "/icons/flag.png"} style={darkMode ? { backgroundColor: "rgb(50, 50, 50)" } : {}} />
+                                                            <img className={styles.navigationNumberChecked} src={process.env.PUBLIC_URL + "/icons/flag.png"} />
                                                         }
                                                     </div>
                                                 ))
@@ -400,8 +357,7 @@ export default function TestMode() {
                                                         <input
                                                             type="button"
                                                             value="이전"
-                                                            className={questionNumber !== 0 ? styles.prevButtonAble : styles.prevButtonDisabled}
-                                                            style={darkMode ? (questionNumber !== 0 ? {} : { backgroundColor: "rgb(80, 80, 80)" }) : {}}
+                                                            className={questionNumber !== 0 ? styles.prevButtonAbled : styles.prevButtonDisabled}
                                                             onClick={() => {
                                                                 if (questionNumber !== 0) {
                                                                     setQuestionNumber(questionNumber - 1);
@@ -414,8 +370,7 @@ export default function TestMode() {
                                                         <input
                                                             type="button"
                                                             value="다음"
-                                                            className={questionNumber !== questionList.length - 1 ? styles.nextButtonAble : styles.nextButtonDisabled}
-                                                            style={darkMode ? (questionNumber !== questionList.length - 1 ? {} : { backgroundColor: "rgb(80, 80, 80)" }) : {}}
+                                                            className={questionNumber !== questionList.length - 1 ? styles.nextButtonAbled : styles.nextButtonDisabled}
                                                             onClick={() => {
                                                                 if (questionNumber !== questionList.length - 1) {
                                                                     setQuestionNumber(questionNumber + 1);
@@ -436,16 +391,13 @@ export default function TestMode() {
                                                 &&
 
                                                 <div className={styles.questionAnswerContent}>
-                                                    <div
-                                                        className={styles.questionContent}
-                                                        style={darkMode ? { color: "rgb(255, 255, 255)", fontSize: fontSizeValue[fontSizeIndex][1] } : { fontSize: fontSizeValue[fontSizeIndex][1] }}
-                                                    >
+                                                    <div className={styles.questionContent}>
                                                         {questionList[questionNumber].question}
 
-                                                        <img 
+                                                        <img
                                                             src={questionList[questionNumber].imageFile}
                                                             width={questionList[questionNumber].imageSize * 25 + "%"}
-                                                            className={styles.questionImage} 
+                                                            className={styles.questionImage}
                                                         />
                                                     </div>
 
@@ -477,23 +429,6 @@ export default function TestMode() {
                                                             <div>
                                                                 <div
                                                                     className={answerSheet[questionNumber] === true ? styles.choiceSelected : styles.choiceNotSelected}
-
-                                                                    style={darkMode ? (
-                                                                        !(answerSheet[questionNumber])
-
-                                                                            ?
-
-                                                                            {
-                                                                                color: "rgb(255, 255, 255)",
-                                                                                backgroundColor: "rgb(60, 60, 60)",
-                                                                                fontSize: fontSizeValue[fontSizeIndex][1]
-                                                                            }
-
-                                                                            :
-
-                                                                            { fontSize: fontSizeValue[fontSizeIndex][1] }
-                                                                    ) : { fontSize: fontSizeValue[fontSizeIndex][1] }}
-
                                                                     onClick={() => {
                                                                         let temp = [...answerSheet];
                                                                         temp[questionNumber] = true;
@@ -506,23 +441,6 @@ export default function TestMode() {
 
                                                                 <div
                                                                     className={answerSheet[questionNumber] === false ? styles.choiceSelected : styles.choiceNotSelected}
-
-                                                                    style={darkMode ? (
-                                                                        (answerSheet[questionNumber])
-
-                                                                            ?
-
-                                                                            {
-                                                                                color: "rgb(255, 255, 255)",
-                                                                                backgroundColor: "rgb(60, 60, 60)",
-                                                                                fontSize: fontSizeValue[fontSizeIndex][1]
-                                                                            }
-
-                                                                            :
-
-                                                                            { fontSize: fontSizeValue[fontSizeIndex][1] }
-                                                                    ) : { fontSize: fontSizeValue[fontSizeIndex][1] }}
-
                                                                     onClick={() => {
                                                                         let temp = [...answerSheet];
                                                                         temp[questionNumber] = false;
@@ -542,21 +460,6 @@ export default function TestMode() {
 
                                                             <textarea
                                                                 className={styles.answerTextBox}
-                                                                style={
-                                                                    darkMode
-
-                                                                        ?
-
-                                                                        {
-                                                                            backgroundColor: "rgb(60, 60, 60)",
-                                                                            color: "rgb(255, 255, 255)",
-                                                                            fontSize: fontSizeValue[fontSizeIndex][1]
-                                                                        }
-
-                                                                        :
-
-                                                                        { fontSize: fontSizeValue[fontSizeIndex][1] }
-                                                                }
                                                                 value={answerSheet[questionNumber]}
                                                                 spellCheck={false}
                                                                 onChange={(event: any) => {
@@ -576,24 +479,6 @@ export default function TestMode() {
                                                             <div style={{ height: "calc(100% - 30px)" }}>
                                                                 <textarea
                                                                     className={styles.answerTextBox}
-                                                                    style={
-                                                                        darkMode
-
-                                                                            ?
-
-                                                                            {
-                                                                                backgroundColor: "rgb(60, 60, 60)",
-                                                                                height: "calc(100% - 30px)",
-                                                                                color: "rgb(255, 255, 255)",
-                                                                                fontSize: fontSizeValue[fontSizeIndex][1]
-                                                                            }
-
-                                                                            :
-
-                                                                            {
-                                                                                height: "calc(100% - 30px)",
-                                                                                fontSize: fontSizeValue[fontSizeIndex][1]
-                                                                            }}
                                                                     value={answerSheet[questionNumber]}
                                                                     spellCheck={false}
                                                                     onChange={(event: any) => {
@@ -604,7 +489,7 @@ export default function TestMode() {
                                                                     }}
                                                                 />
 
-                                                                <div className={styles.answerTextLength} style={darkMode ? { color: "rgb(120, 120, 120)" } : {}}>
+                                                                <div className={styles.answerTextLength}>
                                                                     총 {answerSheet[questionNumber] ? answerSheet[questionNumber].length : 0}자
                                                                 </div>
                                                             </div>
@@ -617,35 +502,10 @@ export default function TestMode() {
 
 
 
-                                    <div className={styles.testModeContainerBottom}>
-                                        {
-                                            darkMode
-
-                                                ?
-
-                                                <div className={styles.lightButton} onClick={() => { setDarkMode(!darkMode); }}>
-                                                    <img className={styles.darkLightIcon} src={process.env.PUBLIC_URL + "/icons/sun.png"} />
-
-                                                    <div className={styles.darkLightButtonText} style={darkMode ? { color: "rgb(0, 0, 0)" } : {}}>
-                                                        밝은 화면
-                                                    </div>
-                                                </div>
-
-                                                :
-
-                                                <div className={styles.darkButton} onClick={() => { setDarkMode(!darkMode); }}>
-                                                    <img className={styles.darkLightIcon} src={process.env.PUBLIC_URL + "/icons/moon.png"} />
-
-                                                    <div className={styles.darkLightButtonText}>
-                                                        어두운 화면
-                                                    </div>
-                                                </div>
-                                        }
-
+                                    <div className={styles.applyModeContainerBottom}>
                                         <div className={styles.fontSizeContainer}>
                                             <div
                                                 className={styles.fontSizeSmall}
-                                                style={darkMode ? { backgroundColor: "rgb(60, 60, 60)", color: "rgb(255, 255, 255)" } : {}}
                                                 onClick={() => {
                                                     if (fontSizeIndex !== 0) {
                                                         setFontSizeIndex(fontSizeIndex - 1);
@@ -655,16 +515,12 @@ export default function TestMode() {
                                                 -
                                             </div>
 
-                                            <div
-                                                className={styles.fontSizeValue}
-                                                style={darkMode ? { backgroundColor: "rgb(60, 60, 60)", color: "rgb(255, 255, 255)" } : {}}
-                                            >
+                                            <div className={styles.fontSizeValue}>
                                                 {fontSizeValue[fontSizeIndex][0]}
                                             </div>
 
                                             <div
                                                 className={styles.fontSizeLarge}
-                                                style={darkMode ? { backgroundColor: "rgb(60, 60, 60)", color: "rgb(255, 255, 255)" } : {}}
                                                 onClick={() => {
                                                     if (fontSizeIndex !== fontSizeValue.length - 1) {
                                                         setFontSizeIndex(fontSizeIndex + 1);
@@ -682,76 +538,142 @@ export default function TestMode() {
 
                                         <input type="submit" className={styles.submitButton} value="제출하기" />
 
-                                        <input type="button" className={styles.exitButton} value="종료하기" />
+                                        <input
+                                            type="button"
+                                            className={styles.exitButton}
+                                            value="종료하기"
+                                            onClick={() => {
+                                                setIsExitingTest(true);
+                                            }}
+                                        />
                                     </div>
+
+                                    {
+                                        isExitingTest
+
+                                        &&
+
+                                        <div className={styles.exitBackground}>
+                                            <div className={styles.exitContainer}>
+                                                <div className={styles.exitContainerTop}>
+                                                    답안지를 제출하고 시험을 종료하시겠습니까?<br />
+                                                    시험 시간이 종료될 때 까지, 다시 접속하여 시험에 응시할 수 있습니다.
+                                                </div>
+
+                                                <div className={styles.exitContainerBottom}>
+                                                    <div 
+                                                        className={styles.exitContainerExitButton}
+                                                        onClick={() => {
+                                                            submitAnswerSheet(event);
+                                                            setIsApplyingTest(false);
+                                                            setIsExitingTest(false);
+                                                            setQuestionNumber(0);
+                                                        }}
+                                                    >
+                                                        종료하기
+                                                    </div>
+
+                                                    <div 
+                                                        className={styles.exitContainerCancelButton}
+                                                        onClick={() => {
+                                                            setIsExitingTest(false);
+                                                        }}
+                                                    >
+                                                        계속 문제풀기
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </form>
 
                                 :
 
-                                <div className={styles.noticeContainer}>
-                                    <div className={styles.noticeContainerTop}>
-                                        <div className={styles.testName}>
-                                            {testInfo.testName}
+                                <div className={styles.noticeBackground}>
+                                    {
+                                        isTestTime === "전"
+
+                                        &&
+
+                                        <div className={styles.noticeContainer}>
+                                            <div className={styles.noticeContainerTop}>
+                                                {testInfo.testName}
+                                            </div>
+
+                                            <div className={styles.noticeButtonBefore}>
+                                                {daysBefore !== 0 && <span>{daysBefore}일&nbsp;</span>}
+                                                {hoursBefore !== 0 && <span>{hoursBefore}시간&nbsp;</span>}
+                                                {minutesBefore !== 0 && <span>{minutesBefore}분&nbsp;</span>}
+                                                {secondsBefore}초&nbsp;
+                                                후 시험 시작
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
 
-                                    <div className={styles.noticeContainerBottom}>
-                                        <div>
-                                            {
-                                                isTestTime === "전"
+                                    {
+                                        isTestTime === "중"
 
-                                                &&
+                                        &&
 
-                                                <div className={styles.noticeContainerMain}>
-                                                    <div className={styles.noticeContainerMainTop}>
+                                        <div className={styles.noticeContainer}>
+                                            <div className={styles.noticeContainerTop}>
+                                                <div className={styles.noticeContainerInfo}>
+                                                    <div>
+                                                        시험 이름
+                                                    </div>
+
+                                                    <div>
                                                         {testInfo.testName}
                                                     </div>
+                                                </div>
 
-                                                    <div className={styles.noticeButtonBefore}>
-                                                        {daysBefore !== 0 && <span>{daysBefore}일&nbsp;</span>}
-                                                        {hoursBefore !== 0 && <span>{hoursBefore}시간&nbsp;</span>}
-                                                        {minutesBefore !== 0 && <span>{minutesBefore}분&nbsp;</span>}
-                                                        {secondsBefore}초&nbsp;
-                                                        후 시험 시작
+                                                <div className={styles.noticeContainerInfo}>
+                                                    <div>
+                                                        출제자
+                                                    </div>
+
+                                                    <div>
+                                                        {testInfo.userName}
                                                     </div>
                                                 </div>
-                                            }
 
-                                            {
-                                                isTestTime === "중"
+                                                <div className={styles.noticeContainerInfo}>
+                                                    <div>
+                                                        응시자 이름
+                                                    </div>
 
-                                                &&
-
-                                                <div className={styles.noticeContainerMain}>
-                                                    <div className={styles.noticeContainerMainTop}>
-                                                        {testInfo.testName}<br />
+                                                    <div>
                                                         {applicantInfo.applicantName}
                                                     </div>
-
-                                                    <div
-                                                        className={styles.noticeButtonStart}
-                                                        onClick={() => { setIsApplyingTest(true); }}
-                                                    >
-                                                        시험 시작하기
-                                                    </div>
                                                 </div>
-                                            }
+                                            </div>
 
-                                            {
-                                                isTestTime === "후"
+                                            <div className={styles.noticeContainerBottom}>
+                                                <div />
 
-                                                &&
-
-                                                <div className={styles.noticeContainerMain}>
-                                                    <div />
-
-                                                    <div className={styles.noticeContainerFinished}>
-                                                        시험이 종료되었습니다.
-                                                    </div>
+                                                <div
+                                                    className={styles.startTestButton}
+                                                    onClick={() => { setIsApplyingTest(true); }}
+                                                >
+                                                    시험 시작하기
                                                 </div>
-                                            }
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
+
+                                    {
+                                        isTestTime === "후"
+
+                                        &&
+
+                                        <div className={styles.noticeContainer}>
+                                            <div />
+
+                                            <div className={styles.noticeContainerTop}>
+                                                시험이 종료되었습니다.
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                         }
                     </div>

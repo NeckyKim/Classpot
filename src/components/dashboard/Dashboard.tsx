@@ -79,6 +79,7 @@ export default function Dashboard({ userCode, email }: {
         try {
             await setDoc(doc(collection(dbService, "tests")), {
                 userCode: userCode,
+                userName: userName,
                 testName: testName,
                 startDate: Date.parse(startDate),
                 duration: duration,

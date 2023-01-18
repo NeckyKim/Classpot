@@ -8,11 +8,11 @@ import GetTestInfo from "../../hooks/GetTestInfo";
 
 import { toast } from "react-toastify";
 
-import styles from "./TestSettings.module.css";
+import styles from "./SettingsTab.module.css";
 
 
 
-export default function TestSettingsTab({ testCode }: { testCode: string | undefined }) {
+export default function SettingsTab({ testCode }: { testCode: string | undefined }) {
     const navigate = useNavigate();
 
 

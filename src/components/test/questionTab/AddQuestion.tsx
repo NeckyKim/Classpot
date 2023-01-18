@@ -130,7 +130,7 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
 
             <div className={styles.questionTypeContainer}>
                 <div
-                    className={type === "객관식" ? styles.questionTypeSelectedLeft : styles.questionTypeNotSelectedLeft}
+                    className={type === "객관식" ? styles.questionTypeSelected : styles.questionTypeNotSelected}
                     onClick={() => {
                         setType("객관식");
                         setAnswer(new Array(10).fill(false));
@@ -140,7 +140,7 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                 </div>
 
                 <div
-                    className={type === "참/거짓" ? styles.questionTypeSelectedMiddle : styles.questionTypeNotSelectedMiddle}
+                    className={type === "참/거짓" ? styles.questionTypeSelected : styles.questionTypeNotSelected}
                     onClick={() => {
                         setType("참/거짓");
                         setAnswer(true);
@@ -150,7 +150,7 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                 </div>
 
                 <div
-                    className={type === "주관식" ? styles.questionTypeSelectedMiddle : styles.questionTypeNotSelectedMiddle}
+                    className={type === "주관식" ? styles.questionTypeSelected : styles.questionTypeNotSelected}
                     onClick={() => {
                         setType("주관식");
                         setAnswer("");
@@ -160,7 +160,7 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                 </div>
 
                 <div
-                    className={type === "서술형" ? styles.questionTypeSelectedRight : styles.questionTypeNotSelectedRight}
+                    className={type === "서술형" ? styles.questionTypeSelected : styles.questionTypeNotSelected}
                     onClick={() => {
                         setType("서술형");
                         setAnswer("");
