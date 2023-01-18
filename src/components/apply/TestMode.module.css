@@ -459,7 +459,7 @@
     border: 1px solid rgb(220, 220, 220);
     padding: 20px;
     display: grid;
-    grid-template-rows: 40px 1fr 60px;
+    grid-template-rows: 1fr 60px;
 }
 
 .noticeContainerHeader {
@@ -499,18 +499,4 @@
 .noticeButtonAfter {
     color: rgb(100, 100, 100);
     background-color: rgb(220, 220, 220);
-}
-
-:root {
-    --toastify-toast-width: fit-content;
-
-    --toastify-icon-color-info: rgb(0, 100, 250);
-    --toastify-icon-color-success: rgb(0, 220, 220);
-    --toastify-icon-color-warning: rgb(250, 50, 50);
-    --toastify-icon-color-error: rgb(250, 50, 50);
-}
-
-.Toastify__toast-container--bottom-right {
-    right: 240px;
-    bottom: 240px;
 }

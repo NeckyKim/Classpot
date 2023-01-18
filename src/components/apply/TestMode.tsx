@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import { dbService } from "../../FirebaseModules";
-import { doc, getDoc, updateDoc, collection, orderBy, onSnapshot, query } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 import Error from "../../Error";
-import Notice from "./Notice";
 import GetTestInfo from "../hooks/GetTestInfo";
+import GetApplicantInfo from "../hooks/GetApplicantInfo";
 import GetQuestionList from "../hooks/GetQuestionList";
 import GetApplicantList from "../hooks/GetApplicantList";
 
 import { toast } from "react-toastify";
 
 import styles from "./TestMode.module.css";
+
 
 
 
@@ -23,7 +24,12 @@ export default function TestMode() {
 
 
     // 시험 정보
-    const testInfo: any = GetTestInfo(testCode);
+    const testInfo: any = GetTestInfo(testCode); 
+
+    // 응시자 정보
+    const applicantInfo: any = GetApplicantInfo({testCode, applicantCode});
+
+
 
     // 질문 목록
     const questionList: any = GetQuestionList(testCode);
@@ -697,12 +703,8 @@ export default function TestMode() {
                                                 &&
 
                                                 <div className={styles.noticeContainerMain}>
-                                                    <div className={styles.noticeContainerHeader}>
-                                                        시험 안내사항
-                                                    </div>
-
                                                     <div className={styles.noticeContainerMainTop}>
-                                                        <Notice />
+                                                        {testInfo.testName}
                                                     </div>
 
                                                     <div className={styles.noticeButtonBefore}>
@@ -721,12 +723,9 @@ export default function TestMode() {
                                                 &&
 
                                                 <div className={styles.noticeContainerMain}>
-                                                    <div className={styles.noticeContainerHeader}>
-                                                        시험 안내사항
-                                                    </div>
-
                                                     <div className={styles.noticeContainerMainTop}>
-                                                        <Notice />
+                                                        {testInfo.testName}<br />
+                                                        {applicantInfo.applicantName}
                                                     </div>
 
                                                     <div

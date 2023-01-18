@@ -223,6 +223,30 @@ export default function TestSettingsTab({ testCode }: { testCode: string | undef
 
 
 
+                <div className={styles.header}>
+                    시험 코드 설정
+                </div>
+
+                <div className={styles.settingsContainer}>
+                    <div className={styles.applyCode}>
+                        <div className={styles.applyCodeValue}>
+                            {testInfo.applyCode}
+                        </div>
+
+                        <div 
+                            className={styles.applyCodeCopyButton}
+                            onClick={() => {
+                                navigator.clipboard.writeText(testInfo.applyCode);
+                                toast.success("응시 코드가 복사되었습니다.");
+                            }}
+                        >
+                            복사
+                        </div>
+                    </div>
+                </div>
+
+
+
 
                 <div className={styles.header}>
                     시간 설정
