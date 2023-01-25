@@ -224,3 +224,13 @@
     font-weight: 500;
     font-size: 1.2rem;
 }
+
+
+
+@media (max-width: 1200px) {
+    .answerSheetModeContainerBottom {
+        width: 100vw;
+        display: block;
+        margin: 0px auto;
+    }
+}

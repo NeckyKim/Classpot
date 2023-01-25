@@ -1,6 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-
 import GetApplicantList from "../../hooks/GetApplicantList";
 
 import Error from "../../../Error";

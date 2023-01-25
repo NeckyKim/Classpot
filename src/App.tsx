@@ -11,7 +11,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Test from "./components/test/Test";
 import Apply from "./components/apply/Apply";
 import ApplyMode from "./components/apply/ApplyMode";
-import AnswerSheetMode from "./components/test/answerSheetTab/AnswerSheetMode";
+import AnswerSheetRouter from "./components/test/answerSheetTab/AnswerSheetRouter";
 
 import Error from "./Error";
 
@@ -54,19 +54,19 @@ export default function App() {
                     style={
                         location.pathname.includes("/apply/")
 
-                        ?
+                            ?
 
-                        {
-                            right: "30px",
-                            bottom: "70px"
-                        }
+                            {
+                                right: "30px",
+                                bottom: "70px"
+                            }
 
-                        :
+                            :
 
-                        {
-                            right: "40px",
-                            bottom: "40px"
-                        }
+                            {
+                                right: "40px",
+                                bottom: "40px"
+                            }
                     }
                 />
 
@@ -80,7 +80,7 @@ export default function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/apply/:testCode" element={<Apply />} />
                             <Route path="/apply/:testCode/applicant/:applicantCode" element={<ApplyMode />} />
-                            <Route path="/test/:testCode/answersheet/:applicantCode" element={<AnswerSheetMode userCode={null} grade={false} />} />
+                            <Route path="/test/:testCode/answersheet/:applicantCode" element={<AnswerSheetRouter userCode={null} />} />
                             <Route path="*" element={<Error message="페이지 오류 입니다." />} />
                         </Routes>
 
@@ -90,7 +90,7 @@ export default function App() {
                         <Routes>
                             <Route path="/" element={<Dashboard userCode={userObject.uid} email={userObject.email} />} />
                             <Route path="/test/:testCode" element={<Test userCode={userObject.uid} email={userObject.email} />} />
-                            <Route path="/test/:testCode/answersheet/:applicantCode" element={<AnswerSheetMode userCode={userObject.uid} grade={true}/>} />
+                            <Route path="/test/:testCode/answersheet/:applicantCode" element={<AnswerSheetRouter userCode={userObject.uid} />} />
                             <Route path="*" element={<Error message="페이지 오류 입니다." />} />
                         </Routes>
                 }
