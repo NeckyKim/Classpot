@@ -6,7 +6,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 
 
 
-export default function GetApplicantInfo({ testCode, applicantCode }: { testCode: string | undefined; applicantCode: string | undefined }) {
+export default function GetApplicantInfo(testCode: string | undefined, applicantCode: string | undefined) {
     const [applicantInfo, setApplicantInfo] = useState<any>([]);
 
     if (testCode && applicantCode) {

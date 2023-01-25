@@ -28,6 +28,8 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
 
 
     var answerSheet: string[] = new Array(100).fill(null);
+    var reportCard: string[] = new Array(100).fill(null);
+
 
     async function addApplicant(event: any) {
         event.preventDefault()
@@ -39,6 +41,8 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                     createdTime: Date.now(),
                     submittedTime: Date.now(),
                     answerSheet: answerSheet,
+                    reportCard: reportCard,
+                    autoGrading: true,
                     magicCode: magicCode
                 })
 

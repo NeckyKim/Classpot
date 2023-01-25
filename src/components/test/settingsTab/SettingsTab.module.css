@@ -132,7 +132,7 @@
 
 .feedbackEnabledButtonOn {
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
+    background-color: rgb(0, 220, 220);
 }
 
 .feedbackEnabledButtonOff {
@@ -153,7 +153,7 @@
 
 .feedbackDisabledButtonOn {
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
+    background-color: rgb(0, 220, 220);
 }
 
 .feedbackDisabledButtonOff {
