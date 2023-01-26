@@ -51,3 +51,12 @@
     width: 100vw;
     height: 70px;
 }
+
+
+
+@media (max-width: 1200px) {
+    .headerContainer {
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+}

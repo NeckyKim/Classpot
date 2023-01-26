@@ -8,6 +8,12 @@
     margin-top: 0px;
 }
 
+.settingsHeader {
+    color: rgb(150, 150, 150);
+    height: 40px;
+    line-height: 40px;
+}
+
 .settingsContainer {
     width: 100%;
     height: fit-content;
@@ -15,60 +21,38 @@
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
+}
+
+.settingsContainerTop {
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
 }
 
-.settingsHeader {
-    color: rgb(150, 150, 150);
-    height: 40px;
-    line-height: 40px;
-}
-
-.testNameValue,
-.applyCodeValue {
-    font-size: 1.4rem;
-    height: 40px;
-    line-height: 40px;
-}
-
-.testNameEditing {
+.settingsContainerBottom {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(220, 220, 220);
     display: grid;
-    grid-template-columns: 1fr 100px 100px;
-    gap: 5px;
+    grid-template-columns: 1fr fit-content(100%);
+    gap: 10px
 }
 
-.testNameNotEditing,
-.applyCode {
-    display: grid;
-    grid-template-columns: 1fr 100px;
-}
-
-.applyCode {
-    display: grid;
-    grid-template-columns: 1fr 100px;
-}
-
-.testDateValue {
+.settingsContainerValue {
     font-size: 1.2rem;
     height: 40px;
     line-height: 40px;
 }
 
-.testDateEditing {
-    display: grid;
-    grid-template-columns: 220px 60px 60px;
-    gap: 5px;
+.settingsContainerInfo {
+    font-size: 1rem;
+    height: 40px;
+    line-height: 40px;
 }
 
-.testDateNotEditing {
-    display: grid;
-    grid-template-columns: 250px 100px;
-}
-
-.testInputBox {
+.inputBox {
     font-size: 1rem;
     border: none;
+    border-radius: 5px;
     background-color: rgb(240, 240, 240);
     padding-left: 10px;
     padding-right: 10px;
@@ -76,7 +60,7 @@
 
 .editButton,
 .applyCodeCopyButton {
-    width: 100%;
+    width: 100px;
     height: 40px;
     line-height: 40px;
     font-size: 1rem;
@@ -88,21 +72,8 @@
     cursor: pointer;
 }
 
-.editConfirmButton {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    font-size: 1rem;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 220, 220);
-    cursor: pointer;
-}
-
-.editCancelButton {
-    width: 100%;
+.cancelButton {
+    width: 100px;
     height: 40px;
     line-height: 40px;
     font-size: 1rem;
@@ -115,99 +86,45 @@
 }
 
 .feedbackButtons {
-    display: grid;
-    grid-template-columns: 100px 100px;
-    gap: 1px;
-}
-
-.feedbackEnabledButtonOn,
-.feedbackEnabledButtonOff {
-    font-size: 1rem;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border: none;
-    border-radius: 5px 0px 0px 5px;
-}
-
-.feedbackEnabledButtonOn {
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 220, 220);
-}
-
-.feedbackEnabledButtonOff {
-    background-color: rgb(240, 240, 240);
-    cursor: pointer;
-}
-
-
-.feedbackDisabledButtonOn,
-.feedbackDisabledButtonOff {
-    font-size: 1rem;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border: none;
-    border-radius: 0px 5px 5px 0px;
-}
-
-.feedbackDisabledButtonOn {
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 220, 220);
-}
-
-.feedbackDisabledButtonOff {
-    background-color: rgb(240, 240, 240);
-    cursor: pointer;
-}
-
-.testDeleteButton {
     width: 200px;
     height: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+}
+
+.feedbackButtonOn {
+    width: 100px;
+    height: 40px;
     line-height: 40px;
     font-size: 1rem;
     text-align: center;
     border: none;
     border-radius: 5px;
     color: rgb(255, 255, 255);
-    background-color: rgb(250, 50, 50);
+    background-color: rgb(0, 220, 220);
     cursor: pointer;
 }
 
-.deleteContainer {
-    width: 100%;
-    height: fit-content;
-    padding: 20px;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-}
-
-.deleteContainerHighlighted {
-    margin-top: 20px;
-    color: rgb(250, 50, 50);
-}
-
-.deleteContainerInputBox {
-    width: 100%;
+.feedbackButtonOff {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
     font-size: 1rem;
+    text-align: center;
     border: none;
     border-radius: 5px;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: rgb(240, 240, 240);
+    color: rgb(255, 255, 255);
+    background-color: rgb(200, 200, 200);
+    cursor: pointer;
 }
 
-.deleteContainerButtons {
-    margin-top: 10px;
-    display: grid;
-    grid-template-columns: 1fr 100px 100px;
-    gap: 5px;
-}
-
+.deleteButton,
 .deleteConfirmButton {
-    width: 100%;
+    width: 100px;
     height: 40px;
+    line-height: 40px;
     font-size: 1rem;
+    text-align: center;
     border: none;
     border-radius: 5px;
     color: rgb(255, 255, 255);
@@ -216,17 +133,44 @@
 }
 
 .deleteConfirmButton:disabled {
-    color: rgb(150, 150, 150);
     background-color: rgb(200, 200, 200);
-    cursor: auto;
 }
 
 .deleteCancelButton {
-    width: 100%;
+    width: 100px;
     height: 40px;
+    line-height: 40px;
     font-size: 1rem;
+    text-align: center;
     border: none;
     border-radius: 5px;
-    background-color: rgb(240, 240, 240);
+    color: rgb(255, 255, 255);
+    background-color: rgb(200, 200, 200);
     cursor: pointer;
+}
+
+.deleteReminder {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.deleteContainer {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(220, 220, 220);
+}
+
+.deleteContainerBottom {
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    gap: 10px
+}
+
+
+
+
+@media (max-width: 600px) {
+    .settingsContainerValue {
+        font-size: 1rem;
+    }
 }

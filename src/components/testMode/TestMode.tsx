@@ -9,15 +9,19 @@ import GetTestInfo from "../hooks/GetTestInfo";
 import GetApplicantInfo from "../hooks/GetApplicantInfo";
 import GetQuestionList from "../hooks/GetQuestionList";
 import GetApplicantList from "../hooks/GetApplicantList";
+import TimeCalculator from "../hooks/TimeCalculator";
+import PreTestMode from "./PreTestMode";
 
 import { toast } from "react-toastify";
 
-import styles from "./ApplyMode.module.css";
+import styles from "./TestMode.module.css";
 
 
 
 
-export default function ApplyMode() {
+
+
+export default function TestMode() {
     const { testCode } = useParams();
     const { applicantCode } = useParams();
 
@@ -31,6 +35,11 @@ export default function ApplyMode() {
 
     // 질문 목록
     const questionList: any = GetQuestionList(testCode);
+
+    // 시험 진행 상황
+    const isTestTime = TimeCalculator(testInfo.startDate, testInfo.duration);
+
+
 
 
 
@@ -101,58 +110,15 @@ export default function ApplyMode() {
 
 
 
-    // 시험 진행 상황
-    const [isTestTime, setIsTestTime] = useState<string>("불");
-
-    const startTime = testInfo?.startDate;
-    const [currentTime, setIsCurrentTime] = useState<any>(Date.now());
-    const finishTime = testInfo?.startDate + testInfo?.duration * 60000;
-
-    useEffect(() => {
-        const clock = setInterval(() => {
-            setIsCurrentTime(Date.now());
-        }, 1000);
-
-        return (() => clearInterval(clock))
-    }, []);
-
-    useEffect(() => {
-        if (currentTime < startTime) {
-            setIsTestTime("전");
-        }
-
-        else if (currentTime >= startTime && currentTime <= finishTime) {
-            setIsTestTime("중");
-        }
-
-        else if (currentTime > finishTime) {
-            setIsTestTime("후");
-
-            if (isApplyingTest) {
-                submitAnswerSheet(event);
-                setIsApplyingTest(false);
-            }
-        }
-    })
-
-    // 시험 시작 전 남은 시간
-    var daysBefore = Math.floor((startTime - currentTime) / 86400000)
-    var hoursBefore = Math.floor(((startTime - currentTime) - daysBefore * 14400000) / 3600000);
-    var minutesBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000) / 60000);
-    var secondsBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000 - minutesBefore * 60000) / 1000);
-
-
-
-    // 시험 응시 중 남은 시간
-    var hoursCurrent = Math.floor((finishTime - currentTime) / 3600000);
-    var minutesCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000) / 60000);
-    var secondsCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000 - minutesCurrent * 60000) / 1000);
-
-
-
     // 시험 응시 화면
     const [isApplyingTest, setIsApplyingTest] = useState<boolean>(false);
     const [questionNumber, setQuestionNumber] = useState<number>(0);
+
+
+    if (isApplyingTest === true && isTestTime[0] === "후") {
+        submitAnswerSheet(event);
+        setIsApplyingTest(false);
+    }
 
 
     // 객관식 문제 설정
@@ -212,12 +178,12 @@ export default function ApplyMode() {
             ?
 
 
-            isApplyingTest && isTestTime === "중"
+            isApplyingTest && isTestTime[0] === "중"
 
                 ?
 
-                <form onSubmit={submitAnswerSheet} className={styles.applyModeContainer}>
-                    <div className={styles.applyModeContainerTop}>
+                <form onSubmit={submitAnswerSheet} className={styles.testModeContainer}>
+                    <div className={styles.testModeContainerTop}>
                         <div className={styles.testName}>
                             {testInfo.testName}
                         </div>
@@ -229,18 +195,22 @@ export default function ApplyMode() {
                         <div className={styles.timer}>
                             <img className={styles.timerIcon} src={process.env.PUBLIC_URL + "/icons/clock.png"} />
 
+                            <div className={styles.timerHeader}>
+                                남은 시간
+                            </div>
+
                             <div className={styles.timerValue}>
-                                {hoursCurrent !== 0 && <span>{hoursCurrent}:</span>}
-                                {String(minutesCurrent).padStart(2, "0")}
+                                {isTestTime[2][0] !== 0 && <span>{isTestTime[2][0]}:</span>}
+                                {String(isTestTime[2][1]).padStart(2, "0")}
                                 :
-                                {String(secondsCurrent).padStart(2, "0")}
+                                {String(isTestTime[2][2]).padStart(2, "0")}
                             </div>
                         </div>
                     </div>
 
 
 
-                    <div className={styles.applyModeContainerCenter}>
+                    <div className={styles.testModeContainerCenter}>
                         <div className={styles.navigation}>
                             {
                                 questionList.length > 0
@@ -349,7 +319,8 @@ export default function ApplyMode() {
                                         <input
                                             type="button"
                                             value="이전"
-                                            className={questionNumber !== 0 ? styles.prevButtonAbled : styles.prevButtonDisabled}
+                                            className={questionNumber !== 0 ? styles.prevNextbuttonOn : styles.prevNextbuttonOff}
+                                            style={{borderRadius: "5px 0px 0px 5px"}}
                                             onClick={() => {
                                                 if (questionNumber !== 0) {
                                                     setQuestionNumber(questionNumber - 1);
@@ -362,7 +333,8 @@ export default function ApplyMode() {
                                         <input
                                             type="button"
                                             value="다음"
-                                            className={questionNumber !== questionList.length - 1 ? styles.nextButtonAbled : styles.nextButtonDisabled}
+                                            className={questionNumber !== questionList.length - 1 ? styles.prevNextbuttonOn : styles.prevNextbuttonOff}
+                                            style={{borderRadius: "0px 5px 5px 0px"}}
                                             onClick={() => {
                                                 if (questionNumber !== questionList.length - 1) {
                                                     setQuestionNumber(questionNumber + 1);
@@ -494,7 +466,7 @@ export default function ApplyMode() {
 
 
 
-                    <div className={styles.applyModeContainerBottom}>
+                    <div className={styles.testModeContainerBottom}>
                         <div className={styles.fontSizeContainer}>
                             <div
                                 className={styles.fontSizeSmall}
@@ -581,86 +553,7 @@ export default function ApplyMode() {
 
                 :
 
-                <div>
-                    {
-                        isTestTime === "전"
-
-                        &&
-
-                        <div className={styles.preModeContainer}>
-                            <div className={styles.preModeTop}>
-                                <div className={styles.preModeHeader}>
-                                    시험 이름
-                                </div>
-
-                                <div className={styles.preModeTestName}>
-                                    {testInfo.testName}
-                                </div>
-
-                                <div className={styles.preModeInfo}>
-                                    <div className={styles.preModeInfoHeader}>
-                                        출제자
-                                    </div>
-
-                                    <div className={styles.preModeInfoValue}>
-                                        {testInfo.userName}
-                                    </div>
-                                </div>
-
-                                <div className={styles.preModeInfo}>
-                                    <div className={styles.preModeInfoHeader}>
-                                        응시자
-                                    </div>
-
-                                    <div className={styles.preModeInfoValue}>
-                                        {applicantInfo.applicantName}
-                                    </div>
-                                </div>
-
-                                <div className={styles.preModeTimer}>
-                                    {daysBefore !== 0 && <span>{daysBefore}일&nbsp;</span>}
-                                    {hoursBefore !== 0 && <span>{hoursBefore}시간&nbsp;</span>}
-                                    {minutesBefore !== 0 && <span>{minutesBefore}분&nbsp;</span>}
-                                    {secondsBefore}초&nbsp;
-                                    후 시작
-                                </div>
-                            </div>
-
-                            <div className={styles.preModeBottom}>
-
-
-                            </div>
-
-
-
-
-                        </div>
-                    }
-
-                    {
-                        isTestTime === "중"
-
-                        &&
-
-                        <div className={styles.noticeContainer}>
-                            
-                        </div>
-                    }
-
-                    {
-                        isTestTime === "후"
-
-                        &&
-
-                        <div className={styles.noticeContainer}>
-                            <div />
-
-                            <div className={styles.noticeContainerTop}>
-                                시험이 종료되었습니다.
-                            </div>
-                        </div>
-                    }
-                </div>
+                <PreTestMode testInfo={testInfo} testCode={testCode} applicantName={applicantInfo.applicantName} applicantCode={applicantCode} isTestTime={isTestTime} setIsApplyingTest={setIsApplyingTest} noOfQuestions={questionList.length} totalPoints={questionList.map((row: any) => row.points).reduce(function add(sum: number, current: number) { return sum + current })} />
 
             :
 

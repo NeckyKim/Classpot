@@ -1,0 +1,131 @@
+.preTestModeContainer {
+    width: 100vw;
+    height: calc(100vh - 70px);
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+}
+
+.preTestModeContainerTop {
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-top: 50px;
+    position: relative;
+}
+
+.preTestModeContainerBottom {
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-top: 20px;
+    border-top: 1px solid rgb(220, 220, 220);
+}
+
+.header {
+    font-size: 1.2rem;
+    font-weight: 100;
+    color: rgb(150, 150, 150);
+}
+
+.testName {
+    font-size: 2.5rem;
+    font-weight: 1000;
+    margin-bottom: 30px;
+}
+
+.userName {
+    font-size: 1.5rem;
+    font-weight: 1000;
+    margin-bottom: 30px;
+}
+
+.info {
+    font-size: 1.2rem;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 100px fit-content(100%);
+}
+
+.infoHeader {
+    font-weight: 100;
+    color: rgb(150, 150, 150);
+}
+
+.buttonZone {
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    margin-top: 50px;
+}
+
+.buttonDisabled {
+    width: 300px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 5px;
+    color: rgb(150, 150, 150);
+    background-color: rgb(200, 200, 200);
+}
+
+.buttonEnabled {
+    font-size: 1.2rem;
+    width: 300px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    cursor: pointer;
+}
+
+.tabMenu {
+    display: grid;
+    grid-template-columns: repeat(4, fit-content(100%));
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.tabSelected {
+    font-size: 1.2rem;
+    color: rgb(0, 100, 250);
+}
+
+.tabNotSelected {
+    font-size: 1.2rem;
+    color: rgb(150, 150, 150);
+    cursor: pointer;
+}
+
+.tabContent {
+    font-weight: 100;
+    color: rgb(150, 150, 150);
+    margin-left: 20px;
+}
+
+
+
+@media (max-width: 1200px) {
+    .preTestModeContainerTop {
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+    
+    .preTestModeContainerBottom {
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+
+    .buttonZone {
+        display: grid;
+        grid-template-columns: 0fr 1fr;
+    }
+    
+    .buttonDisabled {
+        width: 100%;
+    }
+    
+    .buttonEnabled {
+        width: 100%;
+    }
+}

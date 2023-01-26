@@ -1,4 +1,5 @@
 .text {
+    width: 100%;
     font-size: 1.3rem;
     line-height: 70px;
 }
@@ -22,6 +23,8 @@
     color: rgb(255, 255, 255);
     background: linear-gradient(135deg, rgb(0, 100, 250) 20%, rgb(0, 220, 220) 90%);
     position: fixed;
+    padding-left: 15vw;
+    padding-right: 15vw;
     top: 0px;
     left: 0;
     z-index: 2;
@@ -29,4 +32,22 @@
 
 .blank {
     height: 70px;
+}
+
+
+
+@media (max-width: 1200px) {
+    .notScrolled,
+    .scrolled {
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .text {
+        font-size: 1rem;
+    }
 }

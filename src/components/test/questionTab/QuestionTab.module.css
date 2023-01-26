@@ -6,17 +6,15 @@
     border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 220, 220);
+    margin-bottom: 40px;
     cursor: pointer;
 }
 
 .questionContainer {
-    border-top: 1px solid rgb(220, 220, 220);
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-.questionContainer:nth-child(2) {
-    border: none;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    padding: 40px;
+    margin-bottom: 40px;
 }
 
 .questionHeader {
@@ -112,4 +110,12 @@
     color: rgb(255, 255, 255);
     background-color: rgb(250, 50, 50);
     cursor: pointer;
+}
+
+
+
+@media (max-width: 1200px) {
+    .questionContainer {
+        padding: min(40px, 5vw);
+    }
 }

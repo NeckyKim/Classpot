@@ -1,4 +1,4 @@
-.applyModeContainer {
+.testModeContainer {
     width: 100vw;
     height: 100vh;
     display: block;
@@ -11,7 +11,7 @@
     grid-template-rows: 69px 1fr 69px;
 }
 
-.applyModeContainerTop {
+.testModeContainerTop {
     display: grid;
     grid-template-columns: fit-content(100%) 1fr fit-content(100%);
     padding: 15px;
@@ -47,8 +47,15 @@
     padding-right: 15px;
     background-color: rgb(250, 50, 50);
     display: grid;
-    grid-template-columns: 20px 1fr;
+    grid-template-columns: 20px fit-content(100%) fit-content(100%);
     gap: 10px;
+}
+
+.timerHeader {
+    font-size: 0.8rem;
+    height: 20px;
+    line-height: 20px;
+    color: rgb(255, 255, 255);
 }
 
 .timerIcon {
@@ -59,11 +66,11 @@
 .timerValue {
     font-size: 1.2rem;
     height: 20px;
-    line-height: 18px;
+    line-height: 20px;
     color: rgb(255, 255, 255);
 }
 
-.applyModeContainerCenter {
+.testModeContainerCenter {
     display: grid;
     grid-template-columns: fit-content(100%) 1fr;
     border-top: 1px solid rgb(220, 220, 220);
@@ -150,45 +157,23 @@
     cursor: pointer;
 }
 
-.prevNextButton {
-    width: 161px;
-    height: 40px;
-}
-
-.prevButtonAbled,
-.nextButtonAbled,
-.prevButtonDisabled,
-.nextButtonDisabled {
+.prevNextbuttonOn {
+    font-size: 1rem;
     width: 80px;
     height: 40px;
-    font-size: 1rem;
     border: none;
-}
-
-.prevButtonAbled,
-.prevButtonDisabled {
-    border-radius: 5px 0px 0px 5px;
-    margin-right: 1px;
-}
-
-.nextButtonAbled,
-.nextButtonDisabled {
-    color: rgb(255, 255, 255);
-    border-radius: 0px 5px 5px 0px;
-}
-
-.prevButtonAbled,
-.nextButtonAbled {
     color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
     cursor: pointer;
 }
 
-.prevButtonDisabled,
-.nextButtonDisabled {
-    color: rgb(160, 160, 160);
+.prevNextbuttonOff {
+    font-size: 1rem;
+    width: 80px;
+    height: 40px;
+    border: none;
+    color: rgb(255, 255, 255);
     background-color: rgb(200, 200, 200);
-    cursor: auto;
 }
 
 .questionAnswerContent {
@@ -278,7 +263,7 @@
 .choiceSelected {
     color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
-    
+
 }
 
 .choiceNotSelected {
@@ -303,7 +288,7 @@
     margin-top: 5px;
 }
 
-.applyModeContainerBottom {
+.testModeContainerBottom {
     display: grid;
     grid-template-columns: fit-content(100%) 1fr fit-content(100%) fit-content(100%);
     gap: 10px;
@@ -416,45 +401,96 @@
 
 
 
-.preModeContainer {
-    width: 100vw;
-    padding-top: 10vh;
-    padding-left: 15vw;
-    padding-right: 15vw;
-}
+@media (max-width: 1200px) {
+    .timer {
+        display: grid;
+        grid-template-columns: 20px fit-content(100%);
+        gap: 10px;
+    }
+    
+    .timerHeader {
+        display: none;
+    }
+    
+    .timerIcon {
+        height: 20px;
+        filter: invert();
+    }
+    
+    .timerValue {
+        font-size: 1.2rem;
+        height: 20px;
+        line-height: 20px;
+        color: rgb(255, 255, 255);
+    }
 
-.preModeHeader {
-    font-size: 1.2rem;
-    font-weight: 100;
-    color: rgb(150, 150, 150);
-}
+    .testModeContainerCenter {
+        grid-template-columns: 1fr;
+    }
 
-.preModeTestName {
-    font-size: 2rem;
-    font-weight: 1000;
-    margin-bottom: 30px;
-}
+    .navigation {
+        display: none;
+    }
 
-.preModeInfo {
-    font-size: 1.2rem;
-    height: 30px;
-    line-height: 30px;
-    margin-bottom: 10px;
-    display: grid;
-    grid-template-columns: 100px fit-content(100%);
-}
+    .checkQuestionButton {
+        font-size: 0.8rem;
+        margin-right: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
 
-.preModeInfoHeader {
-    font-weight: 100;
-    color: rgb(150, 150, 150);
-}
+    .prevNextbuttonOn {
+        font-size: 0.8rem;
+        width: 60px;
+    }
+    
+    .prevNextbuttonOff {
+        font-size: 0.8rem;
+        width: 60px;
+    }
 
-.preModeTimer {
-    width: 300px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    border-radius: 5px;
-    color: rgb(150, 150, 150);
-    background-color: rgb(200, 200, 200);
+    .questionAnswerContent {
+        display: block;
+        grid-template-columns: none;
+    }
+
+    .questionContent {
+        height: fit-content;
+    }
+
+    .questionContent::-webkit-scrollbar {
+        display: none;
+    }
+
+    .answerContent {
+        height: fit-content;
+    }
+
+    .answerContent::-webkit-scrollbar {
+        display: none;
+    }
+
+    .submitButton,
+    .exitButton {
+        width: 80px;
+        height: 40px;
+        font-size: 0.8rem;
+    }
+
+    .exitContainer {
+        width: 80vw;
+        height: 50vh;
+        font-size: 0.8rem;
+    }
+
+    .exitContainerExitButton {
+        width: 100px;
+        font-size: 0.8rem;
+    }
+    
+    .exitContainerCancelButton {
+        width: 100px;
+        font-size: 0.8rem;
+    }
 }
