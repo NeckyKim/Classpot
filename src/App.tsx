@@ -81,7 +81,7 @@ export default function App() {
                             <Route path="/apply/:testCode" element={<Apply />} />
                             <Route path="/apply/:testCode/applicant/:applicantCode" element={<ApplyMode />} />
                             <Route path="/test/:testCode/answersheet/:applicantCode" element={<AnswerSheetRouter userCode={null} />} />
-                            <Route path="*" element={<Error message="페이지 오류 입니다." />} />
+                            <Route path="*" element={<Error message="존재하지 않는 페이지 입니다." />} />
                         </Routes>
 
 
@@ -91,7 +91,7 @@ export default function App() {
                             <Route path="/" element={<Dashboard userCode={userObject.uid} email={userObject.email} />} />
                             <Route path="/test/:testCode" element={<Test userCode={userObject.uid} email={userObject.email} />} />
                             <Route path="/test/:testCode/answersheet/:applicantCode" element={<AnswerSheetRouter userCode={userObject.uid} />} />
-                            <Route path="*" element={<Error message="페이지 오류 입니다." />} />
+                            <Route path="*" element={<Error message="유효하지 않은 시험 입니다." />} />
                         </Routes>
                 }
             </BrowserRouter>

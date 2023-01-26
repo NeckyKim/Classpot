@@ -1,7 +1,6 @@
 .text {
     font-size: 1.3rem;
     line-height: 70px;
-    padding-left: 40px;
 }
 
 .notScrolled {
@@ -10,6 +9,8 @@
     color: rgb(255, 255, 255);
     background: linear-gradient(135deg, rgb(0, 100, 250) 20%, rgb(0, 220, 220) 90%);
     position: fixed;
+    padding-left: 15vw;
+    padding-right: 15vw;
     top: 70px;
     left: 0;
     z-index: 2;

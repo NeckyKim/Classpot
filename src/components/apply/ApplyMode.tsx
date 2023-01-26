@@ -135,6 +135,19 @@ export default function ApplyMode() {
         }
     })
 
+    // 시험 시작 전 남은 시간
+    var daysBefore = Math.floor((startTime - currentTime) / 86400000)
+    var hoursBefore = Math.floor(((startTime - currentTime) - daysBefore * 14400000) / 3600000);
+    var minutesBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000) / 60000);
+    var secondsBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000 - minutesBefore * 60000) / 1000);
+
+
+
+    // 시험 응시 중 남은 시간
+    var hoursCurrent = Math.floor((finishTime - currentTime) / 3600000);
+    var minutesCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000) / 60000);
+    var secondsCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000 - minutesCurrent * 60000) / 1000);
+
 
 
     // 시험 응시 화면
@@ -180,21 +193,6 @@ export default function ApplyMode() {
             </div>
         )
     }
-
-
-
-    // 시험 시작 전 남은 시간
-    var daysBefore = Math.floor((startTime - currentTime) / 86400000)
-    var hoursBefore = Math.floor(((startTime - currentTime) - daysBefore * 14400000) / 3600000);
-    var minutesBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000) / 60000);
-    var secondsBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000 - minutesBefore * 60000) / 1000);
-
-
-
-    // 시험 응시 중 남은 시간
-    var hoursCurrent = Math.floor((finishTime - currentTime) / 3600000);
-    var minutesCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000) / 60000);
-    var secondsCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000 - minutesCurrent * 60000) / 1000);
 
 
 
@@ -583,24 +581,59 @@ export default function ApplyMode() {
 
                 :
 
-                <div className={styles.noticeBackground}>
+                <div>
                     {
                         isTestTime === "전"
 
                         &&
 
-                        <div className={styles.noticeContainer}>
-                            <div className={styles.noticeContainerTop}>
-                                {testInfo.testName}
+                        <div className={styles.preModeContainer}>
+                            <div className={styles.preModeTop}>
+                                <div className={styles.preModeHeader}>
+                                    시험 이름
+                                </div>
+
+                                <div className={styles.preModeTestName}>
+                                    {testInfo.testName}
+                                </div>
+
+                                <div className={styles.preModeInfo}>
+                                    <div className={styles.preModeInfoHeader}>
+                                        출제자
+                                    </div>
+
+                                    <div className={styles.preModeInfoValue}>
+                                        {testInfo.userName}
+                                    </div>
+                                </div>
+
+                                <div className={styles.preModeInfo}>
+                                    <div className={styles.preModeInfoHeader}>
+                                        응시자
+                                    </div>
+
+                                    <div className={styles.preModeInfoValue}>
+                                        {applicantInfo.applicantName}
+                                    </div>
+                                </div>
+
+                                <div className={styles.preModeTimer}>
+                                    {daysBefore !== 0 && <span>{daysBefore}일&nbsp;</span>}
+                                    {hoursBefore !== 0 && <span>{hoursBefore}시간&nbsp;</span>}
+                                    {minutesBefore !== 0 && <span>{minutesBefore}분&nbsp;</span>}
+                                    {secondsBefore}초&nbsp;
+                                    후 시작
+                                </div>
                             </div>
 
-                            <div className={styles.noticeButtonBefore}>
-                                {daysBefore !== 0 && <span>{daysBefore}일&nbsp;</span>}
-                                {hoursBefore !== 0 && <span>{hoursBefore}시간&nbsp;</span>}
-                                {minutesBefore !== 0 && <span>{minutesBefore}분&nbsp;</span>}
-                                {secondsBefore}초&nbsp;
-                                후 시험 시작
+                            <div className={styles.preModeBottom}>
+
+
                             </div>
+
+
+
+
                         </div>
                     }
 
@@ -610,48 +643,7 @@ export default function ApplyMode() {
                         &&
 
                         <div className={styles.noticeContainer}>
-                            <div className={styles.noticeContainerTop}>
-                                <div className={styles.noticeContainerInfo}>
-                                    <div>
-                                        시험 이름
-                                    </div>
-
-                                    <div>
-                                        {testInfo.testName}
-                                    </div>
-                                </div>
-
-                                <div className={styles.noticeContainerInfo}>
-                                    <div>
-                                        출제자
-                                    </div>
-
-                                    <div>
-                                        {testInfo.userName}
-                                    </div>
-                                </div>
-
-                                <div className={styles.noticeContainerInfo}>
-                                    <div>
-                                        응시자 이름
-                                    </div>
-
-                                    <div>
-                                        {applicantInfo.applicantName}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={styles.noticeContainerBottom}>
-                                <div />
-
-                                <div
-                                    className={styles.startTestButton}
-                                    onClick={() => { setIsApplyingTest(true); }}
-                                >
-                                    시험 시작하기
-                                </div>
-                            </div>
+                            
                         </div>
                     }
 

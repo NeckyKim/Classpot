@@ -414,41 +414,47 @@
     cursor: pointer;
 }
 
-.noticeBackground {
+
+
+.preModeContainer {
     width: 100vw;
-    height: calc(100vh - 70px);
-    display: grid;
-    align-items: center;
-    justify-content: center;
+    padding-top: 10vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
 }
 
-.noticeContainer {
-    width: 60vw;
-    height: 60vh;
-    border-radius: 10px;
-    padding: 20px;
-    border: 1px solid rgb(220, 220, 220);
-    display: grid;
-    grid-template-rows: 1fr fit-content(100%);
+.preModeHeader {
+    font-size: 1.2rem;
+    font-weight: 100;
+    color: rgb(150, 150, 150);
 }
 
-.noticeContainerInfo {
+.preModeTestName {
+    font-size: 2rem;
+    font-weight: 1000;
+    margin-bottom: 30px;
+}
+
+.preModeInfo {
+    font-size: 1.2rem;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
     display: grid;
     grid-template-columns: 100px fit-content(100%);
 }
 
-.noticeContainerBottom {
-    display: grid;
-    grid-template-columns: 1fr fit-content(100%);
+.preModeInfoHeader {
+    font-weight: 100;
+    color: rgb(150, 150, 150);
 }
 
-.startTestButton {
-    width: 250px;
+.preModeTimer {
+    width: 300px;
     height: 50px;
     line-height: 50px;
     text-align: center;
     border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-    cursor: pointer;
+    color: rgb(150, 150, 150);
+    background-color: rgb(200, 200, 200);
 }

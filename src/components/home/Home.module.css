@@ -42,11 +42,11 @@
 
 .applyButton:enabled {
     color: rgb(255, 255, 255);
-    background: linear-gradient(135deg, rgb(50, 200, 250) 10%, rgb(0, 100, 250) 90%);
+    background-color: rgb(0, 220, 220);
     cursor: pointer;
 }
 
 .applyButton:disabled {
     color: rgb(100, 100, 100);
-    background: linear-gradient(135deg, rgb(150, 150, 150) 10%, rgb(120, 120, 120) 90%);
+    background-color: rgb(150, 150, 150);
 }

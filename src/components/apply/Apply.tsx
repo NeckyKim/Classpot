@@ -47,37 +47,33 @@ export default function Apply() {
 
 
     return (
-        <div>
-            {
-                testInfo
+        testInfo
 
-                    ?
+            ?
 
-                    <div>
-                        시험 이름: {testInfo.testName}<br />
+            <div>
+                시험 이름: {testInfo.testName}<br />
 
-                        <input 
-                            type="text" 
-                            value={magicCode} 
-                            maxLength={5}
-                            onChange={(event: any) => { 
-                                setMagicCode(String(event.target.value).toUpperCase()); 
-                            }} />
+                <input
+                    type="text"
+                    value={magicCode}
+                    maxLength={5}
+                    onChange={(event: any) => {
+                        setMagicCode(String(event.target.value).toUpperCase());
+                    }} />
 
-                        <button
-                            disabled={magicCode.length !== 5}
-                            onClick={() => {
-                                applyCodeToApplicantCode();
-                            }}
-                        >
-                            시험 응시
-                        </button>
-                    </div>
+                <button
+                    disabled={magicCode.length !== 5}
+                    onClick={() => {
+                        applyCodeToApplicantCode();
+                    }}
+                >
+                    시험 응시
+                </button>
+            </div>
 
-                    :
+            :
 
-                    <Error message="유효하지 않은 응시 코드 입니다." />
-            }
-        </div>
+            <Error message="유효하지 않은 응시 코드 입니다." />
     )
 }

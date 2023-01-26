@@ -8,10 +8,10 @@
     left: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 15vw;
+    padding-right: 15vw;
     display: grid;
-    grid-template-columns: 1fr 100px;
+    grid-template-columns: 1fr fit-content(100%) ;
 }
 
 .headerLogo {
