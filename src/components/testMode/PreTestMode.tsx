@@ -79,7 +79,7 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                             &&
 
                             <div>
-                                <div className={styles.info}>
+                                {/* <div className={styles.info}>
                                     <div className={styles.infoHeader}>
                                         응시 시간
                                     </div>
@@ -107,7 +107,7 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                     <div className={styles.infoValue}>
                                         {totalPoints}점
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div className={styles.buttonZone}>
                                     <div />
