@@ -1,23 +1,27 @@
 .container {
-    width: 70vw;
-    margin: 0px auto;
-    margin-top: 50px;
+    width: 100vw;
+    padding: 40px;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px
 }
 
-.button {
+.testContainer {
     width: 100%;
-    height: fit-content;
+    height: 200px;
     font-size: 1.5rem;
     color: rgb(0, 0, 0);
     padding: 25px;
     border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
     display: grid;
-    grid-template-columns: 1fr 200px;
-    margin-bottom: 10px;
+    grid-template-rows: 1fr fit-content(100%);
 }
 
 .name {
+    font-weight: 700;
     height: 50px;
     line-height: 50px;
 }
@@ -27,7 +31,7 @@
     height: 25px;
     line-height: 25px;
     text-align: right;
-    color: rgb(100, 100, 100);
+    color: rgb(150, 150, 150);
 }
 
 .time {
@@ -35,11 +39,7 @@
     height: 25px;
     line-height: 25px;
     text-align: right;
-    color: rgb(100, 100, 100);
-}
-
-.button:hover > .name {
-    color: rgb(0, 100, 250);
+    color: rgb(150, 150, 150);
 }
 
 .addButton {
@@ -50,7 +50,7 @@
     border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 220, 220);
-    margin-top: 50px;
+    margin-top: 40px;
     margin-bottom: 50px;
     display: inline-block;
     cursor: pointer;
@@ -118,4 +118,25 @@
     margin-left: 10px;
     display: inline-block;
     cursor: pointer;
+}
+
+
+
+@media (max-width: 1200px) {
+    .container {
+        width: 100vw;
+        padding: 40px;
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: min(40px, 5vw);
+    }
 }

@@ -18,53 +18,51 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
 
                 <div className={styles.preTestModeContainer}>
                     <div className={styles.preTestModeContainerTop}>
-                        <div className={styles.header}>
-                            시험 이름
+                        <div className={styles.preTestModeContainerTop1}>
+                            <div className={styles.header}>
+                                시험 이름
+                            </div>
+
+                            <div className={styles.testName}>
+                                {testInfo.testName}
+                            </div>
+
+                            <div className={styles.info}>
+                                <div className={styles.header}>
+                                    출제자
+                                </div>
+
+                                <div className={styles.infoValue}>
+                                    {testInfo.userName}
+                                </div>
+                            </div>
+
+                            <div className={styles.info}>
+                                <div className={styles.header}>
+                                    응시자
+                                </div>
+
+                                <div className={styles.infoValue}>
+                                    {applicantName}
+                                </div>
+                            </div>
+
+                            <div className={styles.info}>
+                                <div className={styles.header}>
+                                    시작 일시
+                                </div>
+
+                                <div className={styles.infoValue}>
+                                    {new Date(testInfo?.startDate).toLocaleString("ko-KR")}
+                                </div>
+                            </div>
                         </div>
 
-                        <div className={styles.testName}>
-                            {testInfo.testName}
-                        </div>
+                        <div className={styles.preTestModeContainerTop2}>
+                            {
+                                isTestTime[0] === "전"
 
-                        <div className={styles.info}>
-                            <div className={styles.infoHeader}>
-                                출제자
-                            </div>
-
-                            <div className={styles.infoValue}>
-                                {testInfo.userName}
-                            </div>
-                        </div>
-
-                        <div className={styles.info}>
-                            <div className={styles.infoHeader}>
-                                응시자
-                            </div>
-
-                            <div className={styles.infoValue}>
-                            {applicantName}
-                            </div>
-                        </div>
-
-                        <div className={styles.info}>
-                            <div className={styles.infoHeader}>
-                                시작 일시
-                            </div>
-
-                            <div className={styles.infoValue}>
-                                {new Date(testInfo?.startDate).toLocaleString("ko-KR")}
-                            </div>
-                        </div>
-
-                        {
-                            isTestTime[0] === "전"
-
-                            &&
-                            
-                            <div>
-
-                            <div className={styles.buttonZone}>
-                                <div />
+                                &&
 
                                 <div className={styles.buttonDisabled}>
                                     {isTestTime[1][0] !== 0 && <span>{isTestTime[1][0]}일 </span>}
@@ -72,26 +70,42 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                     {isTestTime[1][2] !== 0 && <span>{isTestTime[1][2]}분 </span>}
                                     {isTestTime[1][3]}초 후 시작
                                 </div>
-                            </div>
-                            </div>
+                            }
 
-                        }
+                            {
+                                isTestTime[0] === "중"
 
-                        {
-                            isTestTime[0] === "중"
+                                &&
 
-                            &&
-
-                            <div>
-                                <div className={styles.buttonZone}>
-                                    <div />
-
-                                    <div className={styles.buttonEnabled} onClick={() => { setIsApplyingTest(true); }}>
-                                        시험 응시
-                                    </div>
+                                <div className={styles.buttonEnabled} onClick={() => { setIsApplyingTest(true); }}>
+                                    시험 응시
                                 </div>
-                            </div>
-                        }
+                            }
+
+                            {
+                                isTestTime[0] === "후"
+
+                                &&
+
+                                (
+                                    testInfo.feedback
+
+                                        ?
+
+                                        <div className={styles.buttonEnabled} onClick={() => {
+                                            window.open("/test/" + testCode + "/answersheet/" + applicantCode)
+                                        }}>
+                                            시험 결과 보기
+                                        </div>
+
+                                        :
+
+                                        <div className={styles.buttonDisabled}>
+                                            시험 종료
+                                        </div>
+                                )
+                            }
+                        </div>
                     </div>
 
 
@@ -138,60 +152,6 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                 </ul>
                             }
                         </div>
-                    </div>
-                </div>
-            }
-
-
-            {
-                isTestTime[0] === "후"
-
-                &&
-
-                <div className={styles.preTestModeContainer}>
-                    <div className={styles.preTestModeContainerTop}>
-                        <div className={styles.header}>
-                            시험 이름
-                        </div>
-
-                        <div className={styles.testName}>
-                            {testInfo.testName}
-                        </div>
-
-                        <div className={styles.header}>
-                            출제자
-                        </div>
-
-                        <div className={styles.userName}>
-                            {testInfo.userName}
-                        </div>
-
-                        <div className={styles.header}>
-                            응시자
-                        </div>
-
-                        <div className={styles.userName}>
-                            {applicantName}
-                        </div>
-
-                        {
-                            testInfo.feedback
-
-                                ?
-
-                                <div className={styles.buttonEnabled} onClick={() => {
-                                    window.open("/test/" + testCode + "/answersheet/" + applicantCode)
-                                }}>
-                                    시험 결과 보기
-                                </div>
-
-                                :
-
-                                <div className={styles.buttonDisabled}>
-                                    시험 종료
-                                </div>
-                        }
-
                     </div>
                 </div>
             }

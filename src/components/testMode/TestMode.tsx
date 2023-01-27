@@ -18,9 +18,6 @@ import styles from "./TestMode.module.css";
 
 
 
-
-
-
 export default function TestMode() {
     const { testCode } = useParams();
     const { applicantCode } = useParams();

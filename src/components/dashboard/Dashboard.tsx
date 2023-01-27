@@ -15,14 +15,11 @@ import styles from "./Dashboard.module.css";
 
 
 
-export default function Dashboard({ userCode, email }: {
-    userCode: string,
-    email: string
-}) {
+export default function Dashboard({ userCode, email }: { userCode: string, email: string }) {
     // 사용자 정보
     var userInfo = GetUserInfo(userCode);
 
-    
+
 
     // 사용자 등록
     const [userName, setUserName] = useState<string>("");
@@ -198,18 +195,18 @@ export default function Dashboard({ userCode, email }: {
                                     {
                                         testList.map((current: any) => (
                                             <Link to={"/test/" + current.testCode} style={{ textDecoration: "none" }}>
-                                                <div className={styles.button}>
+                                                <div className={styles.testContainer}>
                                                     <div className={styles.name}>
                                                         {current.testName}
                                                     </div>
 
-                                                    <div>
+                                                    <div className={styles.testContainerBottom}>
                                                         <div className={styles.date}>
-                                                            {new Date(current.startDate).toLocaleDateString("ko-KR")}
+                                                            {new Date(current.startDate).toLocaleString("ko-KR")}
                                                         </div>
 
                                                         <div className={styles.time}>
-                                                            {new Date(current.startDate).toLocaleTimeString("ko-KR")}
+                                                            {current.duration}분
                                                         </div>
                                                     </div>
                                                 </div>
