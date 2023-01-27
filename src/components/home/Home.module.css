@@ -2,51 +2,59 @@
     width: 100vw;
     height: calc(100vh - 70px);
     background: linear-gradient(135deg, rgb(0, 100, 250) 20%, rgb(0, 220, 220) 90%);
-    padding-top: 30vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    display: grid;
+    grid-template-rows: 1fr fit-content(100%);
 }
 
-.intro {
-    font-size: 2rem;
-    font-weight: 100;
-    color: rgb(255, 255, 255);
-    text-align: center;
-}
-
-.applyCodeInputBox {
-    width: 400px;
-    height: 80px;
+.homeContainerTop {
     font-size: 3rem;
-    font-weight: 100;
-    letter-spacing: 20px;
-    padding-left: 20px;
-    display: block;
-    margin: 0px auto;
-    text-align: center;
-    background: none;
-    border: none;
-    border-bottom: 1px solid rgb(255, 255, 255);
     color: rgb(255, 255, 255);
 }
 
-.applyButton {
-    width: 200px;
-    height: 50px;
-    line-height: 50px;
+.homeContainerBottom {
+    display: grid;
+    justify-self: right;
+}
+
+.applyTestButton {
     font-size: 1.2rem;
-    display: block;
-    margin: 0px auto;
-    margin-top: 50px;
-    border: none;
+    width: 300px;
+    height: 60px;
+    line-height: 60px;
     border-radius: 5px;
-}
-
-.applyButton:enabled {
+    text-align: center;
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 220, 220);
+    background-color: rgb(0, 100, 250);
     cursor: pointer;
 }
 
-.applyButton:disabled {
-    color: rgb(100, 100, 100);
-    background-color: rgb(150, 150, 150);
+
+
+@media (max-width: 1200px) {
+    .homeContainer {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .homeContainer {
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+
+    .homeContainerTop {
+        font-size: 2rem;
+    }
+
+    .applyTestButton {
+        font-size: 1.2rem;
+        width: calc(100vw - min(80px, 10vw));
+    }
 }

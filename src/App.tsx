@@ -9,7 +9,8 @@ import Home from "./components/home/Home";
 import Login from "./components/login/Login";
 import Dashboard from './components/dashboard/Dashboard';
 import Test from "./components/test/Test";
-import Apply from "./components/testMode/Apply";
+import CheckTestCode from "./components/home/CheckTestCode";
+import CheckApplicantCode from "./components/home/CheckApplicantCode";
 import TestMode from "./components/testMode/TestMode";
 import AnswerSheetRouter from "./components/test/answerSheetTab/AnswerSheetRouter";
 
@@ -78,7 +79,8 @@ export default function App() {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
-                            <Route path="/apply/:testCode" element={<Apply />} />
+                            <Route path="/apply" element={<CheckTestCode />} />
+                            <Route path="/apply/:testCode" element={<CheckApplicantCode />} />
                             <Route path="/apply/:testCode/applicant/:applicantCode" element={<TestMode />} />
                             <Route path="/test/:testCode/answersheet/:applicantCode" element={<AnswerSheetRouter userCode={null} />} />
                             <Route path="*" element={<Error message="존재하지 않는 페이지 입니다." />} />

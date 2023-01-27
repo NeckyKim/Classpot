@@ -17,15 +17,6 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
-    // 화면 너비
-    const [width, setWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
-    });
-
-
-
     // 시험 정보
     const testInfo: any = GetTestInfo(testCode);
 

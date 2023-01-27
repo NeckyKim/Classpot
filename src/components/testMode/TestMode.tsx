@@ -38,6 +38,13 @@ export default function TestMode() {
 
 
 
+    // 화면 너비
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
+    });
+
 
 
     // 글자 크기 설정
@@ -181,12 +188,14 @@ export default function TestMode() {
 
                 <form onSubmit={submitAnswerSheet} className={styles.testModeContainer}>
                     <div className={styles.testModeContainerTop}>
-                        <div className={styles.testName}>
-                            {testInfo.testName}
-                        </div>
+                        <div className={styles.testModeCotainerTopInfo}>
+                            <div className={styles.testName}>
+                                {testInfo.testName}
+                            </div>
 
-                        <div className={styles.applicantName}>
-                            {applicantInfo.applicantName}
+                            <div className={styles.applicantName}>
+                                {applicantInfo.applicantName}
+                            </div>
                         </div>
 
                         <div className={styles.timer}>
@@ -312,34 +321,32 @@ export default function TestMode() {
                                         {checkedQuestions.includes(questionNumber) ? "문항 체크 해제" : "문항 체크"}
                                     </div>
 
-                                    <div>
-                                        <input
-                                            type="button"
-                                            value="이전"
-                                            className={questionNumber !== 0 ? styles.prevNextbuttonOn : styles.prevNextbuttonOff}
-                                            style={{borderRadius: "5px 0px 0px 5px"}}
-                                            onClick={() => {
-                                                if (questionNumber !== 0) {
-                                                    setQuestionNumber(questionNumber - 1);
-                                                }
+                                    <div
+                                        className={questionNumber !== 0 ? styles.prevNextButtonOn : styles.prevNextButtonOff}
+                                        style={{ borderRadius: "5px 0px 0px 5px" }}
+                                        onClick={() => {
+                                            if (questionNumber !== 0) {
+                                                setQuestionNumber(questionNumber - 1);
+                                            }
 
-                                                submitAnswerSheet(event);
-                                            }}
-                                        />
+                                            submitAnswerSheet(event);
+                                        }}
+                                    >
+                                        {width < 600 ? <img className={styles.prevNextButtonImage} src={process.env.PUBLIC_URL + "/icons/arrow_left.png"} /> : "이전"}
+                                    </div>
 
-                                        <input
-                                            type="button"
-                                            value="다음"
-                                            className={questionNumber !== questionList.length - 1 ? styles.prevNextbuttonOn : styles.prevNextbuttonOff}
-                                            style={{borderRadius: "0px 5px 5px 0px"}}
-                                            onClick={() => {
-                                                if (questionNumber !== questionList.length - 1) {
-                                                    setQuestionNumber(questionNumber + 1);
-                                                }
+                                    <div
+                                        className={questionNumber !== questionList.length - 1 ? styles.prevNextButtonOn : styles.prevNextButtonOff}
+                                        style={{ borderRadius: "0px 5px 5px 0px" }}
+                                        onClick={() => {
+                                            if (questionNumber !== questionList.length - 1) {
+                                                setQuestionNumber(questionNumber + 1);
+                                            }
 
-                                                submitAnswerSheet(event);
-                                            }}
-                                        />
+                                            submitAnswerSheet(event);
+                                        }}
+                                    >
+                                        {width < 600 ? <img className={styles.prevNextButtonImage} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} /> : "다음"}
                                     </div>
                                 </div>
                             }
@@ -464,39 +471,11 @@ export default function TestMode() {
 
 
                     <div className={styles.testModeContainerBottom}>
-                        <div className={styles.fontSizeContainer}>
-                            <div
-                                className={styles.fontSizeSmall}
-                                onClick={() => {
-                                    if (fontSizeIndex !== 0) {
-                                        setFontSizeIndex(fontSizeIndex - 1);
-                                    }
-                                }
-                                }>
-                                -
-                            </div>
-
-                            <div className={styles.fontSizeValue}>
-                                {fontSizeValue[fontSizeIndex][0]}
-                            </div>
-
-                            <div
-                                className={styles.fontSizeLarge}
-                                onClick={() => {
-                                    if (fontSizeIndex !== fontSizeValue.length - 1) {
-                                        setFontSizeIndex(fontSizeIndex + 1);
-                                    }
-                                }
-                                }>
-                                +
-                            </div>
-                        </div>
-
                         <div className={styles.submittedTime}>
-                            최종 제출 시간 &nbsp;
+                            최종 제출 시간
+                            {width < 600 ? <br /> : " "}
                             {submittedTime && new Date(submittedTime).toLocaleString("ko-KR")}
                         </div>
-
                         <input type="submit" className={styles.submitButton} value="제출하기" />
 
                         <input
