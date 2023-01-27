@@ -47,12 +47,12 @@
     padding-right: 15px;
     background-color: rgb(250, 50, 50);
     display: grid;
-    grid-template-columns: 20px fit-content(100%) fit-content(100%);
+    grid-template-columns: 20px fit-content(100%) 80px;
     gap: 10px;
 }
 
 .timerHeader {
-    font-size: 0.8rem;
+    font-weight: 200;
     height: 20px;
     line-height: 20px;
     color: rgb(255, 255, 255);
@@ -68,6 +68,7 @@
     height: 20px;
     line-height: 20px;
     color: rgb(255, 255, 255);
+    text-align: right;
 }
 
 .testModeContainerCenter {

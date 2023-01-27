@@ -4,7 +4,7 @@ import styles from "./PreTestMode.module.css";
 
 
 
-export default function PreTestMode({ testInfo, testCode, applicantName, applicantCode, isTestTime, setIsApplyingTest, noOfQuestions, totalPoints }: { testInfo: any, testCode: any, applicantName: any, applicantCode: any, isTestTime: any, setIsApplyingTest: any, noOfQuestions: any, totalPoints: any }) {
+export default function PreTestMode({ testInfo, testCode, applicantName, applicantCode, isTestTime, setIsApplyingTest, noOfQuestions }: { testInfo: any, testCode: any, applicantName: any, applicantCode: any, isTestTime: any, setIsApplyingTest: any, noOfQuestions: any }) {
     const [tab, setTab] = useState<number>(1);
 
 
@@ -60,6 +60,8 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                             isTestTime[0] === "전"
 
                             &&
+                            
+                            <div>
 
                             <div className={styles.buttonZone}>
                                 <div />
@@ -71,6 +73,8 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                     {isTestTime[1][3]}초 후 시작
                                 </div>
                             </div>
+                            </div>
+
                         }
 
                         {
@@ -79,36 +83,6 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                             &&
 
                             <div>
-                                {/* <div className={styles.info}>
-                                    <div className={styles.infoHeader}>
-                                        응시 시간
-                                    </div>
-
-                                    <div className={styles.infoValue}>
-                                        {testInfo?.duration}분
-                                    </div>
-                                </div>
-
-                                <div className={styles.info}>
-                                    <div className={styles.infoHeader}>
-                                        총 문제 수
-                                    </div>
-
-                                    <div className={styles.infoValue}>
-                                        {noOfQuestions}문제
-                                    </div>
-                                </div>
-
-                                <div className={styles.info}>
-                                    <div className={styles.infoHeader}>
-                                        총점
-                                    </div>
-
-                                    <div className={styles.infoValue}>
-                                        {totalPoints}점
-                                    </div>
-                                </div> */}
-
                                 <div className={styles.buttonZone}>
                                     <div />
 

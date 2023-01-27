@@ -26,14 +26,16 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                 {current.applicantName}
                             </div>
 
-                            <div className={styles.scores}>
-                                {current && current.reportCard.filter((elements: any) => elements === null).length !== 100 && current.reportCard.filter((element: any) => (element >= 0 && element !== null)).reduce(function add(sum: number, current: number) {return sum + current})}점
-                            </div>
-                            
-                            <div
-                                className={styles.checkAnswerSheetButton}
-                                onClick={() => { window.open("/test/" + testCode + "/answersheet/" + current.applicantCode) }}>
-                                답안지 확인
+                            <div className={styles.applicantContainer2}>
+                                <div className={styles.scores}>
+                                    {current && current.reportCard.filter((elements: any) => elements === null).length !== 100 && current.reportCard.filter((element: any) => (element >= 0 && element !== null)).reduce(function add(sum: number, current: number) { return sum + current })}점
+                                </div>
+
+                                <div
+                                    className={styles.checkAnswerSheetButton}
+                                    onClick={() => { window.open("/test/" + testCode + "/answersheet/" + current.applicantCode) }}>
+                                    답안지 확인
+                                </div>
                             </div>
                         </div>
                     ))

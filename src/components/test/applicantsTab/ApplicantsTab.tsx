@@ -31,6 +31,7 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
     var reportCard: string[] = new Array(100).fill(null);
 
 
+
     async function addApplicant(event: any) {
         event.preventDefault()
 
@@ -62,7 +63,7 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
 
     return (
         <div>
-            <button
+            <div
                 className={styles.addApplicantButton}
                 onClick={() => {
                     setIsAddingApplicant(true);
@@ -70,7 +71,7 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                 }}
             >
                 응시자 추가
-            </button>
+            </div>
 
             {
                 isAddingApplicant
@@ -86,17 +87,23 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                         required
                     />
 
-                    <input type="submit" value="추가" className={styles.addConfirmButton} />
+                    <div className={styles.addApplicantContainerButtons}>
+                        <input 
+                            type="submit" 
+                            value="추가" 
+                            className={styles.addConfirmButton}
+                        />
 
-                    <input
-                        type="button"
-                        value="취소"
-                        className={styles.addCancelButton}
-                        onClick={() => {
-                            setApplicantName("");
-                            setIsAddingApplicant(false);
-                        }}
-                    />
+                        <input
+                            type="button"
+                            value="취소"
+                            className={styles.addCancelButton}
+                            onClick={() => {
+                                setApplicantName("");
+                                setIsAddingApplicant(false);
+                            }}
+                        />
+                    </div>
                 </form>
             }
 

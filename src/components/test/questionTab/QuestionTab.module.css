@@ -1,7 +1,9 @@
 .addQuestionButton {
     width: 150px;
     height: 40px;
+    line-height: 40px;
     font-size: 1rem;
+    text-align: center;
     border: none;
     border-radius: 5px;
     color: rgb(255, 255, 255);
@@ -32,7 +34,7 @@
 }
 
 .questionType {
-    font-weight: 100;
+    font-weight: 300;
     font-size: 1.2rem;
     height: 40px;
     line-height: 40px;
@@ -43,7 +45,7 @@
 }
 
 .questionPoints {
-    font-weight: 100;
+    font-weight: 300;
     font-size: 1.2rem;
     height: 40px;
     line-height: 40px;
@@ -117,5 +119,43 @@
 @media (max-width: 1200px) {
     .questionContainer {
         padding: min(40px, 5vw);
+    }
+
+    .questionNumber {
+        font-weight: 500;
+        font-size: 1.2rem;
+        font-family: "NanumSquare";
+        height: 30px;
+        line-height: 30px;
+        color: rgb(0, 100, 250);
+    }
+    
+    .questionType {
+        font-size: 1rem;
+        height: 30px;
+        line-height: 30px;
+        margin-left: 10px;
+        padding-left: 10px;
+    }
+    
+    .questionPoints {
+        font-size: 1rem;
+        height: 30px;
+        line-height: 30px;
+        margin-left: 10px;
+    }
+
+    .editButton {
+        width: 40px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.7rem;
+    }
+    
+    .deleteButton {
+        width: 40px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.7rem;
     }
 }

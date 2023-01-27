@@ -1,0 +1,127 @@
+.applicantContainer {
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+}
+
+.applicantContainer:nth-child(2) {
+    margin-top: 40px;
+}
+
+.applicantContainer1 {
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 5px;
+}
+
+.applicantContainerEdit {
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%);
+    gap: 5px;
+}
+
+.applicantContainerDelete {
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%);
+    gap: 5px;
+}
+
+.applicantName {
+    font-size: 1.5rem;
+    height: 40px;
+    line-height: 40px;
+}
+
+.applicantCode {
+    font-size: 1.2rem;
+    font-weight: 300;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 10px;
+    color: rgb(0, 220, 220);
+}
+
+.applicantContainer2 {
+    display: grid;
+    grid-template-columns: repeat(3, fit-content(100%));
+    gap: 5px;
+}
+
+.copyURLButton {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    cursor: pointer;
+}
+
+.editButton {
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 220, 220);
+    cursor: pointer;
+}
+
+.deleteButton {
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 50, 50);
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 600px) {
+    .applicantContainer {
+        grid-template-columns: none;
+        grid-template-rows: 40px 40px;
+    }
+
+    .applicantContainer2 {
+        justify-self: right;
+    }
+
+    .copyURLButton {
+        width: 80px;
+    }
+    
+    .editButton {
+        width: 50px;
+    }
+    
+    .deleteButton {
+        width: 50px;
+    }
+}

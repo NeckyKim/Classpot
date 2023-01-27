@@ -45,9 +45,9 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                         :
 
                         <div>
-                            <button onClick={() => { setIsAddingQuestion((prev) => !prev); }} className={styles.addQuestionButton} >
+                            <div onClick={() => { setIsAddingQuestion((prev) => !prev); }} className={styles.addQuestionButton} >
                                 문제 추가
-                            </button>
+                            </div>
 
                             {
                                 questionList.length > 0

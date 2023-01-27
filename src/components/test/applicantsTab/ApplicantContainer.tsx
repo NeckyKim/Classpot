@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, setDoc, updateDoc, deleteDoc, collection } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 import { toast } from "react-toastify";
 
-import styles from "./ApplicantsTab.module.css";
+import styles from "./ApplicantContainer.module.css";
 
 
 
@@ -61,7 +61,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
 
     return (
         <div className={styles.applicantContainer}>
-            <div className={styles.applicantContainerTop}>
+            <div className={styles.applicantContainer1}>
                 <div className={styles.applicantName}>
                     {applicantObject.applicantName}
                 </div>
@@ -69,8 +69,10 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                 <div className={styles.applicantCode}>
                     {applicantObject.magicCode}
                 </div>
+            </div>
 
-                <button
+            <div className={styles.applicantContainer2}>
+                <div
                     className={styles.copyURLButton}
                     onClick={() => {
                         try {
@@ -84,9 +86,9 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                     }}
                 >
                     URL 복사
-                </button>
+                </div>
 
-                <button
+                <div
                     className={styles.editButton}
                     onClick={() => {
                         setIsEditingApplicant(true);
@@ -95,9 +97,9 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                     }}
                 >
                     수정
-                </button>
+                </div>
 
-                <button
+                <div
                     className={styles.deleteButton}
                     onClick={() => {
                         setIsEditingApplicant(false);
@@ -105,7 +107,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                     }}
                 >
                     삭제
-                </button>
+                </div>
             </div>
 
 

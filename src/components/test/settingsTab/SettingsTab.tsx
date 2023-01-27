@@ -17,6 +17,15 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
+    // 화면 너비
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
+    });
+
+
+
     // 시험 정보
     const testInfo: any = GetTestInfo(testCode);
 
@@ -30,7 +39,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
-    // 시작 일시 변경
+    // 시작 일시
     const [isEditingStartDate, setIsEditingStartDate] = useState<boolean>(false);
     const [startDate, setStartDate] = useState<any>("");
 
@@ -40,7 +49,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
-    // 응시 시간 변경
+    // 응시 시간
     const [isEditingDuration, setIsEditingDuration] = useState<boolean>(false);
     const [duration, setDuration] = useState<any>("");
 
@@ -48,12 +57,13 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
-    // 시험 삭제
+    // 시험 삭제 여부
     const [isDeletingTest, setIsDeletingTest] = useState<boolean>(false);
     const [deletingTestConfirmText, setDeletingTestConfirmText] = useState<string>("");
 
 
 
+    // 시험 이름 변경 함수
     async function editTestName(event: any) {
         event.preventDefault();
 
@@ -76,6 +86,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
+    // 시작 일시 변경 함수
     async function editTestStartDate(event: any) {
         event.preventDefault();
 
@@ -98,6 +109,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
+    // 응시 시간 변경 함수
     async function editTestDuration(event: any) {
         event.preventDefault();
 
@@ -120,6 +132,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
+    // 피드백 공개 설정 변경 함수
     async function changeFeedback(event: any) {
         event.preventDefault();
 
@@ -142,6 +155,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
+    // 시험 삭제 함수
     async function deleteTest(event: any) {
         event.preventDefault();
 
@@ -251,7 +265,6 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                     </div>
                 </div>
             </div>
-
 
 
 
@@ -394,12 +407,12 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
             </div>
 
             <div className={styles.settingsContainer}>
-                <div className={styles.settingsContainerTop}>
-                    <div className={styles.settingsContainerInfo}>
+                <div className={styles.feedbackContainer}>
+                    <div className={styles.feedbackContainer1}>
                         시험이 종료되면, 응시자들이 문제와 정답을 확인할 수 있습니다.
                     </div>
 
-                    <div className={styles.feedbackButtons}>
+                    <div className={styles.feedbackContainer2}>
                         <button
                             className={testInfo.feedback ? styles.feedbackButtonOn : styles.feedbackButtonOff}
                             onClick={changeFeedback}
@@ -429,8 +442,8 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
             </div>
 
             <div className={styles.settingsContainer}>
-                <div className={styles.settingsContainerTop}>
-                    <div className={styles.settingsContainerInfo}>
+                <div className={styles.feedbackContainer}>
+                    <div className={styles.feedbackContainer1}>
                         시험을 삭제합니다. 문제, 응시자 목록, 답안지가 전부 삭제됩니다.
                     </div>
 
@@ -439,17 +452,21 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
                             ?
 
-                            <div className={styles.cancelButton} onClick={() => { setIsDeletingTest(true); }}>
-                                시험 삭제
+                            <div className={styles.feedbackContainer2}>
+                                <div className={styles.cancelButton} onClick={() => { setIsDeletingTest(true); }}>
+                                    시험 삭제
+                                </div>
                             </div>
 
                             :
 
-                            <div
-                                className={styles.deleteCancelButton}
-                                onClick={() => { setIsDeletingTest(false); }}
-                            >
-                                삭제 취소
+                            <div className={styles.feedbackContainer2}>
+                                <div
+                                    className={styles.deleteCancelButton}
+                                    onClick={() => { setIsDeletingTest(false); }}
+                                >
+                                    삭제 취소
+                                </div>
                             </div>
                     }
 
@@ -465,7 +482,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                     <form className={styles.deleteContainer} onSubmit={deleteTest}>
                         <div className={styles.deleteReminder}>
                             시험을 삭제하려면 시험 이름을 입력하신 후 확인을 누르세요.<br />
-                            이 작업은 되돌릴 수 없으며, 삭제된 정보는 복구가 불가능합니다.
+                            <span style={{color: "rgb(250, 50, 50)"}}>이 작업은 되돌릴 수 없으며, 삭제된 정보는 복구가 불가능합니다.</span>
                         </div>
 
                         <div className={styles.deleteContainerBottom}>

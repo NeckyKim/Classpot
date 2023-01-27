@@ -50,6 +50,7 @@
 }
 
 .inputBox {
+    width: 100%;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
@@ -81,15 +82,19 @@
     border: none;
     border-radius: 5px;
     color: rgb(255, 255, 255);
-    background-color: rgb(250, 50, 50);
+    background-color: rgb(200, 200, 200);
     cursor: pointer;
 }
 
-.feedbackButtons {
-    width: 200px;
-    height: 40px;
+.feedbackContainer {
     display: grid;
-    grid-template-columns: repeat(2, 100px);
+    grid-template-columns: 1fr fit-content(100%);
+}
+
+.feedbackContainer1 {
+    height: 40px;
+    line-height: 40px;
+    word-break: keep-all;
 }
 
 .feedbackButtonOn {
@@ -152,6 +157,7 @@
 .deleteReminder {
     font-size: 1rem;
     margin-bottom: 20px;
+    word-break: keep-all;
 }
 
 .deleteContainer {
@@ -166,6 +172,27 @@
     gap: 10px
 }
 
+
+
+@media (max-width: 1200px) {
+    .feedbackContainer {
+        grid-template-columns: none;
+        grid-template-rows: fit-content(100%) 40px;
+        gap: 10px;
+    }
+
+    .feedbackContainer1 {
+        height: normal;
+        line-height: normal;
+        justify-items: right;
+    }
+
+    .feedbackContainer2 {
+        display: grid;
+        grid-template-columns: 1fr fit-content(100%) fit-content(100%);
+        justify-items: right;
+    }
+}
 
 
 
