@@ -46,10 +46,10 @@ textarea:focus {
 }
 
 .Toastify__toast {
+    margin: 0px;
     padding: 20px;
     border-radius: 5px;
     box-shadow: none;
-    color: rgb(0, 0, 0);
 }
 
 .Toastify__toast-container {
@@ -75,5 +75,21 @@ textarea:focus {
     to {
         visibility: hidden;
         transform: translate3d(120%, 0, 0);
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .Toastify__toast {
+        padding: 10px;
+        border-radius: 0px;
+        box-shadow: none;
+    }
+    
+    .Toastify__toast-container {
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
     }
 }

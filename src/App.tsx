@@ -34,6 +34,16 @@ export default function App() {
 
 
 
+    // 화면 너비
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
+    });
+
+
+
+
     return (
         <div>
             <BrowserRouter>
@@ -41,10 +51,20 @@ export default function App() {
 
                 <ToastContainer
                     transition={Slide}
-                    position="bottom-right"
+                    position={
+                        width < 600
+
+                        ?
+
+                        "bottom-center"
+
+                        : 
+
+                        "bottom-right"
+                    }
                     autoClose={5000}
                     hideProgressBar
-                    newestOnTop={false}
+                    newestOnTop={true}
                     closeOnClick={false}
                     rtl={false}
                     pauseOnFocusLoss={false}
@@ -57,17 +77,22 @@ export default function App() {
 
                             ?
 
-                            {
-                                right: "30px",
-                                bottom: "70px"
-                            }
+                            { right: "30px", bottom: "70px" }
 
                             :
 
-                            {
-                                right: "40px",
-                                bottom: "40px"
-                            }
+                            (
+
+                                width < 600
+
+                                    ?
+
+                                    { right: "0", bottom: "0" }
+
+                                    :
+
+                                    { right: "40px", bottom: "40px" }
+                            )
                     }
                 />
 
