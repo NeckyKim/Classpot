@@ -82,7 +82,7 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                     <input
                         type="text"
                         value={applicantName}
-                        className={styles.addApplicantInputBox}
+                        className={styles.inputBox}
                         onChange={(event: any) => { setApplicantName(event.target.value); }}
                         required
                     />

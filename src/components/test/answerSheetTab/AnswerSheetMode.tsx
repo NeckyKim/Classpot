@@ -62,7 +62,17 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
     async function changeAutoGradingMode(event: any) {
         event.preventDefault();
 
-        if (testCode && applicantCode) {
+        var ok = false;
+
+        if (applicantInfo.autoGrading === false) {
+            ok = confirm("자동 채점을 사용하시겠습니까? 수동으로 채점된 모든 항목들이 초기화되고 자동으로 다시 채점됩니다.");
+        }
+
+        else {
+            ok = true
+        }
+
+        if (testCode && applicantCode && ok) {
             try {
                 await updateDoc(doc(dbService, "tests", testCode, "applicants", applicantCode), {
                     autoGrading: !(applicantInfo.autoGrading)
@@ -109,7 +119,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
         submitReportCard(event);
     }
 
-    console.log(reportCard)
+
 
     return (
         applicantInfo.answerSheet && applicantInfo.answerSheet.filter((elements: any) => elements === null).length !== 100
@@ -118,12 +128,14 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
             <div className={styles.answerSheetModeContainer}>
                 <div className={styles.answerSheetModeContainerTop}>
-                    <div className={styles.testName}>
-                        {testInfo.testName}
-                    </div>
+                    <div className={styles.answerSheetModeContainerTopInfo}>
+                        <div className={styles.testName}>
+                            {testInfo.testName}
+                        </div>
 
-                    <div className={styles.applicantName}>
-                        {applicantInfo.applicantName}
+                        <div className={styles.applicantName}>
+                            {applicantInfo.applicantName}
+                        </div>
                     </div>
 
                     {
@@ -140,14 +152,13 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
                             :
 
-                            <div>
-                            </div>
+                            <div />
                     }
 
 
                     <div className={styles.scores}>
                         <div className={styles.scoresHeader}>
-                            나의 점수
+                            {editable ? "점수" : "나의 점수"}
                         </div>
 
                         <div className={styles.scoresValue}>
@@ -333,62 +344,81 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
                                         &&
 
-                                        (
-                                        applicantInfo.autoGrading
-
-                                            ?
-
-                                            <div>
-                                                자동 채점을 해제하면 점수를 수정할 수 있습니다.
+                                        <div>
+                                            <div className={styles.questionAnswerSubHeader}>
+                                                채점
                                             </div>
 
-                                            :
-
                                             <div>
-                                                <div onClick={() => {
-                                                    var temp = applicantInfo.reportCard;
-                                                    temp[index] = 0;
+                                                {
+                                                    applicantInfo.autoGrading
 
-                                                    changeScores(event);
-                                                }}>
-                                                    오답 처리
-                                                </div>
+                                                        ?
 
-                                                <div onClick={() => {
-                                                    var temp = applicantInfo.reportCard;
+                                                        <div className={styles.manualGradingGuide}>
+                                                            자동 채점을 해제하면 점수를 수정할 수 있습니다.
+                                                        </div>
 
-                                                    var check = prompt("점수를 입력하세요");
+                                                        :
 
-                                                    if (!!Number(check)) {
-                                                        if (Number(check) >= 0 && Number(check) <= current.points) {
-                                                            temp[index] = Number(check);
-                                                            changeScores(event);
-                                                        }
+                                                        <div className={styles.manualGradingContainer}>
+                                                            <button
+                                                                className={styles.manualGradingWrong}
+                                                                disabled={applicantInfo.reportCard[index] === 0}
+                                                                onClick={() => {
+                                                                    var temp = applicantInfo.reportCard;
+                                                                    temp[index] = 0;
 
-                                                        else {
-                                                            alert("최소 0점부터 " + current.points + "까지 점수를 부여할 수 있습니다.");
-                                                        }
-                                                    }
+                                                                    changeScores(event);
+                                                                }}
+                                                            >
+                                                                오답
+                                                            </button>
 
-                                                    else {
-                                                        alert("숫자를 입력해야 합니다.");
-                                                    }
-                                                }}>
-                                                    부분 점수
-                                                </div>
+                                                            <div
+                                                                className={(applicantInfo.reportCard[index] !== 0 && applicantInfo.reportCard[index] !== current.points) ? styles.manualGradingSomeOn : styles.manualGradingSomeOff}
+                                                                onClick={() => {
+                                                                    var temp = applicantInfo.reportCard;
 
-                                                <div onClick={() => {
-                                                    var temp = applicantInfo.reportCard;
-                                                    temp[index] = current.points;
+                                                                    var check = prompt("점수를 입력하세요");
 
-                                                    changeScores(event);
-                                                }}>
-                                                    정답 처리
-                                                </div>
+                                                                    if (!!Number(check)) {
+                                                                        if (Number(check) >= 0 && Number(check) <= current.points) {
+                                                                            temp[index] = Number(check);
+                                                                            changeScores(event);
+                                                                        }
+
+                                                                        else {
+                                                                            alert("최소 0점부터 " + current.points + "까지 점수를 부여할 수 있습니다.");
+                                                                        }
+                                                                    }
+
+                                                                    else {
+                                                                        alert("숫자를 입력해야 합니다.");
+                                                                    }
+                                                                }}
+                                                            >
+                                                                부분 정답
+                                                            </div>
+
+                                                            <button
+                                                                className={styles.manualGradingCorrect}
+                                                                disabled={applicantInfo.reportCard[index] === current.points}
+                                                                onClick={() => {
+                                                                    var temp = applicantInfo.reportCard;
+                                                                    temp[index] = current.points;
+
+                                                                    changeScores(event);
+                                                                }}
+                                                            >
+                                                                정답
+                                                            </button>
+                                                        </div>
+                                                }
                                             </div>
-                                        )
+                                        </div>
                                     }
-                                    
+
 
                                     {
 

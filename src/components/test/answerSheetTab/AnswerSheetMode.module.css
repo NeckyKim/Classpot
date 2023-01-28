@@ -1,5 +1,6 @@
 .answerSheetModeContainer {
     width: 100vw;
+    height: 100vh;
     display: block;
     margin: 0px auto;
     margin-top: -70px;
@@ -11,14 +12,39 @@
 .answerSheetModeContainerTop {
     width: 100vw;
     display: grid;
-    grid-template-columns: fit-content(100%) 1fr fit-content(100%) fit-content(100%);
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%);
     padding: 15px;
     padding-left: 30px;
     padding-right: 30px;
     border-bottom: 1px solid rgb(220, 220, 220);
-    background-color: rgb(255, 255, 255);
     position: fixed;
-    top: 0px;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+}
+
+.answerSheetModeContainerTopInfo {
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+}
+
+.testName {
+    font-size: 1.2rem;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.applicantName {
+    font-size: 1.2rem;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 1px solid rgb(220, 220, 220);
 }
 
 .autoGradingButton {
@@ -60,37 +86,14 @@
     border-left: 1px solid rgb(0, 220, 220)
 }
 
-.answerSheetModeContainerBottom {
-    width: 70vw;
-    display: block;
-    margin: 0px auto;
-}
-
-.testName {
-    font-size: 1.2rem;
-    height: 30px;
-    line-height: 30px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.applicantName {
-    font-size: 1.2rem;
-    height: 30px;
-    line-height: 30px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 20px;
-    padding-left: 20px;
-    border-left: 1px solid rgb(220, 220, 220)
-}
-
 .questionAnswer {
     border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
-    margin: 40px;
+    padding: 30px;
+    margin-top: 40px;
     margin-bottom: 40px;
-    padding: 40px;
+    margin-left: 15vw;
+    margin-right: 15vw;
 }
 
 .questionAnswer:nth-child(1) {
@@ -105,7 +108,8 @@
 
 .questionAnswerSubHeader {
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 5px;
     color: rgb(0, 100, 250);
 }
 
@@ -123,7 +127,7 @@
     height: 40px;
     line-height: 40px;
     font-size: 1.2rem;
-    font-weight: 100;
+    font-weight: 300;
     margin-left: 25px;
     padding-left: 25px;
     color: rgb(150, 150, 150);
@@ -135,7 +139,7 @@
     height: 40px;
     line-height: 40px;
     font-size: 1.2rem;
-    font-weight: 100;
+    font-weight: 300;
     margin-left: 20px;
     color: rgb(150, 150, 150);
 }
@@ -146,7 +150,6 @@
     word-break: keep-all;
     text-align: justify;
     white-space: pre-line;
-    overflow: scroll;
 }
 
 .correctChoice {
@@ -225,6 +228,82 @@
     font-size: 1.2rem;
 }
 
+.manualGradingGuide {
+    font-weight: 500;
+    color: rgb(150, 150, 150);
+    margin-top: 0px;
+}
+
+.manualGradingContainer {
+    display: grid;
+    grid-template-columns: repeat(3, fit-content(100%));
+    gap: 5px;
+}
+
+.manualGradingWrong {
+    font-size: 1rem;
+    width: fit-content;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(250, 50, 50);
+    color: rgb(250, 50, 50);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.manualGradingWrong:disabled {
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 50, 50);
+}
+
+.manualGradingSomeOn {
+    font-size: 1rem;
+    width: fit-content;
+    height: 40px;
+    line-height: 36px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(250, 200, 50);
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 200, 50);
+    cursor: pointer;
+}
+
+.manualGradingSomeOff {
+    font-size: 1rem;
+    width: fit-content;
+    height: 40px;
+    line-height: 36px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(250, 200, 50);
+    color: rgb(250, 200, 50);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.manualGradingCorrect {
+    font-size: 1rem;
+    width: fit-content;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(100, 200, 50);
+    color: rgb(100, 200, 50);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.manualGradingCorrect:disabled {
+    color: rgb(255, 255, 255);
+    background-color: rgb(100, 200, 50);
+}
+
 
 
 @media (max-width: 1200px) {
@@ -232,5 +311,82 @@
         width: 100vw;
         display: block;
         margin: 0px auto;
+    }
+
+    .questionAnswer {
+        padding-left: min(5vw, 30px);;
+        padding-right: min(5vw, 30px);;
+        margin-left: min(5vw, 30px);
+        margin-right: min(5vw, 30px);
+    }
+
+    .questionNumber {
+        font-size: 1.5rem;
+    }
+
+    .questionType {
+        font-size: 1rem;
+        margin-left: 15px;
+        padding-left: 15px;
+    }
+
+    .questionPoints {
+        font-size: 1rem;
+        margin-left: 10px;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .answerSheetModeContainerTop {
+        padding-left: min(5vw, 30px);
+        padding-right: min(5vw, 30px);
+    }
+
+    .answerSheetModeContainerTopInfo {
+        grid-template-columns: none;
+    }
+
+    .testName {
+        font-size: 1rem;
+        height: 20px;
+        line-height: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .applicantName {
+        font-size: 1rem;
+        height: 20px;
+        line-height: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        padding-left: 0px;
+        border-left: none;
+    }
+
+    .autoGradingButton {
+        font-size: 0.8rem;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 5px;
+    }
+
+    .scoresHeader {
+        display: none;
+    }
+    
+    .scoresValue {
+        font-size: 1rem;
+        margin-left: 0px;
+        padding-left: 0px;
+        border-left: none;
+    }
+    
+    .questionAnswer {
+        padding: min(5vw, 30px);
     }
 }

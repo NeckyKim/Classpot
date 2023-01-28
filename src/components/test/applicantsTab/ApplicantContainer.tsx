@@ -61,55 +61,56 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
 
     return (
         <div className={styles.applicantContainer}>
-            <div className={styles.applicantContainer1}>
-                <div className={styles.applicantName}>
-                    {applicantObject.applicantName}
+            <div className={styles.applicantContainerTop}>
+                <div className={styles.applicantContainer1}>
+                    <div className={styles.applicantName}>
+                        {applicantObject.applicantName}
+                    </div>
+
+                    <div className={styles.applicantCode}>
+                        {applicantObject.magicCode}
+                    </div>
                 </div>
 
-                <div className={styles.applicantCode}>
-                    {applicantObject.magicCode}
+                <div className={styles.applicantContainer2}>
+                    <div
+                        className={styles.copyURLButton}
+                        onClick={() => {
+                            try {
+                                navigator.clipboard.writeText(window.location.origin + "/apply/" + testCode + "/applicant/" + applicantObject.applicantCode);
+                                toast.success("응시자 URL이 복사되었습니다.");
+                            }
+
+                            catch (error) {
+                                toast.error("응시자 URL 복사에 실패하였습니다.")
+                            }
+                        }}
+                    >
+                        URL 복사
+                    </div>
+
+                    <div
+                        className={styles.editButton}
+                        onClick={() => {
+                            setIsEditingApplicant(true);
+                            setIsDeletingApplicant(false);
+                            setApplicantName(applicantObject.applicantName);
+                        }}
+                    >
+                        수정
+                    </div>
+
+                    <div
+                        className={styles.deleteButton}
+                        onClick={() => {
+                            setIsEditingApplicant(false);
+                            setIsDeletingApplicant(true);
+                        }}
+                    >
+                        삭제
+                    </div>
                 </div>
             </div>
-
-            <div className={styles.applicantContainer2}>
-                <div
-                    className={styles.copyURLButton}
-                    onClick={() => {
-                        try {
-                            navigator.clipboard.writeText(window.location.origin + "/apply/" + testCode + "/applicant/" + applicantObject.applicantCode);
-                            toast.success("응시자 URL이 복사되었습니다.");
-                        }
-
-                        catch (error) {
-                            toast.error("응시자 URL 복사에 실패하였습니다.")
-                        }
-                    }}
-                >
-                    URL 복사
-                </div>
-
-                <div
-                    className={styles.editButton}
-                    onClick={() => {
-                        setIsEditingApplicant(true);
-                        setIsDeletingApplicant(false);
-                        setApplicantName(applicantObject.applicantName);
-                    }}
-                >
-                    수정
-                </div>
-
-                <div
-                    className={styles.deleteButton}
-                    onClick={() => {
-                        setIsEditingApplicant(false);
-                        setIsDeletingApplicant(true);
-                    }}
-                >
-                    삭제
-                </div>
-            </div>
-
 
 
             {
@@ -126,17 +127,17 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                     <input
                         type="text"
                         value={applicantName}
-                        className={styles.addApplicantInputBox}
+                        className={styles.inputBox}
                         onChange={(event: any) => { setApplicantName(event.target.value); }}
                         required
                     />
 
-                    <input type="submit" value="변경" className={styles.editConfirmButton} />
+                    <input type="submit" value="변경" className={styles.editButton} />
 
                     <input
                         type="button"
                         value="취소"
-                        className={styles.editCancelButton}
+                        className={styles.deleteButton}
                         onClick={() => {
                             setIsEditingApplicant(false);
                             setApplicantName("");
@@ -156,7 +157,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                     해당 응시자를 삭제하시겠습니까?
 
                     <div
-                        className={styles.deleteConfirmButton}
+                        className={styles.deleteButton}
                         onClick={() => {
                             deleteApplicant(event, applicantObject.applicantCode);
                             setIsDeletingApplicant(false);
@@ -166,7 +167,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                     </div>
 
                     <div
-                        className={styles.deleteCancelButton}
+                        className={styles.cancelButton}
                         onClick={() => {
                             setIsDeletingApplicant(false);
                         }}
