@@ -64,6 +64,7 @@ export default function CheckApplicantCode() {
                     value={magicCode}
                     className={styles.inputBox}
                     maxLength={5}
+                    spellCheck={false}
                     onChange={(event: any) => {
                         setMagicCode(String(event.target.value).toUpperCase());
                     }}

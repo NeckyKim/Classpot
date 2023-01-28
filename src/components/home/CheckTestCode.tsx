@@ -58,6 +58,7 @@ export default function CheckTestCode() {
                     value={applyCode}
                     className={styles.inputBox}
                     maxLength={5}
+                    spellCheck={false}
                     onChange={(event: any) => {
                         setApplyCode(String(event.target.value).toUpperCase());
                     }}
