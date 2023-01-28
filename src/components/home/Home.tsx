@@ -14,7 +14,7 @@ export default function Home() {
     return (
         <div className={styles.homeContainer}>
             <div className={styles.homeContainerTop}>
-                간단하게<br />
+                쉽고 간편하게<br />
                 5자리 문자로<br />
                 시험을 진행해보세요.
             </div>
