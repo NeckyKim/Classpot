@@ -40,7 +40,7 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
 
                         ?
 
-                        <EditQuestion userCode={userCode} setIsEditingQuestion={setIsEditingQuestion} questionInfo={questionList[index]} />
+                        <EditQuestion setIsEditingQuestion={setIsEditingQuestion} questionInfo={questionList[index]} />
 
                         :
 

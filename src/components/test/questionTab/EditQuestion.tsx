@@ -14,8 +14,7 @@ import "react-quill/dist/quill.snow.css";
 
 
 
-export default function EditQuestion({ userCode, setIsEditingQuestion, questionInfo }: {
-    userCode: string, 
+export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
     setIsEditingQuestion: any,
     questionInfo: any
 }) {
@@ -304,7 +303,7 @@ export default function EditQuestion({ userCode, setIsEditingQuestion, questionI
 
             <br />
 
-            <input type="submit" value="추가" className={styles.submitButton} />
+            <input type="submit" value="수정" className={styles.submitButton} />
 
             <button
                 className={styles.cancelButton}

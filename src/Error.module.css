@@ -5,5 +5,15 @@
     font-weight: 300;
     color: rgb(150, 150, 150);
     margin-top: 20vh;
+    padding-left: 40px;
+    padding-right: 40px;
     text-align: center;
+}
+
+@media (max-width: 600px) {
+    .errorContainer {
+        font-size: 1.2rem;
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
 }
