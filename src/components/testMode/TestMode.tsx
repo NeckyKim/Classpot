@@ -359,15 +359,10 @@ export default function TestMode() {
                                 &&
 
                                 <div className={styles.questionAnswerContent}>
-                                    <div className={styles.questionContent}>
-                                        {questionList[questionNumber].question}
-
-                                        <img
-                                            src={questionList[questionNumber].imageFile}
-                                            width={questionList[questionNumber].imageSize * 25 + "%"}
-                                            className={styles.questionImage}
-                                        />
-                                    </div>
+                                    <div 
+                                        className={styles.questionContent}
+                                        dangerouslySetInnerHTML={ {__html: questionList[questionNumber].question} }
+                                    />
 
                                     <div className={styles.answerContent}>
                                         {

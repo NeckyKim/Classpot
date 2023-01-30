@@ -32,7 +32,13 @@ export default function Header({ loggedIn }: HeaderProps) {
                             ?
 
 
-                            <div className={styles.logoutButton} onClick={() => { authService.signOut(); }}>
+                            <div 
+                                className={styles.logoutButton} 
+                                onClick={() => { 
+                                    authService.signOut();
+                                    navigate("/");
+                                }}
+                            >
                                 로그아웃
                             </div>
 

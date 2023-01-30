@@ -92,9 +92,10 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                 </div>
                                             </div>
 
-                                            <div className={styles.questionText}>
-                                                {current.question}
-                                            </div>
+                                            <div 
+                                                className={styles.questionText}
+                                                dangerouslySetInnerHTML={ {__html: current.question} }
+                                            />
 
                                             {
                                                 current.imageFile

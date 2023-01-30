@@ -185,9 +185,10 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                                     </div>
                                 </div>
 
-                                <div className={styles.questionContent}>
-                                    {current.question}
-                                </div>
+                                <div 
+                                    className={styles.questionContent}
+                                    dangerouslySetInnerHTML={ {__html: current.question} }
+                                />
 
                                 <div>
                                     {
