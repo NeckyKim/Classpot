@@ -44,7 +44,7 @@ export default function Login() {
                     <div className={styles.loginGuide}>
                         별도의 회원 가입 없이<br />
                         Google 계정으로<br />
-                        테스트팟을 이용할 수 있습니다.
+                        테스트콘을 이용할 수 있습니다.
                     </div>
                     
                     <button className={styles.loginButton} name="google" onClick={onSocialClick}>

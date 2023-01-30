@@ -11,13 +11,23 @@
     padding-left: 15vw;
     padding-right: 15vw;
     display: grid;
-    grid-template-columns: 1fr fit-content(100%) ;
+    grid-template-columns: 1fr fit-content(100%);
 }
 
-.headerLogo {
+.headerLogoIcon {
     height: 50px;
     padding: 2px;
     cursor: pointer;
+}
+
+.headerLogoText {
+    font-family: "Poppins";
+    font-weight: 500;
+    font-size: 1.5rem;
+    height: 50px;
+    line-height: 50px;
+    letter-spacing: -2px;
+    margin-left: 10px;
 }
 
 .logoutButton {

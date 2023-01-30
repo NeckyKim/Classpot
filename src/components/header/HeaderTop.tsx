@@ -18,7 +18,7 @@ export default function Header({ loggedIn }: HeaderProps) {
     return (
         <div>
             <div className={styles.headerContainer}>
-                <img className={styles.headerLogo} src={process.env.PUBLIC_URL + "/logos/logo.png"} onClick={() => { navigate("/") }} />
+                <img className={styles.headerLogoIcon} src={process.env.PUBLIC_URL + "/logos/logo.png"} onClick={() => { navigate("/") }} />
 
                 {
                     window.location.pathname.split("/")[1] !== "apply"
