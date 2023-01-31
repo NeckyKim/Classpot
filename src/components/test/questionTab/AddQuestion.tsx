@@ -8,7 +8,7 @@ import { doc, setDoc } from "firebase/firestore";
 import Choices from "./Choices";
 
 import { toast } from "react-toastify";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 
 import styles from "./AddQuestion.module.css";
 import "react-quill/dist/quill.snow.css";

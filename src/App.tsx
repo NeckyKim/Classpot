@@ -16,7 +16,7 @@ import AnswerSheetRouter from "./components/test/answerSheetTab/AnswerSheetRoute
 
 import Error from "./Error";
 
-import { ToastContainer, Slide } from "react-toastify";
+import { ToastContainer, Slide, cssTransition } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
@@ -25,6 +25,8 @@ import './App.css';
 
 export default function App() {
     const [userObject, setUserObject] = useState<any>(null);
+
+
 
     useEffect(() => {
         authService.onAuthStateChanged((user: any) => {
@@ -43,58 +45,43 @@ export default function App() {
 
 
 
-
     return (
         <div>
             <BrowserRouter>
                 <HeaderTop loggedIn={userObject !== null} />
 
-                <ToastContainer
-                    transition={Slide}
-                    position={
-                        width < 600
+                {
+                    !location.pathname.includes("/apply/")
 
-                        ?
+                    &&
 
-                        "bottom-center"
+                    <ToastContainer
+                        transition={Slide}
+                        position={width < 600 ? "bottom-center" : "bottom-right"}
+                        autoClose={5000}
+                        hideProgressBar
+                        newestOnTop={true}
+                        closeOnClick={false}
+                        rtl={false}
+                        pauseOnFocusLoss={false}
+                        draggable={false}
+                        pauseOnHover={false}
+                        theme="colored"
+                        limit={1}
+                        style={
+                            width < 600
 
-                        : 
+                                ?
 
-                        "bottom-right"
-                    }
-                    autoClose={5000}
-                    hideProgressBar
-                    newestOnTop={true}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss={false}
-                    draggable={false}
-                    pauseOnHover={false}
-                    theme="colored"
-                    limit={1}
-                    style={
-                        location.pathname.includes("/apply/")
+                                { right: "0px", bottom: "0px" }
 
-                            ?
+                                :
 
-                            { right: "30px", bottom: "70px" }
-
-                            :
-
-                            (
-
-                                width < 600
-
-                                    ?
-
-                                    { right: "0", bottom: "0" }
-
-                                    :
-
-                                    { right: "40px", bottom: "40px" }
-                            )
-                    }
-                />
+                                { right: "40px", bottom: "40px" }
+                        }
+                    />
+                }
+                
 
                 {
                     userObject === null

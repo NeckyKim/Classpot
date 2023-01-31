@@ -36,6 +36,8 @@ textarea:focus {
 
 
 
+/* React Toastify CSS settings */
+
 :root {
     --toastify-toast-width: fit-content;
 
@@ -76,6 +78,50 @@ textarea:focus {
         visibility: hidden;
         transform: translate3d(120%, 0, 0);
     }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 0.1s ease-out both;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.fadeOut {
+    animation: fadeOut 0.1s ease-in both;
+}
+
+
+
+/* React Quill CSS settings */
+
+.ql-toolbar {
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.ql-container {
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 
