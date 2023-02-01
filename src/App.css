@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
-    font-family: 'Pretendard';
+    font-family: "-apple-system", "Pretendard" sans-serif;
     font-weight: 600;
 
     margin: 0;
@@ -32,6 +32,20 @@ input:focus {
 
 textarea:focus {
     outline: none;
+}
+
+select,
+input,
+details,
+details summary {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    user-select: text;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
 }
 
 
