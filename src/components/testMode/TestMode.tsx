@@ -11,7 +11,7 @@ import GetQuestionList from "../hooks/GetQuestionList";
 import GetApplicantList from "../hooks/GetApplicantList";
 import TimeCalculator from "../hooks/TimeCalculator";
 import PreTestMode from "./PreTestMode";
-import Sample from "./Sample";
+import SampleQuestions from "./SampleQuestions";
 
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
@@ -67,7 +67,7 @@ export default function TestMode() {
             }
         ]
 
-        questionList = Sample;
+        questionList = SampleQuestions;
     }
 
     if (applicantCode === "sample") {

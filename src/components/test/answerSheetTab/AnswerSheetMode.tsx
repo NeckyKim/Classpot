@@ -8,7 +8,7 @@ import Error from "../../../Error";
 import GetTestInfo from "../../hooks/GetTestInfo";
 import GetQuestionList from "../../hooks/GetQuestionList";
 import GetApplicantInfo from "../../hooks/GetApplicantInfo";
-import Sample from "../../testMode/Sample";
+import SampleQuestions from "../../testMode/SampleQuestions";
 
 import styles from "./AnswerSheetMode.module.css";
 
@@ -48,7 +48,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
             userName: "김영우"
         }
 
-        questionList = Sample;
+        questionList = SampleQuestions;
     }
 
     if (applicantCode === "sample") {

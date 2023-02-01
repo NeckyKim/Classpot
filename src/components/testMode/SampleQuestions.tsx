@@ -29,7 +29,7 @@ export default [
     },
 
     {
-        answer: true,
+        answer: false,
         choices: ["", "", "", "", "", "", "", "", "", ""],
         createdTime: 3,
         points: 5,
