@@ -11,6 +11,7 @@ import GetQuestionList from "../hooks/GetQuestionList";
 import GetApplicantList from "../hooks/GetApplicantList";
 import TimeCalculator from "../hooks/TimeCalculator";
 import PreTestMode from "./PreTestMode";
+import Sample from "./Sample";
 
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
@@ -26,16 +27,65 @@ export default function TestMode() {
 
 
     // 시험 정보
-    const testInfo: any = GetTestInfo(testCode);
+    var testInfo: any = GetTestInfo(testCode);
 
     // 응시자 정보
-    const applicantInfo: any = GetApplicantInfo(testCode, applicantCode);
+    var applicantInfo: any = GetApplicantInfo(testCode, applicantCode);
+
+    // 응시자 목록
+    var applicantList: any = GetApplicantList(testCode);
 
     // 질문 목록
-    const questionList: any = GetQuestionList(testCode);
+    var questionList: any = GetQuestionList(testCode);
+
+
+
+    const [tempDate, setTempDate] = useState<number>(Date.now() + 15000);
+    
+    if (testCode === "sample") {
+        testInfo = {
+            applyCode: "SAMPL",
+            createdTime: 1000000000,
+            duration: "3",
+            feedback: true,
+            startDate: tempDate,
+            testName: "시험 환경 테스트 문제",
+            userCode: "AGrRbUSDWXW1HEVRLgM5M1LDLB42",
+            userName: "테스트콘"
+        }
+
+        applicantList = [
+            {
+                applicantCode: "sample",
+                answerSheet: new Array(100).fill(null),
+                applicantName: "체험 응시자",
+                autoGrading: true,
+                createdTime: Date.now(),
+                magicCode: "SAMPL",
+                reportCard: new Array(100).fill(null),
+                submittedTime: Date.now()
+            }
+        ]
+
+        questionList = Sample;
+    }
+
+    if (applicantCode === "sample") {
+        applicantInfo = {
+            answerSheet: new Array(100).fill(null),
+            applicantName: "체험 응시자",
+            autoGrading: true,
+            createdTime: Date.now(),
+            magicCode: "SAMPL",
+            reportCard: new Array(100).fill(null),
+            submittedTime: Date.now()
+        }
+    }
+
+
 
     // 시험 진행 상황
-    const isTestTime = TimeCalculator(testInfo.startDate, testInfo.duration);
+    var isTestTime = TimeCalculator(testInfo.startDate, testInfo.duration);
 
 
 
@@ -62,22 +112,25 @@ export default function TestMode() {
 
 
 
-    // 응시자 목록
-    const applicantList: any = GetApplicantList(testCode);
-
-
-
     // 답안지 불러오기
     const [answerSheet, setAnswerSheet] = useState<any>([]);
     const [submittedTime, setSubmittedTime] = useState<number>();
 
-    if (testCode && applicantCode) {
+    if (testCode === "sample") {
         useEffect(() => {
-            getDoc(doc(dbService, "tests", testCode, "applicants", applicantCode)).then((doc: any) => {
-                setAnswerSheet(doc.data().answerSheet);
-                setSubmittedTime(doc.data().submittedTime);
-            });
+            setAnswerSheet(new Array(100).fill(null));
         }, [])
+    }
+
+    else {
+        if (testCode && applicantCode) {
+            useEffect(() => {
+                getDoc(doc(dbService, "tests", testCode, "applicants", applicantCode)).then((doc: any) => {
+                    setAnswerSheet(doc.data().answerSheet);
+                    setSubmittedTime(doc.data().submittedTime);
+                });
+            }, [])
+        }
     }
 
 
@@ -91,16 +144,11 @@ export default function TestMode() {
     async function submitAnswerSheet(event: any) {
         event.preventDefault();
 
-        if (testCode && applicantCode && modified) {
+        if (testCode === "sample" && modified) {
             try {
-                await updateDoc(doc(dbService, "tests", testCode, "applicants", applicantCode), {
-                    answerSheet: answerSheet,
-                    submittedTime: Date.now()
-                })
+                localStorage.setItem("sampleTestAnswerSheet", JSON.stringify(answerSheet));
 
-                toast.success("답안지가 제출되었습니다.", {
-
-                });
+                toast.success("답안지가 제출되었습니다.");
 
                 setModified(false);
                 setSubmittedTime(Date.now());
@@ -109,6 +157,27 @@ export default function TestMode() {
             catch (error) {
                 toast.error("답안지 제출에 실패했습니다.");
                 console.log(error);
+            }
+        }
+
+        else {
+            if (testCode && applicantCode && modified) {
+                try {
+                    await updateDoc(doc(dbService, "tests", testCode, "applicants", applicantCode), {
+                        answerSheet: answerSheet,
+                        submittedTime: Date.now()
+                    })
+    
+                    toast.success("답안지가 제출되었습니다.");
+    
+                    setModified(false);
+                    setSubmittedTime(Date.now());
+                }
+    
+                catch (error) {
+                    toast.error("답안지 제출에 실패했습니다.");
+                    console.log(error);
+                }
             }
         }
     }
@@ -124,6 +193,7 @@ export default function TestMode() {
         submitAnswerSheet(event);
         setIsApplyingTest(false);
     }
+
 
 
     // 객관식 문제 설정
@@ -223,6 +293,8 @@ export default function TestMode() {
 
                         <form onSubmit={submitAnswerSheet} className={styles.testModeContainer}>
                             <div className={styles.testModeContainerTop}>
+                                <img className={styles.testconLogo} src={process.env.PUBLIC_URL + "/logos/icon_gray.png"} />
+
                                 <div className={styles.testModeCotainerTopInfo}>
                                     <div className={styles.testName}>
                                         {testInfo.testName}
@@ -559,7 +631,7 @@ export default function TestMode() {
 
                         :
 
-                        <PreTestMode testInfo={testInfo} testCode={testCode} applicantName={applicantInfo.applicantName} applicantCode={applicantCode} isTestTime={isTestTime} setIsApplyingTest={setIsApplyingTest} noOfQuestions={questionList.length} />
+                        <PreTestMode testInfo={testInfo} testCode={testCode} applicantName={applicantInfo.applicantName} applicantCode={applicantCode} isTestTime={isTestTime} setIsApplyingTest={setIsApplyingTest} />
 
                     :
 

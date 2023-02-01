@@ -4,7 +4,7 @@ import styles from "./PreTestMode.module.css";
 
 
 
-export default function PreTestMode({ testInfo, testCode, applicantName, applicantCode, isTestTime, setIsApplyingTest, noOfQuestions }: { testInfo: any, testCode: any, applicantName: any, applicantCode: any, isTestTime: any, setIsApplyingTest: any, noOfQuestions: any }) {
+export default function PreTestMode({ testInfo, testCode, applicantName, applicantCode, isTestTime, setIsApplyingTest }: { testInfo: any, testCode: any, applicantName: any, applicantCode: any, isTestTime: any, setIsApplyingTest: any}) {
     const [tab, setTab] = useState<number>(1);
 
 

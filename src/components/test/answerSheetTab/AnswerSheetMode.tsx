@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { dbService } from "../../../FirebaseModules";
@@ -7,6 +8,7 @@ import Error from "../../../Error";
 import GetTestInfo from "../../hooks/GetTestInfo";
 import GetQuestionList from "../../hooks/GetQuestionList";
 import GetApplicantInfo from "../../hooks/GetApplicantInfo";
+import Sample from "../../testMode/Sample";
 
 import styles from "./AnswerSheetMode.module.css";
 
@@ -16,29 +18,75 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
     const { testCode } = useParams();
     const { applicantCode } = useParams();
 
-    const testInfo: any = GetTestInfo(testCode);
-    const questionList: any = GetQuestionList(testCode);
-    const applicantInfo: any = GetApplicantInfo(testCode, applicantCode);
 
+
+    // 시험 정보
+    var testInfo: any = GetTestInfo(testCode);
+
+    // 응시자 정보
+    var applicantInfo: any = GetApplicantInfo(testCode, applicantCode);
+
+    // 질문 목록
+    var questionList: any = GetQuestionList(testCode);
+
+    // 채점지
     var reportCard: number[] = new Array(100).fill(null);
+
+
+
+    const [tempDate, setTempDate] = useState<number>(Date.now() + 15000);
+
+    if (testCode === "sample") {
+        testInfo = {
+            applyCode: "SAMPL",
+            createdTime: 1000000000,
+            duration: "5",
+            feedback: true,
+            startDate: tempDate,
+            testName: "시험 환경 테스트 문제",
+            userCode: "AGrRbUSDWXW1HEVRLgM5M1LDLB42",
+            userName: "김영우"
+        }
+
+        questionList = Sample;
+    }
+
+    if (applicantCode === "sample") {
+        applicantInfo = {
+            answerSheet: JSON.parse(localStorage.getItem("sampleTestAnswerSheet") || ""),
+            applicantName: "체험 응시자",
+            autoGrading: true,
+            createdTime: Date.now(),
+            magicCode: "SAMPL",
+            reportCard: new Array(100).fill(null),
+            submittedTime: Date.now()
+        }
+    }
 
 
 
     async function submitReportCard(event: any) {
         event.preventDefault();
 
-        if (testCode && applicantCode) {
-            try {
-                await updateDoc(doc(dbService, "tests", testCode, "applicants", applicantCode), {
-                    reportCard: reportCard
-                })
-            }
+        if (testCode === "sample") {
+            applicantInfo.reportCard = reportCard;
+        }
 
-            catch (error) {
-                console.log(error);
+        else {
+            if (testCode && applicantCode) {
+                try {
+                    await updateDoc(doc(dbService, "tests", testCode, "applicants", applicantCode), {
+                        reportCard: reportCard
+                    })
+                }
+    
+                catch (error) {
+                    console.log(error);
+                }
             }
         }
     }
+
 
 
     async function changeScores(event: any) {
@@ -128,6 +176,8 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
             <div className={styles.answerSheetModeContainer}>
                 <div className={styles.answerSheetModeContainerTop}>
+                    <img className={styles.testconLogo} src={process.env.PUBLIC_URL + "/logos/icon_gray.png"} />
+
                     <div className={styles.answerSheetModeContainerTopInfo}>
                         <div className={styles.testName}>
                             {testInfo.testName}

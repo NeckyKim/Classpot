@@ -14,10 +14,15 @@
 .testModeContainerTop {
     width: 100vw;
     display: grid;
-    grid-template-columns: 1fr fit-content(100%);
+    grid-template-columns: fit-content(100%) 1fr fit-content(100%);
     padding: 15px;
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.testconLogo {
+    height: 40px;
+    margin-right: 20px;
 }
 
 .testModeCotainerTopInfo {
@@ -457,6 +462,10 @@
     .testModeContainerTop {
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
+    }
+
+    .testconLogo {
+        margin-right: 5px;
     }
 
     .testModeCotainerTopInfo {
