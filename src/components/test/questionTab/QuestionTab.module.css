@@ -53,15 +53,6 @@
     color: rgb(150, 150, 150);
 }
 
-.questionText {
-    gap: 50px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    word-break: keep-all;
-    text-align: justify;
-    white-space: pre-line;
-}
-
 .correctChoice {
     padding: 10px;
     margin-bottom: 5px;

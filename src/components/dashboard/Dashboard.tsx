@@ -192,10 +192,11 @@ export default function Dashboard({ userCode, email }: { userCode: string, email
                                 :
 
                                 <div>
+                                    <div className={styles.testContainer}>
                                     {
                                         testList.map((current: any) => (
                                             <Link to={"/test/" + current.testCode} style={{ textDecoration: "none" }}>
-                                                <div className={styles.testContainer}>
+                                                <div className={styles.testElements}>
                                                     <div className={styles.name}>
                                                         {current.testName}
                                                     </div>
@@ -213,6 +214,7 @@ export default function Dashboard({ userCode, email }: { userCode: string, email
                                             </Link>
                                         ))
                                     }
+                                    </div>
 
                                     <button onClick={() => { setIsAddingTest(true); }} className={styles.addButton}>
                                         시험 추가

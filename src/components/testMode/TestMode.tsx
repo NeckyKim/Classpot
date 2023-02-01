@@ -13,10 +13,13 @@ import TimeCalculator from "../hooks/TimeCalculator";
 import PreTestMode from "./PreTestMode";
 import SampleQuestions from "./SampleQuestions";
 
+import ReactQuill from "react-quill";
+
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
 
 import styles from "./TestMode.module.css";
+import "react-quill/dist/quill.snow.css";
 
 
 
@@ -466,9 +469,11 @@ export default function TestMode() {
                                         &&
 
                                         <div className={styles.questionAnswerContent}>
-                                            <div
-                                                className={styles.questionContent}
-                                                dangerouslySetInnerHTML={{ __html: questionList[questionNumber].question }}
+                                            <ReactQuill
+                                                value={questionList[questionNumber].question}
+                                                readOnly={true}
+                                                modules={{ toolbar: false }}
+                                                theme="snow"
                                             />
 
                                             <div className={styles.answerContent}>

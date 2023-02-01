@@ -9,7 +9,10 @@ import EditQuestion from "./EditQuestion";
 import GetQuestionList from "../../hooks/GetQuestionList";
 import Error from "../../../Error";
 
+import ReactQuill from "react-quill";
+
 import styles from "./QuestionTab.module.css";
+import "react-quill/dist/quill.snow.css";
 
 
 
@@ -92,9 +95,18 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                 </div>
                                             </div>
 
-                                            <div 
-                                                className={styles.questionText}
+                                            {/* <div 
+                                                className={styles.questionPassage}
                                                 dangerouslySetInnerHTML={ {__html: current.question} }
+                                            /> */}
+
+                                            
+                                            <ReactQuill
+                                                className={styles.questionPassage}
+                                                value={current.question}
+                                                readOnly={true}
+                                                modules={{toolbar: false}}
+                                                theme="snow"
                                             />
 
                                             {
