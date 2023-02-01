@@ -43,7 +43,7 @@ export default function App() {
         window.addEventListener("resize", () => { setWidth(window.innerWidth); });
     });
 
-    console.log(location.pathname.includes("/apply/"))
+
 
     return (
         <div>
