@@ -17,6 +17,8 @@
 
 .homeContainerBottom {
     display: grid;
+    grid-template-rows: repeat(2, fit-content(100%));
+    gap: 20px;
     justify-self: right;
 }
 
@@ -32,6 +34,17 @@
     cursor: pointer;
 }
 
+.sampleTestButton {
+    font-size: 1.2rem;
+    width: 300px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 5px;
+    text-align: center;
+    color: rgb(0, 100, 250);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
 
 
 @media (max-width: 1200px) {
@@ -54,6 +67,11 @@
     }
 
     .applyTestButton {
+        font-size: 1.2rem;
+        width: calc(100vw - min(80px, 10vw));
+    }
+
+    .sampleTestButton {
         font-size: 1.2rem;
         width: calc(100vw - min(80px, 10vw));
     }

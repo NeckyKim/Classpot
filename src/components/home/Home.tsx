@@ -21,6 +21,10 @@ export default function Home() {
                 <div className={styles.applyTestButton} onClick={() => {navigate("/apply")}}>
                     시험 응시하기
                 </div>
+
+                <div className={styles.sampleTestButton} onClick={() => {navigate("/apply/sample/applicant/sample")}}>
+                    체험 해보기
+                </div>
             </div>
         </div>
     )

@@ -46,10 +46,10 @@ export default function TestMode() {
         testInfo = {
             applyCode: "SAMPL",
             createdTime: 1000000000,
-            duration: "3",
+            duration: "2",
             feedback: true,
             startDate: tempDate,
-            testName: "시험 환경 테스트 문제",
+            testName: "시험 환경 체험 문제",
             userCode: "AGrRbUSDWXW1HEVRLgM5M1LDLB42",
             userName: "테스트콘"
         }
