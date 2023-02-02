@@ -215,7 +215,10 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                         </div>
 
                         <div className={styles.scoresValue}>
-                            {applicantInfo.reportCard && applicantInfo.reportCard.filter((elements: any) => elements === null).length !== 100 && applicantInfo.reportCard.filter((element: any) => (element >= 0 && element !== null)).reduce(function add(sum: number, current: number) { return sum + current })}점
+                            {applicantInfo.reportCard && applicantInfo.reportCard.filter((elements: any) => elements === null).length !== 100 && applicantInfo.reportCard.filter((element: any) => (element >= 0 && element !== null)).reduce(function add(sum: number, current: number) { return sum + current })}
+                            /
+                            {questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current;}, 0)}
+                            점
                         </div>
                     </div>
                 </div>

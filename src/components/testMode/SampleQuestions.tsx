@@ -38,7 +38,7 @@ export default [
     },
 
     {
-        answer: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: false, 8: false, 9: false},
+        answer: {0: true, 1: true, 2: true, 3: true, 4: true, 5: true, 6: false, 7: false, 8: false, 9: false},
         choices: [
             "기러기", 
             "토마토", 
