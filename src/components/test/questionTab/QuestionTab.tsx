@@ -100,7 +100,7 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                 readOnly={true}
                                                 modules={{toolbar: false}}
                                                 theme="snow"
-                                                style={{ padding: "20px 0px 20px 0px", margin: "0px" }}
+                                                style={{ padding: "20px 0px 20px 0px" }}
                                             />
 
                                             {

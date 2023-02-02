@@ -474,7 +474,7 @@ export default function TestMode() {
                                                 readOnly={true}
                                                 modules={{ toolbar: false }}
                                                 theme="snow"
-                                                style={{ padding: "0px 30px 30px 30px", margin: "0px 0px 0px 0px" }}
+                                                style={{ padding: "0px 30px 30px 30px" }}
                                             />
 
                                             <div className={styles.answerContent}>

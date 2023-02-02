@@ -4,13 +4,16 @@ import { useParams } from "react-router-dom";
 import { dbService } from "../../../FirebaseModules";
 import { doc, updateDoc } from "firebase/firestore";
 
-import Error from "../../../Error";
 import GetTestInfo from "../../hooks/GetTestInfo";
 import GetQuestionList from "../../hooks/GetQuestionList";
 import GetApplicantInfo from "../../hooks/GetApplicantInfo";
 import SampleQuestions from "../../testMode/SampleQuestions";
+import Error from "../../../Error";
+
+import ReactQuill from "react-quill";
 
 import styles from "./AnswerSheetMode.module.css";
+import "react-quill/dist/quill.snow.css";
 
 
 
@@ -235,9 +238,12 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                                     </div>
                                 </div>
 
-                                <div 
-                                    className={styles.questionContent}
-                                    dangerouslySetInnerHTML={ {__html: current.question} }
+                                <ReactQuill
+                                    value={current.question}
+                                    readOnly={true}
+                                    modules={{ toolbar: false }}
+                                    theme="snow"
+                                    style={{ padding: "20px 0px 20px 0px" }}
                                 />
 
                                 <div>
