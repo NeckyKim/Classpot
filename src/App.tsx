@@ -16,10 +16,11 @@ import AnswerSheetRouter from "./components/test/answerSheetTab/AnswerSheetRoute
 
 import Error from "./Error";
 
-import { ToastContainer, Slide, cssTransition } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
+import "react-quill/dist/quill.snow.css";
 
 
 

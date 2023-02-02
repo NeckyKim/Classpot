@@ -94,19 +94,13 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                     삭제
                                                 </div>
                                             </div>
-
-                                            {/* <div 
-                                                className={styles.questionPassage}
-                                                dangerouslySetInnerHTML={ {__html: current.question} }
-                                            /> */}
-
                                             
                                             <ReactQuill
-                                                className={styles.questionPassage}
                                                 value={current.question}
                                                 readOnly={true}
                                                 modules={{toolbar: false}}
                                                 theme="snow"
+                                                style={{ padding: "20px 0px 20px 0px", margin: "0px" }}
                                             />
 
                                             {

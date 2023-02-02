@@ -267,15 +267,28 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                                             </div>
 
                                             <div className={current.points === applicantInfo.reportCard[index] ? styles.gradedCorrect : (applicantInfo.reportCard[index] !== 0 ? styles.gradedSomeCorrect : styles.gradedIncorrect)}>
-                                                {applicantInfo.answerSheet[index][0] && <div className={styles.choice}>{current.choices[0]}</div>}
-                                                {applicantInfo.answerSheet[index][1] && <div className={styles.choice}>{current.choices[1]}</div>}
-                                                {applicantInfo.answerSheet[index][2] && <div className={styles.choice}>{current.choices[2]}</div>}
-                                                {applicantInfo.answerSheet[index][3] && <div className={styles.choice}>{current.choices[3]}</div>}
-                                                {applicantInfo.answerSheet[index][4] && <div className={styles.choice}>{current.choices[4]}</div>}
-                                                {applicantInfo.answerSheet[index][5] && <div className={styles.choice}>{current.choices[5]}</div>}
-                                                {applicantInfo.answerSheet[index][6] && <div className={styles.choice}>{current.choices[6]}</div>}
-                                                {applicantInfo.answerSheet[index][7] && <div className={styles.choice}>{current.choices[7]}</div>}
-                                                {applicantInfo.answerSheet[index][8] && <div className={styles.choice}>{current.choices[8]}</div>}
+                                                {
+                                                    (Object.values(applicantInfo.answerSheet[index]).filter((elem: any) => elem === true).length) !== 0
+                                                    
+                                                    ?
+
+                                                    <div>
+                                                        {applicantInfo.answerSheet[index][0] && <div className={styles.choice}>{current.choices[0]}</div>}
+                                                        {applicantInfo.answerSheet[index][1] && <div className={styles.choice}>{current.choices[1]}</div>}
+                                                        {applicantInfo.answerSheet[index][2] && <div className={styles.choice}>{current.choices[2]}</div>}
+                                                        {applicantInfo.answerSheet[index][3] && <div className={styles.choice}>{current.choices[3]}</div>}
+                                                        {applicantInfo.answerSheet[index][4] && <div className={styles.choice}>{current.choices[4]}</div>}
+                                                        {applicantInfo.answerSheet[index][5] && <div className={styles.choice}>{current.choices[5]}</div>}
+                                                        {applicantInfo.answerSheet[index][6] && <div className={styles.choice}>{current.choices[6]}</div>}
+                                                        {applicantInfo.answerSheet[index][7] && <div className={styles.choice}>{current.choices[7]}</div>}
+                                                        {applicantInfo.answerSheet[index][8] && <div className={styles.choice}>{current.choices[8]}</div>}
+                                                    </div>
+
+                                                    :
+
+                                                    "(미응답)"
+                                                }
+
 
                                                 <div className={styles.grading}>
                                                     <div className={styles.gradingResults}>
@@ -310,7 +323,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
                                             <div className={current.points === applicantInfo.reportCard[index] ? styles.gradedCorrect : (applicantInfo.reportCard[index] !== 0 ? styles.gradedSomeCorrect : styles.gradedIncorrect)}>
                                                 <div className={styles.choice}>
-                                                    {applicantInfo.answerSheet[index] ? "참" : "거짓"}
+                                                    {applicantInfo.answerSheet[index] !== null ? (applicantInfo.answerSheet[index] ? "참" : "거짓") : "(미응답)"}
                                                 </div>
 
                                                 <div className={styles.grading}>
@@ -346,7 +359,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
                                             <div className={current.points === applicantInfo.reportCard[index] ? styles.gradedCorrect : (applicantInfo.reportCard[index] !== 0 ? styles.gradedSomeCorrect : styles.gradedIncorrect)}>
                                                 <div className={styles.choice}>
-                                                    {applicantInfo.answerSheet[index]}
+                                                    {(applicantInfo.answerSheet[index] !== null && applicantInfo.answerSheet[index] !== "") ? applicantInfo.answerSheet[index] : "(미응답)"}
                                                 </div>
 
                                                 <div className={styles.grading}>
@@ -374,7 +387,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
                                             <div className={applicantInfo.reportCard[index] === -1 ? styles.gradedBefore : (current.points === applicantInfo.reportCard[index] ? styles.gradedCorrect : (applicantInfo.reportCard[index] !== 0 ? styles.gradedSomeCorrect : styles.gradedIncorrect))}>
                                                 <div className={styles.choice}>
-                                                    {applicantInfo.answerSheet[index]}
+                                                    {(applicantInfo.answerSheet[index] !== null && applicantInfo.answerSheet[index] !== "") ? applicantInfo.answerSheet[index] : "(미응답)"}
                                                 </div>
 
                                                 <div className={styles.grading}>

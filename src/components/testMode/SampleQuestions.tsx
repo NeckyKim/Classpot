@@ -4,7 +4,7 @@ export default [
         choices: ["", "", "", "", "", "", "", "", "", ""],
         createdTime: 1,
         points: 5,
-        question: '<p>가수가 꿈인 민지는 새로운 노래의 가사를 쓰고 있었습니다.</p><p>다음의 내용은 민지가 쓴 가사의 일부입니다.</p><p><br></p><p><em style="background-color: rgb(255, 255, 255); color: rgb(107, 123, 176);">내 지난 날들은</em></p><p><em style="background-color: rgb(255, 255, 255); color: rgb(107, 123, 176);>눈 뜨면 잊는 꿈</em></p><p><em style="background-color: rgb(255, 255, 255); color: rgb(107, 123, 176);">Hype Boy 너만 원해</em></p><p><em style="background-color: rgb(255, 255, 255); color: rgb(107, 123, 176);">Hype Boy 내가 전해</em></p><p><br></p><p>가사에서 단어 "Hybe Boy"가 총 몇 번 나왔는지 <u>숫자로 쓰시오</u>.</p>',
+        question: '<p>가수가 꿈인 민지는 새로운 노래의 가사를 쓰고 있었습니다.</p><p>다음의 내용은 민지가 쓴 가사의 일부입니다.</p><p><br></p><p><em style="background-color: rgb(255, 255, 255); color: rgb(107, 123, 176);">내 지난 날들은</em></p><p><em style="background-color: rgb(255, 255, 255); color: rgb(107, 123, 176);">눈 뜨면 잊는 꿈</em></p><p><em style="background-color: rgb(255, 255, 255); color: rgb(107, 123, 176);">Hype Boy 너만 원해</em></p><p><em style="background-color: rgb(255, 255, 255); color: rgb(107, 123, 176);">Hype Boy 내가 전해</em></p><p><br></p><p>가사에서 단어 "Hype Boy"가 총 몇 번 나왔는지 <u>숫자로 쓰시오</u>.</p>',
         type: "주관식"
     },
 
