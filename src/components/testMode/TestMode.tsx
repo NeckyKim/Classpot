@@ -49,7 +49,7 @@ export default function TestMode() {
         testInfo = {
             applyCode: "SAMPL",
             createdTime: 1000000000,
-            duration: "2",
+            duration: "200",
             feedback: true,
             startDate: tempDate,
             testName: "시험 환경 체험 문제",
@@ -469,13 +469,15 @@ export default function TestMode() {
                                         &&
 
                                         <div className={styles.questionAnswerContent}>
-                                            <ReactQuill
-                                                value={questionList[questionNumber].question}
-                                                readOnly={true}
-                                                modules={{ toolbar: false }}
-                                                theme="snow"
-                                                style={{ padding: "0px 30px 30px 30px" }}
-                                            />
+                                            <div className={styles.questionContent}>
+                                                <ReactQuill
+                                                    value={questionList[questionNumber].question}
+                                                    readOnly={true}
+                                                    modules={{ toolbar: false }}
+                                                    theme="snow"
+                                                    style={{ padding: "0px 30px 30px 30px" }}
+                                                />
+                                            </div>
 
                                             <div className={styles.answerContent}>
                                                 {

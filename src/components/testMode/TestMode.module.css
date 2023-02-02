@@ -90,13 +90,23 @@
 }
 
 .navigation {
-    width: 70px;
+    width: fit-content(100%);
     height: calc(100vh - 140px);
     padding: 15px;
     border-right: 1px solid rgb(220, 220, 220);
     overflow: auto;
     display: block;
 }
+
+.navigation::-webkit-scrollbar-thumb {
+    background-color: red;
+}
+
+.navigation::-webkit-scrollbar-track {
+    height: 30px;
+    background-color: blue;
+}
+
 
 .navigationNumberSelected,
 .navigationNumberNotSelected {
@@ -197,11 +207,22 @@
     grid-template-columns: calc(50vw - 60px) 1fr;
 }
 
+.questionContent {
+    height: calc(100vh - 240px);
+    padding: 30px;
+    padding-top: 0px;
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+
+    overflow: auto;
+}
+
+
 .answerContent {
     height: calc(100vh - 240px);
     padding: 30px;
     padding-top: 0px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .answerContent::-webkit-scrollbar {

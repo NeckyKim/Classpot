@@ -118,13 +118,6 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                             >
                                 안내사항
                             </div>
-
-                            <div
-                                className={tab === 2 ? styles.tabSelected : styles.tabNotSelected}
-                                onClick={() => { setTab(2); }}
-                            >
-                                시험 환경 점검
-                            </div>
                         </div>
 
                         <div>
