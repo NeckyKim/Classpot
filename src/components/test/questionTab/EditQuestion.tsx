@@ -9,15 +9,15 @@ import Choices from "./Choices";
 import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 
-import { Editor, Viewer } from "@toast-ui/react-editor";
-import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+// import { Editor, Viewer } from "@toast-ui/react-editor";
+// import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 
 import styles from "./EditQuestion.module.css";
 import "react-quill/dist/quill.snow.css";
 
-import "@toast-ui/editor/dist/toastui-editor.css";
-import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-import "tui-color-picker/dist/tui-color-picker.css";
+// import "@toast-ui/editor/dist/toastui-editor.css";
+// import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+// import "tui-color-picker/dist/tui-color-picker.css";
 
 
 
@@ -206,7 +206,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 onChange={(editor: any) => { setQuestion(editor) }}
             />
 
-            <Editor
+            {/* <Editor
                 initialValue={questionInfo.question}
                 ref={editorRef}
                 hideModeSwitch={true}
@@ -221,7 +221,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                     ['ul', 'ol', 'indent', 'outdent'],
                     ['table', 'image'],
                 ]}
-            />
+            /> */}
 
             <div className={styles.header}>
                 정답
