@@ -11,7 +11,6 @@ import GetQuestionList from "../hooks/GetQuestionList";
 import GetApplicantList from "../hooks/GetApplicantList";
 import TimeCalculator from "../hooks/TimeCalculator";
 import PreTestMode from "./PreTestMode";
-import SampleQuestions from "./SampleQuestions";
 
 import ReactQuill from "react-quill";
 
@@ -49,7 +48,7 @@ export default function TestMode() {
         testInfo = {
             applyCode: "SAMPL",
             createdTime: 1000000000,
-            duration: "200",
+            duration: "3",
             feedback: true,
             startDate: tempDate,
             testName: "시험 환경 체험 문제",
@@ -70,7 +69,7 @@ export default function TestMode() {
             }
         ]
 
-        questionList = SampleQuestions;
+        questionList = GetQuestionList("v11SzyBZgaLVIChPtqwV");
     }
 
     if (applicantCode === "sample") {

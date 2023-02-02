@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 
@@ -10,12 +10,19 @@ import Choices from "./Choices";
 import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 
+import { Editor, Viewer } from "@toast-ui/react-editor";
+import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+
 import styles from "./AddQuestion.module.css";
 import "react-quill/dist/quill.snow.css";
 
+import "@toast-ui/editor/dist/toastui-editor.css";
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "tui-color-picker/dist/tui-color-picker.css";
 
 
-export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCode: string, setIsAddingQuestion: any }) {
+
+export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }: { userCode: string, setIsAddingQuestion: any }) {
     const { testCode } = useParams();
 
     const [type, setType] = useState<string>("객관식");
@@ -93,6 +100,14 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
             toast.error("객관식 문제는 정답을 적어도 하나 이상 설정해야 합니다.");
         }
     }
+
+
+
+    const editorRef = useRef<any>();
+
+    function onEditorChange () {
+        (setQuestion(editorRef.current?.getInstance().getHTML()));
+    };
 
 
 
@@ -187,6 +202,21 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                 onChange={(editor: any) => { setQuestion(editor) }}
             />
 
+            {/* <Editor
+                ref={editorRef}
+                hideModeSwitch={true}
+                onChange={onEditorChange}
+                height="600px"
+                initialEditType="wysiwyg"
+                plugins={[colorSyntax]}
+                toolbarItems={[
+                    ['heading', 'bold', 'italic', 'strike'],
+                    ['hr', 'quote'],
+                    ['ul', 'ol', 'indent', 'outdent'],
+                    ['table', 'image'],
+                ]}
+            /> */}
+
             <div className={styles.header}>
                 정답
             </div>
@@ -236,12 +266,6 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                 &&
 
                 <div>
-                    <div className={styles.questionHeader}>
-                        정답
-                    </div>
-
-
-
                     <div className={styles.answerContainer}>
                         <div
                             className={answer ? styles.answerTrueSelected : styles.answerTrueNotSelected}
@@ -267,10 +291,6 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                 &&
 
                 <div>
-                    <div className={styles.questionHeader}>
-                        정답
-                    </div>
-
                     <input
                         type="text"
                         value={answer}
@@ -287,10 +307,6 @@ export default function AddQuestion({ userCode, setIsAddingQuestion }: { userCod
                 &&
 
                 <div>
-                    <div className={styles.questionHeader}>
-                        정답
-                    </div>
-
                     <div className={styles.answerBoxUnable}>
                         서술형 문제는 정답을 설정할 수 없습니다.
                     </div>

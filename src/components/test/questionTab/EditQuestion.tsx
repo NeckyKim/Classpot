@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router";
 
 import { dbService } from "../../../FirebaseModules";
@@ -9,8 +9,15 @@ import Choices from "./Choices";
 import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 
+import { Editor, Viewer } from "@toast-ui/react-editor";
+import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+
 import styles from "./EditQuestion.module.css";
 import "react-quill/dist/quill.snow.css";
+
+import "@toast-ui/editor/dist/toastui-editor.css";
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "tui-color-picker/dist/tui-color-picker.css";
 
 
 
@@ -29,6 +36,14 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
 
     const [choices, setChoices] = useState<string[]>(questionInfo.choices);
     const [numberOfChoices, setNumberOfChoices] = useState<number>(Object.values(questionInfo.choices).filter(element => element != "").length);
+
+
+
+    const editorRef = useRef<any>();
+
+    function onEditorChange () {
+        (setQuestion(editorRef.current?.getInstance().getHTML()));
+    };
 
 
 
@@ -191,6 +206,23 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 onChange={(editor: any) => { setQuestion(editor) }}
             />
 
+            <Editor
+                initialValue={questionInfo.question}
+                ref={editorRef}
+                hideModeSwitch={true}
+                onChange={onEditorChange}
+                height="600px"
+                placeholder=""
+                initialEditType="wysiwyg"
+                plugins={[colorSyntax]}
+                toolbarItems={[
+                    ['heading', 'bold', 'italic', 'strike'],
+                    ['hr', 'quote'],
+                    ['ul', 'ol', 'indent', 'outdent'],
+                    ['table', 'image'],
+                ]}
+            />
+
             <div className={styles.header}>
                 정답
             </div>
@@ -240,12 +272,6 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 &&
 
                 <div>
-                    <div className={styles.questionHeader}>
-                        정답
-                    </div>
-
-
-
                     <div className={styles.answerContainer}>
                         <div
                             className={answer ? styles.answerTrueSelected : styles.answerTrueNotSelected}
@@ -271,10 +297,6 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 &&
 
                 <div>
-                    <div className={styles.questionHeader}>
-                        정답
-                    </div>
-
                     <input
                         type="text"
                         value={answer}
@@ -291,10 +313,6 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 &&
 
                 <div>
-                    <div className={styles.questionHeader}>
-                        정답
-                    </div>
-
                     <div className={styles.answerBoxUnable}>
                         서술형 문제는 정답을 설정할 수 없습니다.
                     </div>

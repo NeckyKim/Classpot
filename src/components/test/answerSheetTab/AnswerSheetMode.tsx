@@ -7,7 +7,6 @@ import { doc, updateDoc } from "firebase/firestore";
 import GetTestInfo from "../../hooks/GetTestInfo";
 import GetQuestionList from "../../hooks/GetQuestionList";
 import GetApplicantInfo from "../../hooks/GetApplicantInfo";
-import SampleQuestions from "../../testMode/SampleQuestions";
 import Error from "../../../Error";
 
 import ReactQuill from "react-quill";
@@ -51,7 +50,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
             userName: "김영우"
         }
 
-        questionList = SampleQuestions;
+        questionList = GetQuestionList("v11SzyBZgaLVIChPtqwV");
     }
 
     if (applicantCode === "sample") {
