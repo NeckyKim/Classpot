@@ -45,15 +45,18 @@ export default function TestMode() {
     const [tempDate, setTempDate] = useState<number>(Date.now() + 15000);
     
     if (testCode === "sample") {
+
+
         testInfo = {
             applyCode: "SAMPL",
             createdTime: 1000000000,
-            duration: "3",
+            duration: 100,
             feedback: true,
             startDate: tempDate,
+            showInfo: true,
             testName: "시험 환경 체험 문제",
             userCode: "AGrRbUSDWXW1HEVRLgM5M1LDLB42",
-            userName: "테스트콘"
+            userName: "테스트콘",
         }
 
         applicantList = [
@@ -638,7 +641,7 @@ export default function TestMode() {
 
                         :
 
-                        <PreTestMode testInfo={testInfo} testCode={testCode} applicantName={applicantInfo.applicantName} applicantCode={applicantCode} isTestTime={isTestTime} setIsApplyingTest={setIsApplyingTest} />
+                        <PreTestMode testInfo={testInfo} testCode={testCode} applicantName={applicantInfo.applicantName} applicantCode={applicantCode} isTestTime={isTestTime} setIsApplyingTest={setIsApplyingTest} noOfQuestions={questionList?.length} totalPoints={questionList ? (questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current;}, 0)) : 0} />
 
                     :
 

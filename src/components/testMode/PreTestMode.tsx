@@ -4,11 +4,11 @@ import styles from "./PreTestMode.module.css";
 
 
 
-export default function PreTestMode({ testInfo, testCode, applicantName, applicantCode, isTestTime, setIsApplyingTest }: { testInfo: any, testCode: any, applicantName: any, applicantCode: any, isTestTime: any, setIsApplyingTest: any}) {
+export default function PreTestMode({ testInfo, testCode, applicantName, applicantCode, isTestTime, setIsApplyingTest, noOfQuestions, totalPoints }: { testInfo: any, testCode: any, applicantName: any, applicantCode: any, isTestTime: any, setIsApplyingTest: any, noOfQuestions: number, totalPoints: number }) {
     const [tab, setTab] = useState<number>(1);
 
 
-
+    
     return (
         <div>
             {
@@ -56,6 +56,35 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                     {new Date(testInfo?.startDate).toLocaleString("ko-KR")}
                                 </div>
                             </div>
+
+                            {
+                                testInfo?.showInfo
+
+                                &&
+
+                                <div>
+                                    <div className={styles.info}>
+                                        <div className={styles.header}>
+                                            응시 시간
+                                        </div>
+
+                                        <div className={styles.infoValue}>
+                                            {testInfo?.duration}분
+                                        </div>
+                                    </div>
+
+
+                                    <div className={styles.info}>
+                                        <div className={styles.header}>
+                                            문항 구성
+                                        </div>
+
+                                        <div className={styles.infoValue}>
+                                            {noOfQuestions}문제&nbsp;&nbsp;{totalPoints}점
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         <div className={styles.preTestModeContainerTop2}>
@@ -248,7 +277,7 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
 
 
 
-                    
+
                 </div>
             }
         </div>

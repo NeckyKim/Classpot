@@ -81,7 +81,9 @@ export default function Dashboard({ userCode, email }: { userCode: string, email
                 startDate: Date.parse(startDate),
                 duration: duration,
                 createdTime: Date.now(),
-                applyCode: applyCode
+                applyCode: applyCode,
+                feedback: false,
+                showInfo: false
             })
 
             toast.success("시험 추가가 완료되었습니다.");
@@ -124,58 +126,72 @@ export default function Dashboard({ userCode, email }: { userCode: string, email
                                 ?
 
                                 <form onSubmit={addTest}>
-                                    <div className={styles.testHeader}>
-                                        시험 이름
+                                    <div className={styles.header}>
+                                        시험 이름 설정
                                     </div>
-                                    <input
-                                        type="textbox"
-                                        value={testName}
-                                        onChange={(event) => {
-                                            setTestName(event.target.value);
-                                        }}
-                                        className={styles.testInputBox}
-                                        required
-                                    />
-                                    <br />
+
+                                    <div className={styles.nameContainer}>
+                                        <input
+                                            type="text"
+                                            className={styles.inputBox}
+                                            value={testName}
+                                            onChange={(event) => {
+                                                setTestName(event.target.value);
+                                            }}
+                                            required
+                                        />
+                                    </div>
 
 
-                                    <div className={styles.testHeader}>
-                                        시작 일시
+                                    <div className={styles.header}>
+                                        시간 설정
                                     </div>
-                                    <input
-                                        type="datetime-local"
-                                        value={startDate}
-                                        onChange={(event) => {
-                                            setStartDate(event.target.value);
-                                        }}
-                                        className={styles.testInputBox}
-                                        required
-                                    />
-                                    <br />
 
-                                    <div className={styles.testHeader}>
-                                        응시 시간
-                                    </div>
-                                    <input
-                                        type="number"
-                                        value={duration}
-                                        onChange={(event) => {
-                                            setDuration(Number(event.target.value));
-                                        }}
-                                        className={styles.testInputBox}
-                                        required
-                                    />
-                                    <br />
+                                    <div className={styles.settingsContainer}>
+                                        <div className={styles.settingsContainerHeader}>
+                                            시작 일시
+                                        </div>
 
-                                    <div className={styles.testHeader}>
-                                        종료 일시
+                                        <input
+                                            type="datetime-local"
+                                            value={startDate}
+                                            onChange={(event) => {
+                                                setStartDate(event.target.value);
+                                            }}
+                                            className={styles.inputBox}
+                                            required
+                                        />
                                     </div>
-                                    <div className={styles.testFixedBox}>
-                                        {new Date(Date.parse(startDate) + duration * 60000).toLocaleString()}
-                                    </div>
-                                    <br />
 
-                                    <input type="submit" value="추가" className={styles.submitButton} />
+                                    <div className={styles.settingsContainer}>
+                                        <div className={styles.settingsContainerHeader}>
+                                            응시 시간
+                                        </div>
+
+                                        <input
+                                            type="number"
+                                            value={duration}
+                                            onChange={(event) => {
+                                                setDuration(Number(event.target.value));
+                                            }}
+                                            className={styles.inputBox}
+                                            required
+                                        />
+                                    </div>
+
+                                    <div className={styles.settingsContainer}>
+                                        <div className={styles.settingsContainerHeader}>
+                                            종료 일시
+                                        </div>
+
+                                        <div className={styles.valueBox}>
+                                            {new Date(Date.parse(startDate) + duration * 60000).toLocaleString()}
+                                        </div>
+                                    </div>
+
+
+
+                                    <input type="submit" value="추가" className={styles.confirmButton} />
 
                                     <button
                                         className={styles.cancelButton}
@@ -193,27 +209,27 @@ export default function Dashboard({ userCode, email }: { userCode: string, email
 
                                 <div>
                                     <div className={styles.testContainer}>
-                                    {
-                                        testList.map((current: any) => (
-                                            <Link to={"/test/" + current.testCode} style={{ textDecoration: "none" }}>
-                                                <div className={styles.testElements}>
-                                                    <div className={styles.name}>
-                                                        {current.testName}
-                                                    </div>
-
-                                                    <div className={styles.testContainerBottom}>
-                                                        <div className={styles.date}>
-                                                            {new Date(current.startDate).toLocaleString("ko-KR")}
+                                        {
+                                            testList.map((current: any) => (
+                                                <Link to={"/test/" + current.testCode} style={{ textDecoration: "none" }}>
+                                                    <div className={styles.testElements}>
+                                                        <div className={styles.name}>
+                                                            {current.testName}
                                                         </div>
 
-                                                        <div className={styles.time}>
-                                                            {current.duration}분
+                                                        <div className={styles.testContainerBottom}>
+                                                            <div className={styles.date}>
+                                                                {new Date(current.startDate).toLocaleString("ko-KR")}
+                                                            </div>
+
+                                                            <div className={styles.time}>
+                                                                {current.duration}분
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </Link>
-                                        ))
-                                    }
+                                                </Link>
+                                            ))
+                                        }
                                     </div>
 
                                     <button onClick={() => { setIsAddingTest(true); }} className={styles.addButton}>

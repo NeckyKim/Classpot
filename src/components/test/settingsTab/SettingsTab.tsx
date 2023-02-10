@@ -123,7 +123,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
 
-    // 피드백 공개 설정 변경 함수
+    // 성적 공개 설정 변경 함수
     async function changeFeedback(event: any) {
         event.preventDefault();
 
@@ -133,13 +133,33 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                     feedback: !testInfo.feedback,
                 })
 
-                toast.success("시험 피드백 공개 설정이 변경되었습니다.");
-                setIsEditingDuration(false);
+                toast.success("성적 공개 설정이 변경되었습니다.");
             }
 
             catch (error) {
                 console.log(error);
-                toast.error("시험 피드백 공개 설정 변경에 실패했습니다.");
+                toast.error("성적 공개 설정 변경에 실패했습니다.");
+            }
+        }
+    }
+
+
+    // 시작 전 정보 공개 설정 변경 함수
+    async function changeShowInfo(event: any) {
+        event.preventDefault();
+
+        if (testCode) {
+            try {
+                await updateDoc(doc(dbService, "tests", testCode), {
+                    showInfo: !testInfo.showInfo,
+                })
+
+                toast.success("시작 전 정보 공개 설정이 변경되었습니다.");
+            }
+
+            catch (error) {
+                console.log(error);
+                toast.error("시작 전 정보 공개 설정 변경에 실패했습니다.");
             }
         }
     }
@@ -175,7 +195,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
             <div className={styles.settingsContainer}>
                 <div className={styles.settingsContainerTop}>
-                    <div className={styles.settingsContainerValue}>
+                    <div className={styles.settingsContainerTopValue}>
                         {testInfo.testName}
                     </div>
 
@@ -236,12 +256,12 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
             <div className={styles.header}>
-                시험 코드 설정
+                시험 코드
             </div>
 
             <div className={styles.settingsContainer}>
                 <div className={styles.settingsContainerTop}>
-                    <div className={styles.settingsContainerValue}>
+                    <div className={styles.settingsContainerTopValue}>
                         {testInfo.applyCode}
                     </div>
 
@@ -265,35 +285,43 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
             <div className={styles.settingsContainer}>
                 <div className={styles.settingsContainerTop}>
-                    <div className={styles.settingsContainerValue}>
-                        {new Date(testInfo?.startDate).toLocaleString("ko-KR")}
+                    <div className={styles.settingsContainerTop1}>
+                        <div className={styles.settingsContainerTopHeader}>
+                            시작 일시
+                        </div>
+
+                        <div className={styles.settingsContainerTopValue}>
+                            {new Date(testInfo?.startDate).toLocaleString("ko-KR")}
+                        </div>
                     </div>
 
-                    {
-                        !isEditingStartDate
+                    <div className={styles.settingsContainerTop2}>
+                        {
+                            !isEditingStartDate
 
-                            ?
+                                ?
 
-                            <div
-                                className={styles.editButton}
-                                onClick={() => {
-                                    setIsEditingTestName(false);
-                                    setIsEditingStartDate(true);
-                                    setIsEditingDuration(false);
-                                }}
-                            >
-                                변경
-                            </div>
+                                <div
+                                    className={styles.editButton}
+                                    onClick={() => {
+                                        setIsEditingTestName(false);
+                                        setIsEditingStartDate(true);
+                                        setIsEditingDuration(false);
+                                    }}
+                                >
+                                    변경
+                                </div>
 
-                            :
+                                :
 
-                            <div
-                                className={styles.cancelButton}
-                                onClick={() => { setIsEditingStartDate(false); }}
-                            >
-                                변경 취소
-                            </div>
-                    }
+                                <div
+                                    className={styles.cancelButton}
+                                    onClick={() => { setIsEditingStartDate(false); }}
+                                >
+                                    변경 취소
+                                </div>
+                        }
+                    </div>
                 </div>
 
                 {
@@ -325,35 +353,43 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
             <div className={styles.settingsContainer}>
                 <div className={styles.settingsContainerTop}>
-                    <div className={styles.settingsContainerValue}>
-                        {testInfo?.duration}분
+                    <div className={styles.settingsContainerTop1}>
+                        <div className={styles.settingsContainerTopHeader}>
+                            응시 시간
+                        </div>
+
+                        <div className={styles.settingsContainerTopValue}>
+                            {testInfo?.duration}분
+                        </div>
                     </div>
 
-                    {
-                        !isEditingDuration
+                    <div className={styles.settingsContainerTop2}>
+                        {
+                            !isEditingDuration
 
-                            ?
+                                ?
 
-                            <div
-                                className={styles.editButton}
-                                onClick={() => {
-                                    setIsEditingTestName(false);
-                                    setIsEditingStartDate(false);
-                                    setIsEditingDuration(true);
-                                }}
-                            >
-                                변경
-                            </div>
+                                <div
+                                    className={styles.editButton}
+                                    onClick={() => {
+                                        setIsEditingTestName(false);
+                                        setIsEditingStartDate(false);
+                                        setIsEditingDuration(true);
+                                    }}
+                                >
+                                    변경
+                                </div>
 
-                            :
+                                :
 
-                            <div
-                                className={styles.cancelButton}
-                                onClick={() => { setIsEditingDuration(false); }}
-                            >
-                                변경 취소
-                            </div>
-                    }
+                                <div
+                                    className={styles.cancelButton}
+                                    onClick={() => { setIsEditingDuration(false); }}
+                                >
+                                    변경 취소
+                                </div>
+                        }
+                    </div>
                 </div>
 
                 {
@@ -384,8 +420,12 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
             <div className={styles.settingsContainer}>
-                <div className={styles.settingsContainerTop}>
-                    <div className={styles.settingsContainerValue}>
+                <div className={styles.settingsContainerTop1}>
+                    <div className={styles.settingsContainerTopHeader}>
+                        종료 일시
+                    </div>
+
+                    <div className={styles.settingsContainerTopValue}>
                         {new Date(testInfo?.startDate + testInfo?.duration * 60000).toLocaleString("ko-KR")}
                     </div>
                 </div>
@@ -394,7 +434,41 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
             <div className={styles.header}>
-                피드백 공개 설정
+                시작 전 정보 공개 설정
+            </div>
+
+            <div className={styles.settingsContainer}>
+                <div className={styles.feedbackContainer}>
+                    <div className={styles.feedbackContainer1}>
+                        시험 시작 전, 응시자들이 문항 수, 응시 시간, 총점을 확인할 수 있습니다.
+                    </div>
+
+                    <div className={styles.feedbackContainer2}>
+                        <button
+                            className={testInfo.showInfo ? styles.feedbackButtonOn : styles.feedbackButtonOff}
+                            onClick={changeShowInfo}
+                            disabled={testInfo.showInfo === true}
+                            style={{ borderRadius: "5px 0px 0px 5px" }}
+                        >
+                            공개
+                        </button>
+
+                        <button
+                            className={!testInfo.showInfo ? styles.feedbackButtonOn : styles.feedbackButtonOff}
+                            onClick={changeShowInfo}
+                            disabled={testInfo.showInfo === false}
+                            style={{ borderRadius: "0px 5px 5px 0px" }}
+                        >
+                            비공개
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div className={styles.header}>
+                성적 공개 설정
             </div>
 
             <div className={styles.settingsContainer}>
@@ -410,7 +484,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                             disabled={testInfo.feedback === true}
                             style={{ borderRadius: "5px 0px 0px 5px" }}
                         >
-                            공개함
+                            공개
                         </button>
 
                         <button
@@ -419,7 +493,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                             disabled={testInfo.feedback === false}
                             style={{ borderRadius: "0px 5px 5px 0px" }}
                         >
-                            공개 안 함
+                            비공개
                         </button>
                     </div>
                 </div>

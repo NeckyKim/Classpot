@@ -12,7 +12,7 @@
     padding-bottom: 40px;
     position: relative;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr fit-content(100%);
 }
 
 .preTestModeContainerTop2 {
