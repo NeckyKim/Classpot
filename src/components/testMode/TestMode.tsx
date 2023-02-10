@@ -50,7 +50,7 @@ export default function TestMode() {
         testInfo = {
             applyCode: "SAMPL",
             createdTime: 1000000000,
-            duration: 100,
+            duration: 2,
             feedback: true,
             startDate: tempDate,
             showInfo: true,
