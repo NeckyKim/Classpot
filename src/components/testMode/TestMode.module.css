@@ -7,17 +7,21 @@
     position: relative;
     z-index: 1;
     background-color: rgb(255, 255, 255);
-    display: grid;
-    grid-template-rows: 69px 1fr 69px;
 }
 
 .testModeContainerTop {
     width: 100vw;
+    height: 70px;
     display: grid;
     grid-template-columns: fit-content(100%) 1fr fit-content(100%);
     padding: 15px;
     padding-left: 30px;
     padding-right: 30px;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 0px;
+    left: 0px;
 }
 
 .testconLogo {
@@ -57,8 +61,8 @@
     padding-right: 15px;
     border: 2px solid rgb(250, 50, 50);
     display: grid;
-    grid-template-columns: 20px fit-content(100%) 80px;
-    gap: 5px;
+    grid-template-columns: 20px fit-content(100%) fit-content(100%);
+    gap: 10px;
 }
 
 .timerHeader {
@@ -80,32 +84,73 @@
     line-height: 36px;
     color: rgb(250, 50, 50);
     text-align: right;
-}
-
-.testModeContainerCenter {
-    display: grid;
-    grid-template-columns: fit-content(100%) 1fr;
-    border-top: 1px solid rgb(220, 220, 220);
-    border-bottom: 1px solid rgb(220, 220, 220);
-    overflow: auto;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
 }
 
 .navigation {
-    width: fit-content(100%);
+    width: 80px;
     height: calc(100vh - 140px);
-    padding: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-right: 1px solid rgb(220, 220, 220);
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
     display: block;
+    transition: 0.5s;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 70px;
+    left: 0;
+    z-index: 1;
+}
+
+.navigation::-webkit-scrollbar {
+    width: 10px;
 }
 
 .navigation::-webkit-scrollbar-thumb {
-    background-color: red;
+    width: 10px;
+    background-color: rgb(220, 220, 220);
+    background-clip: padding-box;
+    border: 3px solid transparent;
 }
 
 .navigation::-webkit-scrollbar-track {
-    height: 30px;
-    background-color: blue;
+    background-color: transparent;
+}
+
+.navigation:hover {
+    width: 200px;
+    transition: 0.5s;
+}
+
+.navigation:hover~.questionAnswerHeader,
+.navigation:hover~.questionAnswerContent {
+    left: 200px;
+    transition: 0.5s;
+}
+
+.navigationNumber {
+    display: grid;
+    grid-template-columns: fit-content(100%) 120px;
+}
+
+.navigationInfo {
+    height: 40px;
+    line-height: 40px;
+    margin-left: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    gap: 5px;
+}
+
+.navigationInfoType,
+.navigationInfoPoints {
+    font-weight: 300;
+    color: rgb(150, 150, 150);
 }
 
 .navigationNumberSelected,
@@ -154,16 +199,16 @@
     z-index: 2;
 }
 
-.questionAnswer {
-    display: grid;
-    grid-template-rows: fit-content(100%) 1fr;
-}
-
 .questionAnswerHeader {
+    width: calc(100vw - 80px);
     display: grid;
     grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%) fit-content(100%);
     padding: 30px;
     padding-bottom: 20px;
+    position: fixed;
+    top: 70px;
+    left: 80px;
+    transition: 0.5s;
 }
 
 .checkQuestionButton {
@@ -203,26 +248,41 @@
 }
 
 .questionAnswerContent {
+    width: calc(100vw - 80px);
+    height: calc(100vh - 230px);
     display: grid;
     grid-template-columns: calc(50vw - 60px) 1fr;
+    position: fixed;
+    top: 160px;
+    left: 80px;
+    overflow: auto;
+    transition: 0.5s;
+}
+
+.questionAnswerContent::-webkit-scrollbar {
+    width: 10px;
+}
+
+.questionAnswerContent::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: rgb(220, 220, 220);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+}
+
+.questionAnswerContent::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 .questionContent {
     height: calc(100vh - 240px);
-    padding: 30px;
     padding-top: 0px;
-    -ms-overflow-style: auto;
-    scrollbar-width: auto;
-
-    overflow: auto;
 }
-
 
 .answerContent {
     height: calc(100vh - 240px);
     padding: 30px;
     padding-top: 0px;
-    overflow: auto;
 }
 
 .answerContent::-webkit-scrollbar {
@@ -308,12 +368,19 @@
 }
 
 .testModeContainerBottom {
+    width: 100vw;
+    height: 70px;
     display: grid;
     grid-template-columns: 1fr fit-content(100%) fit-content(100%);
     gap: 10px;
     padding: 15px;
     padding-left: 30px;
     padding-right: 30px;
+    border-top: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
 }
 
 .submittedTime {
@@ -349,12 +416,16 @@
 
 .exitContainer {
     width: 40vw;
-    height: 30vh;
+    height: fit-content;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     padding: 20px;
     display: grid;
     grid-template-rows: 1fr fit-content(100%);
+}
+
+.exitContainerTop {
+    margin-bottom: 20px;
 }
 
 .exitContainerBottom {
@@ -388,19 +459,22 @@
 
 @media (max-width: 1200px) {
     .testModeContainerCenter {
-        grid-template-columns: 1fr;
+        width: 100vw;
+        height: calc(100vh - 140px);
+        left: 0px;
+        overflow: auto;
     }
-
     .navigation {
         display: none;
     }
 
     .questionAnswerHeader {
+        width: 100vw;
         padding: 30px;
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
-        ;
         padding-bottom: 20px;
+        left: 0px;
     }
 
     .checkQuestionButton {
@@ -408,28 +482,20 @@
     }
 
     .questionAnswerContent {
+        width: 100vw;
         display: block;
         grid-template-columns: none;
+        left: 0px;
     }
 
     .questionContent {
         height: fit-content;
-        padding-left: min(5vw, 30px);
-        padding-right: min(5vw, 30px);
-    }
-
-    .questionContent::-webkit-scrollbar {
-        display: none;
     }
 
     .answerContent {
         height: fit-content;
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
-    }
-
-    .answerContent::-webkit-scrollbar {
-        display: none;
     }
 
     .questionNumber {
@@ -449,7 +515,6 @@
 
     .exitContainer {
         width: 80vw;
-        height: 30vh;
     }
 
     .exitContainerExitButton {
