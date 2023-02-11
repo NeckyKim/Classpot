@@ -27,6 +27,8 @@ export default function TestMode() {
     const { applicantCode } = useParams();
 
 
+    
+    localStorage.clear();
 
     // 시험 정보
     var testInfo: any = GetTestInfo(testCode);
