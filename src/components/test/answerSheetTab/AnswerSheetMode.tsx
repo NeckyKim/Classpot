@@ -9,10 +9,10 @@ import GetQuestionList from "../../hooks/GetQuestionList";
 import GetApplicantInfo from "../../hooks/GetApplicantInfo";
 import Error from "../../../Error";
 
-import ReactQuill from "react-quill";
+import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./AnswerSheetMode.module.css";
-import "react-quill/dist/quill.snow.css";
+
 
 
 
@@ -81,7 +81,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                         reportCard: reportCard
                     })
                 }
-    
+
                 catch (error) {
                     console.log(error);
                 }
@@ -216,7 +216,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                         <div className={styles.scoresValue}>
                             {applicantInfo.reportCard && applicantInfo.reportCard.filter((elements: any) => elements === null).length !== 100 && applicantInfo.reportCard.filter((element: any) => (element >= 0 && element !== null)).reduce(function add(sum: number, current: number) { return sum + current })}
                             /
-                            {questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current;}, 0)}
+                            {questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current; }, 0)}
                             점
                         </div>
                     </div>
@@ -240,12 +240,26 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                                     </div>
                                 </div>
 
-                                <ReactQuill
+                                <Editor
+                                    apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                                    disabled={true}
+                                    init={{
+                                        readonly: true,
+                                        menubar: false,
+                                        toolbar: false,
+                                        statusbar: false,
+                                        plugins: ["autoresize"],
+                                        skin: "borderless",
+                                        content_style: `
+                                            @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+                                            body{
+                                                font-family:'Pretendard';
+                                                font-weight: 600;
+                                                margin: 0px
+                                            }
+                                        `
+                                    }}
                                     value={current.question}
-                                    readOnly={true}
-                                    modules={{ toolbar: false }}
-                                    theme="snow"
-                                    style={{ padding: "20px 0px 20px 0px" }}
                                 />
 
                                 <div>
@@ -277,24 +291,24 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                                             <div className={current.points === applicantInfo.reportCard[index] ? styles.gradedCorrect : (applicantInfo.reportCard[index] !== 0 ? styles.gradedSomeCorrect : styles.gradedIncorrect)}>
                                                 {
                                                     (Object.values(applicantInfo.answerSheet[index]).filter((elem: any) => elem === true).length) !== 0
-                                                    
-                                                    ?
 
-                                                    <div>
-                                                        {applicantInfo.answerSheet[index][0] && <div className={styles.choice}>{current.choices[0]}</div>}
-                                                        {applicantInfo.answerSheet[index][1] && <div className={styles.choice}>{current.choices[1]}</div>}
-                                                        {applicantInfo.answerSheet[index][2] && <div className={styles.choice}>{current.choices[2]}</div>}
-                                                        {applicantInfo.answerSheet[index][3] && <div className={styles.choice}>{current.choices[3]}</div>}
-                                                        {applicantInfo.answerSheet[index][4] && <div className={styles.choice}>{current.choices[4]}</div>}
-                                                        {applicantInfo.answerSheet[index][5] && <div className={styles.choice}>{current.choices[5]}</div>}
-                                                        {applicantInfo.answerSheet[index][6] && <div className={styles.choice}>{current.choices[6]}</div>}
-                                                        {applicantInfo.answerSheet[index][7] && <div className={styles.choice}>{current.choices[7]}</div>}
-                                                        {applicantInfo.answerSheet[index][8] && <div className={styles.choice}>{current.choices[8]}</div>}
-                                                    </div>
+                                                        ?
 
-                                                    :
+                                                        <div>
+                                                            {applicantInfo.answerSheet[index][0] && <div className={styles.choice}>{current.choices[0]}</div>}
+                                                            {applicantInfo.answerSheet[index][1] && <div className={styles.choice}>{current.choices[1]}</div>}
+                                                            {applicantInfo.answerSheet[index][2] && <div className={styles.choice}>{current.choices[2]}</div>}
+                                                            {applicantInfo.answerSheet[index][3] && <div className={styles.choice}>{current.choices[3]}</div>}
+                                                            {applicantInfo.answerSheet[index][4] && <div className={styles.choice}>{current.choices[4]}</div>}
+                                                            {applicantInfo.answerSheet[index][5] && <div className={styles.choice}>{current.choices[5]}</div>}
+                                                            {applicantInfo.answerSheet[index][6] && <div className={styles.choice}>{current.choices[6]}</div>}
+                                                            {applicantInfo.answerSheet[index][7] && <div className={styles.choice}>{current.choices[7]}</div>}
+                                                            {applicantInfo.answerSheet[index][8] && <div className={styles.choice}>{current.choices[8]}</div>}
+                                                        </div>
 
-                                                    "(미응답)"
+                                                        :
+
+                                                        "(미응답)"
                                                 }
 
 

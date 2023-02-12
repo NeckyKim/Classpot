@@ -20,7 +20,6 @@ import { ToastContainer, Slide } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
-import "react-quill/dist/quill.snow.css";
 
 
 

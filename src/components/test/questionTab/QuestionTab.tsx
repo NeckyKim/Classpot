@@ -9,10 +9,10 @@ import EditQuestion from "./EditQuestion";
 import GetQuestionList from "../../hooks/GetQuestionList";
 import Error from "../../../Error";
 
-import ReactQuill from "react-quill";
+import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./QuestionTab.module.css";
-import "react-quill/dist/quill.snow.css";
+
 
 
 
@@ -94,13 +94,27 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                     삭제
                                                 </div>
                                             </div>
-                                            
-                                            <ReactQuill
+
+                                            <Editor
+                                                apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                                                disabled={true}
+                                                init={{
+                                                    readonly: true,
+                                                    menubar: false,
+                                                    toolbar: false,
+                                                    statusbar: false,
+                                                    plugins: ["autoresize"],
+                                                    skin: "borderless",
+                                                    content_style: `
+                                                    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+                                                    body{
+                                                        font-family:'Pretendard';
+                                                        font-weight: 600;
+                                                        margin: 0px;
+                                                    }
+                                                `
+                                                }}
                                                 value={current.question}
-                                                readOnly={true}
-                                                modules={{toolbar: false}}
-                                                theme="snow"
-                                                style={{ padding: "20px 0px 20px 0px" }}
                                             />
 
                                             {

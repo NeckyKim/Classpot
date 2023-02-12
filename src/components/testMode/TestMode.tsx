@@ -12,13 +12,12 @@ import GetApplicantList from "../hooks/GetApplicantList";
 import TimeCalculator from "../hooks/TimeCalculator";
 import PreTestMode from "./PreTestMode";
 
-import ReactQuill from "react-quill";
-
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
+import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./TestMode.module.css";
-import "react-quill/dist/quill.snow.css";
+
 
 
 
@@ -26,9 +25,9 @@ export default function TestMode() {
     const { testCode } = useParams();
     const { applicantCode } = useParams();
 
-
-    
-    localStorage.clear();
+    useEffect(() => {
+        localStorage.clear();
+    }, [])
 
     // 시험 정보
     var testInfo: any = GetTestInfo(testCode);
@@ -102,20 +101,6 @@ export default function TestMode() {
     useEffect(() => {
         window.addEventListener("resize", () => { setWidth(window.innerWidth); });
     });
-
-
-
-    // 글자 크기 설정
-    const [fontSizeIndex, setFontSizeIndex] = useState<number>(3);
-    const fontSizeValue: [string, string][] = [
-        ["아주 작게", "0.75rem"],
-        ["작게", "0.9rem"],
-        ["조금 작게", "1.05rem"],
-        ["보통", "1.2rem"],
-        ["조금 크게", "1.5rem"],
-        ["크게", "2.0rem"],
-        ["아주 크게", "2.5rem"],
-    ]
 
 
 
@@ -346,7 +331,7 @@ export default function TestMode() {
                                     &&
 
                                     questionList.map((current: any, index: number) => (
-                                        <div 
+                                        <div
                                             className={styles.navigationNumber}
                                             onClick={() => {
                                                 setQuestionNumber(index);
@@ -398,12 +383,12 @@ export default function TestMode() {
                                                     <img className={styles.navigationNumberChecked} src={process.env.PUBLIC_URL + "/icons/flag.png"} />
                                                 }
                                             </div>
-                                            
+
                                             {
-                                                isMouseOnNavigation 
-                                                
-                                                && 
-                                                
+                                                isMouseOnNavigation
+
+                                                &&
+
                                                 <div className={styles.navigationInfo}>
                                                     <div className={styles.navigationInfoType}>
                                                         {current.type}
@@ -421,151 +406,184 @@ export default function TestMode() {
 
 
 
-                                {
-                                    questionList.length > 0
+                            {
+                                questionList.length > 0
 
-                                    &&
+                                &&
 
-                                    <div className={styles.questionAnswerHeader}>
-                                        <div className={styles.questionNumber}>
-                                            Q.{questionNumber + 1}
-                                        </div>
-
-                                        <div className={styles.questionType}>
-                                            {questionList[questionNumber].type}
-
-                                        </div>
-
-                                        <div className={styles.questionPoints}>
-                                            {questionList[questionNumber].points}점
-                                        </div>
-
-                                        <div />
-
-                                        <div
-                                            className={styles.checkQuestionButton}
-                                            onClick={() => {
-                                                if (checkedQuestions.includes(questionNumber)) {
-                                                    let temp = checkedQuestions;
-                                                    temp = temp.filter((elem: any) => elem !== questionNumber);
-                                                    setCheckedQuestions(temp);
-                                                }
-
-                                                else {
-                                                    let temp = checkedQuestions;
-                                                    temp.push(questionNumber);
-                                                    setCheckedQuestions(temp);
-                                                }
-                                            }}
-                                        >
-                                            {checkedQuestions.includes(questionNumber) ? "문항 체크 해제" : "문항 체크"}
-                                        </div>
-
-                                        <div
-                                            className={questionNumber !== 0 ? styles.prevNextButtonOn : styles.prevNextButtonOff}
-                                            style={{ borderRadius: "5px 0px 0px 5px" }}
-                                            onClick={() => {
-                                                if (questionNumber !== 0) {
-                                                    setQuestionNumber(questionNumber - 1);
-                                                }
-
-                                                submitAnswerSheet(event);
-                                            }}
-                                        >
-                                            {width < 600 ? <img className={styles.prevNextButtonImage} src={process.env.PUBLIC_URL + "/icons/arrow_left.png"} /> : "이전"}
-                                        </div>
-
-                                        <div
-                                            className={questionNumber !== questionList.length - 1 ? styles.prevNextButtonOn : styles.prevNextButtonOff}
-                                            style={{ borderRadius: "0px 5px 5px 0px", marginLeft: "1px" }}
-                                            onClick={() => {
-                                                if (questionNumber !== questionList.length - 1) {
-                                                    setQuestionNumber(questionNumber + 1);
-                                                }
-
-                                                submitAnswerSheet(event);
-                                            }}
-                                        >
-                                            {width < 600 ? <img className={styles.prevNextButtonImage} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} /> : "다음"}
-                                        </div>
+                                <div className={styles.questionAnswerHeader}>
+                                    <div className={styles.questionNumber}>
+                                        Q.{questionNumber + 1}
                                     </div>
-                                }
+
+                                    <div className={styles.questionType}>
+                                        {questionList[questionNumber].type}
+
+                                    </div>
+
+                                    <div className={styles.questionPoints}>
+                                        {questionList[questionNumber].points}점
+                                    </div>
+
+                                    <div />
+
+                                    <div
+                                        className={styles.checkQuestionButton}
+                                        onClick={() => {
+                                            if (checkedQuestions.includes(questionNumber)) {
+                                                let temp = checkedQuestions;
+                                                temp = temp.filter((elem: any) => elem !== questionNumber);
+                                                setCheckedQuestions(temp);
+                                            }
+
+                                            else {
+                                                let temp = checkedQuestions;
+                                                temp.push(questionNumber);
+                                                setCheckedQuestions(temp);
+                                            }
+                                        }}
+                                    >
+                                        {checkedQuestions.includes(questionNumber) ? "문항 체크 해제" : "문항 체크"}
+                                    </div>
+
+                                    <div
+                                        className={questionNumber !== 0 ? styles.prevNextButtonOn : styles.prevNextButtonOff}
+                                        style={{ borderRadius: "5px 0px 0px 5px" }}
+                                        onClick={() => {
+                                            if (questionNumber !== 0) {
+                                                setQuestionNumber(questionNumber - 1);
+                                            }
+
+                                            submitAnswerSheet(event);
+                                        }}
+                                    >
+                                        {width < 600 ? <img className={styles.prevNextButtonImage} src={process.env.PUBLIC_URL + "/icons/arrow_left.png"} /> : "이전"}
+                                    </div>
+
+                                    <div
+                                        className={questionNumber !== questionList.length - 1 ? styles.prevNextButtonOn : styles.prevNextButtonOff}
+                                        style={{ borderRadius: "0px 5px 5px 0px", marginLeft: "1px" }}
+                                        onClick={() => {
+                                            if (questionNumber !== questionList.length - 1) {
+                                                setQuestionNumber(questionNumber + 1);
+                                            }
+
+                                            submitAnswerSheet(event);
+                                        }}
+                                    >
+                                        {width < 600 ? <img className={styles.prevNextButtonImage} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} /> : "다음"}
+                                    </div>
+                                </div>
+                            }
 
 
 
-                                {
-                                    questionList.length > 0
+                            {
+                                questionList.length > 0
 
-                                    &&
+                                &&
 
-                                    <div className={styles.questionAnswerContent}>
-                                        <div className={styles.questionContent}>
-                                            <ReactQuill
-                                                value={questionList[questionNumber].question}
-                                                readOnly={true}
-                                                modules={{ toolbar: false }}
-                                                theme="snow"
-                                                style={{ padding: "0px 30px 30px 30px" }}
+                                <div className={styles.questionAnswerContent}>
+                                    <div className={styles.questionContent}>
+                                        <Editor
+                                            apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                                            disabled={true}
+                                            init={{
+                                                readonly: true,
+                                                menubar: false,
+                                                toolbar: false,
+                                                statusbar: false,
+                                                plugins: ["autoresize"],
+                                                skin: "borderless",
+                                                content_style: `
+                                                    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+                                                    body{
+                                                        font-family:'Pretendard'; 
+                                                        font-weight: 600;
+                                                        margin: 0px;
+                                                    }
+                                                `
+                                            }}
+                                            value={questionList[questionNumber].question}
+                                        />
+                                    </div>
+
+                                    <div className={styles.answerContent}>
+                                        {
+                                            questionList[questionNumber].type === "객관식"
+
+                                            &&
+
+                                            <div>
+                                                <Choices choicesNumber={0} />
+                                                <Choices choicesNumber={1} />
+                                                <Choices choicesNumber={2} />
+                                                {questionList[questionNumber].choices[3] !== "" && <Choices choicesNumber={3} />}
+                                                {questionList[questionNumber].choices[4] !== "" && <Choices choicesNumber={4} />}
+                                                {questionList[questionNumber].choices[5] !== "" && <Choices choicesNumber={5} />}
+                                                {questionList[questionNumber].choices[6] !== "" && <Choices choicesNumber={6} />}
+                                                {questionList[questionNumber].choices[7] !== "" && <Choices choicesNumber={7} />}
+                                                {questionList[questionNumber].choices[8] !== "" && <Choices choicesNumber={8} />}
+                                                {questionList[questionNumber].choices[9] !== "" && <Choices choicesNumber={9} />}
+                                            </div>
+                                        }
+
+                                        {
+                                            questionList[questionNumber].type === "참/거짓"
+
+                                            &&
+
+                                            <div>
+                                                <div
+                                                    className={answerSheet[questionNumber] === true ? styles.choiceSelected : styles.choiceNotSelected}
+                                                    onClick={() => {
+                                                        let temp = [...answerSheet];
+                                                        temp[questionNumber] = true;
+                                                        setModified(true);
+                                                        setAnswerSheet(temp);
+                                                    }}
+                                                >
+                                                    참
+                                                </div>
+
+                                                <div
+                                                    className={answerSheet[questionNumber] === false ? styles.choiceSelected : styles.choiceNotSelected}
+                                                    onClick={() => {
+                                                        let temp = [...answerSheet];
+                                                        temp[questionNumber] = false;
+                                                        setModified(true);
+                                                        setAnswerSheet(temp);
+                                                    }}
+                                                >
+                                                    거짓
+                                                </div>
+                                            </div>
+                                        }
+
+                                        {
+                                            questionList[questionNumber].type === "주관식"
+
+                                            &&
+
+                                            <textarea
+                                                className={styles.answerTextBox}
+                                                value={answerSheet[questionNumber]}
+                                                spellCheck={false}
+                                                onChange={(event: any) => {
+                                                    let temp = [...answerSheet];
+                                                    temp[questionNumber] = String(event.target.value);
+                                                    setModified(true);
+                                                    setAnswerSheet(temp);
+                                                }}
                                             />
-                                        </div>
+                                        }
 
-                                        <div className={styles.answerContent}>
-                                            {
-                                                questionList[questionNumber].type === "객관식"
+                                        {
+                                            questionList[questionNumber].type === "서술형"
 
-                                                &&
+                                            &&
 
-                                                <div>
-                                                    <Choices choicesNumber={0} />
-                                                    <Choices choicesNumber={1} />
-                                                    <Choices choicesNumber={2} />
-                                                    {questionList[questionNumber].choices[3] !== "" && <Choices choicesNumber={3} />}
-                                                    {questionList[questionNumber].choices[4] !== "" && <Choices choicesNumber={4} />}
-                                                    {questionList[questionNumber].choices[5] !== "" && <Choices choicesNumber={5} />}
-                                                    {questionList[questionNumber].choices[6] !== "" && <Choices choicesNumber={6} />}
-                                                    {questionList[questionNumber].choices[7] !== "" && <Choices choicesNumber={7} />}
-                                                    {questionList[questionNumber].choices[8] !== "" && <Choices choicesNumber={8} />}
-                                                    {questionList[questionNumber].choices[9] !== "" && <Choices choicesNumber={9} />}
-                                                </div>
-                                            }
-
-                                            {
-                                                questionList[questionNumber].type === "참/거짓"
-
-                                                &&
-
-                                                <div>
-                                                    <div
-                                                        className={answerSheet[questionNumber] === true ? styles.choiceSelected : styles.choiceNotSelected}
-                                                        onClick={() => {
-                                                            let temp = [...answerSheet];
-                                                            temp[questionNumber] = true;
-                                                            setModified(true);
-                                                            setAnswerSheet(temp);
-                                                        }}
-                                                    >
-                                                        참
-                                                    </div>
-
-                                                    <div
-                                                        className={answerSheet[questionNumber] === false ? styles.choiceSelected : styles.choiceNotSelected}
-                                                        onClick={() => {
-                                                            let temp = [...answerSheet];
-                                                            temp[questionNumber] = false;
-                                                            setModified(true);
-                                                            setAnswerSheet(temp);
-                                                        }}
-                                                    >
-                                                        거짓
-                                                    </div>
-                                                </div>
-                                            }
-
-                                            {
-                                                questionList[questionNumber].type === "주관식"
-
-                                                &&
-
+                                            <div style={{ height: "calc(100% - 30px)" }}>
                                                 <textarea
                                                     className={styles.answerTextBox}
                                                     value={answerSheet[questionNumber]}
@@ -577,34 +595,15 @@ export default function TestMode() {
                                                         setAnswerSheet(temp);
                                                     }}
                                                 />
-                                            }
 
-                                            {
-                                                questionList[questionNumber].type === "서술형"
-
-                                                &&
-
-                                                <div style={{ height: "calc(100% - 30px)" }}>
-                                                    <textarea
-                                                        className={styles.answerTextBox}
-                                                        value={answerSheet[questionNumber]}
-                                                        spellCheck={false}
-                                                        onChange={(event: any) => {
-                                                            let temp = [...answerSheet];
-                                                            temp[questionNumber] = String(event.target.value);
-                                                            setModified(true);
-                                                            setAnswerSheet(temp);
-                                                        }}
-                                                    />
-
-                                                    <div className={styles.answerTextLength}>
-                                                        총 {answerSheet[questionNumber] ? answerSheet[questionNumber].length : 0}자
-                                                    </div>
+                                                <div className={styles.answerTextLength}>
+                                                    총 {answerSheet[questionNumber] ? answerSheet[questionNumber].length : 0}자
                                                 </div>
-                                            }
-                                        </div>
+                                            </div>
+                                        }
                                     </div>
-                                }
+                                </div>
+                            }
 
 
 

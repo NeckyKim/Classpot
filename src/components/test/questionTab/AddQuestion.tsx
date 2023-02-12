@@ -8,17 +8,10 @@ import { doc, setDoc } from "firebase/firestore";
 import Choices from "./Choices";
 
 import { toast } from "react-toastify";
-import ReactQuill from "react-quill";
-
-// import { Editor, Viewer } from "@toast-ui/react-editor";
-// import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./AddQuestion.module.css";
-import "react-quill/dist/quill.snow.css";
-
-// import "@toast-ui/editor/dist/toastui-editor.css";
-// import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-// import "tui-color-picker/dist/tui-color-picker.css";
+import tinyMceStyles from "./TinyMce.module.css";
 
 
 
@@ -34,28 +27,6 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
     const [choices, setChoices] = useState<string[]>(new Array(10).fill(""));
     const [numberOfChoices, setNumberOfChoices] = useState<number>(3);
-
-
-
-    const modules = {
-        toolbar: {
-            container: [
-                [
-                    { font: [] },
-                    { size: ["small", false, "large", "huge"] },
-                    { color: [] },
-                    { background: [] }
-                ],
-                ["bold", "italic", "underline", "code-block"],
-                [
-                    { align: [] },
-                    { list: "ordered" },
-                    { list: "bullet" },
-                ],
-                ["image"],
-            ],
-        },
-    }
 
 
 
@@ -101,13 +72,6 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
         }
     }
 
-
-
-    const editorRef = useRef<any>();
-
-    function onEditorChange () {
-        (setQuestion(editorRef.current?.getInstance().getHTML()));
-    };
 
 
 
@@ -187,35 +151,41 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
                 <div className={styles.questionPointsUnit}>
                     점
                 </div>
-            </div>    
+            </div>
 
 
 
             <div className={styles.header}>
                 지문
             </div>
-
-            <ReactQuill
-                className={styles.questionPassageInputBox}
-                modules={modules}
-                theme="snow"
-                onChange={(editor: any) => { setQuestion(editor) }}
+            
+            <Editor
+                apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                initialValue=""
+                value={question}
+                onEditorChange={(content: any) => { setQuestion(content); }}
+                init={{
+                    height: 500,
+                    menubar: false,
+                    statusbar: false,
+                    plugins: ['lists', 'image', 'table', 'lineheight'],
+                    toolbar: 'fontsize | bold italic strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | outdent indent | bullist numlist | image table',
+                    font_size_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+                    line_height_formats: "0.8 1 1.2 1.4 1.6 1.8 2",
+                    resize: false,
+                    content_style: `
+                        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+                        body{
+                            font-family:'Pretendard';
+                            font-weight: 600;
+                            font-size: 12pt;
+                            line-height: 1;
+                        }
+                    `
+                }}
             />
 
-            {/* <Editor
-                ref={editorRef}
-                hideModeSwitch={true}
-                onChange={onEditorChange}
-                height="600px"
-                initialEditType="wysiwyg"
-                plugins={[colorSyntax]}
-                toolbarItems={[
-                    ['heading', 'bold', 'italic', 'strike'],
-                    ['hr', 'quote'],
-                    ['ul', 'ol', 'indent', 'outdent'],
-                    ['table', 'image'],
-                ]}
-            /> */}
+
 
             <div className={styles.header}>
                 정답
