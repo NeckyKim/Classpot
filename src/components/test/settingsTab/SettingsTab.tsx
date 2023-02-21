@@ -262,7 +262,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
             <div className={styles.settingsContainer}>
                 <div className={styles.settingsContainerTop}>
                     <div className={styles.settingsContainerTopValue}>
-                        {testInfo.applyCode}
+                        {testInfo.shortTestCode}
                     </div>
 
                     <div

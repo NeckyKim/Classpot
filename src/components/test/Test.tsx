@@ -32,24 +32,40 @@ export default function Test({ userCode, email }: { userCode: string; email: str
             ?
 
             <div>
-                <HeaderBottom testName={testInfo ? testInfo.testName : ""} />
+                {/* <HeaderBottom testName={testInfo ? testInfo.testName : ""} /> */}
 
                 <div className={styles.container}>
                     <div className={styles.containerLeft}>
                         <div className={tab === 1 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(1); }} >
-                            시험 설정
+                            <img className={tab === 1 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/settings.png"} />
+
+                            <div className={tab === 1 ? styles.tabTextSelected : styles.tabTextNotSelected}>
+                                시험 설정
+                            </div>
                         </div>
 
                         <div className={tab === 2 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(2); }} >
-                            문제 관리
+                            <img className={tab === 2 ? styles.tabIconSelected : styles.tabIconNotSelected}  src={process.env.PUBLIC_URL + "/icons/questions.png"} />
+
+                            <div className={tab === 2 ? styles.tabTextSelected : styles.tabTextNotSelected}>
+                                문제 관리
+                            </div>
                         </div>
 
                         <div className={tab === 3 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(3); }} >
-                            응시자 관리
+                            <img className={tab === 3 ? styles.tabIconSelected : styles.tabIconNotSelected}  src={process.env.PUBLIC_URL + "/icons/applicants.png"} />
+
+                            <div className={tab === 3 ? styles.tabTextSelected : styles.tabTextNotSelected}>
+                                응시자 관리
+                            </div>
                         </div>
 
                         <div className={tab === 4 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(4); }} >
-                            답안지 확인
+                            <img className={tab === 4 ? styles.tabIconSelected : styles.tabIconNotSelected}  src={process.env.PUBLIC_URL + "/icons/answersheets.png"} />
+
+                            <div className={tab === 4 ? styles.tabTextSelected : styles.tabTextNotSelected}>
+                                답안지 확인
+                            </div>
                         </div>
                     </div>
 

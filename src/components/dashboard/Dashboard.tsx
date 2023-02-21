@@ -5,7 +5,7 @@ import { dbService } from "../../FirebaseModules";
 import { doc, setDoc, collection } from "firebase/firestore";
 import { onSnapshot, query, where } from "firebase/firestore";
 
-import GenerateApplyCode from "../hooks/GenerateApplyCode";
+import GenerateShortTestCode from "../hooks/GenerateShortTestCode";
 import GetUserInfo from "../hooks/GetUserInfo";
 
 import { toast } from "react-toastify";
@@ -65,7 +65,7 @@ export default function Dashboard({ userCode, email }: { userCode: string, email
     const [startDate, setStartDate] = useState<any>(new Date().toLocaleDateString("sv-SE") + "T" + new Date().toLocaleTimeString("en-US", { hour12: false }));
     const [duration, setDuration] = useState<number>(60);
 
-    const applyCode = GenerateApplyCode();
+    const shortTestCode = GenerateShortTestCode();
 
 
 
@@ -81,7 +81,7 @@ export default function Dashboard({ userCode, email }: { userCode: string, email
                 startDate: Date.parse(startDate),
                 duration: duration,
                 createdTime: Date.now(),
-                applyCode: applyCode,
+                shortTestCode: shortTestCode,
                 feedback: false,
                 showInfo: false
             })

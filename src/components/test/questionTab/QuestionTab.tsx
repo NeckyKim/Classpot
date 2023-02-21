@@ -118,18 +118,6 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                             />
 
                                             {
-                                                current.imageFile
-
-                                                &&
-
-                                                <img
-                                                    src={current.imageFile}
-                                                    width={current.imageSize * 25 + "%"}
-                                                    className={styles.questionImage}
-                                                />
-                                            }
-
-                                            {
                                                 current.type === "객관식"
 
                                                 &&

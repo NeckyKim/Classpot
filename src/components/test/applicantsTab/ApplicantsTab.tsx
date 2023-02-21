@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, setDoc, updateDoc, deleteDoc, collection } from "firebase/firestore";
+import { doc, setDoc, collection } from "firebase/firestore";
 
 import ApplicantContainer from "./ApplicantContainer";
-import GenerateApplicantCode from "../../hooks/GenerateApplicantCode";
+import GenerateShortApplicantCode from "../../hooks/GenerateShortApplicantCode";
 import GetApplicantList from "../../hooks/GetApplicantList";
 import Error from "../../../Error";
 
@@ -23,7 +23,7 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
 
     const [applicantName, setApplicantName] = useState<string>("");
 
-    const magicCode = GenerateApplicantCode(testCode);
+    const shortApplicantCode = GenerateShortApplicantCode(testCode);
 
 
 
@@ -44,7 +44,7 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                     answerSheet: answerSheet,
                     reportCard: reportCard,
                     autoGrading: true,
-                    magicCode: magicCode
+                    shortApplicantCode: shortApplicantCode
                 })
 
                 toast.success("응시자가 추가됐습니다.");

@@ -6,7 +6,7 @@ import { onSnapshot, query } from "firebase/firestore";
 
 
 
-export default function GenerateApplyCode() {
+export default function GenerateShortTestCode() {
     const [usedApplyCodeList, setUsedApplyCodeList] = useState<any>([]);
 
 
@@ -25,7 +25,7 @@ export default function GenerateApplyCode() {
     while (true) {
         let results: string = "";
 
-        for (let i: number = 0; i < 5; i++) {
+        for (let i: number = 0; i < 6; i++) {
             results = results + "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".charAt(Math.floor(Math.random() * 36));
         }
 
