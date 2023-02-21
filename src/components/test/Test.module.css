@@ -112,6 +112,8 @@
         width: 100vw;
         height: calc(100vh - 150px);
         padding: 40px;
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
         position: fixed;
         top: 70px;
         left: 0px;
