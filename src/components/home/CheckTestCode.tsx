@@ -11,16 +11,16 @@ import styles from "./CheckTestCode.module.css";
 export default function CheckTestCode() {
     const navigate = useNavigate()
 
-    const [applyCode, setApplyCode] = useState<string>("");
+    const [shortTestCode, setShortTestCode] = useState<string>("");
     const [results, setResults] = useState<any>(undefined);
     const [message, setMessage] = useState<string>("");
 
 
 
-    function applyCodeToTestCode(event: any) {
+    function shortTestCodeToTestCode(event: any) {
         event?.preventDefault()
 
-        onSnapshot(query(collection(dbService, "tests"), where("applyCode", "==", applyCode)), (snapshot) => {
+        onSnapshot(query(collection(dbService, "tests"), where("shortTestCode", "==", shortTestCode)), (snapshot) => {
             setResults(snapshot.docs.map((current) => (
                 current.id
             )));
@@ -47,20 +47,20 @@ export default function CheckTestCode() {
         <div>
             <form
                 className={styles.homeContainer}
-                onSubmit={applyCodeToTestCode}
+                onSubmit={shortTestCodeToTestCode}
             >
                 <div className={styles.header}>
-                    5자리 시험 코드를 입력하세요.
+                    6자리 시험 코드를 입력하세요.
                 </div>
 
                 <input
                     type="text"
-                    value={applyCode}
+                    value={shortTestCode}
                     className={styles.inputBox}
-                    maxLength={5}
+                    maxLength={6}
                     spellCheck={false}
                     onChange={(event: any) => {
-                        setApplyCode(String(event.target.value).toUpperCase());
+                        setShortTestCode(String(event.target.value).toUpperCase());
                     }}
                 />
 
@@ -72,7 +72,7 @@ export default function CheckTestCode() {
                     type="submit"
                     value="시험 코드 확인"
                     className={styles.goToTestButton}
-                    disabled={applyCode.length !== 5}
+                    disabled={shortTestCode.length !== 6}
                 />
             </form>
         </div>

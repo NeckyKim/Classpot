@@ -12,9 +12,8 @@ export default function Home() {
     return (
         <div className={styles.homeContainer}>
             <div className={styles.homeContainerTop}>
-                쉽고 빠르게<br />
-                5자리 문자로<br />
-                시험을 진행해보세요.
+                지금은 온라인으로
+                시험을 보는 시대
             </div>
 
             <div className={styles.homeContainerBottom}>

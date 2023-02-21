@@ -8,8 +8,8 @@
     left: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 15vw;
-    padding-right: 15vw;
+    padding-left: 40px;
+    padding-right: 40px;
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
 }

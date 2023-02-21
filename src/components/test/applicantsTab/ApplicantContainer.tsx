@@ -68,7 +68,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                     </div>
 
                     <div className={styles.applicantCode}>
-                        {applicantObject.magicCode}
+                        {applicantObject.shortApplicantCode}
                     </div>
                 </div>
 

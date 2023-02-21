@@ -15,18 +15,16 @@ export default function CheckApplicantCode() {
 
     const navigate = useNavigate()
 
-    var testInfo: any | undefined = GetTestInfo(testCode);
-
-    const [magicCode, setMagicCode] = useState<string>("");
+    const [shortApplicantCode, setShortApplicantCode] = useState<string>("");
     const [results, setResults] = useState<any>(undefined);
     const [message, setMessage] = useState<string>("");
 
 
 
-    function applyCodeToApplicantCode(event: any) {
+    function shortApplicantCodeToApplicantCode(event: any) {
         event?.preventDefault()
 
-        onSnapshot(query(collection(dbService, "tests", testCode, "applicants"), where("magicCode", "==", magicCode)), (snapshot) => {
+        onSnapshot(query(collection(dbService, "tests", testCode, "applicants"), where("shortApplicantCode", "==", shortApplicantCode)), (snapshot) => {
             setResults(snapshot.docs.map((current) => (
                 current.id
             )));
@@ -53,20 +51,20 @@ export default function CheckApplicantCode() {
         <div>
             <form
                 className={styles.homeContainer}
-                onSubmit={applyCodeToApplicantCode}
+                onSubmit={shortApplicantCodeToApplicantCode}
             >
                 <div className={styles.header}>
-                    5자리 응시자 코드를 입력하세요.
+                    6자리 응시자 코드를 입력하세요.
                 </div>
 
                 <input
                     type="text"
-                    value={magicCode}
+                    value={shortApplicantCode}
                     className={styles.inputBox}
-                    maxLength={5}
+                    maxLength={6}
                     spellCheck={false}
                     onChange={(event: any) => {
-                        setMagicCode(String(event.target.value).toUpperCase());
+                        setShortApplicantCode(String(event.target.value).toUpperCase());
                     }}
                 />
 
@@ -78,7 +76,7 @@ export default function CheckApplicantCode() {
                     type="submit"
                     value="응시자 코드 확인"
                     className={styles.goToTestButton}
-                    disabled={magicCode.length !== 5}
+                    disabled={shortApplicantCode.length !== 6}
                 />
             </form>
         </div>
