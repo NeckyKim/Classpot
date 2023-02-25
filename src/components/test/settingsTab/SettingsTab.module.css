@@ -1,85 +1,49 @@
-.header {
-    color: rgb(0, 100, 250);
-    margin-top: 50px;
-    margin-bottom: 10px;
-}
-
-.header:nth-child(1) {
-    margin-top: 0px;
-}
-
-.settingsHeader {
-    color: rgb(150, 150, 150);
-    height: 40px;
-    line-height: 40px;
-}
-
 .settingsContainer {
-    width: 100%;
-    height: fit-content;
     padding: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
 }
 
-.settingsContainerTop {
-    display: grid;
-    grid-template-columns: 1fr fit-content(100%);
-}
-
-.settingsContainerTop1 {
-    display: grid;
-    grid-template-columns: fit-content(100%) 1fr;
-}
-
-.settingsContainerTop2 {
-    display: grid;
-    justify-content: right;
-}
-
-.settingsContainerTopHeader {
-    font-size: 1rem;
-    height: 40px;
-    line-height: 40px;
-    margin-right: 10px;
-    color: rgb(150, 150, 150);
-}
-
-.settingsContainerTopValue {
+.settingsHeader {
     font-size: 1.2rem;
+    font-weight: 200;
+    color: rgb(150, 150, 150);
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+.settingsHeader:nth-child(1) {
+    margin-top: 0px;
+}
+
+.settingsValue {
+    font-size: 1.5rem;
+    font-weight: 700;
     height: 40px;
     line-height: 40px;
+    margin-bottom: 10px;
 }
 
-.settingsContainerBottom {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid rgb(220, 220, 220);
-    display: grid;
-    grid-template-columns: 1fr fit-content(100%);
-    gap: 10px
-}
-
-.settingsContainerInfo {
-    font-size: 1rem;
+.startEndDateValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 320px;
     height: 40px;
     line-height: 40px;
+    margin-bottom: 10px;
 }
 
-.inputBox {
-    width: 100%;
+.durationValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 120px;
     height: 40px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(240, 240, 240);
-    padding-left: 10px;
-    padding-right: 10px;
+    line-height: 40px;
+    margin-bottom: 10px;
 }
 
-.editButton,
-.applyCodeCopyButton {
+.editButton {
     width: 100px;
     height: 40px;
     line-height: 40px;
@@ -103,125 +67,163 @@
     color: rgb(255, 255, 255);
     background-color: rgb(200, 200, 200);
     cursor: pointer;
+    margin-left: 10px;
+}
+
+.description {
+    font-weight: 300;
+    color: rgb(0, 220, 220);
+    word-break: keep-all;
+}
+
+.dateContainer {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, fit-content(100%));
+    gap: 20px;
 }
 
 .feedbackContainer {
+    margin-bottom: 10px;
     display: grid;
-    grid-template-columns: 1fr fit-content(100%);
-}
-
-.feedbackContainer1 {
-    height: 40px;
-    line-height: 40px;
-    word-break: keep-all;
+    grid-template-columns: repeat(2, fit-content(100%));
+    gap: 1px;
 }
 
 .feedbackButtonOn {
-    width: 70px;
+    width: 100px;
     height: 40px;
     line-height: 40px;
     font-size: 1rem;
-    text-align: center;
     border: none;
-    border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 220, 220);
-    cursor: pointer;
+    text-align: center;
 }
 
 .feedbackButtonOff {
-    width: 70px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 1rem;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(200, 200, 200);
-    cursor: pointer;
-}
-
-.deleteButton,
-.deleteConfirmButton {
     width: 100px;
     height: 40px;
     line-height: 40px;
     font-size: 1rem;
-    text-align: center;
     border: none;
-    border-radius: 5px;
     color: rgb(255, 255, 255);
-    background-color: rgb(250, 50, 50);
+    background-color: rgb(200, 200, 200);
+    text-align: center;
     cursor: pointer;
 }
 
-.deleteConfirmButton:disabled {
-    background-color: rgb(200, 200, 200);
-}
-
-.deleteCancelButton {
-    width: 100px;
+.testNameInputBox {
+    width: 600px;
     height: 40px;
     line-height: 40px;
-    font-size: 1rem;
-    text-align: center;
-    border: none;
+    font-size: 1.1rem;
     border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(200, 200, 200);
-    cursor: pointer;
+    border: 1px solid rgb(220, 220, 220);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
 }
 
-.deleteReminder {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    word-break: keep-all;
+.startDateInputBox {
+    width: 320px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
 }
 
-.deleteContainer {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid rgb(220, 220, 220);
-}
-
-.deleteContainerBottom {
-    display: grid;
-    grid-template-columns: 1fr fit-content(100%);
-    gap: 10px
-}
-
-
-
-@media (max-width: 1200px) {
-    .feedbackContainer {
-        grid-template-columns: none;
-        grid-template-rows: fit-content(100%) 40px;
-        gap: 10px;
-    }
-
-    .feedbackContainer1 {
-        height: normal;
-        line-height: normal;
-        justify-items: right;
-    }
-
-    .feedbackContainer2 {
-        display: grid;
-        grid-template-columns: 1fr fit-content(100%) fit-content(100%);
-        justify-items: right;
-    }
+.durationInputBox {
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    padding-left: 10px;
+    margin-bottom: 10px;
 }
 
 
 
-@media (max-width: 600px) {
-    .settingsContainerTop {
-        grid-template-columns: none;
-        grid-template-rows: 1fr 1fr;
-    }
-
-    .settingsContainerTopValue {
+@media (max-width: 1200px)  {
+    .settingsHeader {
         font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .settingsValue {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .startEndDateValue {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    
+    .durationValue {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .editButton {
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .cancelButton {
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.8rem;
+        margin-left: 5px;
+    }
+    
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .dateContainer {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: repeat(3, fit-content(100%));
+        gap: 5px;
+    }
+
+    .feedbackButtonOn {
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .feedbackButtonOff {
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .testNameInputBox {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .startDateInputBox {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .durationInputBox {
+        width: 100%;
+        margin-bottom: 5px;
     }
 }
