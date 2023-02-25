@@ -28,7 +28,7 @@ export default function Choices({ index, answer, setAnswer, choices, setChoices 
     return (
         <div className={styles.choiceContainer}>
             <input
-                type="text"
+                type="textarea"
                 name={String(index)}
                 value={choices[index]}
                 onChange={onChangeChoices}

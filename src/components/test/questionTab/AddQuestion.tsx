@@ -77,85 +77,81 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
     return (
         <form onSubmit={addQuestion}>
-            <div className={styles.header}>
-                문제 설정
+            <div className={styles.addQuestionsHeader}>
+                유형
             </div>
 
-            <div className={styles.questionTypeContainer}>
-                <div className={styles.addQuestionHeader}>
-                    유형
+            <div className={styles.typeButtons}>
+                <div
+                    className={type === "객관식" ? styles.typeSelected : styles.typeNotSelected}
+                    style={{ borderRadius: "5px 0px 0px 5px" }}
+                    onClick={() => {
+                        setType("객관식");
+                        setAnswer(new Array(10).fill(false));
+                        setNumberOfAnswers(0);
+                    }}>
+                    객관식
                 </div>
 
-                <div className={styles.questionTypeButtons}>
-                    <div
-                        className={type === "객관식" ? styles.questionTypeSelected : styles.questionTypeNotSelected}
-                        style={{ borderRadius: "5px 0px 0px 5px" }}
-                        onClick={() => {
-                            setType("객관식");
-                            setAnswer(new Array(10).fill(false));
-                            setNumberOfAnswers(0);
-                        }}>
-                        객관식
-                    </div>
+                <div
+                    className={type === "참/거짓" ? styles.typeSelected : styles.typeNotSelected}
+                    onClick={() => {
+                        setType("참/거짓");
+                        setAnswer(true);
+                        setNumberOfAnswers(1);
+                    }}>
+                    참/거짓
+                </div>
 
-                    <div
-                        className={type === "참/거짓" ? styles.questionTypeSelected : styles.questionTypeNotSelected}
-                        onClick={() => {
-                            setType("참/거짓");
-                            setAnswer(true);
-                            setNumberOfAnswers(1);
-                        }}>
-                        참/거짓
-                    </div>
+                <div
+                    className={type === "주관식" ? styles.typeSelected : styles.typeNotSelected}
+                    onClick={() => {
+                        setType("주관식");
+                        setAnswer("");
+                        setNumberOfAnswers(1);
+                    }}>
+                    주관식
+                </div>
 
-                    <div
-                        className={type === "주관식" ? styles.questionTypeSelected : styles.questionTypeNotSelected}
-                        onClick={() => {
-                            setType("주관식");
-                            setAnswer("");
-                            setNumberOfAnswers(1);
-                        }}>
-                        주관식
-                    </div>
-
-                    <div
-                        className={type === "서술형" ? styles.questionTypeSelected : styles.questionTypeNotSelected}
-                        style={{ borderRadius: "0px 5px 5px 0px" }}
-                        onClick={() => {
-                            setType("서술형");
-                            setAnswer("");
-                            setNumberOfAnswers(1);
-                        }}>
-                        서술형
-                    </div>
+                <div
+                    className={type === "서술형" ? styles.typeSelected : styles.typeNotSelected}
+                    style={{ borderRadius: "0px 5px 5px 0px" }}
+                    onClick={() => {
+                        setType("서술형");
+                        setAnswer("");
+                        setNumberOfAnswers(1);
+                    }}>
+                    서술형
                 </div>
             </div>
 
 
 
-            <div className={styles.questionPointsContainer}>
-                <div className={styles.addQuestionHeader}>
-                    배점
-                </div>
+            <div className={styles.addQuestionsHeader}>
+                배점
+            </div>
 
+            <div className={styles.points}>
                 <input
                     type="number"
                     min={1}
                     max={100}
                     value={points}
-                    onChange={(event) => { setPoints(Number(event.target.value)); }}
-                    className={styles.questionPointsInputBox}
+                    onChange={(event) => { 
+                        setPoints(Number(event.target.value)); 
+                    }}
+                    className={styles.pointsInputBox}
                     required
                 />
 
-                <div className={styles.questionPointsUnit}>
+                <div className={styles.pointsUnit}>
                     점
                 </div>
             </div>
 
 
 
-            <div className={styles.header}>
+            <div className={styles.addQuestionsHeader}>
                 지문
             </div>
             
@@ -188,8 +184,26 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
 
 
-            <div className={styles.header}>
+            <div className={styles.choicesHeader}>
                 정답
+
+                <div className={styles.choicesButtonContainer}>
+                    <input
+                        type="button"
+                        value="증가 +"
+                        disabled={numberOfChoices === 10}
+                        onClick={() => { setNumberOfChoices(numberOfChoices + 1); }}
+                        className={styles.choicesIncreaseButton}
+                    />
+
+                    <input
+                        type="button"
+                        value="감소 -"
+                        disabled={numberOfChoices === 3}
+                        onClick={() => { setNumberOfChoices(numberOfChoices - 1); }}
+                        className={styles.choicesDecreaseButton}
+                    />
+                </div>
             </div>
 
             {
@@ -197,37 +211,17 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
                 &&
 
-                <div>
-                    <div className={styles.choiceButtonContainer}>
-                        <input
-                            type="button"
-                            value="증가 +"
-                            disabled={numberOfChoices === 10}
-                            onClick={() => { setNumberOfChoices(numberOfChoices + 1); }}
-                            className={styles.choiceButtonUp}
-                        />
-
-                        <input
-                            type="button"
-                            value="감소 -"
-                            disabled={numberOfChoices === 3}
-                            onClick={() => { setNumberOfChoices(numberOfChoices - 1); }}
-                            className={styles.choiceButtonDown}
-                        />
-                    </div>
-
-                    <div className={styles.choicesContainer}>
-                        <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                        {numberOfChoices >= 4 && <Choices index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 5 && <Choices index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 6 && <Choices index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 7 && <Choices index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                        {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    </div>
+                <div className={styles.choicesContainer}>
+                    <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    {numberOfChoices >= 4 && <Choices index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 5 && <Choices index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 6 && <Choices index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 7 && <Choices index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
                 </div>
             }
 
@@ -236,24 +230,23 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
                 &&
 
-                <div>
-                    <div className={styles.answerContainer}>
-                        <div
-                            className={answer ? styles.answerTrueSelected : styles.answerTrueNotSelected}
-                            onClick={() => { setAnswer(true); }}
-                        >
-                            참
-                        </div>
+                <div className={styles.trueFalseButtons}>
+                    <div
+                        className={answer ? styles.trueFalseSelected : styles.trueFalseNotSelected}
+                        style={{borderRadius: "5px 0px 0px 5px"}}
+                        onClick={() => { setAnswer(true); }}
+                    >
+                        참
+                    </div>
 
-                        <div
-                            className={!answer ? styles.answerFalseSelected : styles.answerFalseNotSelected}
-                            onClick={() => { setAnswer(false); }}
-                        >
-                            거짓
-                        </div>
+                    <div
+                        className={!answer ? styles.trueFalseSelected : styles.trueFalseNotSelected}
+                        style={{borderRadius: "0px 5px 5px 0px"}}
+                        onClick={() => { setAnswer(false); }}
+                    >
+                        거짓
                     </div>
                 </div>
-
             }
 
             {
@@ -261,15 +254,13 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
                 &&
 
-                <div>
-                    <input
-                        type="text"
-                        value={answer}
-                        onChange={(event) => { setAnswer(event.target.value); }}
-                        className={styles.answerBox}
-                        required
-                    />
-                </div>
+                <input
+                    type="text"
+                    value={answer}
+                    onChange={(event) => { setAnswer(event.target.value); }}
+                    className={styles.answerInputBox}
+                    required
+                />
             }
 
             {
@@ -277,28 +268,28 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
                 &&
 
-                <div>
-                    <div className={styles.answerBoxUnable}>
-                        서술형 문제는 정답을 설정할 수 없습니다.
-                    </div>
+                <div className={styles.answerInputBoxDisabled}>
+                    서술형 문제는 정답을 설정할 수 없습니다.
                 </div>
             }
 
-            <br />
 
-            <input type="submit" value="추가" className={styles.submitButton} />
 
-            <button
-                className={styles.cancelButton}
-                onClick={() => {
-                    setIsAddingQuestion(false);
-                    setPoints(1);
-                    setQuestion("");
-                    setAnswer("");
-                }}
-            >
-                취소
-            </button>
+            <div className={styles.addQuestionsButtons}>
+                <input type="submit" value="추가" className={styles.submitButton} />
+
+                <button
+                    className={styles.cancelButton}
+                    onClick={() => {
+                        setIsAddingQuestion(false);
+                        setPoints(1);
+                        setQuestion("");
+                        setAnswer("");
+                    }}
+                >
+                    취소
+                </button>
+            </div>
         </form>
     )
 }
