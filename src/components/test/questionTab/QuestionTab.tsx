@@ -22,7 +22,6 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
     const [index, setIndex] = useState<number>(0);
 
 
-
     // 질문 목록
     const questionList: any = GetQuestionList(testCode);
 
@@ -59,20 +58,10 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
 
                                     questionList.map((current: any, index: number) => (
                                         <div className={styles.questionContainer}>
-                                            <div className={styles.questionHeader}>
+                                            <div className={styles.questionContainerTop}>
                                                 <div className={styles.questionNumber}>
-                                                    Q.{index + 1}
+                                                    {index + 1}
                                                 </div>
-
-                                                <div className={styles.questionType}>
-                                                    {current.type}
-                                                </div>
-
-                                                <div className={styles.questionPoints}>
-                                                    {current.points}점
-                                                </div>
-
-                                                <div />
 
                                                 <div
                                                     className={styles.editButton}
@@ -80,6 +69,9 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                         setIsEditingQuestion((prev) => !prev);
                                                         setIndex(index);
                                                     }}>
+
+                                                    <img className={styles.buttonImage} src={process.env.PUBLIC_URL + "/icons/edit.png"} />
+
                                                     수정
                                                 </div>
 
@@ -91,70 +83,127 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                             await deleteObject(ref(storageService, userCode + "/" + testCode + "/" + current.questionCode))
                                                         }
                                                     }}>
+
+                                                    <img className={styles.buttonImage} src={process.env.PUBLIC_URL + "/icons/delete.png"} />
+
                                                     삭제
                                                 </div>
                                             </div>
 
-                                            <Editor
-                                                apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
-                                                disabled={true}
-                                                init={{
-                                                    readonly: true,
-                                                    menubar: false,
-                                                    toolbar: false,
-                                                    statusbar: false,
-                                                    plugins: ["autoresize"],
-                                                    skin: "borderless",
-                                                    content_style: `
-                                                    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-                                                    body{
-                                                        font-family:'Pretendard';
-                                                        font-weight: 600;
-                                                        margin: 0px;
-                                                    }
-                                                `
-                                                }}
-                                                value={current.question}
-                                            />
+                                            <div className={styles.questionContainerBottom}>
+                                                <div className={styles.questionInfo}>
+                                                    <div className={styles.questionInfoContainer}>
+                                                        <div className={styles.questionInfoHeader}>
+                                                            유형
+                                                        </div>
 
-                                            {
-                                                current.type === "객관식"
+                                                        <div className={styles.questionInfoValue}>
+                                                            {current.type}
+                                                        </div>
+                                                    </div>
 
-                                                &&
 
-                                                <div>
-                                                    <div className={current.answer[0] ? styles.correctChoice : styles.wrongChoice}>{current.choices[0]}</div>
-                                                    <div className={current.answer[1] ? styles.correctChoice : styles.wrongChoice}>{current.choices[1]}</div>
-                                                    <div className={current.answer[2] ? styles.correctChoice : styles.wrongChoice}>{current.choices[2]}</div>
-                                                    {current.choices[3] && <div className={current.answer[3] ? styles.correctChoice : styles.wrongChoice}>{current.choices[3]}</div>}
-                                                    {current.choices[4] && <div className={current.answer[4] ? styles.correctChoice : styles.wrongChoice}>{current.choices[4]}</div>}
-                                                    {current.choices[5] && <div className={current.answer[5] ? styles.correctChoice : styles.wrongChoice}>{current.choices[5]}</div>}
-                                                    {current.choices[6] && <div className={current.answer[6] ? styles.correctChoice : styles.wrongChoice}>{current.choices[6]}</div>}
-                                                    {current.choices[7] && <div className={current.answer[7] ? styles.correctChoice : styles.wrongChoice}>{current.choices[7]}</div>}
-                                                    {current.choices[8] && <div className={current.answer[8] ? styles.correctChoice : styles.wrongChoice}>{current.choices[8]}</div>}
-                                                    {current.choices[9] && <div className={current.answer[9] ? styles.correctChoice : styles.wrongChoice}>{current.choices[9]}</div>}
+                                                    <div className={styles.questionInfoContainer}>
+                                                        <div className={styles.questionInfoHeader}>
+                                                            배점
+                                                        </div>
+
+                                                        <div className={styles.questionInfoValue}>
+                                                            {current.points}점
+                                                        </div>
+                                                    </div>
+
+                                                    <div className={styles.questionInfoContainer}>
+                                                        <div className={styles.questionInfoHeader}>
+                                                            난이도
+                                                        </div>
+
+                                                        <div className={styles.questionInfoValue}>
+                                                            {current.level === 0 && <div className={styles.level0}>매우 쉬움</div>}
+                                                            {current.level === 1 && <div className={styles.level1}>쉬움</div>}
+                                                            {current.level === 2 && <div className={styles.level2}>보통</div>}
+                                                            {current.level === 3 && <div className={styles.level3}>어려움</div>}
+                                                            {current.level === 4 && <div className={styles.level4}>매우 어려움</div>}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            }
 
-                                            {
-                                                current.type === "참/거짓"
 
-                                                &&
 
-                                                <div className={styles.correctChoice}>
-                                                    {current.answer ? "참" : "거짓"}
+                                                <div className={styles.questionInfoHeader}>
+                                                    지문
                                                 </div>
-                                            }
 
-                                            {
-                                                current.type === "주관식"
-
-                                                &&
-
-                                                <div className={styles.correctChoice}>
-                                                    {current.answer}
+                                                <div className={styles.questionPassage}>
+                                                    <Editor
+                                                        apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                                                        disabled={true}
+                                                        init={{
+                                                            readonly: true,
+                                                            menubar: false,
+                                                            toolbar: false,
+                                                            statusbar: false,
+                                                            plugins: ["autoresize"],
+                                                            skin: "borderless",
+                                                            content_style: `
+                                                        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+                                                        body{
+                                                            font-family:'Pretendard';
+                                                            font-weight: 600;
+                                                            margin: 0px;
+                                                            padding: 0px;
+                                                        }
+                                                    `
+                                                        }}
+                                                        value={current.question}
+                                                    />
                                                 </div>
-                                            }
+
+
+
+                                                <div className={styles.questionInfoHeader}>
+                                                    정답
+                                                </div>
+
+                                                {
+                                                    current.type === "객관식"
+
+                                                    &&
+
+                                                    <div>
+                                                        <div className={current.answer[0] ? styles.correctChoice : styles.wrongChoice}>{current.choices[0]}</div>
+                                                        <div className={current.answer[1] ? styles.correctChoice : styles.wrongChoice}>{current.choices[1]}</div>
+                                                        <div className={current.answer[2] ? styles.correctChoice : styles.wrongChoice}>{current.choices[2]}</div>
+                                                        {current.choices[3] && <div className={current.answer[3] ? styles.correctChoice : styles.wrongChoice}>{current.choices[3]}</div>}
+                                                        {current.choices[4] && <div className={current.answer[4] ? styles.correctChoice : styles.wrongChoice}>{current.choices[4]}</div>}
+                                                        {current.choices[5] && <div className={current.answer[5] ? styles.correctChoice : styles.wrongChoice}>{current.choices[5]}</div>}
+                                                        {current.choices[6] && <div className={current.answer[6] ? styles.correctChoice : styles.wrongChoice}>{current.choices[6]}</div>}
+                                                        {current.choices[7] && <div className={current.answer[7] ? styles.correctChoice : styles.wrongChoice}>{current.choices[7]}</div>}
+                                                        {current.choices[8] && <div className={current.answer[8] ? styles.correctChoice : styles.wrongChoice}>{current.choices[8]}</div>}
+                                                        {current.choices[9] && <div className={current.answer[9] ? styles.correctChoice : styles.wrongChoice}>{current.choices[9]}</div>}
+                                                    </div>
+                                                }
+
+                                                {
+                                                    current.type === "참/거짓"
+
+                                                    &&
+
+                                                    <div className={styles.correctChoice}>
+                                                        {current.answer ? "참" : "거짓"}
+                                                    </div>
+                                                }
+
+                                                {
+                                                    current.type === "주관식"
+
+                                                    &&
+
+                                                    <div className={styles.correctChoice}>
+                                                        {current.answer}
+                                                    </div>
+                                                }
+                                            </div>
                                         </div>
                                     ))
 

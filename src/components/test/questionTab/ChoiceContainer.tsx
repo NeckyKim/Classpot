@@ -1,4 +1,4 @@
-import styles from "./Choices.module.css";
+import styles from "./ChoiceContainer.module.css";
 
 
 

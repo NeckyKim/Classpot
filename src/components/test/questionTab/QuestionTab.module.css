@@ -15,50 +15,106 @@
 .questionContainer {
     border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
-    padding: 40px;
     margin-bottom: 40px;
 }
 
-.questionHeader {
+.questionContainerTop {
     display: grid;
-    grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%);
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.questionContainerBottom {
+    padding: 40px;
 }
 
 .questionNumber {
-    font-weight: 500;
     font-size: 2rem;
-    font-family: "NanumSquare";
-    height: 40px;
-    line-height: 40px;
+    font-weight: 500;
     color: rgb(0, 100, 250);
 }
 
-.questionType {
-    font-weight: 300;
-    font-size: 1.2rem;
-    height: 40px;
-    line-height: 40px;
-    margin-left: 25px;
-    padding-left: 25px;
-    color: rgb(150, 150, 150);
-    border-left: 1px solid rgb(220, 220, 220);
+.questionInfo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 40px;
 }
 
-.questionPoints {
-    font-weight: 300;
+.questionInfoContainer {
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+}
+
+.questionInfoHeader {
     font-size: 1.2rem;
-    height: 40px;
-    line-height: 40px;
-    margin-left: 20px;
+    height: 26px;
+    line-height: 26px;
+    font-weight: 300;
     color: rgb(150, 150, 150);
+}
+
+.questionInfoHeader:nth-child(4) {
+    margin-bottom: 15px;
+}
+
+.questionInfoValue {
+    font-size: 1.2rem;
+    height: 26px;
+    line-height: 26px;
+    margin-left: 15px;
+}
+
+.level0,
+.level1,
+.level2,
+.level3,
+.level4 {
+    width: fit-content;
+    height: 26px;
+    line-height: 26px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.level0 {
+    background-color: rgb(100, 250, 250);
+    color: rgb(0, 100, 250);
+}
+
+.level1 {
+    background-color: rgb(150, 250, 150);
+    color: rgb(0, 150, 0);
+}
+
+.level2 {
+    background-color: rgb(200, 200, 200);
+    color: rgb(50, 50, 50);
+}
+
+.level3 {
+    background-color: rgb(250, 150, 50);
+    color: rgb(255, 255, 255);
+}
+
+.level4 {
+    background-color: rgb(250, 170, 170);
+    color: rgb(250, 0, 0);
 }
 
 .correctChoice {
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
+    border: 1px solid rgb(0, 100, 250);
+    color: rgb(0, 100, 250);
     word-break: keep-all;
     text-align: justify;
 }
@@ -67,7 +123,7 @@
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
-    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(220, 220, 220);
     word-break: keep-all;
     text-align: justify;
 }
@@ -81,44 +137,75 @@
 .editButton {
     width: 60px;
     height: 30px;
-    line-height: 30px;
+    line-height: 28px;
     font-size: 0.9rem;
     text-align: center;
-    border: none;
+    border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 220, 220);
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
     cursor: pointer;
 }
 
 .deleteButton {
     width: 60px;
     height: 30px;
-    line-height: 30px;
+    line-height: 28px;
     font-size: 0.9rem;
     text-align: center;
     margin-left: 5px;
-    border: none;
+    border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(250, 50, 50);
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
     cursor: pointer;
+}
+
+.buttonImage {
+    height: 28px;
+    padding: 7px;
+    padding-right: 5px;
 }
 
 
 
 @media (max-width: 1200px) {
-    .questionContainer {
+    .questionContainerTop {
+        display: grid;
+        grid-template-columns: 1fr fit-content(100%) fit-content(100%);
+        border-bottom: 1px solid rgb(220, 220, 220);
+        align-items: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+    
+    .questionContainerBottom {
         padding: min(40px, 5vw);
     }
 
     .questionNumber {
-        font-weight: 500;
         font-size: 1.5rem;
-        font-family: "NanumSquare";
-        height: 30px;
-        line-height: 30px;
-        color: rgb(0, 100, 250);
+    }
+
+    .questionInfo {
+        margin-bottom: min(40px, 5vw);
+    }
+
+    .questionInfoContainer {
+        grid-template-columns: none;
+        grid-template-rows: (3, fit-content(100%));
+    }
+   
+    .questionInfoHeader {
+        font-size: 1rem;
+    }
+
+    .questionInfoValue {
+        font-size: 1rem;
+        margin-left: 0px;
+        margin-top: 10px;
     }
     
     .questionType {
@@ -137,16 +224,12 @@
     }
 
     .editButton {
-        width: 40px;
-        height: 30px;
-        line-height: 30px;
+        width: 55px;
         font-size: 0.7rem;
     }
     
     .deleteButton {
-        width: 40px;
-        height: 30px;
-        line-height: 30px;
+        width: 55px;
         font-size: 0.7rem;
     }
 }

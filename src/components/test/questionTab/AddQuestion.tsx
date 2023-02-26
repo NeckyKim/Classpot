@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { dbService } from "../../../FirebaseModules";
 import { doc, setDoc } from "firebase/firestore";
 
-import Choices from "./Choices";
+import ChoiceContainer from "./ChoiceContainer";
 
 import { toast } from "react-toastify";
 import { Editor } from '@tinymce/tinymce-react';
@@ -20,6 +20,7 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
     const [type, setType] = useState<string>("객관식");
     const [points, setPoints] = useState<number>(1);
+    const [level, setLevel] = useState<number>(2);
 
     const [question, setQuestion] = useState<string>("");
     const [answer, setAnswer] = useState<any>(new Array(10).fill(false));
@@ -48,6 +49,7 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
                 await setDoc(doc(dbService, "tests", testCode, "questions", id), {
                     type: type,
                     points: points,
+                    level: level,
                     question: question,
                     answer: answer,
                     choices: choices,
@@ -72,7 +74,7 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
         }
     }
 
-
+    console.log(level)
 
 
     return (
@@ -132,25 +134,48 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
 
 
-            <div className={styles.addQuestionsHeader}>
-                배점
-            </div>
+            <div className={styles.pointsLevel}>
+                <div>
+                    <div className={styles.addQuestionsHeader}>
+                        배점
+                    </div>
 
-            <div className={styles.points}>
-                <input
-                    type="number"
-                    min={1}
-                    max={100}
-                    value={points}
-                    onChange={(event) => { 
-                        setPoints(Number(event.target.value)); 
-                    }}
-                    className={styles.pointsInputBox}
-                    required
-                />
+                    <div className={styles.points}>
+                        <input
+                            type="number"
+                            min={1}
+                            max={100}
+                            value={points}
+                            onChange={(event) => {
+                                setPoints(Number(event.target.value));
+                            }}
+                            className={styles.pointsInputBox}
+                            required
+                        />
 
-                <div className={styles.pointsUnit}>
-                    점
+                        <div className={styles.pointsUnit}>
+                            점
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div className={styles.addQuestionsHeader}>
+                        난이도
+                    </div>
+
+                    <select
+                        className={styles.levelDropdownBox}
+                        onChange={(event: any) => {
+                            setLevel(Number(event.target.value));
+                        }}
+                    >
+                        <option value={0}>매우 쉬움</option>
+                        <option value={1}>쉬움</option>
+                        <option value={2} selected>보통</option>
+                        <option value={3}>어려움</option>
+                        <option value={4}>매우 어려움</option>
+                    </select>
                 </div>
             </div>
 
@@ -217,16 +242,16 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
                 &&
 
                 <div className={styles.choicesContainer}>
-                    <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    {numberOfChoices >= 4 && <Choices index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 5 && <Choices index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 6 && <Choices index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 7 && <Choices index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    <ChoiceContainer index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    <ChoiceContainer index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    <ChoiceContainer index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    {numberOfChoices >= 4 && <ChoiceContainer index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 5 && <ChoiceContainer index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 6 && <ChoiceContainer index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 7 && <ChoiceContainer index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 8 && <ChoiceContainer index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 9 && <ChoiceContainer index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 10 && <ChoiceContainer index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
                 </div>
             }
 

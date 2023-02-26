@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { dbService } from "../../../FirebaseModules";
 import { doc, updateDoc } from "firebase/firestore";
 
-import Choices from "./Choices";
+import ChoiceContainer from "./ChoiceContainer";
 
 import { toast } from "react-toastify";
 import { Editor } from '@tinymce/tinymce-react';
@@ -22,6 +22,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
 
     const [type, setType] = useState<string>(questionInfo.type);
     const [points, setPoints] = useState<number>(questionInfo.points);
+    const [level, setLevel] = useState<number>(questionInfo.level);
 
     const [question, setQuestion] = useState<string>(questionInfo.question);
     const [answer, setAnswer] = useState<any>(questionInfo.answer);
@@ -52,6 +53,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 await updateDoc(doc(dbService, "tests", testCode, "questions", questionInfo.questionCode), {
                     type: type,
                     points: points,
+                    level: level,
                     question: question,
                     answer: answer,
                     choices: choices,
@@ -133,32 +135,54 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
             </div>
 
 
+            <div className={styles.pointsLevel}>
+                <div>
+                    <div className={styles.addQuestionsHeader}>
+                        배점
+                    </div>
 
-            <div className={styles.addQuestionsHeader}>
-                배점
-            </div>
+                    <div className={styles.points}>
+                        <input
+                            type="number"
+                            min={1}
+                            max={100}
+                            value={points}
+                            onChange={(event) => {
+                                setPoints(Number(event.target.value));
+                            }}
+                            className={styles.pointsInputBox}
+                            required
+                        />
 
-            <div className={styles.points}>
-                <input
-                    type="number"
-                    min={1}
-                    max={100}
-                    value={points}
-                    onChange={(event) => { 
-                        setPoints(Number(event.target.value)); 
-                    }}
-                    className={styles.pointsInputBox}
-                    required
-                />
+                        <div className={styles.pointsUnit}>
+                            점
+                        </div>
+                    </div>
+                </div>
 
-                <div className={styles.pointsUnit}>
-                    점
+                <div>
+                    <div className={styles.addQuestionsHeader}>
+                        난이도
+                    </div>
+
+                    <select
+                        className={styles.levelDropdownBox}
+                        onChange={(event: any) => {
+                            setLevel(Number(event.target.value));
+                        }}
+                    >
+                        <option value={0} selected={questionInfo.level === 0}>매우 쉬움</option>
+                        <option value={1} selected={questionInfo.level === 1}>쉬움</option>
+                        <option value={2} selected={questionInfo.level === 2}>보통</option>
+                        <option value={3} selected={questionInfo.level === 3}>어려움</option>
+                        <option value={4} selected={questionInfo.level === 4}>매우 어려움</option>
+                    </select>
                 </div>
             </div>
 
 
 
-            <div className={styles.header}>
+            <div className={styles.addQuestionsHeader}>
                 지문
             </div>
 
@@ -218,16 +242,16 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 &&        
 
                 <div className={styles.choicesContainer}>
-                    <Choices index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    <Choices index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    <Choices index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    {numberOfChoices >= 4 && <Choices index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 5 && <Choices index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 6 && <Choices index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 7 && <Choices index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 8 && <Choices index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 9 && <Choices index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 10 && <Choices index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    <ChoiceContainer index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    <ChoiceContainer index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    <ChoiceContainer index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
+                    {numberOfChoices >= 4 && <ChoiceContainer index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 5 && <ChoiceContainer index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 6 && <ChoiceContainer index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 7 && <ChoiceContainer index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 8 && <ChoiceContainer index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 9 && <ChoiceContainer index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
+                    {numberOfChoices >= 10 && <ChoiceContainer index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
                 </div>
             }
 
