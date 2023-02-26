@@ -121,6 +121,7 @@ details summary::-webkit-details-marker {
 
 @media (max-width: 1200px) {
     .Toastify__toast {
+        font-size: 0.8rem;
         padding: 10px;
         border-radius: 0px;
         box-shadow: none;
