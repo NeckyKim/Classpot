@@ -101,7 +101,6 @@
     margin-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
-    gap: 1px;
 }
 
 .feedbackButtonOn {
@@ -118,11 +117,11 @@
 .feedbackButtonOff {
     width: 100px;
     height: 40px;
-    line-height: 40px;
+    line-height: 38px;
     font-size: 1rem;
-    border: none;
-    color: rgb(255, 255, 255);
-    background-color: rgb(200, 200, 200);
+    border: 1px solid rgb(220, 220, 220);
+    color: rgb(150, 150, 150);
+    background-color: rgb(255, 255, 255);
     text-align: center;
     cursor: pointer;
 }

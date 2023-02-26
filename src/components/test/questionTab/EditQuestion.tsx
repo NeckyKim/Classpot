@@ -86,7 +86,10 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
             <div className={styles.typeButtons}>
                 <div
                     className={type === "객관식" ? styles.typeSelected : styles.typeNotSelected}
-                    style={{ borderRadius: "5px 0px 0px 5px" }}
+                    style={{ 
+                        borderRadius: "5px 0px 0px 5px",
+                        borderRight: "none"
+                    }}
                     onClick={() => {
                         setType("객관식");
                         setAnswer(new Array(10).fill(false));
@@ -97,6 +100,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
 
                 <div
                     className={type === "참/거짓" ? styles.typeSelected : styles.typeNotSelected}
+                    style={{ borderRight: "none" }}
                     onClick={() => {
                         setType("참/거짓");
                         setAnswer(true);
@@ -107,6 +111,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
 
                 <div
                     className={type === "주관식" ? styles.typeSelected : styles.typeNotSelected}
+                    style={{ borderRight: "none" }}
                     onClick={() => {
                         setType("주관식");
                         setAnswer("");
