@@ -57,7 +57,7 @@ export default function App() {
 
                     <ToastContainer
                         transition={Slide}
-                        position={width < 600 ? "bottom-center" : "bottom-right"}
+                        position={width < 1200 ? "bottom-center" : "bottom-right"}
                         autoClose={5000}
                         hideProgressBar
                         newestOnTop={true}
@@ -69,11 +69,11 @@ export default function App() {
                         theme="colored"
                         limit={1}
                         style={
-                            width < 600
+                            width < 1200
 
                                 ?
 
-                                { right: "0px", bottom: "0px" }
+                                { right: "0px", bottom: "80px", zIndex: "2" }
 
                                 :
 
