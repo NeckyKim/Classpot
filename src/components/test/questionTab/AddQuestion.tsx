@@ -74,7 +74,6 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
         }
     }
 
-    console.log(level)
 
 
     return (

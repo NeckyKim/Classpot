@@ -60,6 +60,7 @@
     font-size: 1.1rem;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
     padding-left: 10px;
 }
 
@@ -70,12 +71,13 @@
 }
 
 .levelDropdownBox {
-    width: 200px;
+    width: 150px;
     height: 40px;
     line-height: 40px;
     font-size: 1.1rem;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
     padding-left: 10px;
 }
 
@@ -208,14 +210,16 @@
 
 
 
-@media (max-width: 1200px)  {
+@media (max-width: 1200px) {
     .addQuestionsHeader {
         font-size: 1rem;
+        margin-top: 20px;
         margin-bottom: 5px;
     }
 
     .choicesHeader {
         font-size: 1rem;
+        margin-top: 20px;
         margin-bottom: 5px;
     }
 
@@ -226,6 +230,13 @@
     .trueFalseButtons {
         width: 100%;
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pointsLevel {
+        grid-template-columns: none;
+        grid-template-rows: repeat(2, fit-content(100%));
+        gap: 20px;
+        margin-top: 20px;
     }
 
     .addQuestionsButtons {
