@@ -79,7 +79,7 @@
     line-height: 26px;
     font-size: 0.85rem;
     font-weight: 500;
-    border-radius: 15px;
+    border-radius: 13px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -180,7 +180,7 @@
         padding-left: min(40px, 5vw);
         padding-right: min(40px, 5vw);
     }
-    
+
     .questionContainerBottom {
         padding: min(40px, 5vw);
     }
@@ -190,14 +190,15 @@
     }
 
     .questionInfo {
+        grid-template-columns: 1fr 1fr 1.5fr;
         margin-bottom: min(40px, 5vw);
     }
 
     .questionInfoContainer {
         grid-template-columns: none;
-        grid-template-rows: (3, fit-content(100%));
+        grid-template-rows: (2, fit-content(100%));
     }
-   
+
     .questionInfoHeader {
         font-size: 1rem;
     }
@@ -207,7 +208,7 @@
         margin-left: 0px;
         margin-top: 10px;
     }
-    
+
     .questionType {
         font-size: 1rem;
         height: 30px;
@@ -215,7 +216,7 @@
         margin-left: 10px;
         padding-left: 10px;
     }
-    
+
     .questionPoints {
         font-size: 1rem;
         height: 30px;
@@ -223,11 +224,21 @@
         margin-left: 10px;
     }
 
+    .level0,
+    .level1,
+    .level2,
+    .level3,
+    .level4 {
+        font-size: 0.75rem;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
     .editButton {
         width: 55px;
         font-size: 0.7rem;
     }
-    
+
     .deleteButton {
         width: 55px;
         font-size: 0.7rem;
