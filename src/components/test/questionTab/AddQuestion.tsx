@@ -216,23 +216,40 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
             <div className={styles.choicesHeader}>
                 정답
 
-                <div className={styles.choicesButtonContainer}>
-                    <input
-                        type="button"
-                        value="증가 +"
-                        disabled={numberOfChoices === 10}
-                        onClick={() => { setNumberOfChoices(numberOfChoices + 1); }}
-                        className={styles.choicesIncreaseButton}
-                    />
+                {
+                    type === "객관식"
 
-                    <input
-                        type="button"
-                        value="감소 -"
-                        disabled={numberOfChoices === 3}
-                        onClick={() => { setNumberOfChoices(numberOfChoices - 1); }}
-                        className={styles.choicesDecreaseButton}
-                    />
-                </div>
+                    &&
+
+                    <div className={styles.choicesButtonContainer}>
+                        <input
+                            type="button"
+                            value="증가 +"
+                            disabled={numberOfChoices === 10}
+                            onClick={() => { setNumberOfChoices(numberOfChoices + 1); }}
+                            className={styles.choicesIncreaseButton}
+                        />
+
+                        <input
+                            type="button"
+                            value="감소 -"
+                            disabled={numberOfChoices === 3}
+                            onClick={() => { 
+                                setNumberOfChoices(numberOfChoices - 1);
+                                
+                                var temp1 = choices;
+                                temp1[numberOfChoices - 1] = "";
+
+                                var temp2 = answer;
+                                temp2[numberOfChoices - 1] = false;
+
+                                setChoices(temp1);
+                                setAnswer(temp2);
+                            }}
+                            className={styles.choicesDecreaseButton}
+                        />
+                    </div>
+                }
             </div>
 
             {

@@ -28,6 +28,10 @@ textarea:focus {
     outline: none;
 }
 
+select:focus {
+    outline: none;
+}
+
 select,
 input,
 details,

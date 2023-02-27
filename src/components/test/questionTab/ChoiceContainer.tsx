@@ -12,7 +12,7 @@ type ChoicesProps = {
 
 
 
-export default function Choices({ index, answer, setAnswer, choices, setChoices }: ChoicesProps) {
+export default function ChoiceContainer({ index, answer, setAnswer, choices, setChoices }: ChoicesProps) {
     function onChangeChoices(event: any) {
         setChoices((prev: any) => {
             return { ...prev, [event.target.name]: event.target.value }
@@ -24,6 +24,8 @@ export default function Choices({ index, answer, setAnswer, choices, setChoices 
             return { ...prev, [event.target.name]: !answer[event.target.name] }
         });
     }
+
+    
 
     return (
         <div className={styles.choiceContainer}>

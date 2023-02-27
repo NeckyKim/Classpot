@@ -257,7 +257,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                                     <input
                                         type="datetime-local"
                                         className={styles.startDateInputBox}
-                                        value={startDate.toLocaleString("")}
+                                        value={startDate.toLocaleString("ko-KR")}
                                         onChange={(event) => {
                                             setStartDate(event.target.value);
                                         }}
@@ -287,10 +287,12 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                                     </div>
 
                                     <div className={styles.settingsValue}>
-                                        {new Date(testInfo?.startDate + testInfo?.duration * 60000).toLocaleString("ko-KR")}
+                                        {new Date(Date.parse(startDate) + duration * 60000).toLocaleString("ko-KR")}
                                     </div>
                                 </div>
                             </div>
+
+
 
                             <input
                                 type="submit"

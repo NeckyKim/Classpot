@@ -1,10 +1,9 @@
-.container {
+.dashboardContainer {
     width: 100vw;
     padding: 40px;
     padding-left: 15vw;
     padding-right: 15vw;
 }
-
 
 .testContainer {
     display: grid;
@@ -60,64 +59,49 @@
     cursor: pointer;
 }
 
-.header {
-    color: rgb(0, 100, 250);
-    margin-top: 50px;
+.addTestHeader {
+    font-size: 1.2rem;
+    font-weight: 300;
+    height: 30px;
+    line-height: 30px;
+    color: rgb(150, 150, 150);
+    margin-top: 40px;
     margin-bottom: 10px;
 }
 
-.header:nth-child(1) {
+.addTestHeader:nth-child(1) {
     margin-top: 0px;
 }
 
-.nameContainer {
-    width: 100%;
-    height: fit-content;
-    padding: 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-}
-
-.settingsContainer {
-    width: 100%;
-    height: fit-content;
-    padding: 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    display: grid;
-    grid-template-columns: fit-content(100%) 1fr;
-}
-
-.settingsContainerHeader {
-    font-size: 1rem;
+.addTestValue {
+    font-size: 1.5rem;
+    font-weight: 700;
     height: 40px;
     line-height: 40px;
-    margin-right: 10px;
-    color: rgb(150, 150, 150);
+    margin-bottom: 10px;
 }
 
-.inputBox {
-    width: 100%;
+.addTestNameStartDateInputBox {
+    width: 400px;
     height: 40px;
-    font-size: 1rem;
-    border: none;
+    line-height: 40px;
+    font-size: 1.1rem;
     border-radius: 5px;
-    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.valueBox {
-    width: 100%;
+.addTestDurationInputBox {
+    width: 100px;
     height: 40px;
     line-height: 40px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     border-radius: 5px;
-    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
     padding-left: 10px;
-    padding-right: 10px;
 }
 
 .confirmButton {
@@ -150,7 +134,7 @@
 }
 
 @media (max-width: 1200px) {
-    .container {
+    .dashboardContainer {
         width: 100vw;
         padding: 40px;
         padding-left: min(40px, 5vw);
@@ -160,18 +144,12 @@
     .testContainer {
         grid-template-columns: 1fr;
     }
-}
 
-@media (max-width: 600px) {
-    .settingsContainer {
-        grid-template-columns: none;
-        grid-template-rows: fit-content(100%) 1fr;
+    .addTestNameStartDateInputBox {
+        width: 100%;
     }
 
-    .settingsContainerHeader {
-        height: 20px;
-        line-height: 20px;
-        margin-right: 0px;
-        margin-bottom: 10px;
+    .addTestValue {
+        font-size: 1.2rem;
     }
 }

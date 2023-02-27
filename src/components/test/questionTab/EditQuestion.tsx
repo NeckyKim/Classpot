@@ -230,7 +230,18 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                         type="button"
                         value="감소 -"
                         disabled={numberOfChoices === 3}
-                        onClick={() => { setNumberOfChoices(numberOfChoices - 1); }}
+                        onClick={() => { 
+                            setNumberOfChoices(numberOfChoices - 1);
+                            
+                            var temp1 = choices;
+                            temp1[numberOfChoices - 1] = "";
+
+                            var temp2 = answer;
+                            temp2[numberOfChoices - 1] = false;
+
+                            setChoices(temp1);
+                            setAnswer(temp2);
+                        }}
                         className={styles.choicesDecreaseButton}
                     />
                 </div>

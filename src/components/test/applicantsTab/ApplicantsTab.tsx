@@ -62,66 +62,66 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
 
 
     return (
-        <div>
-            <div
-                className={styles.addApplicantButton}
-                onClick={() => {
-                    setIsAddingApplicant(true);
-                    setApplicantName("");
-                }}
-            >
-                응시자 추가
-            </div>
+        isAddingApplicant
 
+            ?
 
+            <form onSubmit={addApplicant}>
+                <div className={styles.addApplicantHeader}>
+                    응시자 이름
+                </div>
 
-            {
-                isAddingApplicant
+                <input
+                    type="text"
+                    value={applicantName}
+                    className={styles.applicantNameInputBox}
+                    onChange={(event: any) => { setApplicantName(event.target.value); }}
+                    required
+                />
 
-                &&
-
-                <form className={styles.addApplicantContainer} onSubmit={addApplicant}>
+                <div className={styles.addApplicantButtons}>
                     <input
-                        type="text"
-                        value={applicantName}
-                        className={styles.inputBox}
-                        onChange={(event: any) => { setApplicantName(event.target.value); }}
-                        required
+                        type="submit"
+                        value="추가"
+                        className={styles.confirmButton}
                     />
 
-                    <div className={styles.addApplicantContainerButtons}>
-                        <input 
-                            type="submit" 
-                            value="추가" 
-                            className={styles.addConfirmButton}
-                        />
+                    <input
+                        type="button"
+                        value="취소"
+                        className={styles.cancelButton}
+                        onClick={() => {
+                            setApplicantName("");
+                            setIsAddingApplicant(false);
+                        }}
+                    />
+                </div>
+            </form>
 
-                        <input
-                            type="button"
-                            value="취소"
-                            className={styles.addCancelButton}
-                            onClick={() => {
-                                setApplicantName("");
-                                setIsAddingApplicant(false);
-                            }}
-                        />
-                    </div>
-                </form>
-            }
+            :
 
+            <div>
+                <div
+                    className={styles.addApplicantButton}
+                    onClick={() => {
+                        setIsAddingApplicant(true);
+                        setApplicantName("");
+                    }}
+                >
+                    응시자 추가
+                </div>
 
+                {
+                    applicantList.length > 0
 
-            {
-                applicantList.length > 0
+                        ?
 
-                    ?
+                        applicantList.map((current: any) => <ApplicantContainer testCode={testCode} applicantObject={current} />)
 
-                    applicantList.map((current: any) => <ApplicantContainer testCode={testCode} applicantObject={current} />)
+                        :
 
-                    :
-
-                    <Error message="응시자가 없습니다." />
-            }
-        </div>
+                        <Error message="응시자가 없습니다." />
+                }
+            </div>
     )
 }
