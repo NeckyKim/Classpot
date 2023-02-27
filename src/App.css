@@ -46,9 +46,6 @@ details summary::-webkit-details-marker {
     display: none;
 }
 
-
-
-
 /* React Toastify CSS settings */
 
 :root {
@@ -120,8 +117,6 @@ details summary::-webkit-details-marker {
 .fadeOut {
     animation: fadeOut 0.1s ease-in both;
 }
-
-
 
 @media (max-width: 1200px) {
     .Toastify__toast {

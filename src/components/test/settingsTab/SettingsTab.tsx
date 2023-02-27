@@ -168,7 +168,6 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                     시험 이름
                 </div>
 
-
                 {
                     isEditingTestName
 
@@ -485,19 +484,20 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                             onChange={(event) => {
                                 setDeleteTestConfirmText(event.target.value);
                             }}
+                            spellCheck={false}
                         />
 
                         <div className={styles.deleteContainerButtonZone}>
                             <input
                                 type="submit"
-                                className={styles.deleteTestButton}
+                                className={styles.deleteTestConfirmButton}
                                 disabled={deleteTestConfirmText !== testInfo.testName}
                                 value="삭제"
                             />
 
                             <input
                                 type="button"
-                                className={styles.cancelButton}
+                                className={styles.deleteTestCancelButton}
                                 value="취소"
                                 onClick={() => {
                                     setDeleteTestConfirmText("");

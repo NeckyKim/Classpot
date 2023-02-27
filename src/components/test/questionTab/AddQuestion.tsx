@@ -191,7 +191,6 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
                 onEditorChange={(content: any) => { setQuestion(content); }}
                 init={{
                     height: 500,
-                    skin: 'bootstrap',
                     menubar: false,
                     statusbar: false,
                     plugins: ['lists', 'image', 'table', 'lineheight'],

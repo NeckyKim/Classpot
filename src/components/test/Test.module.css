@@ -1,43 +1,92 @@
-.container {
-    width: 100vw;
-    margin: 0px auto;
-    height: calc(100vh - 70px);
-    z-index: 1;
+.containerLeftTop {
+    width: 300px;
+    height: 70px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: rgb(30, 30, 50);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 8;
 }
 
-.containerLeft {
+.containerLogo {
+    height: 50px;
+    padding: 2px;
+    margin-left: -8px;
+    cursor: pointer;
+}
+
+.containerRightTop {
+    width: calc(100vw - 300px);
+    height: 70px;
+    line-height: 70px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    background-color: rgb(245, 245, 245);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    z-index: 7;
+}
+
+.logoutButton {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.containerLeftBottom {
     width: 300px;
-    height: calc(100vh - 70px);
-    padding: 40px;
+    height: 100vh;
+    padding-top: 100px;
     padding-left: 20px;
     padding-right: 20px;
     background-color: rgb(40, 40, 60);
     position: fixed;
-    top: 70px;
+    top: 0px;
     left: 0px;
     display: grid;
     grid-template-rows: repeat(4, 50px);
     gap: 10px;
-    z-index: 2;
+    z-index: 7;
 }
 
-.containerRight {
+.containerRightBottom {
     width: calc(100vw - 300px);
-    height: calc(100vh - 70px);
-    padding-top: 40px;
+    height: 100vh;
+    padding-top: 110px;
     padding-bottom: 40px;
     padding-left: 100px;
     padding-right: 100px;
+    background-color: rgb(255, 255, 255);
     position: fixed;
-    top: 70px;
+    top: 0px;
     left: 300px;
     overflow: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    z-index: 1;
+    z-index: 6;
 }
 
-.containerRight::-webkit-scrollbar {
+.containerRightBottom::-webkit-scrollbar {
     display: none;
 }
 
@@ -101,7 +150,15 @@
 
 
 @media (max-width: 1200px) {
-    .containerLeft {
+    .containerLeftTop {
+        display: none;
+    }
+
+    .containerRightTop {
+        display: none;
+    }
+
+    .containerLeftBottom {
         width: 100vw;
         height: 80px;
         padding: 10px;
@@ -115,7 +172,7 @@
         gap: 5px;
     }
 
-    .containerRight {
+    .containerRightBottom {
         width: 100vw;
         height: calc(100vh - 150px);
         padding: 40px;

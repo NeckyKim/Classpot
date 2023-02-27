@@ -12,7 +12,7 @@ import Error from "../../../Error";
 import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./QuestionTab.module.css";
-
+import tinyMceStyles from "./TinyMce.module.css";
 
 
 
@@ -20,6 +20,7 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
     const [isAddingQuestion, setIsAddingQuestion] = useState<boolean>(false);
     const [isEditingQuestion, setIsEditingQuestion] = useState<boolean>(false);
     const [index, setIndex] = useState<number>(0);
+
 
 
     // 질문 목록
@@ -144,7 +145,6 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                             toolbar: false,
                                                             statusbar: false,
                                                             plugins: ["autoresize"],
-                                                            skin: "borderless",
                                                             content_style: `
                                                         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
                                                         body{

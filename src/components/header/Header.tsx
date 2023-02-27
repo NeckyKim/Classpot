@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { authService } from "../../FirebaseModules";
 
-import styles from "./HeaderTop.module.css";
+import styles from "./Header.module.css";
 
 
 
@@ -18,7 +18,7 @@ export default function Header({ loggedIn }: HeaderProps) {
     return (
         <div>
             <div className={styles.headerContainer}>
-                <img className={styles.headerLogoIcon} src={process.env.PUBLIC_URL + "/logos/logo.png"} onClick={() => { navigate("/") }} />
+                <img className={styles.headerLogo} src={process.env.PUBLIC_URL + "/logos/logo_black.png"} onClick={() => { navigate("/") }} />
 
                 {
                     window.location.pathname.split("/")[1] !== "apply"

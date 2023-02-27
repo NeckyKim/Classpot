@@ -1,13 +1,15 @@
 .settingsContainer {
-    margin-top: 40px;
-    padding-top: 40px;
-    border-top: 1px solid rgb(220, 220, 220);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
 }
 
-.settingsContainer:first-child {
-    margin-top: 0px;
-    padding-top: 0px;
-    border: none;
+.settingsContainer:last-child {
+    margin-bottom: 0px;
 }
 
 .settingsHeader {
@@ -68,6 +70,7 @@
     color: rgb(255, 255, 255);
     background-color: rgb(250, 50, 50);
     cursor: pointer;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -98,6 +101,7 @@
 }
 
 .feedbackContainer {
+    margin-top: 10px;
     margin-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
@@ -168,7 +172,7 @@
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 42;
+    z-index: 10;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -209,7 +213,7 @@
     justify-content: right;
 }
 
-.deleteTestButton {
+.deleteTestConfirmButton {
     width: 100px;
     height: 40px;
     line-height: 40px;
@@ -222,37 +226,53 @@
     cursor: pointer;
 }
 
-.deleteTestButton:disabled {
+.deleteTestConfirmButton:disabled {
     color: rgb(150, 150, 150);
     background-color: rgb(200, 200, 200);
+}
+
+.deleteTestCancelButton {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(200, 200, 200);
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 
 
 @media (max-width: 1200px)  {
     .settingsContainer {
-        margin-top: 20px;
-        padding-top: 20px;
+        padding-top: 15px;
+        padding-bottom: 20px;
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
     }
 
     .settingsHeader {
         font-size: 1rem;
-        margin-bottom: 5px;
+        margin-bottom: 0px;
     }
 
     .settingsValue {
         font-size: 1.2rem;
-        margin-bottom: 5px;
+        margin-bottom: 0px;
     }
 
     .startEndDateValue {
         font-size: 1.2rem;
-        margin-bottom: 5px;
+        margin-bottom: 0px;
     }
     
     .durationValue {
         font-size: 1.2rem;
-        margin-bottom: 5px;
+        margin-bottom: 0px;
     }
 
     .cancelButton {
@@ -287,12 +307,15 @@
 
     .deleteTestContainer {
         width: 80vw;
-        height: fit-content;
         font-size: 0.8rem;
-        background-color: rgb(255, 255, 255);
-        border-radius: 10px;
-        padding: 20px;
-        display: grid;
-        grid-template-rows: 1fr fit-content(100%);
+    }
+
+    .deleteTestConfirmButton {
+        width: 60px;
+    }
+
+    .deleteTestCancelButton {
+        width: 60px;
+        margin-left: 5px;
     }
 }

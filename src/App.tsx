@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom'
 
 import { authService } from "./FirebaseModules";
 
-import HeaderTop from "./components/header/HeaderTop";
+import Header from "./components/header/Header";
 
 import Home from "./components/home/Home";
 import Login from "./components/login/Login";
@@ -48,7 +48,7 @@ export default function App() {
     return (
         <div className="app">
             <BrowserRouter>
-                <HeaderTop loggedIn={userObject !== null} />
+                <Header loggedIn={userObject !== null} />
 
                 {
                     !location.pathname.includes("/apply/")

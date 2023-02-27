@@ -135,36 +135,34 @@
 }
 
 .editButton {
-    width: 60px;
-    height: 30px;
-    line-height: 28px;
+    height: 40px;
+    line-height: 38px;
     font-size: 0.9rem;
-    text-align: center;
-    border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    padding-right: 10px;
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
     cursor: pointer;
 }
 
 .deleteButton {
-    width: 60px;
-    height: 30px;
-    line-height: 28px;
+    height: 40px;
+    line-height: 38px;
     font-size: 0.9rem;
-    text-align: center;
-    margin-left: 5px;
-    border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    padding-right: 10px;
+    margin-left: 10px;
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
     cursor: pointer;
 }
 
 .buttonImage {
-    height: 28px;
-    padding: 7px;
-    padding-right: 5px;
+    height: 40px;
+    padding: 10px;
+    filter: invert(0.5);
 }
 
 
@@ -235,12 +233,11 @@
     }
 
     .editButton {
-        width: 55px;
-        font-size: 0.7rem;
+        font-size: 0.75rem;
     }
 
     .deleteButton {
-        width: 55px;
-        font-size: 0.7rem;
+        font-size: 0.75rem;
+        margin-left: 5px;
     }
 }

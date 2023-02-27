@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { dbService } from "../../../FirebaseModules";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
@@ -12,8 +12,35 @@ import styles from "./ApplicantContainer.module.css";
 export default function ApplicantContainer({ testCode, applicantObject }: { testCode: string | undefined, applicantObject: any }) {
     const [applicantName, setApplicantName] = useState<string>(applicantObject.applicantName);
 
+    const [moreButton, setMoreButton] = useState<boolean>(false);
     const [isEditingApplicant, setIsEditingApplicant] = useState<boolean>(false);
     const [isDeletingApplicant, setIsDeletingApplicant] = useState<boolean>(false);
+
+
+
+    // 화면 너비
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
+
+        if (width > 1200) {
+            setMoreButton(false);
+        }
+    });
+
+    function copyURL() {
+        try {
+            navigator.clipboard.writeText(window.location.origin + "/apply/" + testCode + "/applicant/" + applicantObject.applicantCode);
+            toast.success("응시자 URL이 복사되었습니다.");
+        }
+
+        catch (error) {
+            toast.error("응시자 URL 복사에 실패하였습니다.")
+        }
+
+        setMoreButton(false);
+    }
 
 
 
@@ -61,57 +88,127 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
 
     return (
         <div className={styles.applicantContainer}>
-            <div className={styles.applicantContainerTop}>
-                <div className={styles.applicantContainer1}>
-                    <div className={styles.applicantName}>
-                        {applicantObject.applicantName}
+            <div className={styles.applicantName}>
+                {applicantObject.applicantName}
+            </div>
+
+            <div className={styles.applicantCode}>
+                {applicantObject.shortApplicantCode}
+            </div>
+
+
+            {
+                width > 1200
+
+                    ?
+
+                    <div className={styles.optionButtons}>
+                        <div
+                            className={styles.optionCopyURLButton}
+                            onClick={copyURL}
+                        >
+                            <img
+                                className={styles.moreOptionIcon}
+                                src={process.env.PUBLIC_URL + "/icons/copy.png"}
+                            />
+                            URL 복사
+                        </div>
+
+                        <div
+                            className={styles.optionEditButton}
+                            onClick={() => {
+                                setIsEditingApplicant(true);
+                                setIsDeletingApplicant(false);
+                                setApplicantName(applicantObject.applicantName);
+                                setMoreButton(false);
+                            }}
+                        >
+                            <img
+                                className={styles.moreOptionIcon}
+                                src={process.env.PUBLIC_URL + "/icons/edit.png"}
+                            />
+                            수정
+                        </div>
+
+                        <div
+                            className={styles.optionDeleteButton}
+                            onClick={() => {
+                                setIsEditingApplicant(false);
+                                setIsDeletingApplicant(true);
+                                setMoreButton(false);
+                            }}
+                        >
+                            <img
+                                className={styles.moreOptionIcon}
+                                src={process.env.PUBLIC_URL + "/icons/delete.png"}
+                            />
+                            삭제
+                        </div>
                     </div>
 
-                    <div className={styles.applicantCode}>
-                        {applicantObject.shortApplicantCode}
-                    </div>
-                </div>
+                    :
 
-                <div className={styles.applicantContainer2}>
-                    <div
-                        className={styles.copyURLButton}
+                    <img
+                        className={styles.moreButton}
+                        src={process.env.PUBLIC_URL + "/icons/more.png"}
                         onClick={() => {
-                            try {
-                                navigator.clipboard.writeText(window.location.origin + "/apply/" + testCode + "/applicant/" + applicantObject.applicantCode);
-                                toast.success("응시자 URL이 복사되었습니다.");
-                            }
-
-                            catch (error) {
-                                toast.error("응시자 URL 복사에 실패하였습니다.")
-                            }
+                            setMoreButton(!moreButton);
                         }}
+                    />
+            }
+
+
+
+
+            {
+                moreButton
+
+                &&
+
+                <div className={styles.moreContainer}>
+                    <div
+                        className={styles.moreContainerCopyURLButton}
+                        onClick={copyURL}
                     >
+                        <img
+                            className={styles.moreOptionIcon}
+                            src={process.env.PUBLIC_URL + "/icons/copy.png"}
+                        />
                         URL 복사
                     </div>
 
                     <div
-                        className={styles.editButton}
+                        className={styles.moreContainerEditButton}
                         onClick={() => {
                             setIsEditingApplicant(true);
                             setIsDeletingApplicant(false);
                             setApplicantName(applicantObject.applicantName);
+                            setMoreButton(false);
                         }}
                     >
+                        <img
+                            className={styles.moreOptionIcon}
+                            src={process.env.PUBLIC_URL + "/icons/edit.png"}
+                        />
                         수정
                     </div>
 
                     <div
-                        className={styles.deleteButton}
+                        className={styles.moreContainerDeleteButton}
                         onClick={() => {
                             setIsEditingApplicant(false);
                             setIsDeletingApplicant(true);
+                            setMoreButton(false);
                         }}
                     >
+                        <img
+                            className={styles.moreOptionIcon}
+                            src={process.env.PUBLIC_URL + "/icons/delete.png"}
+                        />
                         삭제
                     </div>
                 </div>
-            </div>
-
+            }
 
             {
                 isEditingApplicant
@@ -119,60 +216,71 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                 &&
 
                 <form
-                    className={styles.applicantContainerEdit}
+                    className={styles.editDeleteApplicantBackground}
                     onSubmit={() => {
                         editApplicant(event, applicantObject.applicantCode)
                     }}
                 >
-                    <input
-                        type="text"
-                        value={applicantName}
-                        className={styles.inputBox}
-                        onChange={(event: any) => { setApplicantName(event.target.value); }}
-                        required
-                    />
+                    <div className={styles.editDeleteApplicantContainer}>
+                        <div className={styles.editDeleteApplicantContainerHeader}>
+                            응시자 이름
+                        </div>
 
-                    <input type="submit" value="변경" className={styles.editButton} />
+                        <input
+                            type="text"
+                            value={applicantName}
+                            className={styles.editApplicantInputBox}
+                            onChange={(event: any) => { setApplicantName(event.target.value); }}
+                            spellCheck={false}
+                            required
+                        />
 
-                    <input
-                        type="button"
-                        value="취소"
-                        className={styles.deleteButton}
-                        onClick={() => {
-                            setIsEditingApplicant(false);
-                            setApplicantName("");
-                        }}
-                    />
+                        <div className={styles.editDeleteContainerButtonZone}>
+                            <input type="submit" value="변경" className={styles.editButton} />
+
+                            <input
+                                type="button"
+                                value="취소"
+                                className={styles.cancelButton}
+                                onClick={() => {
+                                    setIsEditingApplicant(false);
+                                    setApplicantName("");
+                                }}
+                            />
+                        </div>
+                    </div>
                 </form>
             }
-
-
 
             {
                 isDeletingApplicant
 
                 &&
 
-                <div className={styles.applicantContainerDelete}>
-                    해당 응시자를 삭제하시겠습니까?
+                <div className={styles.editDeleteApplicantBackground}>
+                    <div className={styles.editDeleteApplicantContainer}>
+                        해당 응시자를 삭제하시겠습니까?
 
-                    <div
-                        className={styles.deleteButton}
-                        onClick={() => {
-                            deleteApplicant(event, applicantObject.applicantCode);
-                            setIsDeletingApplicant(false);
-                        }}
-                    >
-                        예
-                    </div>
+                        <div className={styles.editDeleteContainerButtonZone}>
+                            <div
+                                className={styles.deleteButton}
+                                onClick={() => {
+                                    deleteApplicant(event, applicantObject.applicantCode);
+                                    setIsDeletingApplicant(false);
+                                }}
+                            >
+                                예
+                            </div>
 
-                    <div
-                        className={styles.cancelButton}
-                        onClick={() => {
-                            setIsDeletingApplicant(false);
-                        }}
-                    >
-                        아니오
+                            <div
+                                className={styles.cancelButton}
+                                onClick={() => {
+                                    setIsDeletingApplicant(false);
+                                }}
+                            >
+                                아니오
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
