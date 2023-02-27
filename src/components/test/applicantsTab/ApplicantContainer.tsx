@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { dbService } from "../../../FirebaseModules";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
@@ -12,7 +12,7 @@ import styles from "./ApplicantContainer.module.css";
 export default function ApplicantContainer({ testCode, applicantObject }: { testCode: string | undefined, applicantObject: any }) {
     const [applicantName, setApplicantName] = useState<string>(applicantObject.applicantName);
 
-    const [moreButton, setMoreButton] = useState<boolean>(false);
+    const [isMoreButtonClicked, setIsMoreButtonClicked] = useState<boolean>(false);
     const [isEditingApplicant, setIsEditingApplicant] = useState<boolean>(false);
     const [isDeletingApplicant, setIsDeletingApplicant] = useState<boolean>(false);
 
@@ -25,9 +25,11 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
         window.addEventListener("resize", () => { setWidth(window.innerWidth); });
 
         if (width > 1200) {
-            setMoreButton(false);
+            setIsMoreButtonClicked(false);
         }
     });
+
+
 
     function copyURL() {
         try {
@@ -39,7 +41,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
             toast.error("응시자 URL 복사에 실패하였습니다.")
         }
 
-        setMoreButton(false);
+        setIsMoreButtonClicked(false);
     }
 
 
@@ -86,6 +88,26 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
 
 
 
+    function clickedOutside (ref: any) {
+        useEffect(() => {
+            function handleClickOutside(event: any) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setIsMoreButtonClicked(false);
+                }
+            }
+
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const moreButtonRef = useRef(null);
+    clickedOutside(moreButtonRef);
+
+
+
     return (
         <div className={styles.applicantContainer}>
             <div className={styles.applicantName}>
@@ -95,7 +117,6 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
             <div className={styles.applicantCode}>
                 {applicantObject.shortApplicantCode}
             </div>
-
 
             {
                 width > 1200
@@ -120,7 +141,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                                 setIsEditingApplicant(true);
                                 setIsDeletingApplicant(false);
                                 setApplicantName(applicantObject.applicantName);
-                                setMoreButton(false);
+                                setIsMoreButtonClicked(false);
                             }}
                         >
                             <img
@@ -135,7 +156,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                             onClick={() => {
                                 setIsEditingApplicant(false);
                                 setIsDeletingApplicant(true);
-                                setMoreButton(false);
+                                setIsMoreButtonClicked(false);
                             }}
                         >
                             <img
@@ -152,20 +173,17 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                         className={styles.moreButton}
                         src={process.env.PUBLIC_URL + "/icons/more.png"}
                         onClick={() => {
-                            setMoreButton(!moreButton);
+                            setIsMoreButtonClicked((prev) => !prev);
                         }}
                     />
             }
 
-
-
-
             {
-                moreButton
+                isMoreButtonClicked
 
                 &&
 
-                <div className={styles.moreContainer}>
+                <div className={styles.moreContainer} ref={moreButtonRef}>
                     <div
                         className={styles.moreContainerCopyURLButton}
                         onClick={copyURL}
@@ -183,7 +201,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                             setIsEditingApplicant(true);
                             setIsDeletingApplicant(false);
                             setApplicantName(applicantObject.applicantName);
-                            setMoreButton(false);
+                            setIsMoreButtonClicked(false);
                         }}
                     >
                         <img
@@ -198,7 +216,7 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
                         onClick={() => {
                             setIsEditingApplicant(false);
                             setIsDeletingApplicant(true);
-                            setMoreButton(false);
+                            setIsMoreButtonClicked(false);
                         }}
                     >
                         <img

@@ -16,6 +16,7 @@
     border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
     margin-bottom: 40px;
+    position: relative;
 }
 
 .questionContainerTop {
@@ -109,6 +110,7 @@
     color: rgb(250, 0, 0);
 }
 
+
 .correctChoice {
     padding: 10px;
     margin-bottom: 5px;
@@ -134,7 +136,13 @@
     padding: 40px;
 }
 
-.editButton {
+.optionButtons {
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    gap: 10px;
+}
+
+.optionEditButton {
     height: 40px;
     line-height: 38px;
     font-size: 0.9rem;
@@ -146,14 +154,60 @@
     cursor: pointer;
 }
 
-.deleteButton {
+.optionDeleteButton {
     height: 40px;
     line-height: 38px;
     font-size: 0.9rem;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
     padding-right: 10px;
-    margin-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    cursor: pointer;
+}
+
+.moreOptionIcon {
+    width: 40px;
+    padding: 10px;
+    filter: invert(0.5);
+}
+
+.moreButton {
+    width: 40px;
+    padding: 10px;
+    filter: invert(0.5);
+    cursor: pointer;
+    margin-right: -15px;
+}
+
+.moreContainer {
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    padding-right: 15px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 65px;
+    right: 40px;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    z-index: 2;
+}
+
+.moreContainerEditButton {
+    height: 40px;
+    line-height: 38px;
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    cursor: pointer;
+}
+
+.moreContainerDeleteButton {
+    height: 40px;
+    line-height: 38px;
+    border-radius: 0px 0px 5px 5px;
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
     cursor: pointer;
@@ -165,6 +219,9 @@
     filter: invert(0.5);
 }
 
+.tox-tinymce {
+    border: 5px solid red !important;
+}
 
 
 @media (max-width: 1200px) {

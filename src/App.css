@@ -46,6 +46,8 @@ details summary::-webkit-details-marker {
     display: none;
 }
 
+
+
 /* React Toastify CSS settings */
 
 :root {
@@ -62,10 +64,12 @@ details summary::-webkit-details-marker {
     padding: 20px;
     border-radius: 5px;
     box-shadow: none;
+    z-index: 5;
 }
 
 .Toastify__toast-container {
     padding: 0px;
+    z-index: 5;
 }
 
 @keyframes Toastify__slideInRight {
@@ -131,4 +135,47 @@ details summary::-webkit-details-marker {
         padding: 0px;
         width: 100vw;
     }
+}
+
+
+
+/* TinyMCE CSS settings */
+
+.tox-tinymce {
+    border: 1px solid rgb(220, 220, 220) !important;
+    border-radius: 5px !important;
+}
+
+.tox:not(.tox-tinymce-inline) .tox-editor-header {
+    box-shadow: none !important;
+    padding: 0px !important;
+}
+
+.tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.tox.tox-tinymce.tox-tinymce--disabled {
+    border: 0px !important;
+}
+
+.tox .tox-tbtn__select-label {
+    font-family: "Pretendard";
+    font-weight: 600 !important;
+}
+
+.tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {
+    border-right: 1px solid rgb(220, 220, 220) !important;
+}
+
+.tox .tox-tbtn--bespoke {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.tox .tox-collection__item-label {
+    font-family: "Pretendard";
+}
+
+:not(pre)>code[class*=language-], pre[class*=language-] {
+    background-color: red !important;
 }

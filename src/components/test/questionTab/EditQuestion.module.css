@@ -70,15 +70,34 @@
     margin-left: 10px;
 }
 
-.levelDropdownBox {
+.level {
     width: 150px;
     height: 40px;
     line-height: 40px;
+    position: relative;
     font-size: 1.1rem;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
     background-color: rgb(255, 255, 255);
     padding-left: 10px;
+    cursor: pointer;
+}
+
+.levelSelector {
+    width: 150px;
+    height: fit-content;
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
+    z-index: 10;
+}
+
+.levelElements {
+    padding-left: 10px;
+    cursor: pointer;
 }
 
 .choicesHeader {

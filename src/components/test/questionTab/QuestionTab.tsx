@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { dbService, storageService } from "../../../FirebaseModules";
 import { doc, deleteDoc } from "firebase/firestore";
@@ -12,19 +12,52 @@ import Error from "../../../Error";
 import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./QuestionTab.module.css";
-import tinyMceStyles from "./TinyMce.module.css";
 
 
 
 export default function QuestionTab({ userCode, testCode }: { userCode: string, testCode: string | undefined }) {
+    const [isMoreButtonClicked, setIsMoreButtonClicked] = useState<boolean>(false);
     const [isAddingQuestion, setIsAddingQuestion] = useState<boolean>(false);
     const [isEditingQuestion, setIsEditingQuestion] = useState<boolean>(false);
     const [index, setIndex] = useState<number>(0);
 
 
 
+    // 화면 너비
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
+
+        if (width > 1200) {
+            setIsMoreButtonClicked(false);
+        }
+    });
+
+
+
     // 질문 목록
     const questionList: any = GetQuestionList(testCode);
+
+
+
+    function clickedOutside (ref: any) {
+        useEffect(() => {
+            function handleClickOutside(event: any) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setIsMoreButtonClicked(false);
+                }
+            }
+
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const moreButtonRef = useRef(null);
+    clickedOutside(moreButtonRef);
 
 
 
@@ -64,31 +97,87 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                     {index + 1}
                                                 </div>
 
-                                                <div
-                                                    className={styles.editButton}
-                                                    onClick={() => {
-                                                        setIsEditingQuestion((prev) => !prev);
-                                                        setIndex(index);
-                                                    }}>
+                                                {
+                                                    width > 1200
 
-                                                    <img className={styles.buttonImage} src={process.env.PUBLIC_URL + "/icons/edit.png"} />
+                                                        ?
 
-                                                    수정
-                                                </div>
+                                                        <div className={styles.optionButtons}>
+                                                            <div
+                                                                className={styles.optionEditButton}
+                                                                onClick={() => {
+                                                                    setIsEditingQuestion((prev) => !prev);
+                                                                    setIndex(index);
+                                                                }}>
 
-                                                <div
-                                                    className={styles.deleteButton}
-                                                    onClick={async () => {
-                                                        if (testCode && confirm("해당 문제를 삭제하시겠습니까?")) {
-                                                            await deleteDoc(doc(dbService, "tests", testCode, "questions", current.questionCode));
-                                                            await deleteObject(ref(storageService, userCode + "/" + testCode + "/" + current.questionCode))
-                                                        }
-                                                    }}>
+                                                                <img className={styles.buttonImage} src={process.env.PUBLIC_URL + "/icons/edit.png"} />
 
-                                                    <img className={styles.buttonImage} src={process.env.PUBLIC_URL + "/icons/delete.png"} />
+                                                                수정
+                                                            </div>
 
-                                                    삭제
-                                                </div>
+                                                            <div
+                                                                className={styles.optionDeleteButton}
+                                                                onClick={async () => {
+                                                                    if (testCode && confirm("해당 문제를 삭제하시겠습니까?")) {
+                                                                        await deleteDoc(doc(dbService, "tests", testCode, "questions", current.questionCode));
+                                                                        await deleteObject(ref(storageService, userCode + "/" + testCode + "/" + current.questionCode))
+                                                                    }
+                                                                }}>
+
+                                                                <img className={styles.buttonImage} src={process.env.PUBLIC_URL + "/icons/delete.png"} />
+
+                                                                삭제
+                                                            </div>
+                                                        </div>
+
+                                                        :
+
+                                                        <img
+                                                            className={styles.moreButton}
+                                                            src={process.env.PUBLIC_URL + "/icons/more.png"}
+                                                            onClick={() => {
+                                                                setIsMoreButtonClicked((prev) => !prev);
+                                                            }}
+                                                        />
+                                                }
+
+                                                {
+                                                    isMoreButtonClicked
+
+                                                    &&
+
+                                                    <div className={styles.moreContainer}>
+                                                        <div
+                                                            className={styles.moreContainerEditButton}
+                                                            onClick={() => {
+                                                                setIsEditingQuestion((prev) => !prev);
+                                                                setIndex(index);
+                                                            }}
+                                                        >
+                                                            <img
+                                                                className={styles.moreOptionIcon}
+                                                                src={process.env.PUBLIC_URL + "/icons/edit.png"}
+                                                            />
+                                                            수정
+                                                        </div>
+
+                                                        <div
+                                                            className={styles.moreContainerDeleteButton}
+                                                            onClick={async () => {
+                                                                if (testCode && confirm("해당 문제를 삭제하시겠습니까?")) {
+                                                                    await deleteDoc(doc(dbService, "tests", testCode, "questions", current.questionCode));
+                                                                    await deleteObject(ref(storageService, userCode + "/" + testCode + "/" + current.questionCode))
+                                                                }
+                                                            }}
+                                                        >
+                                                            <img
+                                                                className={styles.moreOptionIcon}
+                                                                src={process.env.PUBLIC_URL + "/icons/delete.png"}
+                                                            />
+                                                            삭제
+                                                        </div>
+                                                    </div>
+                                                }
                                             </div>
 
                                             <div className={styles.questionContainerBottom}>
@@ -144,10 +233,11 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
                                                             menubar: false,
                                                             toolbar: false,
                                                             statusbar: false,
-                                                            plugins: ["autoresize"],
+                                                            plugins: ["autoresize", 'codesample'],
                                                             content_style: `
                                                         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-                                                        body{
+
+                                                        body {
                                                             font-family:'Pretendard';
                                                             font-weight: 600;
                                                             margin: 0px;

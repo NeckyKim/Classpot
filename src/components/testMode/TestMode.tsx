@@ -493,14 +493,16 @@ export default function TestMode() {
                                                 menubar: false,
                                                 toolbar: false,
                                                 statusbar: false,
-                                                plugins: ["autoresize"],
+                                                plugins: ["autoresize", "codesample"],
                                                 skin: "borderless",
                                                 content_style: `
                                                     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-                                                    body{
-                                                        font-family:'Pretendard'; 
+
+                                                    body {
+                                                        font-family:'Pretendard';
                                                         font-weight: 600;
                                                         margin: 0px;
+                                                        padding: 0px;
                                                     }
                                                 `
                                             }}

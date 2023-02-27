@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./EditQuestion.module.css";
-import tinyMceStyles from "./TinyMce.module.css";
 
 
 
@@ -23,6 +22,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
     const [type, setType] = useState<string>(questionInfo.type);
     const [points, setPoints] = useState<number>(questionInfo.points);
     const [level, setLevel] = useState<number>(questionInfo.level);
+    const [isLevelClicked, setIsLevelClicked] = useState<boolean>(false);
 
     const [question, setQuestion] = useState<string>(questionInfo.question);
     const [answer, setAnswer] = useState<any>(questionInfo.answer);
@@ -30,6 +30,14 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
 
     const [choices, setChoices] = useState<string[]>(questionInfo.choices);
     const [numberOfChoices, setNumberOfChoices] = useState<number>(Object.values(questionInfo.choices).filter(element => element != "").length);
+
+    const levelDictionary: string[] = [
+        "매우 쉬움",
+        "쉬움",
+        "보통",
+        "어려움",
+        "매우 어려움"
+    ]
 
 
 
@@ -88,7 +96,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
             <div className={styles.typeButtons}>
                 <div
                     className={type === "객관식" ? styles.typeSelected : styles.typeNotSelected}
-                    style={{ 
+                    style={{
                         borderRadius: "5px 0px 0px 5px",
                         borderRight: "none"
                     }}
@@ -165,18 +173,67 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                         난이도
                     </div>
 
-                    <select
-                        className={styles.levelDropdownBox}
-                        onChange={(event: any) => {
-                            setLevel(Number(event.target.value));
+                    <div
+                        className={styles.level}
+                        onClick={() => {
+                            setIsLevelClicked((prev) => !prev);
                         }}
                     >
-                        <option value={0} selected={questionInfo.level === 0}>매우 쉬움</option>
-                        <option value={1} selected={questionInfo.level === 1}>쉬움</option>
-                        <option value={2} selected={questionInfo.level === 2}>보통</option>
-                        <option value={3} selected={questionInfo.level === 3}>어려움</option>
-                        <option value={4} selected={questionInfo.level === 4}>매우 어려움</option>
-                    </select>
+                        {levelDictionary[level]}
+
+                        {
+                            isLevelClicked
+
+                            &&
+
+                            <div
+                                className={styles.levelSelector}
+                                onClick={() => {
+                                    setIsLevelClicked((prev) => !prev);
+                                }}
+                            >
+                                <div
+                                    className={styles.levelElements}
+                                    onClick={() => {
+                                        setLevel(0);
+                                        setIsLevelClicked(false);
+                                    }}
+                                >매우 쉬움</div>
+
+                                <div
+                                    className={styles.levelElements}
+                                    onClick={() => {
+                                        setLevel(1);
+                                        setIsLevelClicked(false);
+                                    }}
+                                >쉬움</div>
+
+                                <div
+                                    className={styles.levelElements}
+                                    onClick={() => {
+                                        setLevel(2);
+                                        setIsLevelClicked(false);
+                                    }}
+                                >보통</div>
+
+                                <div
+                                    className={styles.levelElements}
+                                    onClick={() => {
+                                        setLevel(3);
+                                        setIsLevelClicked(false);
+                                    }}
+                                >어려움</div>
+
+                                <div
+                                    className={styles.levelElements}
+                                    onClick={() => {
+                                        setLevel(4);
+                                        setIsLevelClicked(false);
+                                    }}
+                                >매우 어려움</div>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
 
@@ -194,17 +251,17 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                     height: 500,
                     menubar: false,
                     statusbar: false,
-                    plugins: ['lists', 'image', 'table', 'lineheight'],
-                    toolbar: 'fontsize | bold italic strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | outdent indent | bullist numlist | image table',
+                    plugins: ['lists', 'image', 'table', 'lineheight', 'codesample'],
+                    toolbar: 'fontsize | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | outdent indent | bullist numlist | image table codesample',
                     font_size_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
                     line_height_formats: "0.8 1 1.2 1.4 1.6 1.8 2",
                     resize: false,
                     content_style: `
                         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-                        body{
+
+                        body {
                             font-family:'Pretendard';
                             font-weight: 600;
-                            font-size: 12pt;
                             line-height: 1;
                         }
                     `
@@ -229,9 +286,9 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                         type="button"
                         value="감소 -"
                         disabled={numberOfChoices === 3}
-                        onClick={() => { 
+                        onClick={() => {
                             setNumberOfChoices(numberOfChoices - 1);
-                            
+
                             var temp1 = choices;
                             temp1[numberOfChoices - 1] = "";
 
@@ -249,7 +306,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
             {
                 type === "객관식"
 
-                &&        
+                &&
 
                 <div className={styles.choicesContainer}>
                     <ChoiceContainer index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
@@ -273,7 +330,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                 <div className={styles.trueFalseButtons}>
                     <div
                         className={answer ? styles.trueFalseSelected : styles.trueFalseNotSelected}
-                        style={{borderRadius: "5px 0px 0px 5px"}}
+                        style={{ borderRadius: "5px 0px 0px 5px" }}
                         onClick={() => { setAnswer(true); }}
                     >
                         참
@@ -281,7 +338,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
 
                     <div
                         className={!answer ? styles.trueFalseSelected : styles.trueFalseNotSelected}
-                        style={{borderRadius: "0px 5px 5px 0px"}}
+                        style={{ borderRadius: "0px 5px 5px 0px" }}
                         onClick={() => { setAnswer(false); }}
                     >
                         거짓
