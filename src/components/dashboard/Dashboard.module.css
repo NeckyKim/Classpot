@@ -7,7 +7,7 @@
 
 .testContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px
 }
 
@@ -25,8 +25,6 @@
 
 .name {
     font-weight: 700;
-    height: 50px;
-    line-height: 50px;
 }
 
 .date {
@@ -141,8 +139,9 @@
         padding-right: min(40px, 5vw);
     }
 
-    .testContainer {
-        grid-template-columns: 1fr;
+    .testElements {
+        padding-left: min(25px, 5vw);
+        padding-right: min(25px, 5vw);
     }
 
     .addTestNameStartDateInputBox {
@@ -151,5 +150,12 @@
 
     .addTestValue {
         font-size: 1.2rem;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .testContainer {
+        grid-template-columns: 1fr;
     }
 }
