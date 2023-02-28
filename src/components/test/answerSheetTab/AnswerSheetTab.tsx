@@ -95,19 +95,19 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
     return (
         <div>
             {
-                applicantListClicked
+                width <= 1200
 
-                    ?
+                &&
 
-                    <div
-                        className={styles.applicantListButtonClicked}
-                        onClick={() => {
-                            setApplicantListClicked((prev) => !prev)
-                        }}
-                    >
-                        {
-                            applicantList.map((current: any, index: number) => (
+                (
+                    applicantListClicked
+
+                        ?
+
+                        <div className={styles.applicantListButtonClicked}>
+                            {applicantList.map((current: any, index: number) => (
                                 <div
+                                    className={styles.applicantListContainer}
                                     onClick={() => {
                                         setApplicantIndex(index);
                                         setApplicantListClicked(false);
@@ -115,26 +115,22 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                 >
                                     {current.applicantName}
                                 </div>
-                            ))
-                        }
-                    </div>
+                            ))}
+                        </div>
 
-                    :
+                        :
 
-                    <div
-                        className={styles.applicantListButtonNotClicked}
-                        onClick={() => {
-                            setApplicantListClicked((prev) => !prev)
-                        }}
-                    >
-                        {
-                            applicantIndex !== -1
-
-                            &&
-
-                            applicantList[applicantIndex].applicantName
-                        }
-                    </div>
+                        <div
+                            className={styles.applicantListButtonNotClicked}
+                            onClick={() => {
+                                setApplicantListClicked(true);
+                            }}
+                        >
+                            <div className={styles.applicantListName}>
+                                {applicantIndex === -1 ? "응시자" : applicantList[applicantIndex].applicantName}
+                            </div>
+                        </div>
+                )
             }
 
             {
@@ -183,69 +179,92 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
 
                                     ?
 
-                                    <div>
-                                        응시자를 선택해주세요.
-                                    </div>
+                                    <Error message="응시자를 선택하세요." />
 
                                     :
 
-                                    (
-                                        applicantList[applicantIndex].answerSheet.filter((elem: any) => elem !== null).length > 0
+                                    <div>
+                                        <div className={styles.applicantInfoContainer}>
+                                            <div className={styles.applicantName}>
+                                                {applicantList[applicantIndex].applicantName}
+                                            </div>
 
-                                            ?
+                                            <div className={styles.scoreContainer}>
+                                                <div className={styles.applicantScore}>
+                                                {applicantList[applicantIndex].reportCard.filter((elem: any) => (elem >= 0 && elem !== null)).reduce(function add(sum: number, current: number) { return sum + current })}
+                                                </div>
 
-                                            questionList.map((current: any, questionIndex: number) => (
-                                                <div className={styles.questionContainer}>
-                                                    <div className={styles.questionContainer1}>
-                                                        <div
-                                                            style={{}}
-                                                            className={
-                                                                applicantList[applicantIndex].reportCard[questionIndex] === questionList[questionIndex].points
+                                                <div className={styles.dash}>
+                                                    /
+                                                </div>
 
-                                                                    ?
+                                                <div className={styles.totalScore}>
+                                                    {questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current; }, 0)}
+                                                </div>
 
-                                                                    styles.questionNumberCorrect
+                                                <div className={styles.unit}>
+                                                    점
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                                                    :
+                                        {
+                                            applicantList[applicantIndex].answerSheet.filter((elem: any) => elem !== null).length > 0
 
-                                                                    (
-                                                                        applicantList[applicantIndex].reportCard[questionIndex] === -1
+                                                ?
 
-                                                                            ?
+                                                questionList.map((current: any, questionIndex: number) => (
+                                                    <div className={styles.questionContainer}>
+                                                        <div className={styles.questionContainer1}>
+                                                            <div
+                                                                style={{}}
+                                                                className={
+                                                                    applicantList[applicantIndex].reportCard[questionIndex] === questionList[questionIndex].points
 
-                                                                            styles.questionNumberBefore
+                                                                        ?
 
-                                                                            :
+                                                                        styles.questionNumberCorrect
 
-                                                                            (
-                                                                                applicantList[applicantIndex].reportCard[questionIndex] === 0
+                                                                        :
 
-                                                                                    ?
+                                                                        (
+                                                                            applicantList[applicantIndex].reportCard[questionIndex] === -1
 
-                                                                                    styles.questionNumberIncorrect
+                                                                                ?
 
-                                                                                    :
+                                                                                styles.questionNumberBefore
 
-                                                                                    styles.questionNumberSomeCorrect
-                                                                            )
-                                                                    )
-                                                            }
-                                                        >
-                                                            {questionIndex + 1}
+                                                                                :
+
+                                                                                (
+                                                                                    applicantList[applicantIndex].reportCard[questionIndex] === 0
+
+                                                                                        ?
+
+                                                                                        styles.questionNumberIncorrect
+
+                                                                                        :
+
+                                                                                        styles.questionNumberSomeCorrect
+                                                                                )
+                                                                        )
+                                                                }
+                                                            >
+                                                                {questionIndex + 1}
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div className={styles.questionContainer2}>
-                                                        <Editor
-                                                            apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
-                                                            disabled={true}
-                                                            init={{
-                                                                readonly: true,
-                                                                menubar: false,
-                                                                toolbar: false,
-                                                                statusbar: false,
-                                                                plugins: ["autoresize", 'codesample'],
-                                                                content_style: `
+                                                        <div className={styles.questionContainer2}>
+                                                            <Editor
+                                                                apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                                                                disabled={true}
+                                                                init={{
+                                                                    readonly: true,
+                                                                    menubar: false,
+                                                                    toolbar: false,
+                                                                    statusbar: false,
+                                                                    plugins: ["autoresize", 'codesample'],
+                                                                    content_style: `
                                                         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
                                                         body {
@@ -255,281 +274,282 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                                             padding: 0px;
                                                         }
                                                     `
-                                                            }}
-                                                            value={current.question}
-                                                        />
-                                                    </div>
-
-                                                    <div className={styles.questionContainer3}>
-                                                        {
-                                                            current.type === "객관식"
-
-                                                            &&
-
-                                                            <div className={styles.choiceAnswerContainer}>
-                                                                <div className={styles.choiceAnswerElements}>
-                                                                    <div className={applicantList[applicantIndex].answerSheet[questionIndex][0] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                        1
-                                                                    </div>
-
-                                                                    <div className={applicantList[applicantIndex].answerSheet[questionIndex][0] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                        {current.choices[0]}
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className={styles.choiceAnswerElements}>
-                                                                    <div className={applicantList[applicantIndex].answerSheet[questionIndex][1] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                        2
-                                                                    </div>
-
-                                                                    <div className={applicantList[applicantIndex].answerSheet[questionIndex][1] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                        {current.choices[1]}
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className={styles.choiceAnswerElements}>
-                                                                    <div className={applicantList[applicantIndex].answerSheet[questionIndex][2] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                        3
-                                                                    </div>
-
-                                                                    <div className={applicantList[applicantIndex].answerSheet[questionIndex][2] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                        {current.choices[2]}
-                                                                    </div>
-                                                                </div>
-
-                                                                {
-                                                                    current.choices[3]
-
-                                                                    &&
-
-                                                                    <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][3] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                            4
-                                                                        </div>
-
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][3] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                            {current.choices[3]}
-                                                                        </div>
-                                                                    </div>
-                                                                }
-
-                                                                {
-                                                                    current.choices[4]
-
-                                                                    &&
-
-                                                                    <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][4] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                            5
-                                                                        </div>
-
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][4] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                            {current.choices[4]}
-                                                                        </div>
-                                                                    </div>
-                                                                }
-
-                                                                {
-                                                                    current.choices[5]
-
-                                                                    &&
-
-                                                                    <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][5] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                            6
-                                                                        </div>
-
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][5] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                            {current.choices[5]}
-                                                                        </div>
-                                                                    </div>
-                                                                }
-
-                                                                {
-                                                                    current.choices[6]
-
-                                                                    &&
-
-                                                                    <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][6] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                            7
-                                                                        </div>
-
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][6] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                            {current.choices[6]}
-                                                                        </div>
-                                                                    </div>
-                                                                }
-
-                                                                {
-                                                                    current.choices[7]
-
-                                                                    &&
-
-                                                                    <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][7] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                            8
-                                                                        </div>
-
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][7] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                            {current.choices[7]}
-                                                                        </div>
-                                                                    </div>
-                                                                }
-
-                                                                {
-                                                                    current.choices[8]
-
-                                                                    &&
-
-                                                                    <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][8] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                            9
-                                                                        </div>
-
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][8] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                            {current.choices[8]}
-                                                                        </div>
-                                                                    </div>
-                                                                }
-
-                                                                {
-                                                                    current.choices[9]
-
-                                                                    &&
-
-                                                                    <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][9] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
-                                                                            10
-                                                                        </div>
-
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][9] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                                            {current.choices[9]}
-                                                                        </div>
-                                                                    </div>
-                                                                }
-                                                            </div>
-                                                        }
-
-                                                        {
-                                                            current.type === "참/거짓"
-
-                                                            &&
-
-                                                            <div>
-                                                                {applicantList[applicantIndex].answerSheet[questionIndex] ? "참" : "거짓"}
-                                                            </div>
-                                                        }
-
-                                                        {
-                                                            current.type === "주관식"
-
-                                                            &&
-
-                                                            <div>
-                                                                {applicantList[applicantIndex].answerSheet[questionIndex]}
-                                                            </div>
-                                                        }
-
-
-                                                        {
-                                                            current.type === "서술형"
-
-                                                            &&
-
-                                                            <div>
-                                                                {applicantList[applicantIndex].answerSheet[questionIndex]}
-                                                            </div>
-                                                        }
-                                                    </div>
-
-                                                    <div className={styles.questionContainer4}>
-                                                        <div className={styles.questionContainer4Left}>
-                                                            {
-                                                                applicantList[applicantIndex].reportCard[questionIndex] === questionList[questionIndex].points
-
-                                                                    ?
-
-                                                                    <div className={styles.resultCorrect}>
-                                                                        정답
-                                                                    </div>
-
-                                                                    :
-
-                                                                    (
-                                                                        applicantList[applicantIndex].reportCard[questionIndex] === -1
-
-                                                                            ?
-
-                                                                            <div className={styles.resultBefore}>
-                                                                                채점 전
-                                                                            </div>
-
-                                                                            :
-
-                                                                            (
-                                                                                applicantList[applicantIndex].reportCard[questionIndex] === 0
-
-                                                                                    ?
-
-                                                                                    <div className={styles.resultIncorrect}>
-                                                                                        오답
-                                                                                    </div>
-
-                                                                                    :
-
-                                                                                    <div className={styles.resultSomeCorrect}>
-                                                                                        부분 정답
-                                                                                    </div>
-                                                                            )
-                                                                    )
-                                                            }
+                                                                }}
+                                                                value={current.question}
+                                                            />
                                                         </div>
 
-                                                        <div className={styles.questionContainer4Right}>
+                                                        <div className={styles.questionContainer3}>
                                                             {
-                                                                applicantList[applicantIndex].reportCard[questionIndex] > -1
+                                                                current.type === "객관식"
 
                                                                 &&
 
-                                                                <div
-                                                                    className={
-                                                                        applicantList[applicantIndex].reportCard[questionIndex] === questionList[questionIndex].points
+                                                                <div className={styles.choiceAnswerContainer}>
+                                                                    <div className={styles.choiceAnswerElements}>
+                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][0] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            1
+                                                                        </div>
 
-                                                                            ?
+                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][0] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            {current.choices[0]}
+                                                                        </div>
+                                                                    </div>
 
-                                                                            styles.pointsCorrect
+                                                                    <div className={styles.choiceAnswerElements}>
+                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][1] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            2
+                                                                        </div>
 
-                                                                            :
+                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][1] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            {current.choices[1]}
+                                                                        </div>
+                                                                    </div>
 
-                                                                            (
-                                                                                applicantList[applicantIndex].reportCard[questionIndex] === 0
+                                                                    <div className={styles.choiceAnswerElements}>
+                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][2] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            3
+                                                                        </div>
 
-                                                                                    ?
+                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][2] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            {current.choices[2]}
+                                                                        </div>
+                                                                    </div>
 
-                                                                                    styles.pointsIncorrect
+                                                                    {
+                                                                        current.choices[3]
 
-                                                                                    :
+                                                                        &&
 
-                                                                                    styles.pointsSomeCorrect
-                                                                            )
+                                                                        <div className={styles.choiceAnswerElements}>
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][3] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                                4
+                                                                            </div>
+
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][3] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                                {current.choices[3]}
+                                                                            </div>
+                                                                        </div>
                                                                     }
-                                                                >
-                                                                    {applicantList[applicantIndex].reportCard[questionIndex]}
-                                                                    /
-                                                                    {questionList[questionIndex].points}
-                                                                    점
+
+                                                                    {
+                                                                        current.choices[4]
+
+                                                                        &&
+
+                                                                        <div className={styles.choiceAnswerElements}>
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][4] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                                5
+                                                                            </div>
+
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][4] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                                {current.choices[4]}
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+
+                                                                    {
+                                                                        current.choices[5]
+
+                                                                        &&
+
+                                                                        <div className={styles.choiceAnswerElements}>
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][5] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                                6
+                                                                            </div>
+
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][5] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                                {current.choices[5]}
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+
+                                                                    {
+                                                                        current.choices[6]
+
+                                                                        &&
+
+                                                                        <div className={styles.choiceAnswerElements}>
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][6] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                                7
+                                                                            </div>
+
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][6] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                                {current.choices[6]}
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+
+                                                                    {
+                                                                        current.choices[7]
+
+                                                                        &&
+
+                                                                        <div className={styles.choiceAnswerElements}>
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][7] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                                8
+                                                                            </div>
+
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][7] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                                {current.choices[7]}
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+
+                                                                    {
+                                                                        current.choices[8]
+
+                                                                        &&
+
+                                                                        <div className={styles.choiceAnswerElements}>
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][8] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                                9
+                                                                            </div>
+
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][8] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                                {current.choices[8]}
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+
+                                                                    {
+                                                                        current.choices[9]
+
+                                                                        &&
+
+                                                                        <div className={styles.choiceAnswerElements}>
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][9] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                                10
+                                                                            </div>
+
+                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][9] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                                {current.choices[9]}
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            }
+
+                                                            {
+                                                                current.type === "참/거짓"
+
+                                                                &&
+
+                                                                <div>
+                                                                    {applicantList[applicantIndex].answerSheet[questionIndex] ? "참" : "거짓"}
+                                                                </div>
+                                                            }
+
+                                                            {
+                                                                current.type === "주관식"
+
+                                                                &&
+
+                                                                <div>
+                                                                    {applicantList[applicantIndex].answerSheet[questionIndex]}
+                                                                </div>
+                                                            }
+
+
+                                                            {
+                                                                current.type === "서술형"
+
+                                                                &&
+
+                                                                <div>
+                                                                    {applicantList[applicantIndex].answerSheet[questionIndex]}
                                                                 </div>
                                                             }
                                                         </div>
+
+                                                        <div className={styles.questionContainer4}>
+                                                            <div className={styles.questionContainer4Left}>
+                                                                {
+                                                                    applicantList[applicantIndex].reportCard[questionIndex] === questionList[questionIndex].points
+
+                                                                        ?
+
+                                                                        <div className={styles.resultCorrect}>
+                                                                            정답
+                                                                        </div>
+
+                                                                        :
+
+                                                                        (
+                                                                            applicantList[applicantIndex].reportCard[questionIndex] === -1
+
+                                                                                ?
+
+                                                                                <div className={styles.resultBefore}>
+                                                                                    채점 전
+                                                                                </div>
+
+                                                                                :
+
+                                                                                (
+                                                                                    applicantList[applicantIndex].reportCard[questionIndex] === 0
+
+                                                                                        ?
+
+                                                                                        <div className={styles.resultIncorrect}>
+                                                                                            오답
+                                                                                        </div>
+
+                                                                                        :
+
+                                                                                        <div className={styles.resultSomeCorrect}>
+                                                                                            부분 정답
+                                                                                        </div>
+                                                                                )
+                                                                        )
+                                                                }
+                                                            </div>
+
+                                                            <div className={styles.questionContainer4Right}>
+                                                                {
+                                                                    applicantList[applicantIndex].reportCard[questionIndex] > -1
+
+                                                                    &&
+
+                                                                    <div
+                                                                        className={
+                                                                            applicantList[applicantIndex].reportCard[questionIndex] === questionList[questionIndex].points
+
+                                                                                ?
+
+                                                                                styles.pointsCorrect
+
+                                                                                :
+
+                                                                                (
+                                                                                    applicantList[applicantIndex].reportCard[questionIndex] === 0
+
+                                                                                        ?
+
+                                                                                        styles.pointsIncorrect
+
+                                                                                        :
+
+                                                                                        styles.pointsSomeCorrect
+                                                                                )
+                                                                        }
+                                                                    >
+                                                                        {applicantList[applicantIndex].reportCard[questionIndex]}
+                                                                        /
+                                                                        {questionList[questionIndex].points}
+                                                                        점
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            ))
+                                                ))
 
-                                            :
+                                                :
 
-                                            <Error message="해당 응시자는 답안지를 제출하지 않았습니다." />
-                                    )
+                                                <Error message="해당 응시자는 답안지를 제출하지 않았습니다." />
+                                        }
+                                    </div>
                             }
                         </div>
                     </div>
