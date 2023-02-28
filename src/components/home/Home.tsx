@@ -18,26 +18,6 @@ export default function Home() {
 
 
     return (
-        // <div className={styles.homeContainer}>
-        //     <div className={styles.text1}>
-        //         이제는 온라인으로 시험을 보는 시대
-        //     </div>
-
-        //     <div className={styles.text2}>
-        //         테스트콘으로 간편하게 온라인으로 시험을 진행해보세요.
-        //     </div>
-
-        //     <div className={styles.homeContainerBottom}>
-        //         <div className={styles.applyTestButton} onClick={() => {navigate("/apply")}}>
-        //             시험 응시하기
-        //         </div>
-
-        //         <div className={styles.sampleTestButton} onClick={() => {navigate("/apply/sample/applicant/sample")}}>
-        //             체험 해보기
-        //         </div>
-        //     </div>
-        // </div>
-
         <Swiper
             direction={"vertical"}
             slidesPerView={1}
@@ -86,32 +66,6 @@ export default function Home() {
                     </div>
                 </div>
             </SwiperSlide>
-
-            {/* <SwiperSlide>
-                <div className={styles.slide2}>
-                    <div className={styles.slide2Text}>
-                        다양한 환경에서 시험을 진행할 수 있습니다.
-
-                        <div>
-                            데스크탑
-                        </div>
-
-                        <div>
-                            태블릿
-                        </div>
-
-                        <div>
-                            모바일
-                        </div>
-                    </div>
-
-                    <img className={styles.image} src={process.env.PUBLIC_URL + "/graphics/home.png"} />
-                </div>
-            </SwiperSlide>
-
-            <SwiperSlide>
-                다양한 유형의 문제를 만들어 보세요.
-            </SwiperSlide> */}
         </Swiper>
     )
 }
