@@ -1,54 +1,263 @@
-.applicantContainer {
+.answerSheetContainer {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.answerSheetContainerLeft {
+    width: 300px;
+    height: calc(100vh - 70px);
+    border-right: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
     padding: 20px;
-    margin-bottom: 10px;
+    position: fixed;
+    top: 70px;
+    left: 300px
+}
+
+.applicantContainerSelected {
+    width: 100%;
+    height: 50px;
+    line-height: 30px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(240, 240, 240);
+}
+
+.applicantContainerNotSelected {
+    width: 100%;
+    height: 50px;
+    line-height: 30px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.answerSheetContainerRight {
+    width: calc(100vw - 600px);
+    height: calc(100vh - 70px);
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    position: fixed;
+    top: 70px;
+    left: 600px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.answerSheetContainerRight::-webkit-scrollbar {
+    display: none;
+}
+
+.questionContainer {
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
+    margin-bottom: 40px;
+}
+
+.questionContainer1 {
+    border-bottom: 1px solid rgb(220, 220, 220);
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.questionNumberCorrect {
+    font-size: 2rem;
+    font-weight: 500;
+    color: rgb(100, 220, 100);
+}
+
+.questionNumberBefore {
+    font-size: 2rem;
+    font-weight: 500;
+    color: rgb(200, 200, 250);
+}
+
+.questionNumberIncorrect {
+    font-size: 2rem;
+    font-weight: 500;
+    color: rgb(250, 50, 50);
+}
+
+.questionNumberSomeCorrect {
+    font-size: 2rem;
+    font-weight: 500;
+    color: (250, 200, 100);
+}
+
+.questionContainer2 {
+    height: fit-content;
+    padding-top: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.questionContainer3 {
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+}
+
+.choiceAnswerContainer {
     display: grid;
-    grid-template-columns: 1fr fit-content(100%);
+    gap: 10px;
 }
 
-.applicantName {
-    font-size: 1.5rem;
-    height: 40px;
-    line-height: 40px;
-}
-
-.applicantContainer2 {
+.choiceAnswerElements {
+    height: fit-content;
     display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
+    grid-template-columns: 24px 1fr;
+    gap: 10px;
+    border-radius: 5px;
+    align-items:start;
 }
 
-.scores {
-    font-size: 1.5rem;
-    height: 40px;
-    line-height: 40px;
-    margin-right: 20px;
-    text-align: right;
+.choiceNumberSelected {
+    font-weight: 400;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 12px;
+    background-color: rgb(0, 220, 220);
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.choiceNumberNotSelected {
+    font-weight: 400;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 12px;
+    background-color: rgb(220, 220, 220);
+    color: rgb(100, 100, 100);
+    text-align: center;
+}
+
+.choiceValueSelected {
+    height: fit-content;
+    line-height: 24px;
+    border-radius: 10px;
     color: rgb(0, 220, 220);
 }
 
-.checkAnswerSheetButton {
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 1rem;
-    border: none;
+.choiceValueNotSelected {
+    height: fit-content;
+    line-height: 24px;
+    border-radius: 10px;
+}
+
+.questionContainer4 {
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.resultCorrect {
+    width: fit-content;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 5px;
+    background-color: rgb(100, 220, 100);
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 220, 220);
-    cursor: pointer;
+}
+
+.resultBefore {
+    width: fit-content;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: rgb(200, 200, 200);
+    color: rgb(255, 255, 255);
+}
+
+.resultIncorrect {
+    width: fit-content;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: rgb(250, 50, 50);
+    color: rgb(255, 255, 255);
+}
+
+.resultSomeCorrect {
+    width: fit-content;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: rgb(250, 200, 100);
+    color: rgb(255, 255, 255);
+}
+
+.pointsCorrect {
+    font-size: 1.5rem;
+    height: 30px;
+    line-height: 30px;
+    color: rgb(100, 220, 100);
+}
+
+.pointsIncorrect {
+    font-size: 1.5rem;
+    height: 30px;
+    line-height: 30px;
+    color: rgb(250, 50, 50);
+}
+
+.pointsSomeCorrect {
+    font-size: 1.5rem;
+    height: 30px;
+    line-height: 30px;
+    color: rgb(250, 200, 100);
 }
 
 
 
-@media (max-width: 600px) {
-    .applicantContainer {
-        grid-template-columns: none;
-        grid-template-rows: repeat(2, fit-content(100%));
+@media (max-width: 1200px)  {
+    .answerSheetContainer {
+        display: block;
+    }
+
+    .answerSheetContainerLeft {
+        display: none;
     }
     
-    .applicantContainer2 {
-        justify-self: right;
+    .answerSheetContainerRight {
+        width: 100vw;
+        height: calc(100vh - 150px);
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+        top: 110px;
+        left: 0px;
+    }
+
+    .applicantListButtonNotClicked {
+        width: 100vw;
+        height: 50px;
+        background-color: rgb(240, 240, 240);
+        z-index: 3;
+        display: grid;
+        grid-template-columns: 1fr 50px;
+    }
+
+    .applicantListButtonClicked {
+        width: 100vw;
+        height: calc(100vh - 150px);
+        position: fixed;
+        top: 70px;
+        left: 0px;
     }
 }

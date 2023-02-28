@@ -62,66 +62,70 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
 
 
     return (
-        isAddingApplicant
+        <div className={styles.applicantTabContainer}>
+            {
+                isAddingApplicant
 
-            ?
+                    ?
 
-            <form onSubmit={addApplicant}>
-                <div className={styles.addApplicantHeader}>
-                    응시자 이름
-                </div>
+                    <form onSubmit={addApplicant}>
+                        <div className={styles.addApplicantHeader}>
+                            응시자 이름
+                        </div>
 
-                <input
-                    type="text"
-                    value={applicantName}
-                    className={styles.applicantNameInputBox}
-                    onChange={(event: any) => { setApplicantName(event.target.value); }}
-                    required
-                />
+                        <input
+                            type="text"
+                            value={applicantName}
+                            className={styles.applicantNameInputBox}
+                            onChange={(event: any) => { setApplicantName(event.target.value); }}
+                            required
+                        />
 
-                <div className={styles.addApplicantButtons}>
-                    <input
-                        type="submit"
-                        value="추가"
-                        className={styles.confirmButton}
-                    />
+                        <div className={styles.addApplicantButtons}>
+                            <input
+                                type="submit"
+                                value="추가"
+                                className={styles.confirmButton}
+                            />
 
-                    <input
-                        type="button"
-                        value="취소"
-                        className={styles.cancelButton}
-                        onClick={() => {
-                            setApplicantName("");
-                            setIsAddingApplicant(false);
-                        }}
-                    />
-                </div>
-            </form>
+                            <input
+                                type="button"
+                                value="취소"
+                                className={styles.cancelButton}
+                                onClick={() => {
+                                    setApplicantName("");
+                                    setIsAddingApplicant(false);
+                                }}
+                            />
+                        </div>
+                    </form>
 
-            :
+                    :
 
-            <div>
-                <div
-                    className={styles.addApplicantButton}
-                    onClick={() => {
-                        setIsAddingApplicant(true);
-                        setApplicantName("");
-                    }}
-                >
-                    응시자 추가
-                </div>
+                    <div>
+                        <div
+                            className={styles.addApplicantButton}
+                            onClick={() => {
+                                setIsAddingApplicant(true);
+                                setApplicantName("");
+                            }}
+                        >
+                            응시자 추가
+                        </div>
 
-                {
-                    applicantList.length > 0
+                        {
+                            applicantList.length > 0
 
-                        ?
+                                ?
 
-                        applicantList.map((current: any) => <ApplicantContainer testCode={testCode} applicantObject={current} />)
+                                applicantList.map((current: any) => <ApplicantContainer testCode={testCode} applicantObject={current} />)
 
-                        :
+                                :
 
-                        <Error message="응시자가 없습니다." />
-                }
-            </div>
+                                <Error message="응시자가 없습니다." />
+                        }
+                    </div>
+            }
+        </div>
     )
 }

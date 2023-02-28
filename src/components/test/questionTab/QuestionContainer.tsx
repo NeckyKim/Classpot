@@ -10,7 +10,7 @@ import styles from "./QuestionContainer.module.css";
 
 
 
-export default function QuestionContainer({ testCode, userCode, questionObject, questionNumber, setIndex, setIsEditingQuestion }: { testCode: string|undefined, userCode: string, questionObject: any, questionNumber: number, setIndex: any, setIsEditingQuestion: any }) {
+export default function QuestionContainer({ testCode, userCode, questionObject, questionNumber, setIndex, setIsEditingQuestion }: { testCode: string | undefined, userCode: string, questionObject: any, questionNumber: number, setIndex: any, setIsEditingQuestion: any }) {
     const [isMoreButtonClicked, setIsMoreButtonClicked] = useState<boolean>(false);
 
 
@@ -28,7 +28,7 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
 
 
 
-    function clickedOutside (ref: any) {
+    function clickedOutside(ref: any) {
         useEffect(() => {
             function handleClickOutside(event: any) {
                 if (ref.current && !ref.current.contains(event.target)) {
@@ -138,6 +138,8 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
                 }
             </div>
 
+
+
             <div className={styles.questionContainerBottom}>
                 <div className={styles.questionInfo}>
                     <div className={styles.questionInfoContainer}>
@@ -209,26 +211,158 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
 
 
 
-                <div className={styles.questionInfoHeader}>
-                    정답
-                </div>
-
                 {
                     questionObject.type === "객관식"
 
                     &&
 
-                    <div>
-                        <div className={questionObject.answer[0] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[0]}</div>
-                        <div className={questionObject.answer[1] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[1]}</div>
-                        <div className={questionObject.answer[2] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[2]}</div>
-                        {questionObject.choices[3] && <div className={questionObject.answer[3] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[3]}</div>}
-                        {questionObject.choices[4] && <div className={questionObject.answer[4] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[4]}</div>}
-                        {questionObject.choices[5] && <div className={questionObject.answer[5] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[5]}</div>}
-                        {questionObject.choices[6] && <div className={questionObject.answer[6] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[6]}</div>}
-                        {questionObject.choices[7] && <div className={questionObject.answer[7] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[7]}</div>}
-                        {questionObject.choices[8] && <div className={questionObject.answer[8] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[8]}</div>}
-                        {questionObject.choices[9] && <div className={questionObject.answer[9] ? styles.correctChoice : styles.wrongChoice}>{questionObject.choices[9]}</div>}
+                    <div className={styles.choiceContainer}>
+                        <div className={styles.questionInfoHeader}>
+                            정답
+                        </div>
+
+                        <div className={styles.choiceElements}>
+                            <div className={questionObject.answer[0] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                1
+                            </div>
+
+                            <div className={questionObject.answer[0] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                {questionObject.choices[0]}
+                            </div>
+                        </div>
+
+                        <div className={styles.choiceElements}>
+                            <div className={questionObject.answer[1] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                2
+                            </div>
+
+                            <div className={questionObject.answer[1] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                {questionObject.choices[1]}
+                            </div>
+                        </div>
+
+                        <div className={styles.choiceElements}>
+                            <div className={questionObject.answer[2] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                3
+                            </div>
+
+                            <div className={questionObject.answer[2] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                {questionObject.choices[2]}
+                            </div>
+                        </div>
+
+                        {
+                            questionObject.choices[3]
+
+                            &&
+
+                            <div className={styles.choiceElements}>
+                                <div className={questionObject.answer[3] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                    4
+                                </div>
+
+                                <div className={questionObject.answer[3] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                    {questionObject.choices[3]}
+                                </div>
+                            </div>
+                        }
+
+                        {
+                            questionObject.choices[4]
+
+                            &&
+
+                            <div className={styles.choiceElements}>
+                                <div className={questionObject.answer[4] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                    5
+                                </div>
+
+                                <div className={questionObject.answer[4] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                    {questionObject.choices[4]}
+                                </div>
+                            </div>
+                        }
+
+                        {
+                            questionObject.choices[5]
+
+                            &&
+
+                            <div className={styles.choiceElements}>
+                                <div className={questionObject.answer[5] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                    6
+                                </div>
+
+                                <div className={questionObject.answer[5] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                    {questionObject.choices[5]}
+                                </div>
+                            </div>
+                        }
+
+                        {
+                            questionObject.choices[6]
+
+                            &&
+
+                            <div className={styles.choiceElements}>
+                                <div className={questionObject.answer[6] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                    7
+                                </div>
+
+                                <div className={questionObject.answer[6] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                    {questionObject.choices[6]}
+                                </div>
+                            </div>
+                        }
+
+
+                        {
+                            questionObject.choices[7]
+
+                            &&
+
+                            <div className={styles.choiceElements}>
+                                <div className={questionObject.answer[7] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                    8
+                                </div>
+
+                                <div className={questionObject.answer[7] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                    {questionObject.choices[7]}
+                                </div>
+                            </div>
+                        }
+
+                        {
+                            questionObject.choices[8]
+
+                            &&
+
+                            <div className={styles.choiceElements}>
+                                <div className={questionObject.answer[8] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                    9
+                                </div>
+
+                                <div className={questionObject.answer[8] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                    {questionObject.choices[8]}
+                                </div>
+                            </div>
+                        }
+
+                        {
+                            questionObject.choices[9]
+
+                            &&
+
+                            <div className={styles.choiceElements}>
+                                <div className={questionObject.answer[9] ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                    10
+                                </div>
+
+                                <div className={questionObject.answer[9] ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
+                                    {questionObject.choices[9]}
+                                </div>
+                            </div>
+                        }
                     </div>
                 }
 
@@ -237,8 +371,14 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
 
                     &&
 
-                    <div className={styles.correctChoice}>
-                        {questionObject.answer ? "참" : "거짓"}
+                    <div>
+                        <div className={styles.questionInfoHeader}>
+                            정답
+                        </div>
+
+                        <div className={styles.correctChoice}>
+                            {questionObject.answer ? "참" : "거짓"}
+                        </div>
                     </div>
                 }
 
@@ -247,8 +387,14 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
 
                     &&
 
-                    <div className={styles.correctChoice}>
-                        {questionObject.answer}
+                    <div>
+                        <div className={styles.questionInfoHeader}>
+                            정답
+                        </div>
+
+                        <div className={styles.correctChoice}>
+                            {questionObject.answer}
+                        </div>
                     </div>
                 }
             </div>

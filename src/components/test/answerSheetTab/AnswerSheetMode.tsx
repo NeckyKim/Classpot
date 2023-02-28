@@ -137,37 +137,37 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
 
 
-    if (applicantInfo.answerSheet && applicantInfo.autoGrading) {
-        for (var i = 0; i < questionList.length; i++) {
-            if (questionList[i].type === "객관식") {
-                if (JSON.stringify(questionList[i].answer) === JSON.stringify(applicantInfo.answerSheet[i])) {
-                    reportCard[i] = questionList[i].points;
-                }
+    // if (applicantInfo.answerSheet && applicantInfo.autoGrading) {
+    //     for (var i = 0; i < questionList.length; i++) {
+    //         if (questionList[i].type === "객관식") {
+    //             if (JSON.stringify(questionList[i].answer) === JSON.stringify(applicantInfo.answerSheet[i])) {
+    //                 reportCard[i] = questionList[i].points;
+    //             }
 
-                else {
-                    reportCard[i] = 0;
-                }
-            }
+    //             else {
+    //                 reportCard[i] = 0;
+    //             }
+    //         }
 
-            else if (questionList[i].type === "주관식" || questionList[i].type === "참/거짓") {
-                if (questionList[i].answer === applicantInfo.answerSheet[i]) {
-                    reportCard[i] = questionList[i].points;
-                }
+    //         else if (questionList[i].type === "주관식" || questionList[i].type === "참/거짓") {
+    //             if (questionList[i].answer === applicantInfo.answerSheet[i]) {
+    //                 reportCard[i] = questionList[i].points;
+    //             }
 
-                else {
-                    reportCard[i] = 0;
-                }
-            }
+    //             else {
+    //                 reportCard[i] = 0;
+    //             }
+    //         }
 
-            else if (questionList[i].type === "서술형") {
-                if (reportCard[i] !== -1) {
-                    reportCard[i] = -1;
-                }
-            }
-        }
+    //         else if (questionList[i].type === "서술형") {
+    //             if (reportCard[i] !== -1) {
+    //                 reportCard[i] = -1;
+    //             }
+    //         }
+    //     }
 
-        submitReportCard(event);
-    }
+    //     submitReportCard(event);
+    // }
 
 
 

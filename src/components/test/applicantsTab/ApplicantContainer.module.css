@@ -11,8 +11,8 @@
     position: relative;
 }
 
-.applicantContainer:nth-child(2) {
-    margin-top: 40px;
+.applicantContainer:last-child {
+    margin-bottom: 0px;
 }
 
 .applicantName {

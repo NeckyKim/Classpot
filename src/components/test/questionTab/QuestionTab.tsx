@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 
 import AddQuestion from "./AddQuestion";
 import EditQuestion from "./EditQuestion";
@@ -23,44 +23,46 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string, 
 
 
     return (
-        isAddingQuestion
+        <div className={styles.questionTabContainer}>
+            {
+                isAddingQuestion
 
-            ?
+                    ?
 
-            <AddQuestion userCode={userCode} setIsAddingQuestion={setIsAddingQuestion} />
+                    <AddQuestion userCode={userCode} setIsAddingQuestion={setIsAddingQuestion} />
 
-            :
+                    :
 
-            <div>
-                {
-                    isEditingQuestion
+                    (
+                        isEditingQuestion
 
-                        ?
+                            ?
 
-                        <EditQuestion setIsEditingQuestion={setIsEditingQuestion} questionInfo={questionList[index]} />
+                            <EditQuestion setIsEditingQuestion={setIsEditingQuestion} questionInfo={questionList[index]} />
 
-                        :
+                            :
 
-                        <div>
-                            <div onClick={() => { setIsAddingQuestion((prev) => !prev); }} className={styles.addQuestionButton} >
-                                문제 추가
+                            <div>
+                                <div onClick={() => { setIsAddingQuestion((prev) => !prev); }} className={styles.addQuestionButton} >
+                                    문제 추가
+                                </div>
+
+                                {
+                                    questionList.length > 0
+
+                                        ?
+
+                                        questionList.map((current: any, index: number) => (
+                                            <QuestionContainer testCode={testCode} userCode={userCode} questionObject={current} questionNumber={index} setIndex={setIndex} setIsEditingQuestion={setIsEditingQuestion} />
+                                        ))
+
+                                        :
+
+                                        <Error message="문제가 없습니다." />
+                                }
                             </div>
-
-                            {
-                                questionList.length > 0
-
-                                    ?
-
-                                    questionList.map((current: any, index: number) => (
-                                        <QuestionContainer testCode={testCode} userCode={userCode} questionObject={current} questionNumber={index} setIndex={setIndex} setIsEditingQuestion={setIsEditingQuestion} />
-                                    ))
-
-                                    :
-
-                                    <Error message="문제가 없습니다." />
-                            }
-                        </div>
-                }
-            </div>
+                    )
+            }
+        </div>
     )
 }

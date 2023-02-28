@@ -1,8 +1,12 @@
 .questionContainer {
-    border: 1px solid rgb(220, 220, 220);
     border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
     margin-bottom: 40px;
     position: relative;
+}
+
+.questionContainer:last-child {
+    margin-bottom: 0px;
 }
 
 .questionContainerTop {
@@ -96,24 +100,51 @@
     color: rgb(250, 0, 0);
 }
 
-
-.correctChoice {
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    border: 1px solid rgb(0, 100, 250);
-    color: rgb(0, 100, 250);
-    word-break: keep-all;
-    text-align: justify;
+.choiceContainer {
+    display: grid;
+    gap: 10px;
 }
 
-.wrongChoice {
-    padding: 10px;
-    margin-bottom: 5px;
+.choiceElements {
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 10px;
     border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    word-break: keep-all;
-    text-align: justify;
+    align-items:start;
+}
+
+.choiceNumberCorrect {
+    font-weight: 400;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 12px;
+    background-color: rgb(0, 220, 220);
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.choiceNumberIncorrect {
+    font-weight: 400;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 12px;
+    background-color: rgb(220, 220, 220);
+    color: rgb(100, 100, 100);
+    text-align: center;
+}
+
+.choiceValueCorrect {
+    height: fit-content;
+    line-height: 24px;
+    border-radius: 10px;
+    color: rgb(0, 220, 220);
+}
+
+.choiceValueIncorrect {
+    height: fit-content;
+    line-height: 24px;
+    border-radius: 10px;
 }
 
 .questionImage {

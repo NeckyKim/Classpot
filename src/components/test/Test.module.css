@@ -72,10 +72,7 @@
 .containerRightBottom {
     width: calc(100vw - 300px);
     height: 100vh;
-    padding-top: 110px;
-    padding-bottom: 40px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-top: 70px;
     background-color: rgb(255, 255, 255);
     position: fixed;
     top: 0px;
@@ -173,12 +170,9 @@
 
     .containerRightBottom {
         width: 100vw;
-        height: calc(100vh - 150px);
-        padding: 40px;
-        padding-left: min(40px, 5vw);
-        padding-right: min(40px, 5vw);
+        height: calc(100vh - 80px);
         position: fixed;
-        top: 70px;
+        top: 0px;
         left: 0px;
     }
 

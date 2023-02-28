@@ -1,3 +1,12 @@
+.settingsTabContainer {
+    width: 100%;
+    height: fit-content;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 .settingsContainer {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -248,6 +257,11 @@
 
 
 @media (max-width: 1200px)  {
+    .settingsTabContainer {
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+
     .settingsContainer {
         padding-top: 15px;
         padding-bottom: 20px;

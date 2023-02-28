@@ -162,7 +162,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
 
 
     return (
-        <div>
+        <div className={styles.settingsTabContainer}>
             <div className={styles.settingsContainer}>
                 <div className={styles.settingsHeader}>
                     시험 이름
