@@ -9,6 +9,7 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
 
     const [check1, setCheck1] = useState<boolean>(false);
     const [check2, setCheck2] = useState<boolean>(false);
+    const [check3, setCheck3] = useState<boolean>(false);
 
     return (
         <div>
@@ -24,9 +25,23 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                 className={tab === 1 ? styles.tabButtonClicked : styles.tabButtonNotClicked}
                                 onClick={() => { setTab(1); }}
                             >
-                                <div className={tab === 1 ? styles.tabNumberClicked : styles.tabNumberNotClicked}>1</div>
+                                {
+                                    check1
 
-                                <div>
+                                        ?
+
+                                        <div className={styles.tabCheck}>
+                                            <img className={styles.tabCheckIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />
+                                        </div>
+
+                                        :
+
+                                        <div className={styles.tabNumber}>
+                                            1
+                                        </div>
+                                }
+
+                                <div className={tab === 1 ? styles.tabTextClicked : styles.tabTextNotClicked}>
                                     시험 안내
                                 </div>
                             </button>
@@ -34,22 +49,51 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                             <button
                                 className={tab === 2 ? styles.tabButtonClicked : styles.tabButtonNotClicked}
                                 onClick={() => { setTab(2); }}
+                                disabled={!check1}
                             >
-                                <div className={tab === 2 ? styles.tabNumberClicked : styles.tabNumberNotClicked}>2</div>
+                                {
+                                    check2
 
-                                <div>
-                                    유의 사항
+                                        ?
+
+                                        <div className={styles.tabCheck}>
+                                            <img className={styles.tabCheckIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />
+                                        </div>
+
+                                        :
+
+                                        <div className={styles.tabNumber}>
+                                            2
+                                        </div>
+                                }
+
+                                <div className={tab === 2 ? styles.tabTextClicked : styles.tabTextNotClicked}>
+                                    사용 방법
                                 </div>
                             </button>
 
                             <button
                                 className={tab === 3 ? styles.tabButtonClicked : styles.tabButtonNotClicked}
                                 onClick={() => { setTab(3); }}
-                                disabled={!check1}
+                                disabled={!check2}
                             >
-                                <div className={tab === 3 ? styles.tabNumberClicked : styles.tabNumberNotClicked}>3</div>
+                                {
+                                    check3
 
-                                <div>
+                                        ?
+
+                                        <div className={styles.tabCheck}>
+                                            <img className={styles.tabCheckIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />
+                                        </div>
+
+                                        :
+
+                                        <div className={styles.tabNumber}>
+                                            3
+                                        </div>
+                                }
+
+                                <div className={tab === 3 ? styles.tabTextClicked : styles.tabTextNotClicked}>
                                     약관 동의
                                 </div>
                             </button>
@@ -57,15 +101,19 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                             <button
                                 className={tab === 4 ? styles.tabButtonClicked : styles.tabButtonNotClicked}
                                 onClick={() => { setTab(4); }}
-                                disabled={!check2}
+                                disabled={!check3}
                             >
-                                <div className={tab === 4 ? styles.tabNumberClicked : styles.tabNumberNotClicked}>4</div>
+                                <div className={styles.tabNumber}>
+                                    4
+                                </div>
 
-                                <div>
+                                <div className={tab === 4 ? styles.tabTextClicked : styles.tabTextNotClicked}>
                                     준비 완료
                                 </div>
                             </button>
                         </div>
+
+
 
                         <div className={styles.preTestModeContainerRight}>
                             <div className={styles.testName}>
@@ -79,90 +127,45 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
 
                                 <div className={styles.tab1}>
                                     <div className={styles.tab1Top}>
-                                        안녕하세요,&nbsp;
-                                        <span className={styles.highlight}>
-                                            {applicantName}
-                                        </span>님.<br /><br />
+                                        <div className={styles.introContainer}>
+                                            안녕하세요, <span className={styles.highlight}>{applicantName}</span>님.<br />
 
-                                        본 시험은 &nbsp;
-                                        <span className={styles.highlight}>
-                                            {new Date(testInfo.startDate).toLocaleString("ko-KR")}
-                                        </span>부터&nbsp;
+                                            본 시험은 &nbsp;
+                                            <span className={styles.highlight}>
+                                                {new Date(testInfo.startDate).toLocaleString("ko-KR")}
+                                            </span>부터&nbsp;
 
-                                        <span className={styles.highlight}>
-                                            {new Date(testInfo.startDate + testInfo.duration * 60000).toLocaleString("ko-KR")}
-                                        </span>까지<br />
-
-                                        약&nbsp;
-                                        <span className={styles.highlight}>
-                                            {testInfo.duration}분
-                                        </span> 동안 진행됩니다.<br /><br />
-
-                                        총&nbsp;
-                                        <span className={styles.highlight}>
-                                            {noOfQuestions}문항
-                                        </span>으로 구성되어 있으며,&nbsp;
-
-                                        <span className={styles.highlight}>
-                                            {totalPoints}점
-                                        </span>&nbsp;만점으로 진행됩니다.<br /><br />
-
-                                        유의 사항을 확인해주시고, 약관 동의를 해주셔야 시험에 응시할 수 있습니다.
-                                    </div>
-
-                                    <div className={styles.tab1Bottom}>
-                                        <div
-                                            className={styles.nextButton}
-                                            onClick={() => {
-                                                setTab(2);
-                                            }}
-                                        >
-                                            다음
+                                            약&nbsp;
+                                            <span className={styles.highlight}>
+                                                {testInfo.duration}분
+                                            </span> 동안 진행됩니다.
                                         </div>
-                                    </div>
-                                </div>
-                            }
 
-                            {
-                                tab === 2
-
-                                &&
-
-                                <div className={styles.tab2}>
-                                    <div className={styles.tab2Top}>
                                         <div className={styles.tabHeader}>
-                                            다음 유의 사항을 확인해주세요.
+                                            시험 시작 전 다음 유의 사항을 확인해주세요.
                                         </div>
 
-                                        <div className={styles.notificationContainer}>
+                                        <ol className={styles.notificationContainer}>
                                             <li className={styles.notificationElements}>
-                                                Chrome 브라우저 환경에서 시험을 응시해주세요. 다른 브라우저에서는 시험이 정상적으로 진행되지 않을 수 있습니다.
+                                                Chrome 브라우저 환경에서 시험을 진행해주세요. 다른 브라우저에서는 시험이 원할히 진행되지 않을 수 있습니다.
                                             </li>
 
                                             <li className={styles.notificationElements}>
-                                                시험 도중에 페이지를 나가도 다시 접속하여 계속 응시할 수 있습니다.
+                                                데스크탑에서 시험을 응시하길 권장합니다. 모바일 환경(스마트폰, 태블릿)에서도 응시는 가능하나  불편함이 있을 수 있습니다.
                                             </li>
 
                                             <li className={styles.notificationElements}>
-                                                제출하기 버튼을 누르거나 다른 문제로 이동하면 답안지가 자동으로 제출됩니다.
+                                                원할한 시험 진행을 위해 무선 네트워크(Wi-Fi, LTE, 5G)대신 유선 네트워크(LAN)에서 시험을 응시해주세요. 카페, 도서관 등 공용 네트워크를 사용하는 장소는 권장하지 않습니다.
                                             </li>
 
                                             <li className={styles.notificationElements}>
-                                                시험이 종료되면 마지막에 작성한 답안지가 자동으로 제출됩니다.
+                                                개인의 응시 환경 또는 네트워크 연결 문제로 인한 문제로 인해 발생한 불이익은 책임지지 않으며, 응시자 본인에게 있습니다.
                                             </li>
-
-                                            <li className={styles.notificationElements}>
-                                                개인의 응시 환경 또는 네트워크 연결 문제로 인한 문제로 인해 발생한 불이익은 책임지지 않습니다.
-                                            </li>
-
-                                            <li className={styles.notificationElements}>
-                                                안내사항을 제대로 숙지하지 않아 발생한 불이익은 책임지지 않습니다.
-                                            </li>
-                                        </div>
+                                        </ol>
 
                                         <div className={styles.checkBox}>
                                             <div className={styles.checkBoxText}>
-                                                위의 유의 사항을 모두 확인했으며, 이를 따르지 않아 발생하는 문제의 책임은 본인에게 있음을 확인하였습니다.
+                                                위의 유의 사항을 모두 확인했습니다.
                                             </div>
 
                                             <div
@@ -174,18 +177,106 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                         </div>
                                     </div>
 
-                                    <div className={styles.tab2Bottom}>
-                                        <button
-                                            className={styles.nextButton}
-                                            onClick={() => {
-                                                setCheck1(true);
-                                                setTab(3);
-                                            }}
-                                            disabled={!check1}
-                                        >
-                                            다음
-                                        </button>
+                                    <button
+                                        className={styles.nextButton}
+                                        onClick={() => {
+                                            setTab(2);
+                                        }}
+                                        disabled={!check1}
+                                    >
+                                        다음
+                                    </button>
+                                </div>
+                            }
+
+                            {
+                                tab === 2
+
+                                &&
+
+                                <div className={styles.tab2}>
+                                    <div className={styles.tab2Top}>
+                                        <div className={styles.tabHeader}>
+                                            사용 방법을 잘 숙지하여 시험 응시에 차질이 없도록 해주세요.
+                                        </div>
+
+                                        <div className={styles.manualContainer}>
+                                            <div className={styles.manualElements}>
+                                                <div className={styles.manualElementsLeft}>
+                                                    <div className={styles.manualElementsArrowsButtons}>
+                                                        <div
+                                                            className={styles.manualElementsArrowsButton}
+                                                            style={{ borderRadius: "5px 0px 0px 5px" }}
+                                                        >
+                                                            <img className={styles.manualElementsImage} src={process.env.PUBLIC_URL + "/icons/arrow_left.png"} />
+                                                        </div>
+
+                                                        <div
+                                                            className={styles.manualElementsArrowsButton}
+                                                            style={{ borderRadius: "0px 5px 5px 0px" }}
+                                                        >
+                                                            <img className={styles.manualElementsImage} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className={styles.manualElementsRight}>
+                                                    제출하기 버튼을 누르거나 다른 문제로 이동하면 답안지가 자동으로 제출됩니다.
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.manualElements}>
+                                                <div className={styles.manualElementsLeft}>
+                                                    <div className={styles.manualElementsExitButton}>
+                                                        종료하기
+                                                    </div>
+                                                </div>
+
+                                                <div className={styles.manualElementsRight}>
+                                                    시험 도중에 페이지가 종료되어도 다시 접속하여 시험에 계속 응시할 수 있습니다.
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.manualElements}>
+                                                <div className={styles.manualElementsLeft}>
+                                                    <div className={styles.manualElementsTimer}>
+                                                        <img className={styles.manualElementsImage} src={process.env.PUBLIC_URL + "/icons/timer.png"} />
+
+                                                        <div className={styles.manualElementsNumber}>
+                                                            00:00
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className={styles.manualElementsRight}>
+                                                    시험이 종료되면 마지막에 작성한 답안지가 자동으로 제출됩니다.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.checkBox}>
+                                            <div className={styles.checkBoxText}>
+                                                사용 방법을 모두 확인했습니다.
+                                            </div>
+
+                                            <div
+                                                className={check2 ? styles.checkBoxChecked : styles.checkBoxNotChecked}
+                                                onClick={() => { setCheck2((prev) => !prev); }}
+                                            >
+                                                {check2 && <img className={styles.checkBoxIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />}
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <button
+                                        className={styles.nextButton}
+                                        onClick={() => {
+                                            setTab(3);
+                                        }}
+                                        disabled={!check2}
+                                    >
+                                        다음
+                                    </button>
                                 </div>
                             }
 
@@ -201,37 +292,39 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                         </div>
 
                                         <div className={styles.agreementContainer}>
+                                            <span style={{ fontWeight: "700" }}>&#91;문제 저작권 보호 및 유출 금지 동의&#93;</span><br />
+
                                             본 시험 문제는 저작권의 보호를 받으며, 지문 및 보기에 대한 정보를 복제, 공중송신 배포하거나 2차 저작물을 작성하는 등의 행위를 금합니다. 문제에 대한 정보를 시험 출제자의 동의 없이 타인에게 공개하거나 전달하는 행위는 출제자의 재산을 침해하는 것으로, 이를 침해하는 이는 저작권법에 따라 5년 이하의 징역 또는 5천만 원 이하의 벌금에 처할 수 있습니다.<br /><br />
 
-                                            시험 진행 중 부정행위가 확인되는 경우, 시험 즉시 종료, 재응시 불가 및 실격 처리 등의 조치가 이루어질 수 있으며 이에 동의합니다.<br />
+                                            <span style={{ fontWeight: "700" }}>&#91;부정행위 처리 동의&#93;</span><br />
+
+                                            부정행위란 자신의 실력 이외에 타인의 도움 또는 기타 부정한 방법을 이용하여 점수를 취득하거나 취득하려고 하는 행위 등 공정한 시험 평가에 저촉되는 모든 행위를 말합니다.<br />
+                                            시험 진행 중 부정행위가 확인되는 경우, 시험 즉시 종료, 재시험 불가, 시험 성적 무효 처리 등의 조치가 이루어질 수 있으며 이에 동의합니다.<br /><br />
                                         </div>
 
                                         <div className={styles.checkBox}>
                                             <div className={styles.checkBoxText}>
-                                                위의 내용에 동의합니다.
+                                                위의 내용에 모두 동의합니다.
                                             </div>
 
                                             <div
-                                                className={check2 ? styles.checkBoxChecked : styles.checkBoxNotChecked}
-                                                onClick={() => { setCheck2((prev) => !prev); }}
+                                                className={check3 ? styles.checkBoxChecked : styles.checkBoxNotChecked}
+                                                onClick={() => { setCheck3((prev) => !prev); }}
                                             >
-                                                {check2 && <img className={styles.checkBoxIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />}
+                                                {check3 && <img className={styles.checkBoxIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />}
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className={styles.tab3Bottom}>
-                                        <button
-                                            className={styles.nextButton}
-                                            onClick={() => {
-                                                setCheck2(true);
-                                                setTab(4);
-                                            }}
-                                            disabled={!check2}
-                                        >
-                                            다음
-                                        </button>
-                                    </div>
+                                    <button
+                                        className={styles.nextButton}
+                                        onClick={() => {
+                                            setTab(4);
+                                        }}
+                                        disabled={!check3}
+                                    >
+                                        다음
+                                    </button>
                                 </div>
                             }
 
@@ -288,7 +381,7 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                                 {noOfQuestions}문항
                                             </div>
                                         </div>
-                                        
+
                                         <div className={styles.testInfoContainer}>
                                             <div className={styles.testInfoHeader}>
                                                 총점
@@ -300,30 +393,28 @@ export default function PreTestMode({ testInfo, testCode, applicantName, applica
                                         </div>
                                     </div>
 
-                                    <div className={styles.tab4Bottom}>
-                                        {
-                                            isTestTime[0] === "전"
+                                    {
+                                        isTestTime[0] === "전"
 
-                                            &&
+                                        &&
 
-                                            <button className={styles.startButton} disabled>
-                                                {isTestTime[1][0] !== 0 && <span>{isTestTime[1][0]}일 </span>}
-                                                {isTestTime[1][1] !== 0 && <span>{isTestTime[1][1]}시간 </span>}
-                                                {isTestTime[1][2] !== 0 && <span>{isTestTime[1][2]}분 </span>}
-                                                {isTestTime[1][3]}초 후 시작
-                                            </button>
-                                        }
+                                        <button className={styles.startButton} disabled>
+                                            {isTestTime[1][0] !== 0 && <span>{isTestTime[1][0]}일 </span>}
+                                            {isTestTime[1][1] !== 0 && <span>{isTestTime[1][1]}시간 </span>}
+                                            {isTestTime[1][2] !== 0 && <span>{isTestTime[1][2]}분 </span>}
+                                            {isTestTime[1][3]}초 후 시작
+                                        </button>
+                                    }
 
-                                        {
-                                            isTestTime[0] === "중"
+                                    {
+                                        isTestTime[0] === "중"
 
-                                            &&
+                                        &&
 
-                                            <button className={styles.startButton} onClick={() => { setIsApplyingTest(true); }}>
-                                                시험 응시
-                                            </button>
-                                        }
-                                    </div>
+                                        <button className={styles.startButton} onClick={() => { setIsApplyingTest(true); }}>
+                                            시험 응시
+                                        </button>
+                                    }
                                 </div>
                             }
                         </div>
