@@ -1,148 +1,346 @@
-.preTestModeContainer {
+.preTestModeBackground {
     width: 100vw;
-    height: calc(100vh - 70px);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
     display: grid;
-    grid-template-rows: 2fr 1fr;
+    align-items: center;
+    justify-content: center;
 }
 
-.preTestModeContainerTop {
-    padding-left: 15vw;
-    padding-right: 15vw;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    position: relative;
+.preTestModeContainer {
+    width: 65vw;
+    height: 75vh;
+    border-radius: 10px;
+    border: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.preTestModeContainerLeft {
+    background-color: rgb(245, 245, 245);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: grid;
+    grid-template-rows: repeat(4, fit-content(100%));
+    gap: 10px;
+}
+
+.tabButtonClicked {
+    font-size: 1.2rem;
+    height: 50px;
+    line-height: 30px;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    border: none;
+    text-align: left;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 10px;
+}
+
+.tabButtonNotClicked {
+    font-size: 1.2rem;
+    height: 50px;
+    line-height: 30px;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(100, 100, 100);
+    background-color: rgb(245, 245, 245);
+    border: none;
+    text-align: left;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.tabButtonNotClicked:disabled {
+    background-color: rgb(245, 245, 245);
+}
+
+.tabButtonNotClicked:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.tabButtonNotClicked:hover>.tabNumberNotClicked {
+    background-color: rgb(210, 210, 210);
+}
+
+.tabNumberClicked {
+    width: 40px;
+    border-radius: 5px;
+    background-color: rgb(0, 70, 220);
+    text-align: center;
+}
+
+.tabNumberNotClicked {
+    width: 40px;
+    border-radius: 5px;
+    background-color: rgb(230, 230, 230);
+    text-align: center;
+}
+
+.preTestModeContainerRight {
+    padding: 50px;
+    display: grid;
+    grid-template-rows: fit-content(100%) 1fr;
+}
+
+.testName {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+.nextButton {
+    font-size: 1.2rem;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.nextButton:disabled {
+    background-color: rgb(200, 200, 200);
+    cursor: not-allowed;
+}
+
+.tab1,
+.tab2,
+.tab3 {
     display: grid;
     grid-template-rows: 1fr fit-content(100%);
 }
 
-.preTestModeContainerTop2 {
-    justify-self: right;
-    margin-top: auto;
-}
-
-.preTestModeContainerBottom {
-    padding-left: 15vw;
-    padding-right: 15vw;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border-top: 1px solid rgb(220, 220, 220);
-}
-
-.header {
-    font-size: 1.2rem;
-    font-weight: 200;
-    color: rgb(150, 150, 150);
-}
-
-.testName {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 30px;
-}
-
-.userName {
-    font-size: 1.5rem;
-    font-weight: 1000;
-    margin-bottom: 30px;
-}
-
-.info {
-    font-size: 1.2rem;
-    height: 30px;
-    line-height: 30px;
-    margin-bottom: 10px;
+.tab1Bottom,
+.tab2Bottom,
+.tab3Bottom,
+.tab4Bottom {
     display: grid;
-    grid-template-columns: 100px fit-content(100%);
+    justify-items: right;
 }
 
-.buttonDisabled {
-    width: 300px;
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    border-radius: 5px;
-    color: rgb(150, 150, 150);
-    background-color: rgb(200, 200, 200);
+.tab1Top {
+    font-size: 1.3rem;
 }
 
-.buttonEnabled {
-    font-size: 1.2rem;
-    width: 300px;
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
+.highlight {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(0, 100, 250);
+}
+
+.tabHeader {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    text-align: justify;
+    word-break: keep-all;
+}
+
+.notificationContainer {
     border-radius: 5px;
-    color: rgb(255, 255, 255);
+    border: 1px solid rgb(220, 220, 220);
+    padding: 30px;
+    display: grid;
+    grid-template-rows: repeat(5, fit-content(100%));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.notificationElements {
+    font-weight: 400;
+    text-align: justify;
+    word-break: keep-all;
+}
+
+.checkBox {
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: justify;
+    word-break: keep-all;
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    gap: 10px;
+    align-items: center;
+}
+
+.checkBoxText {
+    line-height: 20px;
+}
+
+.checkBoxChecked {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 100, 250);
     background-color: rgb(0, 100, 250);
     cursor: pointer;
 }
 
-.tabMenu {
-    display: grid;
-    grid-template-columns: repeat(3, fit-content(100%));
-    gap: 30px;
-    margin-bottom: 20px;
-}
-
-.tabSelected {
-    font-size: 1.2rem;
-    color: rgb(0, 100, 250);
-}
-
-.tabNotSelected {
-    font-size: 1.2rem;
-    color: rgb(150, 150, 150);
+.checkBoxNotChecked {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
-.tabContent {
-    font-weight: 300;
-    line-height: 25px;
-    color: rgb(150, 150, 150);
-    margin-left: 20px;
-    word-break: keep-all;
+.checkBoxIcon {
+    width: 28px;
+    height: 28px;
+    padding: 6px;
+    filter: invert();
 }
 
+.agreementContainer {
+    font-weight: 400;
+    height: 250px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    padding: 30px;
+    margin-bottom: 20px;
+    text-align: justify;
+    word-break: keep-all;
+    overflow: auto;
+}
+
+.tab4 {
+    display: grid;
+    grid-template-rows: fit-content(100%) 1fr fit-content(100%);
+}
+
+.tab4Center {
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 40px;
+}
+
+.testInfoContainer {
+    display: grid;
+    grid-template-rows: repeat(2, fit-content(100%));
+    margin-bottom: 30px;
+}
+
+.testInfoHeader {
+    font-size: 1.2rem;
+    height: 26px;
+    line-height: 26px;
+    font-weight: 300;
+    color: rgb(150, 150, 150);
+}
+
+.testInfoValue {
+    font-size: 1.2rem;
+    height: 26px;
+    line-height: 26px;
+}
+
+.startButton {
+    font-size: 1.2rem;
+    width: 400px;
+    height: 50px;
+    line-height: 50px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.startButton:disabled {
+    background-color: rgba(0, 100, 250, 0.7);
+}
 
 
 @media (max-width: 1200px) {
-    .preTestModeContainerTop {
-        padding-left: min(40px, 5vw);
-        padding-right: min(40px, 5vw);
+    .preTestModeBackground {
+        display: block;
     }
-    
-    .preTestModeContainerBottom {
-        padding-left: min(40px, 5vw);
-        padding-right: min(40px, 5vw);
-    }
-}
 
-
-
-@media (max-width: 600px) {
     .preTestModeContainer {
-        grid-template-rows: 2fr fit-content(100%);
+        width: 100vw;
+        height: calc(100vh - 70px);
+        border-radius: 0px;
+        border: none;
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 100px 1fr;
+        position: fixed;
+        top: 70px;
+        left: 0px;
+    }
+
+    .preTestModeContainerLeft {
+        display: none;
+    }
+
+    .preTestModeContainerRight {
+        height: calc(100vh - 70px);
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+
+    .testName {
+        font-size: 1.5rem;
+    }
+
+    .tabHeader {
+        font-size: 1rem;
+    }
+
+    .checkBox {
+        padding-left: min(30px, 5vw);
+        padding-right: min(30px, 5vw);
+    }
+
+    .notificationContainer {
+        padding: min(30px, 5vw);
+    }
+
+    .agreementContainer {
+        padding: min(30px, 5vw);
+    }
+
+    .tab4Center {
+        height: fit-content;
+        display: grid;
+        grid-template-columns: none;
+        margin-top: 40px;
     }
     
-    .testName {
-        font-size: 2rem;
-    }
-        
-    .info {
-        margin-bottom: 5px;
-        grid-template-columns: 80px fit-content(100%);
-    }
-
-    .buttonDisabled {
-        width: calc(100vw - min(80px, 10vw));
+    .testInfoContainer {
+        display: grid;
+        grid-template-rows: none;
+        grid-template-columns: 80px 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
     }
 
-    .buttonEnabled {
-        width: calc(100vw - min(80px, 10vw));
+    .nextButton {
+        width: 100px;
     }
 
-    .tabContent {
-        font-size: 0.8rem;
-        line-height: 15px;
+    .startButton {
+        width: 100%;
     }
 }
