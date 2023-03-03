@@ -43,7 +43,7 @@ export default function TestMode() {
 
 
 
-    const [tempDate, setTempDate] = useState<number>(Date.now() + 15000);
+    const [tempDate, setTempDate] = useState<number>(Date.now() + 30000);
 
     if (testCode === "sample") {
 
@@ -51,7 +51,7 @@ export default function TestMode() {
         testInfo = {
             applyCode: "SAMPL",
             createdTime: 1000000000,
-            duration: 2,
+            duration: 5,
             feedback: true,
             startDate: tempDate,
             showInfo: true,
@@ -205,7 +205,7 @@ export default function TestMode() {
     function Choices({ choicesNumber }: { choicesNumber: number }) {
         return (
             <div
-                className={(answerSheet[questionNumber] || {})[choicesNumber] ? styles.choiceSelected : styles.choiceNotSelected}
+                className={styles.choiceElements}
 
                 onClick={() => {
                     var temp = [...answerSheet];
@@ -222,7 +222,13 @@ export default function TestMode() {
                     setModified(true);
                 }}
             >
-                {questionList[questionNumber].choices[choicesNumber]}
+                <div className={(answerSheet[questionNumber] || {})[choicesNumber] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                    {choicesNumber + 1}
+                </div>
+
+                <div className={(answerSheet[questionNumber] || {})[choicesNumber] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                    {questionList[questionNumber].choices[choicesNumber]}
+                </div>
             </div>
         )
     }
@@ -413,7 +419,7 @@ export default function TestMode() {
 
                                 <div className={styles.questionAnswerHeader}>
                                     <div className={styles.questionNumber}>
-                                        Q.{questionNumber + 1}
+                                        {questionNumber + 1}
                                     </div>
 
                                     <div className={styles.questionType}>
@@ -537,7 +543,7 @@ export default function TestMode() {
 
                                             <div>
                                                 <div
-                                                    className={answerSheet[questionNumber] === true ? styles.choiceSelected : styles.choiceNotSelected}
+                                                    className={styles.choiceElements}
                                                     onClick={() => {
                                                         let temp = [...answerSheet];
                                                         temp[questionNumber] = true;
@@ -545,11 +551,17 @@ export default function TestMode() {
                                                         setAnswerSheet(temp);
                                                     }}
                                                 >
-                                                    참
+                                                    <div className={answerSheet[questionNumber] === true ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                        ○
+                                                    </div>
+
+                                                    <div className={answerSheet[questionNumber] === true ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                        참
+                                                    </div>
                                                 </div>
 
                                                 <div
-                                                    className={answerSheet[questionNumber] === false ? styles.choiceSelected : styles.choiceNotSelected}
+                                                    className={styles.choiceElements}
                                                     onClick={() => {
                                                         let temp = [...answerSheet];
                                                         temp[questionNumber] = false;
@@ -557,7 +569,13 @@ export default function TestMode() {
                                                         setAnswerSheet(temp);
                                                     }}
                                                 >
-                                                    거짓
+                                                    <div className={answerSheet[questionNumber] === false ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                        X
+                                                    </div>
+
+                                                    <div className={answerSheet[questionNumber] === false ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                        거짓
+                                                    </div>
                                                 </div>
                                             </div>
                                         }
@@ -668,14 +686,14 @@ export default function TestMode() {
 
                         :
 
-                        <PreTestMode 
-                            testInfo={testInfo} 
+                        <PreTestMode
+                            testInfo={testInfo}
                             applicantName={applicantInfo.applicantName}
-                            isTestTime={isTestTime} 
-                            setIsApplyingTest={setIsApplyingTest} 
+                            isTestTime={isTestTime}
+                            setIsApplyingTest={setIsApplyingTest}
                             noOfQuestions={questionList?.length}
                             typeOfQuestions={questionList.map((row: any) => row.type)}
-                            totalPoints={questionList ? (questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current; }, 0)) : 0} 
+                            totalPoints={questionList ? (questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current; }, 0)) : 0}
                         />
 
                     :

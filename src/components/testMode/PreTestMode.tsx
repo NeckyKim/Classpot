@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 
 import styles from "./PreTestMode.module.css";
 
@@ -11,6 +12,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
     const [check2, setCheck2] = useState<boolean>(false);
     const [check3, setCheck3] = useState<boolean>(false);
 
+    const { testCode } = useParams();
 
 
     // 화면 너비
@@ -23,11 +25,10 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
 
     return (
-        <div>
-            {
-                (isTestTime[0] === "전" || isTestTime[0] === "중")
+        (
+            (isTestTime[0] === "전" || isTestTime[0] === "중")
 
-                &&
+                ?
 
                 <div className={styles.preTestModeBackground}>
                     <div className={styles.preTestModeWrapper}>
@@ -167,7 +168,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                                 본 시험은 &nbsp;
                                                 <span className={styles.highlight}>
                                                     {new Date(testInfo.startDate).toLocaleString("ko-KR")}
-                                                </span>부터&nbsp;
+                                                </span>부터
 
                                                 약&nbsp;
                                                 <span className={styles.highlight}>
@@ -231,7 +232,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                     <div className={styles.tabContainer}>
                                         <div className={styles.tabContainerTop}>
                                             <div className={styles.tabHeader}>
-                                                원할한 시험을 위해 사용 방법을 확인해주세요.
+                                                원할한 시험을 위해 <span className={styles.highlight}>사용 방법</span>을 확인해주세요.
                                             </div>
 
                                             <div className={styles.manualContainer}>
@@ -324,17 +325,17 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                     <div className={styles.tabContainer}>
                                         <div className={styles.tabContainerTop}>
                                             <div className={styles.tabHeader}>
-                                                다음 약관 내용을 확인해주세요.
+                                                다음 <span className={styles.highlight}>약관 내용</span>을 확인해주세요.
                                             </div>
 
                                             <div className={styles.agreementContainer}>
                                                 <span style={{ fontWeight: "700" }}>&#91;문제 저작권 보호 및 유출 금지 동의&#93;</span><br />
 
-                                                본 시험 문제는 저작권의 보호를 받으며, 지문 및 보기에 대한 정보를 복제, 공중송신 배포하거나 2차 저작물을 작성하는 등의 행위를 금합니다. 문제에 대한 정보를 시험 출제자의 동의 없이 타인에게 공개하거나 전달하는 행위는 출제자의 재산을 침해하는 것으로, 이를 침해하는 이는 저작권법에 따라 5년 이하의 징역 또는 5천만 원 이하의 벌금에 처할 수 있습니다.<br /><br />
+                                                본 시험 문제는 저작권의 보호를 받으며, 지문 및 보기에 대한 정보를 무단 복제, 공중송신 배포, 활용하거나 2차 저작물을 작성하는 등의 행위를 금합니다. 문제에 대한 정보를 시험 출제자의 동의 없이 타인에게 공개하거나 전달하는 행위는 출제자의 재산을 침해하는 것으로, 이를 위반할 경우 관계법에 의거 민사 또는 형사상의 법적 조치도 취할 수 있음을 알려드립니다.<br /><br />
 
                                                 <span style={{ fontWeight: "700" }}>&#91;부정행위 처리 동의&#93;</span><br />
 
-                                                부정행위란 자신의 실력 이외에 타인의 도움 또는 기타 부정한 방법을 이용하여 점수를 취득하거나 취득하려고 하는 행위 등 공정한 시험 평가에 저촉되는 모든 행위를 말합니다.<br />
+                                                부정행위는 시험 규정 외 불공정하거나 부정한 방법을 이용하여 점수를 취득하거나 취득하려고 하는 행위 등 공정한 시험 평가에 저촉되는 모든 행위를 말합니다.
                                                 시험 진행 중 부정행위가 확인되는 경우, 시험 즉시 종료, 재시험 불가, 시험 성적 무효 처리 등의 조치가 이루어질 수 있으며 이에 동의합니다.<br /><br />
                                             </div>
 
@@ -379,8 +380,17 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                                 &&
 
                                                 <div className={styles.tabHeader}>
-                                                    모든 준비가 완료되었습니다.<br />
+                                                    모든 준비가 <span className={styles.highlight}>완료</span>되었습니다.<br />
                                                     시작 시간이 되면 아래의 버튼을 클릭하여 시험을 시작해주세요.<br />
+                                                    {
+                                                        testCode !== "sample"
+
+                                                        &&
+
+                                                        <>
+                                                            <span className={styles.highlight}>시험 환경 테스트</span>를 진행하여 시험 환경을 점검해주세요.
+                                                        </>
+                                                    }
                                                 </div>
                                             }
 
@@ -390,7 +400,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                                 &&
 
                                                 <div className={styles.tabHeader}>
-                                                    지금 시험이 진행 중입니다.<br />
+                                                    지금 시험이 <span className={styles.highlight}>진행 중</span> 입니다.<br />
                                                     아래의 버튼을 클릭하여 시험을 시작해주세요.
                                                 </div>
                                             }
@@ -508,12 +518,33 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                                                 &&
 
-                                                <button className={styles.startButton} disabled>
-                                                    {isTestTime[1][0] !== 0 && <span>{isTestTime[1][0]}일 </span>}
-                                                    {isTestTime[1][1] !== 0 && <span>{isTestTime[1][1]}시간 </span>}
-                                                    {isTestTime[1][2] !== 0 && <span>{isTestTime[1][2]}분 </span>}
-                                                    {isTestTime[1][3]}초 후 시작
-                                                </button>
+                                                <div className={styles.tab4Container5ButtonsZone}>
+                                                    {
+                                                        testCode !== "sample"
+
+                                                            ?
+
+                                                            <button
+                                                                className={styles.demoButton}
+                                                                onClick={() => {
+                                                                    window.open("/apply/sample/applicant/sample");
+                                                                }}
+                                                            >
+                                                                시험 환경 테스트
+                                                            </button>
+
+                                                            :
+
+                                                            <div />
+                                                    }
+
+                                                    <button className={styles.startButton} disabled>
+                                                        {isTestTime[1][0] !== 0 && <span>{isTestTime[1][0]}일 </span>}
+                                                        {isTestTime[1][1] !== 0 && <span>{isTestTime[1][1]}시간 </span>}
+                                                        {isTestTime[1][2] !== 0 && <span>{isTestTime[1][2]}분 </span>}
+                                                        {isTestTime[1][3]}초 후 시작
+                                                    </button>
+                                                </div>
                                             }
 
                                             {
@@ -521,9 +552,13 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                                                 &&
 
-                                                <button className={styles.startButton} onClick={() => { setIsApplyingTest(true); }}>
-                                                    시험 시작
-                                                </button>
+                                                <div className={styles.tab4Container5ButtonsZone}>
+                                                    <div />
+
+                                                    <button className={styles.startButton} onClick={() => { setIsApplyingTest(true); }}>
+                                                        시험 시작
+                                                    </button>
+                                                </div>
                                             }
                                         </div>
                                     </div>
@@ -532,7 +567,26 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+
+
+                :
+
+                <div className={styles.preTestModeBackground}>
+                    <div className={styles.preTestModeWrapper}>
+                        <div className={styles.preTestModeHeader}>
+                            <div className={styles.testName}>
+                                {testInfo.testName}
+                            </div>
+                        </div>
+
+                        <div className={styles.preTestModeContainerFinished}>
+                            <div className={styles.tabHeader}>
+                                시험이 종료되었습니다.
+                                수고하셨습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        )
     )
 }

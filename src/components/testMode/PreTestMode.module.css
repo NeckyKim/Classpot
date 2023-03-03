@@ -152,13 +152,14 @@
 
 .tabHeader {
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 400;
     margin-bottom: 20px;
     text-align: justify;
     word-break: keep-all;
 }
 
 .highlight {
+    font-size: 1.6rem;
     font-weight: 700;
     color: rgb(0, 100, 250);
 }
@@ -415,9 +416,29 @@
     cursor: not-allowed;
 }
 
+.tab4Container5ButtonsZone {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.demoButton {
+    font-size: 1.2rem;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 220, 220);
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
 .startButton {
     font-size: 1.2rem;
-    width: 300px;
+    width: 100%;
     height: 50px;
     line-height: 50px;
     color: rgb(255, 255, 255);
@@ -454,6 +475,18 @@
     100% {
         box-shadow: 0 0 0 20px rgba(0, 100, 250, 0);
     }
+}
+
+.preTestModeContainerFinished {
+    width: 65vw;
+    min-width: 1000px;
+    height: 65vh;
+    border-radius: 10px;
+    border: 1px solid rgb(220, 220, 220);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 
@@ -557,12 +590,12 @@
         font-size: 1rem;
     }
 
-    .introContainer {
+    .highlight {
         font-size: 1rem;
     }
 
-    .highlight {
-        font-size: 1.4rem;
+    .introContainer {
+        font-size: 1rem;
     }
 
     .checkBox {
@@ -646,6 +679,11 @@
         margin-top: 0px;
     }
 
+    .tab4Container5ButtonsZone {
+        grid-template-columns: none;
+        grid-template-rows: repeat(2, 1fr);
+    }
+
     .nextButton {
         width: 100px;
         height: 40px;
@@ -653,8 +691,21 @@
         font-size: 1rem;
     }
 
-    .startButton {
-        width: 100%;
+    .demoButton {
         font-size: 1rem;
+    }
+
+    .startButton {
+        font-size: 1rem;
+    }
+
+    .preTestModeContainerFinished {
+        width: 100vw;
+        height: calc(100vh - 130px);
+        padding-top: 30px;
+        padding-bottom: 100px;
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+        border: none;
     }
 }
