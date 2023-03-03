@@ -145,7 +145,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                             <div className={styles.preTestModeContainerRight}>
                                 {
-                                    width
+                                    width < 1200
 
                                     &&
 
