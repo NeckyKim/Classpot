@@ -1,10 +1,8 @@
 .preTestModeBackground {
     width: 100vw;
     height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
     background-color: rgb(255, 255, 255);
+    margin-top: -70px;
     z-index: 1;
     display: grid;
     align-items: center;
@@ -13,6 +11,7 @@
 
 .preTestModeContainer {
     width: 65vw;
+    min-width: 1000px;
     height: 75vh;
     border-radius: 10px;
     border: 1px solid rgb(220, 220, 220);
@@ -388,21 +387,15 @@
 
 
 @media (max-width: 1200px) {
-    .preTestModeBackground {
-        display: block;
-    }
-
     .preTestModeContainer {
         width: 100vw;
+        min-width: auto;
         height: calc(100vh - 70px);
+        margin-top: 70px;
         border-radius: 0px;
         border: none;
-        display: grid;
+        display: block;
         grid-template-columns: none;
-        grid-template-rows: fit-content(100%) 1fr;
-        position: fixed;
-        top: 70px;
-        left: 0px;
     }
 
     .preTestModeContainerLeft {
