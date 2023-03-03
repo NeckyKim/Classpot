@@ -668,7 +668,15 @@ export default function TestMode() {
 
                         :
 
-                        <PreTestMode testInfo={testInfo} testCode={testCode} applicantName={applicantInfo.applicantName} applicantCode={applicantCode} isTestTime={isTestTime} setIsApplyingTest={setIsApplyingTest} noOfQuestions={questionList?.length} totalPoints={questionList ? (questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current; }, 0)) : 0} />
+                        <PreTestMode 
+                            testInfo={testInfo} 
+                            applicantName={applicantInfo.applicantName}
+                            isTestTime={isTestTime} 
+                            setIsApplyingTest={setIsApplyingTest} 
+                            noOfQuestions={questionList?.length}
+                            typeOfQuestions={questionList.map((row: any) => row.type)}
+                            totalPoints={questionList ? (questionList.length > 0 && questionList.map((row: any) => row.points).reduce((sum: number, current: number) => { return sum + current; }, 0)) : 0} 
+                        />
 
                     :
 

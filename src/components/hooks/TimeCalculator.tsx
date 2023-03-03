@@ -29,19 +29,14 @@ export default function TimeCalculator( startDate: number, duration: number ) {
 
         else if (currentTime > finishTime) {
             setIsTestTime("후");
-
-            // if (isApplyingTest) {
-            //     submitAnswerSheet(event);
-            //     setIsApplyingTest(false);
-            // }
         }
     })
 
     // 시험 시작 전 남은 시간
     var daysBefore = Math.floor((startTime - currentTime) / 86400000)
-    var hoursBefore = Math.floor(((startTime - currentTime) - daysBefore * 14400000) / 3600000);
-    var minutesBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000) / 60000);
-    var secondsBefore = Math.floor(((startTime - currentTime) - hoursBefore * 3600000 - minutesBefore * 60000) / 1000);
+    var hoursBefore = Math.floor(((startTime - currentTime) - daysBefore * 86400000) / 3600000);
+    var minutesBefore = Math.floor(((startTime - currentTime) - daysBefore * 86400000 - hoursBefore * 3600000) / 60000);
+    var secondsBefore = Math.floor(((startTime - currentTime) - daysBefore * 86400000 - hoursBefore * 3600000 - minutesBefore * 60000) / 1000);
 
 
 

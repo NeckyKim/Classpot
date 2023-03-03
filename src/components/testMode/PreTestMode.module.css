@@ -9,10 +9,39 @@
     justify-content: center;
 }
 
+.preTestModeHeader {
+    height: 40px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    align-items: end;
+}
+
+.testName {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.userNameContainer {
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    gap: 10px;
+}
+
+.userNameHeader {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgb(150, 150, 150);
+}
+
+.userNameValue {
+    font-size: 1.1rem;
+}
+
 .preTestModeContainer {
     width: 65vw;
     min-width: 1000px;
-    height: 75vh;
+    height: 65vh;
     border-radius: 10px;
     border: 1px solid rgb(220, 220, 220);
     display: grid;
@@ -87,11 +116,11 @@
     text-align: center;
 }
 
-.tabCheck{
+.tabCheck {
     width: 30px;
     height: 30px;
     border-radius: 15px;
-    background-color: rgb(100, 200, 50);
+    background-color: rgb(0, 220, 220);
 }
 
 .tabCheckIcon {
@@ -108,25 +137,22 @@
     padding-left: 60px;
     padding-right: 60px;
     display: grid;
-    grid-template-rows: fit-content(100%) 1fr;
-    position: relative;
+    grid-template-rows: 1fr fit-content(100%);
 }
 
-.testName {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 30px;
+.tabContainer {
+    display: grid;
+    grid-template-rows: 1fr fit-content(100%);
+}
+
+.tabContainerBottom {
+    display: grid;
+    justify-items: right;
 }
 
 .tabHeader {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    text-align: justify;
-    word-break: keep-all;
-}
-
-.introContainer {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
     margin-bottom: 20px;
     text-align: justify;
     word-break: keep-all;
@@ -134,7 +160,6 @@
 
 .highlight {
     font-weight: 700;
-    font-size: 1.6rem;
     color: rgb(0, 100, 250);
 }
 
@@ -185,7 +210,7 @@
 }
 
 .notificationContainer {
-    max-height: 260px;
+    max-height: 240px;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
     padding: 30px;
@@ -311,17 +336,21 @@
     background-color: transparent;
 }
 
-
-.tab4 {
+.tab4Container {
     display: grid;
-    grid-template-rows: fit-content(100%) 1fr fit-content(100%);
+    grid-template-rows: fit-content(100%) fit-content(100%) 1fr fit-content(100%);
 }
 
-.tab4Center {
+.tab4Container3 {
     height: fit-content;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: 40px;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    margin-top: 15px;
+}
+
+.tab4Container5 {
+    display: grid;
+    justify-items: right;
 }
 
 .testInfoContainer {
@@ -332,16 +361,40 @@
 
 .testInfoHeader {
     font-size: 1.2rem;
+    font-weight: 300;
     height: 26px;
     line-height: 26px;
-    font-weight: 300;
     color: rgb(150, 150, 150);
+    margin-right: 10px;
 }
 
 .testInfoValue {
     font-size: 1.2rem;
     height: 26px;
     line-height: 26px;
+    margin-top: 5px;
+}
+
+.questionTypeContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.questionTypeElements {
+    height: 40px;
+    line-height: 38px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+}
+
+.questionTypeIcon {
+    height: 38px;
+    padding: 5px;
+    filter: invert(0.6);
 }
 
 .nextButton {
@@ -354,9 +407,6 @@
     border-radius: 5px;
     border: none;
     text-align: center;
-    position: absolute;
-    right: 60px;
-    bottom: 40px;
     cursor: pointer;
 }
 
@@ -375,27 +425,69 @@
     border-radius: 5px;
     border: none;
     text-align: center;
-    position: absolute;
-    right: 60px;
-    bottom: 40px;
-    cursor: pointer;
 }
 
 .startButton:disabled {
     background-color: rgba(0, 100, 250, 0.6);
+    cursor: not-allowed;
+}
+
+.startButton:enabled {
+	box-shadow: 0 0 0 0 rgba(0, 100, 250, 1);
+	animation: pulse 3s infinite;
+    cursor: pointer;
+}
+
+.startButton:enabled:hover {
+    background-color: rgba(0, 100, 250, 0.7)
+}
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba(0, 100, 250, 0.7);
+	}
+	
+	60% {
+		box-shadow: 0 0 0 20px rgba(0, 100, 250, 0);
+	}
+
+    100% {
+        box-shadow: 0 0 0 20px rgba(0, 100, 250, 0);
+    }
 }
 
 
+
 @media (max-width: 1200px) {
+    .preTestModeBackground {
+        height: calc(100vh - 70px);
+        display: block;
+    }
+
+    .preTestModeWrapper {
+        margin-top: 70px;
+    }
+
+    .preTestModeHeader {
+        display: none;
+    }
+
+    .testName {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .userNameContainer {
+        display: none;
+    }
+
     .preTestModeContainer {
         width: 100vw;
         min-width: auto;
-        height: calc(100vh - 70px);
-        margin-top: 70px;
+        height: calc(100vh - 140px);
         border-radius: 0px;
         border: none;
         display: block;
-        grid-template-columns: none;
     }
 
     .preTestModeContainerLeft {
@@ -416,7 +508,7 @@
         display: grid;
         grid-template-columns: fit-content(100%) 1fr;
     }
-    
+
     .tabButtonNotClicked {
         font-size: 1rem;
         width: calc((100vw - 2 * min(40px, 5vw)) * 0.1);
@@ -438,13 +530,13 @@
         line-height: 24px;
         border-radius: 12px;
     }
-    
-    .tabCheck{
+
+    .tabCheck {
         width: 24px;
         height: 24px;
         border-radius: 12px;
     }
-    
+
     .tabCheckIcon {
         width: 24px;
         height: 24px;
@@ -453,15 +545,12 @@
     }
 
     .preTestModeContainerRight {
-        height: calc(100vh - 140px);
+        height: calc(100vh - 130px);
         padding-top: 30px;
-        padding-bottom: 30px;
+        padding-bottom: 100px;
         padding-left: min(40px, 5vw);
         padding-right: min(40px, 5vw);
-    }
-
-    .testName {
-        font-size: 1.5rem;
+        grid-template-rows: fit-content(100%) 1fr fit-content(100%);
     }
 
     .tabHeader {
@@ -489,7 +578,7 @@
         padding: min(30px, 5vw);
         padding-left: calc(20px + min(30px, 5vw));
     }
-    
+
     .notificationElements {
         font-size: 0.85rem;
     }
@@ -516,44 +605,56 @@
         padding-right: min(30px, 5vw);
     }
 
-
-    .tab4Center {
+    .tab4Container3 {
         height: fit-content;
         display: grid;
         grid-template-columns: none;
-        gap: 10px;
+        grid-template-rows: repeat(4, fit-content(100%));
+        gap: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .tab4Container4 {
+        display: block;
         margin-top: 10px;
     }
-    
+
+    .questionTypeContainer {
+        grid-template-columns: 1fr 1fr;
+    }
+
     .testInfoContainer {
+        height: fit-content;
         display: grid;
         grid-template-rows: none;
         grid-template-columns: 80px 1fr;
         gap: 5px;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
 
     .testInfoHeader {
         font-size: 1rem;
-        height: 20px;
+        height: fit-content;
         line-height: 20px;
     }
-    
+
     .testInfoValue {
         font-size: 1rem;
-        height: 20px;
+        height: fit-content;
         line-height: 20px;
+        margin-top: 0px;
     }
 
     .nextButton {
         width: 100px;
-        right: min(60px, 5vw);
-        bottom: 100px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1rem;
     }
 
     .startButton {
-        width: calc(100% - 2 * min(60px, 5vw));
-        right: min(60px, 5vw);
-        bottom: 100px;
+        width: 100%;
+        font-size: 1rem;
     }
 }
