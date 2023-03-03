@@ -11,7 +11,7 @@
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
     align-items: center;
-    z-index: 5;
+    z-index: 20;
 }
 
 .headerLogo {
