@@ -49,9 +49,9 @@ export default function TestMode() {
 
 
         testInfo = {
-            applyCode: "SAMPL",
+            applyCode: "SAMPLE",
             createdTime: 1000000000,
-            duration: 5,
+            duration: 50,
             feedback: true,
             startDate: tempDate,
             showInfo: true,
@@ -67,7 +67,7 @@ export default function TestMode() {
                 applicantName: "체험 응시자",
                 autoGrading: true,
                 createdTime: Date.now(),
-                magicCode: "SAMPL",
+                magicCode: "SAMPLE",
                 reportCard: new Array(100).fill(null),
                 submittedTime: Date.now()
             }
@@ -79,10 +79,10 @@ export default function TestMode() {
     if (applicantCode === "sample") {
         applicantInfo = {
             answerSheet: new Array(100).fill(null),
-            applicantName: "체험 응시자",
+            applicantName: "응시자",
             autoGrading: true,
             createdTime: Date.now(),
-            magicCode: "SAMPL",
+            magicCode: "SAMPLE",
             reportCard: new Array(100).fill(null),
             submittedTime: Date.now()
         }
@@ -254,6 +254,46 @@ export default function TestMode() {
         enter: "fadeIn",
         exit: "fadeOut"
     });
+
+
+
+    const [solved, setSolved] = useState<number[]>([]);
+
+    useEffect(() => {
+        questionList.filter((elem: any, index: number) => {
+            if (elem.type === "객관식") {
+                if (answerSheet[index] !== null && answerSheet[index] !== undefined && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0) {
+                    if (!solved.includes(index)) {
+                        var temp = [...solved];
+                        temp.push(index);
+                        setSolved(temp);
+                    }
+                }
+
+                else {
+                    if (solved.includes(index)) {
+                        setSolved([...solved].filter((elem: number) => elem !== index));
+                    }
+                }
+            }
+    
+            else {
+                if (answerSheet[index] !== "" && answerSheet[index] !== null && answerSheet[index] !== undefined) {
+                    if (!solved.includes(index)) {
+                        var temp = [...solved];
+                        temp.push(index);
+                        setSolved(temp);
+                    }
+                }
+
+                else {
+                    if (solved.includes(index)) {
+                        setSolved([...solved].filter((elem: number) => elem !== index));
+                    }
+                }
+            }
+        })
+    }, [answerSheet])
 
 
 
@@ -655,6 +695,105 @@ export default function TestMode() {
                                         <div className={styles.exitContainerTop}>
                                             답안지를 제출하고 시험을 종료하시겠습니까?<br />
                                             시험 시간이 종료될 때 까지, 다시 접속하여 시험에 응시할 수 있습니다.
+                                        </div>
+
+                                        {
+                                            questionList.length === solved.length
+
+                                            ?
+
+                                            <div className={styles.exitContainerNoticePass}>
+                                                모든 문제를 다 풀었습니다.
+                                            </div>
+
+                                            :
+
+                                            <div className={styles.exitContainerNoticeAlert}>
+                                                풀지 않은 문제가 {questionList.length - solved.length}개 있습니다.
+                                            </div>
+                                        }
+
+                                        <div className={styles.exitContainerCenter}>
+                                            {
+                                                questionList.length > 0
+
+                                                &&
+
+                                                questionList.map((current: any, index: number) => (
+                                                    current.type === "객관식"
+
+                                                        ?
+
+                                                        (
+                                                            answerSheet[index] !== null
+
+                                                                && answerSheet[index] !== undefined
+
+                                                                && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0
+
+                                                                ?
+
+                                                                <div className={styles.exitQuestionContainer}>
+                                                                    <div className={styles.exitQuestionContainerNumber}>
+                                                                        {index + 1}
+                                                                    </div>
+
+                                                                    <div className={styles.exitQuestionContainerSolved}>
+                                                                        푼 문제
+                                                                    </div>
+                                                                </div>
+
+                                                                :
+
+                                                                <div className={styles.exitQuestionContainer}>
+                                                                    <div className={styles.exitQuestionContainerNumber}>
+                                                                        {index + 1}
+                                                                    </div>
+
+                                                                    <div className={styles.exitQuestionContainerNotSolved}>
+                                                                        풀지 않은 문제
+                                                                    </div>
+                                                                </div>
+
+                                                        )
+
+                                                        :
+
+                                                        (
+                                                            answerSheet[index] !== null
+
+                                                                && answerSheet[index] !== undefined
+
+                                                                && answerSheet[index] !== ""
+
+                                                                ?
+
+
+                                                                <div className={styles.exitQuestionContainer}>
+                                                                    <div className={styles.exitQuestionContainerNumber}>
+                                                                        {index + 1}
+                                                                    </div>
+
+                                                                    <div className={styles.exitQuestionContainerSolved}>
+                                                                        푼 문제
+                                                                    </div>
+                                                                </div>
+
+                                                                :
+
+                                                                <div className={styles.exitQuestionContainer}>
+                                                                    <div className={styles.exitQuestionContainerNumber}>
+                                                                        {index + 1}
+                                                                    </div>
+
+                                                                    <div className={styles.exitQuestionContainerNotSolved}>
+                                                                        풀지 않은 문제
+                                                                    </div>
+                                                                </div>
+                                                        )
+                                                ))
+                                            }
+
                                         </div>
 
                                         <div className={styles.exitContainerBottom}>

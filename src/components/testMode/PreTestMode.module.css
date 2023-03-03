@@ -468,7 +468,7 @@
 		box-shadow: 0 0 0 0 rgba(0, 100, 250, 0.7);
 	}
 	
-	60% {
+	70% {
 		box-shadow: 0 0 0 20px rgba(0, 100, 250, 0);
 	}
 
@@ -476,6 +476,8 @@
         box-shadow: 0 0 0 20px rgba(0, 100, 250, 0);
     }
 }
+
+
 
 .preTestModeContainerFinished {
     width: 65vw;
@@ -701,11 +703,13 @@
 
     .preTestModeContainerFinished {
         width: 100vw;
-        height: calc(100vh - 130px);
+        min-width: auto;
+        height: calc(100vh - 70px);
         padding-top: 30px;
         padding-bottom: 100px;
         padding-left: min(40px, 5vw);
         padding-right: min(40px, 5vw);
+        border-radius: 0px;
         border: none;
     }
 }

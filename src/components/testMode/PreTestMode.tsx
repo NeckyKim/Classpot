@@ -580,8 +580,18 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                         </div>
 
                         <div className={styles.preTestModeContainerFinished}>
+                            {
+                                width < 1200
+
+                                &&
+
+                                <div className={styles.testName}>
+                                    {testInfo.testName}
+                                </div>
+                            }
+
                             <div className={styles.tabHeader}>
-                                시험이 종료되었습니다.
+                                시험이 종료되었습니다.<br />
                                 수고하셨습니다.
                             </div>
                         </div>
