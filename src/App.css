@@ -146,9 +146,12 @@ details summary::-webkit-details-marker {
     border-radius: 5px !important;
 }
 
+.tox-edit-area__iframe {
+    background-color: transparent !important;
+}
+
 .tox:not(.tox-tinymce-inline) .tox-editor-header {
     box-shadow: none !important;
-    padding: 0px !important;
 }
 
 .tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {
@@ -160,7 +163,7 @@ details summary::-webkit-details-marker {
 }
 
 .tox .tox-tbtn__select-label {
-    font-family: "Pretendard";
+    font-family: "Pretendard" !important;;
     font-weight: 600 !important;
 }
 
@@ -173,9 +176,5 @@ details summary::-webkit-details-marker {
 }
 
 .tox .tox-collection__item-label {
-    font-family: "Pretendard";
-}
-
-:not(pre)>code[class*=language-], pre[class*=language-] {
-    background-color: red !important;
+    font-family: "Pretendard" !important;;
 }

@@ -31,13 +31,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
     const [choices, setChoices] = useState<string[]>(questionInfo.choices);
     const [numberOfChoices, setNumberOfChoices] = useState<number>(Object.values(questionInfo.choices).filter(element => element != "").length);
 
-    const levelDictionary: string[] = [
-        "매우 쉬움",
-        "쉬움",
-        "보통",
-        "어려움",
-        "매우 어려움"
-    ]
+    const levelDictionary: string[] = ["매우 쉬움", "쉬움", "보통", "어려움", "매우 어려움"]
 
 
 
@@ -252,7 +246,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                     menubar: false,
                     statusbar: false,
                     plugins: ['lists', 'image', 'table', 'lineheight', 'codesample'],
-                    toolbar: 'fontsize | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | outdent indent | bullist numlist | image table codesample',
+                    toolbar: 'fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify lineheight | outdent indent | bullist numlist | image table codesample',
                     font_size_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
                     line_height_formats: "0.8 1 1.2 1.4 1.6 1.8 2",
                     resize: false,
@@ -262,7 +256,6 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
                         body {
                             font-family:'Pretendard';
                             font-weight: 600;
-                            line-height: 1;
                         }
                     `
                 }}

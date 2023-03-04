@@ -39,9 +39,8 @@
 }
 
 .preTestModeContainer {
-    width: 65vw;
-    min-width: 1000px;
-    height: 65vh;
+    width: 1200px;
+    height: 650px;
     border-radius: 10px;
     border: 1px solid rgb(220, 220, 220);
     display: grid;
@@ -394,8 +393,12 @@
 
 .questionTypeIcon {
     height: 38px;
-    padding: 5px;
-    filter: invert(0.6);
+    padding: 7px;
+    filter: invert(0.7);
+}
+
+.questionTypeText {
+    font-weight: 500;
 }
 
 .nextButton {
@@ -518,7 +521,6 @@
 
     .preTestModeContainer {
         width: 100vw;
-        min-width: auto;
         height: calc(100vh - 140px);
         border-radius: 0px;
         border: none;

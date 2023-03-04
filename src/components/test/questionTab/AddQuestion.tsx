@@ -29,13 +29,7 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
     const [choices, setChoices] = useState<string[]>(new Array(10).fill(""));
     const [numberOfChoices, setNumberOfChoices] = useState<number>(3);
 
-    const levelDictionary: string[] = [
-        "매우 쉬움",
-        "쉬움",
-        "보통",
-        "어려움",
-        "매우 어려움"
-    ]
+    const levelDictionary: string[] = ["매우 쉬움", "쉬움", "보통", "어려움", "매우 어려움"]
 
 
 
@@ -253,7 +247,7 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
                     menubar: false,
                     statusbar: false,
                     plugins: ['lists', 'image', 'table', 'lineheight', 'codesample'],
-                    toolbar: 'fontsize | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | outdent indent | bullist numlist | image table codesample',
+                    toolbar: 'fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify lineheight | outdent indent | bullist numlist | image table codesample',
                     font_size_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
                     line_height_formats: "0.8 1 1.2 1.4 1.6 1.8 2",
                     resize: false,
@@ -261,7 +255,7 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
                         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
                         body {
-                            font-family:'Pretendard';
+                            font-family: 'Pretendard';
                             font-weight: 600;
                             line-height: 1;
                         }
