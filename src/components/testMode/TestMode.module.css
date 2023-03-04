@@ -258,17 +258,44 @@
     margin-left: 20px;
 }
 
-.checkQuestionButton {
-    width: fit-content;
+.checkQuestionButtonNotChecked {
     height: 40px;
     line-height: 40px;
     border-radius: 5px;
     background-color: rgb(230, 230, 230);
     text-align: center;
     margin-right: 10px;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-right: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
     cursor: pointer;
+}
+
+.checkQuestionButtonChecked {
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 150, 50);
+    text-align: center;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    cursor: pointer;
+}
+
+.checkQuestionButtonIconNotChecked {
+    height: 40px;
+    padding: 7px;
+    filter: invert(0.6);
+}
+
+.checkQuestionButtonIconChecked {
+    height: 40px;
+    padding: 7px;
 }
 
 .prevNextButtonOn {
@@ -391,6 +418,7 @@
     line-height: 30px;
     border-radius: 10px;
     color: rgb(0, 100, 250);
+    cursor: pointer;
 }
 
 .choiceValueNotSelected {
@@ -411,6 +439,11 @@
     padding: 15px;
     background-color: rgb(255, 255, 255);
     resize: none;
+}
+
+.answerTextBox::placeholder {
+    font-weight: 300;
+    color: rgb(150, 150, 150);
 }
 
 .answerTextLength {
@@ -525,12 +558,24 @@
     gap: 5px;
 }
 
+.exitContainerNoticeChecked {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 25px;
+    border-radius: 5px;
+    color: rgb(250, 150, 50);
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 5px;
+}
+
 .exitContainerNoticeIcon {
     height: 25px;
     padding: 2px;
 }
 
-.exitContainerCenter {
+.exitContainerQuestionStatus {
     height: 30vh;
     padding: 20px;
     margin-bottom: 20px;
@@ -539,11 +584,11 @@
     overflow: auto;
 }
 
-.exitContainerCenter::-webkit-scrollbar {
+.exitContainerQuestionStatus::-webkit-scrollbar {
     width: 20px;
 }
 
-.exitContainerCenter::-webkit-scrollbar-thumb {
+.exitContainerQuestionStatus::-webkit-scrollbar-thumb {
     width: 20px;
     background-color: rgb(220, 220, 220);
     background-clip: padding-box;
@@ -552,18 +597,18 @@
     border-bottom: 20px solid transparent;
 }
 
-.exitContainerCenter::-webkit-scrollbar-track {
+.exitContainerQuestionStatus::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-.exitQuestionContainer {
+.questionStatusElements {
     height: 30px;
     line-height: 30px;
     gap: 10px;
     margin-bottom: 10px;
 }
 
-.exitQuestionContainerNumber {
+.questionStatusElementsNumber {
     width: 30px;
     height: 30px;
     line-height: 30px;
@@ -572,7 +617,7 @@
     text-align: center;
 }
 
-.exitQuestionContainerSolved {
+.questionStatusElementsSolved {
     font-size: 1rem;
     line-height: 30px;
     border-radius: 5px;
@@ -587,11 +632,11 @@
     cursor: pointer;
 }
 
-.exitQuestionContainerSolved:hover {
+.questionStatusElementsSolved:hover {
     background-color: rgba(150, 250, 150, 0.7);
 }
 
-.exitQuestionContainerNotSolved {
+.questionStatusElementsNotSolved {
     font-size: 1rem;
     line-height: 30px;
     border-radius: 5px;
@@ -606,15 +651,52 @@
     cursor: pointer;
 }
 
-.exitQuestionContainerNotSolved:hover {
+.questionStatusElementsNotSolved:hover {
     background-color: rgba(250, 180, 180, 0.7);
 }
 
-.exitQuestionContainerGoTo {
-    font-size: 0.85rem;
-    font-weight: 400;
-    height: 30px;
-    line-height: 30px;
+.exitContainerCheckedQuestions {
+    width: 440px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: repeat(100, 1fr);
+    overflow: auto;
+}
+
+.checkedQuestionElements {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 5px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 150, 50);
+    text-align: center;
+    cursor: pointer;
+}
+
+.checkedQuestionElements:hover {
+    background-color: rgba(250, 150, 50, 0.7);
+}
+
+.exitContainerCheckedQuestions::-webkit-scrollbar {
+    width: 20px;
+}
+
+.exitContainerCheckedQuestions::-webkit-scrollbar-thumb {
+    width: 20px;
+    background-color: rgb(220, 220, 220);
+    background-clip: padding-box;
+    border-bottom: 10px solid transparent;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+}
+
+.exitContainerCheckedQuestions::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 .exitContainerBottom {
@@ -644,6 +726,7 @@
     background-color: rgb(230, 230, 230);
     cursor: pointer;
 }
+
 
 .settingsContainer {
     width: 500px;
@@ -730,7 +813,8 @@
         left: 0px;
     }
 
-    .checkQuestionButton {
+    .checkQuestionButtonChecked,
+    .checkQuestionButtonNotChecked {
         display: none;
     }
 
@@ -878,7 +962,7 @@
 
     .exitContainer,
     .settingsContainer {
-        width: 80vw;
+        width: 90vw;
     }
 
     .exitContainerExitButton {

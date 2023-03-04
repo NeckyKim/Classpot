@@ -248,11 +248,7 @@ export default function TestMode() {
                             {
                                 color: "rgb(255, 255, 255)",
                                 backgroundColor: darkButtonColor
-                            }
-
-                            :
-
-                            {}
+                            } : {}
                     }
                 >
                     {choicesNumber + 1}
@@ -374,13 +370,13 @@ export default function TestMode() {
                                         {testInfo.testName}
                                     </div>
 
-                                    <div 
+                                    <div
                                         className={styles.applicantName}
                                         style={
                                             isDarkMode
-        
+
                                                 ?
-        
+
                                                 {
                                                     borderLeft: darkBorderColor
                                                 } : {}
@@ -421,11 +417,7 @@ export default function TestMode() {
                                             color: "rgb(255, 255, 255)",
                                             backgroundColor: darkBackgroundColor,
                                             borderRight: darkBorderColor
-                                        }
-
-                                        :
-
-                                        {}
+                                        } : {}
                                 }
                             >
                                 {
@@ -451,11 +443,7 @@ export default function TestMode() {
                                                         {
                                                             color: "rgb(255, 255, 255)",
                                                             backgroundColor: darkButtonColor
-                                                        }
-
-                                                        :
-
-                                                        {}
+                                                        } : {}
                                                 }
                                             >
                                                 {index + 1}
@@ -483,11 +471,7 @@ export default function TestMode() {
 
                                                                 {
                                                                     backgroundColor: darkButtonColor,
-                                                                }
-
-                                                                :
-
-                                                                {}
+                                                                } : {}
                                                         }
                                                     />
                                                 }
@@ -505,7 +489,19 @@ export default function TestMode() {
 
                                                     &&
 
-                                                    <img className={styles.navigationNumberSolved} src={process.env.PUBLIC_URL + "/icons/check.png"} />
+                                                    <img 
+                                                        className={styles.navigationNumberSolved} 
+                                                        src={process.env.PUBLIC_URL + "/icons/check.png"}
+                                                        style={
+                                                            isDarkMode
+
+                                                                ?
+
+                                                                {
+                                                                    backgroundColor: darkButtonColor,
+                                                                } : {}
+                                                        }
+                                                    />
                                                 }
 
                                                 {
@@ -523,11 +519,7 @@ export default function TestMode() {
 
                                                                 {
                                                                     backgroundColor: darkButtonColor,
-                                                                }
-
-                                                                :
-
-                                                                {}
+                                                                } : {}
                                                         }
                                                     />
                                                 }
@@ -570,11 +562,7 @@ export default function TestMode() {
                                             {
                                                 color: "rgb(255, 255, 255)",
                                                 backgroundColor: darkBackgroundColor,
-                                            }
-
-                                            :
-
-                                            {}
+                                            } : {}
                                     }
                                 >
                                     <div className={styles.questionNumber}>
@@ -590,7 +578,7 @@ export default function TestMode() {
                                             <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/multiple_choice.png"} />
                                         }
 
-{
+                                        {
                                             questionList[questionNumber].type === "참/거짓"
 
                                             &&
@@ -598,7 +586,7 @@ export default function TestMode() {
                                             <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/true_false.png"} />
                                         }
 
-{
+                                        {
                                             questionList[questionNumber].type === "주관식"
 
                                             &&
@@ -606,7 +594,7 @@ export default function TestMode() {
                                             <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/short_answer.png"} />
                                         }
 
-{
+                                        {
                                             questionList[questionNumber].type === "서술형"
 
                                             &&
@@ -621,36 +609,38 @@ export default function TestMode() {
                                     </div>
 
                                     <div
-                                        className={styles.checkQuestionButton}
+                                        className={checkedQuestions.includes(questionNumber) ? styles.checkQuestionButtonChecked : styles.checkQuestionButtonNotChecked}
                                         onClick={() => {
                                             if (checkedQuestions.includes(questionNumber)) {
-                                                let temp = checkedQuestions;
+                                                let temp = [...checkedQuestions];
                                                 temp = temp.filter((elem: any) => elem !== questionNumber);
                                                 setCheckedQuestions(temp);
                                             }
 
                                             else {
-                                                let temp = checkedQuestions;
+                                                let temp = [...checkedQuestions];
                                                 temp.push(questionNumber);
+                                                temp.sort();
                                                 setCheckedQuestions(temp);
                                             }
                                         }}
                                         style={
-                                            isDarkMode
+                                            isDarkMode && !checkedQuestions.includes(questionNumber)
 
                                                 ?
 
                                                 {
                                                     color: "rgb(255, 255, 255)",
                                                     backgroundColor: darkButtonColor
-                                                }
-
-                                                :
-
-                                                {}
+                                                } : {}
                                         }
                                     >
-                                        {checkedQuestions.includes(questionNumber) ? "문항 체크 해제" : "문항 체크"}
+                                        {}
+                                        <img 
+                                            className={checkedQuestions.includes(questionNumber) ? styles.checkQuestionButtonIconChecked : styles.checkQuestionButtonIconNotChecked} 
+                                            src={checkedQuestions.includes(questionNumber) ? process.env.PUBLIC_URL + "/icons/flag_white.png" : process.env.PUBLIC_URL + "/icons/flag_black.png"} 
+                                        />
+                                        {checkedQuestions.includes(questionNumber) ? "문제 체크 해제" : "문제 체크"}
                                     </div>
 
                                     <div
@@ -734,11 +724,7 @@ export default function TestMode() {
                                             {
                                                 color: "rgb(255, 255, 255)",
                                                 backgroundColor: darkBackgroundColor
-                                            }
-
-                                            :
-
-                                            {}
+                                            } : {}
                                     }
                                 >
                                     <div className={styles.questionContent}>
@@ -852,11 +838,7 @@ export default function TestMode() {
                                                                 {
                                                                     color: "rgb(255, 255, 255)",
                                                                     backgroundColor: darkButtonColor
-                                                                }
-
-                                                                :
-
-                                                                {}
+                                                                } : {}
                                                         }
                                                     >
                                                         ○
@@ -886,11 +868,7 @@ export default function TestMode() {
                                                                 {
                                                                     color: "rgb(255, 255, 255)",
                                                                     backgroundColor: darkButtonColor
-                                                                }
-
-                                                                :
-
-                                                                {}
+                                                                } : {}
                                                         }
                                                     >
                                                         X
@@ -912,6 +890,7 @@ export default function TestMode() {
                                                 className={styles.answerTextBox}
                                                 value={answerSheet[questionNumber]}
                                                 spellCheck={false}
+                                                placeholder="이곳에 정답을 입력하세요."
                                                 onChange={(event: any) => {
                                                     let temp = [...answerSheet];
                                                     temp[questionNumber] = String(event.target.value);
@@ -927,11 +906,7 @@ export default function TestMode() {
                                                             color: "rgb(255, 255, 255)",
                                                             backgroundColor: darkBackgroundColor,
                                                             border: darkBorderColor
-                                                        }
-
-                                                        :
-
-                                                        {}
+                                                        } : {}
                                                 }
                                             />
                                         }
@@ -946,6 +921,7 @@ export default function TestMode() {
                                                     className={styles.answerTextBox}
                                                     value={answerSheet[questionNumber]}
                                                     spellCheck={false}
+                                                    placeholder="이곳에 정답을 입력하세요."
                                                     onChange={(event: any) => {
                                                         let temp = [...answerSheet];
                                                         temp[questionNumber] = String(event.target.value);
@@ -961,11 +937,7 @@ export default function TestMode() {
                                                                 color: "rgb(255, 255, 255)",
                                                                 backgroundColor: darkBackgroundColor,
                                                                 border: darkBorderColor
-                                                            }
-
-                                                            :
-
-                                                            {}
+                                                            } : {}
                                                     }
                                                 />
 
@@ -991,11 +963,7 @@ export default function TestMode() {
                                             color: "rgb(255, 255, 255)",
                                             backgroundColor: darkBackgroundColor,
                                             borderTop: darkBorderColor
-                                        }
-
-                                        :
-
-                                        {}
+                                        } : {}
                                 }
                             >
                                 <div
@@ -1009,11 +977,7 @@ export default function TestMode() {
                                             {
                                                 color: "rgb(255, 255, 255)",
                                                 backgroundColor: darkButtonColor
-                                            }
-
-                                            :
-
-                                            {}
+                                            } : {}
                                     }
                                 >
                                     <img
@@ -1026,11 +990,7 @@ export default function TestMode() {
 
                                                 {
                                                     filter: "invert()"
-                                                }
-
-                                                :
-
-                                                {}
+                                                } : {}
                                         }
                                     />
                                 </div>
@@ -1053,11 +1013,7 @@ export default function TestMode() {
                                             {
                                                 color: "rgb(255, 255, 255)",
                                                 backgroundColor: darkButtonColor
-                                            }
-
-                                            :
-
-                                            {}
+                                            } : {}
                                     }
                                 />
 
@@ -1073,11 +1029,7 @@ export default function TestMode() {
                                             {
                                                 color: "rgb(255, 255, 255)",
                                                 backgroundColor: darkButtonColor
-                                            }
-
-                                            :
-
-                                            {}
+                                            } : {}
                                     }
                                     onClick={() => {
                                         setIsExitingTest(true);
@@ -1198,7 +1150,7 @@ export default function TestMode() {
                                                 </div>
                                         }
 
-                                        <div className={styles.exitContainerCenter}>
+                                        <div className={styles.exitContainerQuestionStatus}>
                                             {
                                                 questionList.length > 0
 
@@ -1219,44 +1171,36 @@ export default function TestMode() {
                                                                 ?
 
                                                                 <div
-                                                                    className={styles.exitQuestionContainerSolved}
+                                                                    className={styles.questionStatusElementsSolved}
                                                                     onClick={() => {
                                                                         setIsExitingTest(false);
                                                                         setQuestionNumber(index);
                                                                     }}
                                                                 >
-                                                                    <div className={styles.exitQuestionContainerNumber}>
+                                                                    <div className={styles.questionStatusElementsNumber}>
                                                                         {index + 1}
                                                                     </div>
 
                                                                     <div className={styles.exitQuestionContainerTextSolved}>
                                                                         푼 문제
                                                                     </div>
-
-                                                                    <div className={styles.exitQuestionContainerGoTo}>
-                                                                        문제 보기
-                                                                    </div>
                                                                 </div>
 
                                                                 :
 
                                                                 <div
-                                                                    className={styles.exitQuestionContainerNotSolved}
+                                                                    className={styles.questionStatusElementsNotSolved}
                                                                     onClick={() => {
                                                                         setIsExitingTest(false);
                                                                         setQuestionNumber(index);
                                                                     }}
                                                                 >
-                                                                    <div className={styles.exitQuestionContainerNumber}>
+                                                                    <div className={styles.questionStatusElementsNumber}>
                                                                         {index + 1}
                                                                     </div>
 
                                                                     <div className={styles.exitQuestionContainerTextNotSolved}>
                                                                         풀지 않은 문제
-                                                                    </div>
-
-                                                                    <div className={styles.exitQuestionContainerGoTo}>
-                                                                        문제 보기
                                                                     </div>
                                                                 </div>
 
@@ -1275,51 +1219,70 @@ export default function TestMode() {
 
 
                                                                 <div
-                                                                    className={styles.exitQuestionContainerSolved}
+                                                                    className={styles.questionStatusElementsSolved}
                                                                     onClick={() => {
                                                                         setIsExitingTest(false);
                                                                         setQuestionNumber(index);
                                                                     }}
                                                                 >
-                                                                    <div className={styles.exitQuestionContainerNumber}>
+                                                                    <div className={styles.questionStatusElementsNumber}>
                                                                         {index + 1}
                                                                     </div>
 
                                                                     <div className={styles.exitQuestionContainerTextSolved}>
                                                                         푼 문제
                                                                     </div>
-
-                                                                    <div className={styles.exitQuestionContainerGoTo}>
-                                                                        문제 보기
-                                                                    </div>
                                                                 </div>
 
                                                                 :
 
                                                                 <div
-                                                                    className={styles.exitQuestionContainerNotSolved}
+                                                                    className={styles.questionStatusElementsNotSolved}
                                                                     onClick={() => {
                                                                         setIsExitingTest(false);
                                                                         setQuestionNumber(index);
                                                                     }}
                                                                 >
-                                                                    <div className={styles.exitQuestionContainerNumber}>
+                                                                    <div className={styles.questionStatusElementsNumber}>
                                                                         {index + 1}
                                                                     </div>
 
                                                                     <div className={styles.exitQuestionContainerTextNotSolved}>
                                                                         풀지 않은 문제
                                                                     </div>
-
-                                                                    <div className={styles.exitQuestionContainerGoTo}>
-                                                                        문제 보기
-                                                                    </div>
                                                                 </div>
                                                         )
                                                 ))
                                             }
-
                                         </div>
+                                        
+                                        {
+                                            (checkedQuestions.length > 0 && width > 1200)
+
+                                            &&
+
+                                            <div>
+                                                <div className={styles.exitContainerNoticeChecked}>
+                                                    <img className={styles.exitContainerNoticeIcon} src={process.env.PUBLIC_URL + "/icons/flag.png"} style={{padding: "0px"}}/>
+
+                                                    체크된 문제가 {checkedQuestions.length}개 있습니다.
+                                                </div>
+
+                                                <div className={styles.exitContainerCheckedQuestions}>
+                                                    {checkedQuestions.map((current: any, index: number) => (
+                                                        <div 
+                                                            className={styles.checkedQuestionElements}
+                                                            onClick={() => {
+                                                                setIsExitingTest(false);
+                                                                setQuestionNumber(index);
+                                                            }}
+                                                        >
+                                                            {current + 1}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        }
 
                                         <div className={styles.exitContainerBottom}>
                                             <div
