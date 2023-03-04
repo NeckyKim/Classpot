@@ -71,7 +71,7 @@ export default function TestMode() {
         testInfo = {
             applyCode: "SAMPLE",
             createdTime: 1000000000,
-            duration: 1000,
+            duration: 5,
             feedback: true,
             startDate: tempDate,
             showInfo: true,
