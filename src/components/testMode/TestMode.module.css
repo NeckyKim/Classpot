@@ -97,12 +97,12 @@
 }
 
 .navigation {
-    width: 80px;
+    width: 100px;
     height: calc(100vh - 120px);
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
     border-right: 1px solid rgb(220, 220, 220);
     overflow-x: hidden;
     overflow-y: scroll;
@@ -115,28 +115,17 @@
 }
 
 .navigation::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 .navigation::-webkit-scrollbar-thumb {
-    width: 10px;
-    background-color: rgb(220, 220, 220);
+    width: 5px;
+    background-color: rgb(150, 150, 150, 0.3);
     background-clip: padding-box;
-    border: 3px solid transparent;
 }
 
 .navigation::-webkit-scrollbar-track {
     background-color: transparent;
-}
-
-.navigation:hover {
-    width: 200px;
-}
-
-.navigation:hover~.questionAnswerHeader,
-.navigation:hover~.questionAnswerContent1,
-.navigation:hover~.questionAnswerContent2 {
-    left: 200px;
 }
 
 .navigationNumber {
@@ -164,7 +153,7 @@
     width: 40px;
     height: 40px;
     line-height: 40px;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     border-radius: 5px;
     text-align: center;
     position: relative;
@@ -205,16 +194,18 @@
 }
 
 .questionAnswerHeader {
-    width: calc(100vw - 80px);
+    width: calc(100vw - 100px);
     display: grid;
     grid-template-columns: fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%) fit-content(100%);
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 30px;
     padding-right: 30px;
+    border-bottom: 1px solid rgb(220, 220, 220);
     position: fixed;
     top: 60px;
-    left: 80px;
+    left: 100px;
+    z-index: 2;
 }
 
 .questionNumber {
@@ -321,60 +312,69 @@
     background-color: rgb(200, 200, 200);
 }
 
-.questionAnswerContent1 {
-    width: calc(100vw - 80px);
-    height: calc(100vh - 190px);
+.questionAnswerContentRL {
+    width: calc(100vw - 100px);
+    height: calc(100vh - 180px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: fixed;
-    top: 130px;
-    left: 80px;
-    overflow: auto;
+    top: 120px;
+    left: 100px;
 }
 
-.questionAnswerContent2 {
-    width: calc(100vw - 80px);
-    height: calc(100vh - 190px);
+.questionAnswerContentUD {
+    width: calc(100vw - 100px);
+    height: calc(100vh - 180px);
     display: grid;
     grid-template-rows: fit-content(100%) 1fr;
     position: fixed;
-    top: 130px;
-    left: 80px;
+    top: 120px;
+    left: 100px;
     overflow: auto;
 }
 
-.questionAnswerContent1::-webkit-scrollbar,
-.questionAnswerContent2::-webkit-scrollbar {
-    width: 20px;
+.questionContentRL {
+    height: calc(100vh - 180px);
+    padding: 30px;
+    padding-top: 10px;
+    border-right: 1px solid rgb(220, 220, 220);
+    overflow: auto;
 }
 
-.questionAnswerContent1::-webkit-scrollbar-thumb,
-.questionAnswerContent2::-webkit-scrollbar-thumb {
-    width: 20px;
-    background-color: rgba(150, 150, 150, 0.3);
-    background-clip: padding-box;
-    border-right: 10px solid transparent;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
+.questionContentUD {
+    padding: 30px;
+    padding-top: 10px;
+    padding-bottom: 0px;
 }
 
-.questionAnswerContent1::-webkit-scrollbar-track
-.questionAnswerContent2::-webkit-scrollbar-track {
-    background-color: transparent;
+.answerContentRL {
+    height: calc(100vh - 180px);
+    padding: 30px;
+    overflow: auto;
 }
 
-.questionContent {
+.answerContentUD {
     padding: 30px;
     padding-top: 0px;
 }
 
-.answerContent {
-    padding: 30px;
-    padding-top: 15px;
+.questionContentRL::-webkit-scrollbar,
+.answerContentRL::-webkit-scrollbar,
+.questionAnswerContentUD::-webkit-scrollbar {
+    width: 15px;
 }
 
-.answerContent::-webkit-scrollbar {
-    display: none;
+.questionContentRL::-webkit-scrollbar-thumb,
+.answerContentRL::-webkit-scrollbar-thumb,
+.questionAnswerContentUD::-webkit-scrollbar-thumb {
+    width: 15px;
+    background-color: rgb(150, 150, 150, 0.3);
+}
+
+.questionContentRL::-webkit-scrollbar-track,
+.answerContentRL::-webkit-scrollbar-track,
+.questionAnswerContentUD::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 .choiceElements {
@@ -809,6 +809,7 @@
         padding: 30px;
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
+        padding-top: 10px;
         padding-bottom: 10px;
         left: 0px;
     }
@@ -818,28 +819,53 @@
         display: none;
     }
 
-    .questionAnswerContent1 {
+    .questionAnswerContentRL {
         width: 100vw;
         display: block;
         grid-template-columns: none;
+        border-right: none;
         left: 0px;
+        overflow: auto;
     }
 
-    .questionAnswerContent2{
+    .questionAnswerContentRL::-webkit-scrollbar {
+        width: 15px;
+    }
+
+    .questionAnswerContentRL::-webkit-scrollbar-thumb {
+        width: 15px;
+        background-color: rgb(150, 150, 150, 0.3);
+    }
+
+    .questionAnswerContentRL::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .questionAnswerContentUD{
         width: 100vw;
         display: block;
         grid-template-rows: none;
+        border-right: none;
         left: 0px;
+        overflow: auto;
     }
 
-    .questionContent {
-        padding-top: 0px;
+    .questionContentRL,
+    .questionContentUD {
+        height: fit-content;
+        border-right: 0px;
+        padding-left: min(5vw, 30px);
+        padding-right: min(5vw, 30px);
         padding-bottom: 0px;
     }
 
-    .answerContent {
+    .answerContentRL,
+    .answerContentUD {
+        height: fit-content;
+        border-right: 0px;
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
+        padding-top: 0px;
     }
 }
 
@@ -895,7 +921,8 @@
     }
 
     .questionAnswerHeader {
-        padding-top: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     .questionNumber {

@@ -495,7 +495,7 @@
 
 
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) or (max-height: 900px) {
     .preTestModeBackground {
         height: calc(100vh - 70px);
         display: block;

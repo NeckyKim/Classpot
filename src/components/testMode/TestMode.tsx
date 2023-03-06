@@ -41,7 +41,6 @@ export default function TestMode() {
     // 질문 목록
     var questionList: any = GetQuestionList(testCode);
 
-
     // 체크 표시한 문제
     const [checkedQuestions, setCheckedQuestions] = useState<number[]>([]);
 
@@ -59,7 +58,6 @@ export default function TestMode() {
     const darkBackgroundColor = "rgb(40, 50, 70)";
     const darkButtonColor = "rgb(60, 70, 90)";
     const darkBorderColor = "1px solid rgb(70, 80, 100)";
-    const darkTextColor = "rgb(255, 255, 255)";
 
     // 화면 구성
     const [split, setSplit] = useState<boolean>(true);
@@ -121,6 +119,12 @@ export default function TestMode() {
     useEffect(() => {
         window.addEventListener("resize", () => { setWidth(window.innerWidth); });
     });
+
+    useEffect(() => {
+        if (width < 1200) {
+            setSplit(false);
+        }
+    }, [width])
 
     // 답안지 불러오기
     const [answerSheet, setAnswerSheet] = useState<any>([]);
@@ -525,7 +529,7 @@ export default function TestMode() {
                                                 }
                                             </div>
 
-                                            {
+                                            {/* {
                                                 isMouseOnNavigation
 
                                                 &&
@@ -539,7 +543,7 @@ export default function TestMode() {
                                                         {current.points}점
                                                     </div>
                                                 </div>
-                                            }
+                                            } */}
                                         </div>
                                     ))
                                 }
@@ -562,6 +566,7 @@ export default function TestMode() {
                                             {
                                                 color: "rgb(255, 255, 255)",
                                                 backgroundColor: darkBackgroundColor,
+                                                borderBottom: darkBorderColor
                                             } : {}
                                     }
                                 >
@@ -715,7 +720,7 @@ export default function TestMode() {
                                 &&
 
                                 <div
-                                    className={split ? styles.questionAnswerContent1 : styles.questionAnswerContent2}
+                                    className={split ? styles.questionAnswerContentRL : styles.questionAnswerContentUD}
                                     style={
                                         isDarkMode
 
@@ -727,7 +732,19 @@ export default function TestMode() {
                                             } : {}
                                     }
                                 >
-                                    <div className={styles.questionContent}>
+                                    <div 
+                                        className={split ? styles.questionContentRL : styles.questionContentUD}
+                                        style={
+                                            isDarkMode && split
+    
+                                                ?
+    
+                                                {
+                                                    color: "rgb(255, 255, 255)",
+                                                    borderRight: darkBorderColor
+                                                } : {}
+                                        }
+                                    >
                                         {
                                             isDarkMode
 
@@ -793,7 +810,18 @@ export default function TestMode() {
                                         }
                                     </div>
 
-                                    <div className={styles.answerContent}>
+                                    <div 
+                                        className={split ? styles.answerContentRL : styles.answerContentUD}
+                                        style={
+                                            !split 
+                                            
+                                                ?
+
+                                                {
+                                                    paddingTop: "0px"
+                                                } : {}
+                                        }
+                                    >
                                         {
                                             questionList[questionNumber].type === "객관식"
 
