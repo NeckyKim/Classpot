@@ -1,5 +1,5 @@
 <br><br><br>
-<p align="center"><img src="./public/logos/logo_black.png" width="450" height="=150"></p>
+<p align="center"><img src="./public/logos/logo_original.png" width="450" height="=150"></p>
 <br>
 
 
