@@ -55,7 +55,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
 
     if (applicantCode === "sample") {
         applicantInfo = {
-            answerSheet: JSON.parse(localStorage.getItem("sampleTestAnswerSheet") || ""),
+            answerSheet: JSON.parse(sessionStorage.getItem("sampleTestAnswerSheet") || ""),
             applicantName: "체험 응시자",
             autoGrading: true,
             createdTime: Date.now(),

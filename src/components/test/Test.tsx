@@ -8,6 +8,7 @@ import QuestionTab from "./questionTab/QuestionTab";
 import SettingsTab from "./settingsTab/SettingsTab";
 import ApplicantsTab from "./applicantsTab/ApplicantsTab";
 import AnswerSheetTab from "./answerSheetTab/AnswerSheetTab";
+import SuperviseTab from "./superviseTab/SuperviseTab";
 
 import Error from "../../Error";
 import GetTestInfo from "../hooks/GetTestInfo";
@@ -20,6 +21,7 @@ export default function Test({ userCode, email }: { userCode: string; email: str
     const { testCode } = useParams();
 
     var navigate = useNavigate();
+
 
 
     // 시험 정보
@@ -85,6 +87,14 @@ export default function Test({ userCode, email }: { userCode: string; email: str
                             답안지 확인
                         </div>
                     </div>
+
+                    <div className={tab === 5 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(5); }} >
+                        <img className={tab === 5 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/supervisor.png"} />
+
+                        <div className={tab === 5 ? styles.tabTextSelected : styles.tabTextNotSelected}>
+                            시험 진행
+                        </div>
+                    </div>
                 </div>
 
                 <div className={styles.containerRightBottom}>
@@ -92,6 +102,7 @@ export default function Test({ userCode, email }: { userCode: string; email: str
                     {tab === 2 && <QuestionTab userCode={userCode} testCode={testCode} />}
                     {tab === 3 && <ApplicantsTab testCode={testCode} />}
                     {tab === 4 && <AnswerSheetTab testCode={testCode} />}
+                    {tab === 5 && <SuperviseTab testCode={testCode} />}
                 </div>
             </div>
 

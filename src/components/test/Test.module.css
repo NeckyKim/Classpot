@@ -164,8 +164,8 @@
         bottom: 0px;
         display: grid;
         grid-template-rows: none;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 5px;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0px;
     }
 
     .containerRightBottom {

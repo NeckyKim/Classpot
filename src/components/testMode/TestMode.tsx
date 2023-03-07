@@ -9,6 +9,7 @@ import GetTestInfo from "../hooks/GetTestInfo";
 import GetApplicantInfo from "../hooks/GetApplicantInfo";
 import GetQuestionList from "../hooks/GetQuestionList";
 import GetApplicantList from "../hooks/GetApplicantList";
+import GetNotificationList from "../hooks/GetNotificationList";
 import TimeCalculator from "../hooks/TimeCalculator";
 import PreTestMode from "./PreTestMode";
 
@@ -24,9 +25,7 @@ export default function TestMode() {
     const { testCode } = useParams();
     const { applicantCode } = useParams();
 
-    useEffect(() => {
-        localStorage.clear();
-    }, [])
+
 
     // 시험 정보
     var testInfo: any = GetTestInfo(testCode);
@@ -52,6 +51,15 @@ export default function TestMode() {
     // 설정
     const [isSetting, setIsSetting] = useState<boolean>(false);
 
+    // 공지사항
+    const [isNotification, setIsNotification] = useState<boolean>(false);
+    const [latestNotification, setLatestNotification] = useState<number>(0);
+    var notificationList: any = GetNotificationList(testCode);
+
+    useEffect(() => {
+        sessionStorage.setItem("notifications", "undefined");
+    }, [])
+
     // 다크 모드
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
     const darkBackgroundColor = "rgb(40, 50, 70)";
@@ -62,9 +70,18 @@ export default function TestMode() {
     const [split, setSplit] = useState<boolean>(true);
 
 
+
     const [tempDate, setTempDate] = useState<number>(Date.now() + 30000);
 
+
+    // 시험 환경 점검 안내 팝업
+    const [sampleAlert, setSampleAlert] = useState<boolean>(false);
+
     if (testCode === "sample") {
+        useEffect(() => {
+            setSampleAlert(true);
+        }, [])
+
         testInfo = {
             applyCode: "SAMPLE",
             createdTime: 1000000000,
@@ -72,7 +89,7 @@ export default function TestMode() {
             feedback: true,
             startDate: tempDate,
             showInfo: true,
-            testName: "시험 환경 테스트",
+            testName: "시험 환경 점검",
             userCode: "AGrRbUSDWXW1HEVRLgM5M1LDLB42",
             userName: "테스트콘",
         }
@@ -157,7 +174,7 @@ export default function TestMode() {
 
         if (testCode === "sample" && modified) {
             try {
-                localStorage.setItem("sampleTestAnswerSheet", JSON.stringify(answerSheet));
+                sessionStorage.setItem("sampleTestAnswerSheet", JSON.stringify(answerSheet));
 
                 toast.success("답안지가 제출되었습니다.");
 
@@ -341,6 +358,40 @@ export default function TestMode() {
                         { right: "30px", bottom: "85px" }
                 }
             />
+
+
+
+            {
+                sampleAlert
+
+                &&
+
+                <div className={styles.background}>
+                    <div className={styles.sampleAlertContainer}>
+                        <div className={styles.sampleAlertContainerHeader}>
+                            시험 환경 점검
+                        </div>
+
+                        <ul className={styles.sampleAlertGuide}>
+                            <li>실제 시험 화면과 동일한 화면입니다.</li>
+                            <li>본 시험과는 전혀 연관이 없습니다.</li>
+                            <li>시험 환경을 충분히 점검하신 후 본 시험을 시작해주세요.</li>
+                        </ul>
+
+                        <div
+                            className={styles.confirmButton}
+                            onClick={() => {
+                                setSampleAlert(false);
+                            }}
+                        >
+                            확인
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
             {
                 applicantList.map((row: any) => row.applicantCode).includes(applicantCode)
 
@@ -492,8 +543,8 @@ export default function TestMode() {
 
                                                     &&
 
-                                                    <img 
-                                                        className={styles.navigationNumberSolved} 
+                                                    <img
+                                                        className={styles.navigationNumberSolved}
                                                         src={process.env.PUBLIC_URL + "/icons/check.png"}
                                                         style={
                                                             isDarkMode
@@ -639,10 +690,10 @@ export default function TestMode() {
                                                 } : {}
                                         }
                                     >
-                                        {}
-                                        <img 
-                                            className={checkedQuestions.includes(questionNumber) ? styles.checkQuestionButtonIconChecked : styles.checkQuestionButtonIconNotChecked} 
-                                            src={checkedQuestions.includes(questionNumber) ? process.env.PUBLIC_URL + "/icons/flag_white.png" : process.env.PUBLIC_URL + "/icons/flag_black.png"} 
+                                        { }
+                                        <img
+                                            className={checkedQuestions.includes(questionNumber) ? styles.checkQuestionButtonIconChecked : styles.checkQuestionButtonIconNotChecked}
+                                            src={checkedQuestions.includes(questionNumber) ? process.env.PUBLIC_URL + "/icons/flag_white.png" : process.env.PUBLIC_URL + "/icons/flag_black.png"}
                                         />
                                         {checkedQuestions.includes(questionNumber) ? "문제 체크 해제" : "문제 체크"}
                                     </div>
@@ -731,13 +782,13 @@ export default function TestMode() {
                                             } : {}
                                     }
                                 >
-                                    <div 
+                                    <div
                                         className={split ? styles.questionContentRL : styles.questionContentUD}
                                         style={
                                             isDarkMode && split
-    
+
                                                 ?
-    
+
                                                 {
                                                     color: "rgb(255, 255, 255)",
                                                     borderRight: darkBorderColor
@@ -809,11 +860,11 @@ export default function TestMode() {
                                         }
                                     </div>
 
-                                    <div 
+                                    <div
                                         className={split ? styles.answerContentRL : styles.answerContentUD}
                                         style={
-                                            !split 
-                                            
+                                            !split
+
                                                 ?
 
                                                 {
@@ -1008,7 +1059,7 @@ export default function TestMode() {
                                     }
                                 >
                                     <img
-                                        className={styles.exitContainerNoticeIcon}
+                                        className={styles.testModeContainerBottomIcon}
                                         src={process.env.PUBLIC_URL + "/icons/settings.png"}
                                         style={
                                             isDarkMode
@@ -1022,9 +1073,63 @@ export default function TestMode() {
                                     />
                                 </div>
 
+                                <div
+                                    className={
+                                        ((notificationList?.length === 0) || (sessionStorage.getItem("notifications") === String(notificationList[notificationList.length - 1]?.createdTime)))
+
+                                            ?
+
+                                            styles.notificationButtonNormal
+
+                                            :
+
+                                            styles.notificationButtonPulse
+                                    }
+                                    onClick={() => { 
+                                        setIsNotification(true); 
+                                        sessionStorage.setItem("notifications", notificationList[notificationList.length - 1]?.createdTime);
+                                    }}
+                                    style={
+                                        sessionStorage.getItem("notifications") !== String(notificationList[notificationList.length - 1]?.createdTime)
+
+                                        ?
+
+                                            {
+                                                backgroundColor: "rgb(250, 50, 50)"
+                                            }
+
+                                        :
+
+                                        (
+                                            isDarkMode
+
+                                            ?
+
+                                            {
+                                                color: "rgb(255, 255, 255)",
+                                                backgroundColor: darkButtonColor
+                                            } : {}
+                                        )
+                                    }
+                                >
+                                    <img
+                                        className={styles.testModeContainerBottomIcon}
+                                        src={process.env.PUBLIC_URL + "/icons/notice.png"}
+                                        style={
+                                            isDarkMode || sessionStorage.getItem("notifications") !== String(notificationList[notificationList.length - 1]?.createdTime)
+
+                                                ?
+
+                                                {
+                                                    filter: "invert()"
+                                                } : {}
+                                        }
+                                    />
+                                </div>
+
                                 <div className={styles.submittedTime}>
                                     최종 제출 시간
-                                    {width < 600 ? <br /> : " "}
+                                    {width < 1200 ? <br /> : " "}
                                     {submittedTime && new Date(submittedTime).toLocaleString("ko-KR")}
                                 </div>
 
@@ -1076,33 +1181,41 @@ export default function TestMode() {
                                             설정
 
                                             <img
-                                                className={styles.settingsContainerCloseIcon}
+                                                className={styles.closeIcon}
                                                 src={process.env.PUBLIC_URL + "/icons/close.png"}
                                                 onClick={() => { setIsSetting(false); }}
                                             />
                                         </div>
 
-                                        <div className={styles.settingsElements}>
+                                        <div>
                                             <div className={styles.settingsElementsHeader}>
                                                 화면 밝기
                                             </div>
 
-                                            <div className={styles.settingsElementsTheme}>
-                                                <div
-                                                    className={!isDarkMode ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
-                                                    onClick={() => { setIsDarkMode(false); }}
-                                                    style={{ borderRadius: "5px 0px 0px 5px" }}
-                                                >
-                                                    밝게
-                                                </div>
+                                            <div
+                                                className={!isDarkMode ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
+                                                onClick={() => { setIsDarkMode(false); }}
+                                            >
+                                                <img 
+                                                    className={styles.settingsIcon} 
+                                                    src={process.env.PUBLIC_URL + "/icons/bright.png"}
+                                                    style={!isDarkMode ? {filter: "invert()"} : {}}
+                                                />
 
-                                                <div
-                                                    className={isDarkMode ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
-                                                    onClick={() => { setIsDarkMode(true); }}
-                                                    style={{ borderRadius: "0px 5px 5px 0px" }}
-                                                >
-                                                    어둡게
-                                                </div>
+                                                밝게
+                                            </div>
+
+                                            <div
+                                                className={isDarkMode ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
+                                                onClick={() => { setIsDarkMode(true); }}
+                                            >
+                                                <img 
+                                                    className={styles.settingsIcon} 
+                                                    src={process.env.PUBLIC_URL + "/icons/dark.png"} 
+                                                    style={isDarkMode ? {filter: "invert()"} : {}}
+                                                />
+
+                                                어둡게
                                             </div>
                                         </div>
 
@@ -1111,27 +1224,35 @@ export default function TestMode() {
 
                                             &&
 
-                                            <div className={styles.settingsElements}>
+                                            <div>
                                                 <div className={styles.settingsElementsHeader}>
                                                     화면 구성
                                                 </div>
 
-                                                <div className={styles.settingsElementsTheme}>
-                                                    <div
-                                                        className={split ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
-                                                        onClick={() => { setSplit(true); }}
-                                                        style={{ borderRadius: "5px 0px 0px 5px" }}
-                                                    >
-                                                        좌우로 분할
-                                                    </div>
+                                                <div
+                                                    className={split ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
+                                                    onClick={() => { setSplit(true); }}
+                                                >
+                                                    <img 
+                                                        className={styles.settingsIcon} 
+                                                        src={process.env.PUBLIC_URL + "/icons/RL.png"} 
+                                                        style={split ? {filter: "invert()"} : {}}
+                                                    />
 
-                                                    <div
-                                                        className={!split ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
-                                                        onClick={() => { setSplit(false); }}
-                                                        style={{ borderRadius: "0px 5px 5px 0px" }}
-                                                    >
-                                                        위아래로 분할
-                                                    </div>
+                                                    좌우로 분할
+                                                </div>
+
+                                                <div
+                                                    className={!split ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
+                                                    onClick={() => { setSplit(false); }}
+                                                >
+                                                    <img 
+                                                        className={styles.settingsIcon} 
+                                                        src={process.env.PUBLIC_URL + "/icons/UD.png"} 
+                                                        style={!split ? {filter: "invert()"} : {}}
+                                                    />
+
+                                                    위아래로 분할
                                                 </div>
                                             </div>
                                         }
@@ -1139,7 +1260,41 @@ export default function TestMode() {
                                 </div>
                             }
 
+                            {
+                                isNotification
 
+                                &&
+
+                                <div className={styles.background}>
+                                    <div className={styles.notificationContainer}>
+                                        <div className={styles.settingsContainerHeader}>
+                                            공지사항
+
+                                            <img
+                                                className={styles.closeIcon}
+                                                src={process.env.PUBLIC_URL + "/icons/close.png"}
+                                                onClick={() => { setIsNotification(false); }}
+                                            />
+                                        </div>
+
+                                        <div className={styles.notificationElementsContainer}>
+                                            {
+                                                notificationList.map((current: any) => (
+                                                    <div className={styles.notificationElements}>
+                                                        <div className={styles.notificationElementsText}>
+                                                            {current.notification}
+                                                        </div>
+
+                                                        <div className={styles.notificationElementsDate}>
+                                                            {new Date(current.createdTime).toLocaleString("ko-KR")}
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
 
                             {
                                 isExitingTest
@@ -1244,7 +1399,6 @@ export default function TestMode() {
 
                                                                 ?
 
-
                                                                 <div
                                                                     className={styles.questionStatusElementsSolved}
                                                                     onClick={() => {
@@ -1282,7 +1436,7 @@ export default function TestMode() {
                                                 ))
                                             }
                                         </div>
-                                        
+
                                         {
                                             (checkedQuestions.length > 0 && width > 1200)
 
@@ -1290,14 +1444,14 @@ export default function TestMode() {
 
                                             <div>
                                                 <div className={styles.exitContainerNoticeChecked}>
-                                                    <img className={styles.exitContainerNoticeIcon} src={process.env.PUBLIC_URL + "/icons/flag.png"} style={{padding: "0px"}}/>
+                                                    <img className={styles.exitContainerNoticeIcon} src={process.env.PUBLIC_URL + "/icons/flag.png"} style={{ padding: "0px" }} />
 
                                                     체크된 문제가 {checkedQuestions.length}개 있습니다.
                                                 </div>
 
                                                 <div className={styles.exitContainerCheckedQuestions}>
                                                     {checkedQuestions.map((current: any, index: number) => (
-                                                        <div 
+                                                        <div
                                                             className={styles.checkedQuestionElements}
                                                             onClick={() => {
                                                                 setIsExitingTest(false);

@@ -20,7 +20,6 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
 
     const [isAddingApplicant, setIsAddingApplicant] = useState<boolean>(false);
 
-
     const [applicantName, setApplicantName] = useState<string>("");
 
     const shortApplicantCode = GenerateShortApplicantCode(testCode);
@@ -93,8 +92,8 @@ export default function ApplicantsTab({ testCode }: { testCode: string | undefin
                                 value="취소"
                                 className={styles.cancelButton}
                                 onClick={() => {
-                                    setApplicantName("");
                                     setIsAddingApplicant(false);
+                                    setApplicantName("");
                                 }}
                             />
                         </div>
