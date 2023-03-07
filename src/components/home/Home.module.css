@@ -316,7 +316,7 @@
         padding-left: min(40px, 5vw);
         padding-right: min(40px, 5vw);
         padding-top: 40px;
-        padding-bottom: 60px;
+        padding-bottom: 120px;
         grid-template-columns: none;
         grid-template-rows: repeat(2, fit-content(100%));
         gap: 20px;
