@@ -19,8 +19,6 @@ export default function Home() {
 
     return (
         <div className={styles.homeContainer}>
-
-
             <div className={styles.page1}>
                 <div className={styles.introContainer}>
                     <div className={styles.introText}>
@@ -231,7 +229,7 @@ export default function Home() {
             </div>
 
             <video autoPlay loop muted className={styles.video}>
-                <source src="graphics/background.webm" type="video/webm" />
+                <source src="graphics/background.mp4" type="video/mp4" />
             </video>
         </div>
     )

@@ -155,6 +155,17 @@
     }
 
     .containerLeftBottom {
+        display: none;
+    }
+
+    .containerRightBottom {
+        width: 100vw;
+        height: 100vh;
+        top: 0px;
+        left: 0px;
+    }
+
+    /* .containerLeftBottom {
         width: 100vw;
         height: 80px;
         padding: 10px;
@@ -220,5 +231,5 @@
         font-size: 0.8rem;
         height: 20px;
         line-height: 20px;
-    }
+    } */
 }
