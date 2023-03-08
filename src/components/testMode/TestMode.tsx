@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import { dbService } from "../../FirebaseModules";
-import { doc, getDoc, setDoc, updateDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 import Error from "../../Error";
 import GetTestInfo from "../hooks/GetTestInfo";
@@ -13,11 +13,15 @@ import GetNotificationList from "../hooks/GetNotificationList";
 import TimeCalculator from "../hooks/TimeCalculator";
 import PreTestMode from "./PreTestMode";
 
+import ChattingContainer from "./ChattingContainer";
+import NotificationContainer from "./NotificationContainer";
+
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
 import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./TestMode.module.css";
+
 
 
 
@@ -51,11 +55,13 @@ export default function TestMode() {
     // 설정
     const [isSetting, setIsSetting] = useState<boolean>(false);
 
-
+    // 채팅
+    const [isChatting, setIsChatting] = useState<boolean>(false);
 
     // 다크 모드
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
     const darkBackgroundColor = "rgb(40, 50, 70)";
+    const darkBackgroundColorDeep = "rgb(30, 40, 60)";
     const darkButtonColor = "rgb(60, 70, 90)";
     const darkBorderColor = "1px solid rgb(70, 80, 100)";
 
@@ -324,53 +330,22 @@ export default function TestMode() {
         })
     }, [answerSheet])
 
-
-
     // 공지사항
     const [isNotification, setIsNotification] = useState<boolean>(false);
-    const [latestNotification, setLatestNotification] = useState<number>(0);
     var notificationList: any = GetNotificationList(testCode);
 
-
-
     // 채팅 불러오기
-    const [isMessage, setIsMessage] = useState<boolean>(false);
-    const [messageList, setMessageList] = useState<any>([]);
+    const [chattingList, setChattingList] = useState<any>([]);
 
     useEffect(() => {
         if (testCode && applicantCode) {
-            onSnapshot(query(collection(dbService, "tests", testCode, "applicants", applicantCode, "messages"), orderBy("createdTime")), (snapshot) => {
-                setMessageList(snapshot.docs.map((current) => ({
+            onSnapshot(query(collection(dbService, "tests", testCode, "applicants", applicantCode, "chattings"), orderBy("createdTime")), (snapshot) => {
+                setChattingList(snapshot.docs.map((current) => ({
                     ...current.data()
                 })));
             });
         }
-    }, [isMessage])
-
-
-
-    // 채팅 보내기
-    const [message, setMessage] = useState<string>("");
-
-    async function sendMessage(event: any) {
-        event.preventDefault();
-
-        if (testCode && applicantCode) {
-            try {
-                await setDoc(doc(collection(dbService, "tests", testCode, "applicants", applicantCode, "messages")), {
-                    message: message,
-                    createdTime: Date.now(),
-                    createdBy: "applicant"
-                })
-
-                setMessage("");
-            }
-
-            catch (error) {
-                console.log(error);
-            }
-        }
-    }
+    }, [])
 
 
 
@@ -455,7 +430,7 @@ export default function TestMode() {
 
                                         {
                                             color: "rgb(255, 255, 255)",
-                                            backgroundColor: darkBackgroundColor,
+                                            backgroundColor: darkBackgroundColorDeep,
                                             borderBottom: darkBorderColor
                                         } : {}
                                 }
@@ -621,22 +596,6 @@ export default function TestMode() {
                                                     />
                                                 }
                                             </div>
-
-                                            {/* {
-                                                isMouseOnNavigation
-
-                                                &&
-
-                                                <div className={styles.navigationInfo}>
-                                                    <div className={styles.navigationInfoType}>
-                                                        {current.type}
-                                                    </div>
-
-                                                    <div className={styles.navigationInfoPoints}>
-                                                        {current.points}점
-                                                    </div>
-                                                </div>
-                                            } */}
                                         </div>
                                     ))
                                 }
@@ -1082,7 +1041,7 @@ export default function TestMode() {
 
                                         {
                                             color: "rgb(255, 255, 255)",
-                                            backgroundColor: darkBackgroundColor,
+                                            backgroundColor: darkBackgroundColorDeep,
                                             borderTop: darkBorderColor
                                         } : {}
                                 }
@@ -1135,7 +1094,7 @@ export default function TestMode() {
                                         sessionStorage.setItem("notifications", notificationList[notificationList.length - 1]?.createdTime);
                                     }}
                                     style={
-                                        sessionStorage.getItem("notifications") !== String(notificationList[notificationList.length - 1]?.createdTime)
+                                        ((notificationList?.length !== 0) && sessionStorage.getItem("notifications") !== String(notificationList[notificationList.length - 1]?.createdTime))
 
                                             ?
 
@@ -1161,7 +1120,7 @@ export default function TestMode() {
                                         className={styles.testModeContainerBottomIcon}
                                         src={process.env.PUBLIC_URL + "/icons/notice.png"}
                                         style={
-                                            isDarkMode || sessionStorage.getItem("notifications") !== String(notificationList[notificationList.length - 1]?.createdTime)
+                                            isDarkMode || ((notificationList?.length !== 0) && sessionStorage.getItem("notifications") !== String(notificationList[notificationList.length - 1]?.createdTime))
 
                                                 ?
 
@@ -1175,7 +1134,7 @@ export default function TestMode() {
                                 {/* 채팅 버튼 */}
                                 <div
                                     className={
-                                        ((messageList?.length === 0) || (sessionStorage.getItem("messages") === String(messageList[messageList.length - 1]?.createdTime)))
+                                        ((chattingList?.length === 0) || (sessionStorage.getItem("chattings") === String(chattingList[chattingList.length - 1]?.createdTime)))
 
                                             ?
 
@@ -1185,12 +1144,12 @@ export default function TestMode() {
 
                                             styles.notificationButtonPulse
                                     }
-                                    onClick={() => { 
-                                        setIsMessage(true);
-                                        sessionStorage.setItem("messages", messageList[messageList.length - 1]?.createdTime);
+                                    onClick={() => {
+                                        setIsChatting(true);
+                                        sessionStorage.setItem("chattings", chattingList[chattingList.length - 1]?.createdTime);
                                     }}
                                     style={
-                                        sessionStorage.getItem("messages") !== String(messageList[messageList.length - 1]?.createdTime)
+                                        ((chattingList?.length !== 0) && sessionStorage.getItem("chattings") !== String(chattingList[chattingList.length - 1]?.createdTime))
 
                                             ?
 
@@ -1216,7 +1175,7 @@ export default function TestMode() {
                                         className={styles.testModeContainerBottomIcon}
                                         src={process.env.PUBLIC_URL + "/icons/chat.png"}
                                         style={
-                                            isDarkMode || sessionStorage.getItem("messages") !== String(messageList[messageList.length - 1]?.createdTime)
+                                            isDarkMode || ((chattingList?.length !== 0) && sessionStorage.getItem("chattings") !== String(chattingList[chattingList.length - 1]?.createdTime))
 
                                                 ?
 
@@ -1369,119 +1328,25 @@ export default function TestMode() {
 
                                 &&
 
-                                <div className={styles.background}>
-                                    <div className={styles.backgroundContainer}>
-                                        <div className={styles.backgroundContainerHeaderWithCloseButton}>
-                                            공지사항
-
-                                            <img
-                                                className={styles.closeIcon}
-                                                src={process.env.PUBLIC_URL + "/icons/close.png"}
-                                                onClick={() => { setIsNotification(false); }}
-                                            />
-                                        </div>
-
-                                        <div className={styles.notificationElementsContainer}>
-                                            {
-                                                notificationList.length > 0
-
-                                                    ?
-
-                                                    <div>
-                                                        {
-                                                            notificationList.map((current: any) => (
-                                                                <div className={styles.notificationElements}>
-                                                                    <div className={styles.notificationElementsText}>
-                                                                        {current.notification}
-                                                                    </div>
-
-                                                                    <div className={styles.notificationElementsDate}>
-                                                                        {new Date(current.createdTime).toLocaleString("ko-KR")}
-                                                                    </div>
-                                                                </div>
-                                                            ))
-                                                        }
-                                                    </div>
-
-                                                    :
-
-                                                    "공지사항이 없습니다."
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
+                                <NotificationContainer
+                                    notificationList={notificationList}
+                                    setIsNotification={setIsNotification}
+                                />
                             }
 
                             {
                                 // 채팅 창
 
-                                isMessage
+                                isChatting
 
                                 &&
 
-                                <div className={styles.background}>
-                                    <div className={styles.messageContainer}>
-                                        <div className={styles.backgroundContainerHeaderWithCloseButton}>
-                                            채팅
-
-                                            <img
-                                                className={styles.closeIcon}
-                                                src={process.env.PUBLIC_URL + "/icons/close.png"}
-                                                onClick={() => { setIsMessage(false); }}
-                                            />
-                                        </div>
-
-
-                                        <div className={styles.messageElementsContainer}>
-                                            {
-                                                messageList.map((current: any) => (
-                                                    <div className={current.createdBy === "supervisor" ? styles.messageElementsWrapperSupervisor : styles.messageElementsWrapperApplicant}>
-
-                                                        {
-                                                            current.createdBy === "supervisor"
-
-                                                                ?
-
-                                                                <div className={styles.messageElementsHeaderSupervisor}>
-                                                                    감독관
-                                                                </div>
-
-                                                                :
-
-                                                                <div className={styles.messageElementsHeaderApplicant}>
-                                                                    {applicantInfo.applicantName}
-                                                                </div>
-                                                        }
-
-                                                        <div className={current.createdBy === "supervisor" ? styles.messageElementsTextSupervisor : styles.messageElementsTextApplicant}>
-                                                            {current.message}
-                                                        </div>
-                                                    </div>
-
-                                                ))
-                                            }
-                                        </div>
-
-                                        <div className={styles.messageBox}>
-                                            <input
-                                                value={message}
-                                                onChange={(event: any) => { setMessage(event.target.value); }}
-                                                className={styles.messageInputBox}
-                                                required
-                                            />
-
-                                            <img
-                                                className={styles.messageSendButton}
-                                                src={process.env.PUBLIC_URL + "/icons/send.png"}
-                                                onClick={() => {
-                                                    if (message) {
-                                                        sendMessage(event);
-                                                    }
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                                <ChattingContainer
+                                    testCode={testCode}
+                                    applicantCode={applicantCode}
+                                    applicantName={applicantInfo.applicantName}
+                                    setIsChatting={setIsChatting}
+                                />
                             }
 
                             {

@@ -14,15 +14,13 @@ import styles from "./SuperviseTab.module.css";
 
 export default function SuperviseTab({ testCode }: { testCode: string | undefined }) {
     const [tab, setTab] = useState<number>(1);
-    const [applicantNumber, setApplicantNumber] = useState<number>(0);
+    const [applicantNumber, setApplicantNumber] = useState<number>(-1);
     const [applicantCode, setApplicantCode] = useState<string>("");
 
 
 
     // 응시자 목록
     const applicantList: any = GetApplicantList(testCode);
-
-
 
 
 
@@ -35,13 +33,12 @@ export default function SuperviseTab({ testCode }: { testCode: string | undefine
 
 
     // 응시자별 채팅 목록
-
-    const [messageList, setMessageList] = useState<any>([]);
+    const [chattingList, setChattingList] = useState<any>([]);
 
     useEffect(() => {
         if (testCode && applicantCode) {
-            onSnapshot(query(collection(dbService, "tests", testCode, "applicants", applicantCode, "messages"), orderBy("createdTime")), (snapshot) => {
-                setMessageList(snapshot.docs.map((current) => ({
+            onSnapshot(query(collection(dbService, "tests", testCode, "applicants", applicantCode, "chattings"), orderBy("createdTime")), (snapshot) => {
+                setChattingList(snapshot.docs.map((current) => ({
                     ...current.data()
                 })));
             });
@@ -49,8 +46,6 @@ export default function SuperviseTab({ testCode }: { testCode: string | undefine
     }, [applicantNumber])
 
     const [message, setMessage] = useState<string>("");
-
-
 
 
 
@@ -79,12 +74,12 @@ export default function SuperviseTab({ testCode }: { testCode: string | undefine
 
 
 
-    async function sendMessage(event: any) {
+    async function sendChatting(event: any) {
         event.preventDefault();
 
         if (testCode && applicantCode) {
             try {
-                await setDoc(doc(collection(dbService, "tests", testCode, "applicants", applicantCode, "messages")), {
+                await setDoc(doc(collection(dbService, "tests", testCode, "applicants", applicantCode, "chattings")), {
                     message: message,
                     createdTime: Date.now(),
                     createdBy: "supervisor"
@@ -203,19 +198,18 @@ export default function SuperviseTab({ testCode }: { testCode: string | undefine
                                 </div>
                             ))
                         }
+                        <br /><br />
 
-                        {applicantNumber}<br />
-                        {applicantCode}<br />
-
+                        {applicantNumber}
 
                         {
-                            messageList.length > 0
+                            chattingList.length > 0
 
                                 ?
 
                                 <div>
                                     {
-                                        messageList.map((current: any) => (
+                                        chattingList.map((current: any) => (
                                             <div>
                                                 {current.message}
                                             </div>
@@ -228,7 +222,7 @@ export default function SuperviseTab({ testCode }: { testCode: string | undefine
                                 "해당 응시자와 진행한 채팅이 없습니다."
                         }
 
-                        <form onSubmit={sendMessage}>
+                        <form onSubmit={sendChatting}>
                             <input
                                 value={message}
                                 onChange={(event: any) => { setMessage(event.target.value); }}
