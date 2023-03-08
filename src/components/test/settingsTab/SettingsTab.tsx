@@ -15,8 +15,6 @@ import styles from "./SettingsTab.module.css";
 export default function SettingsTab({ testCode }: { testCode: string | undefined }) {
     const navigate = useNavigate();
 
-
-
     const [tab, setTab] = useState<number>(1);
 
 

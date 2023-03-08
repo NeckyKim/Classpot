@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import { dbService } from "../../FirebaseModules";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 import Error from "../../Error";
 import GetTestInfo from "../hooks/GetTestInfo";
@@ -51,14 +51,7 @@ export default function TestMode() {
     // 설정
     const [isSetting, setIsSetting] = useState<boolean>(false);
 
-    // 공지사항
-    const [isNotification, setIsNotification] = useState<boolean>(false);
-    const [latestNotification, setLatestNotification] = useState<number>(0);
-    var notificationList: any = GetNotificationList(testCode);
 
-    useEffect(() => {
-        sessionStorage.setItem("notifications", "undefined");
-    }, [])
 
     // 다크 모드
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
@@ -141,6 +134,8 @@ export default function TestMode() {
             setSplit(false);
         }
     }, [width])
+
+
 
     // 답안지 불러오기
     const [answerSheet, setAnswerSheet] = useState<any>([]);
@@ -328,6 +323,54 @@ export default function TestMode() {
             }
         })
     }, [answerSheet])
+
+
+
+    // 공지사항
+    const [isNotification, setIsNotification] = useState<boolean>(false);
+    const [latestNotification, setLatestNotification] = useState<number>(0);
+    var notificationList: any = GetNotificationList(testCode);
+
+
+
+    // 채팅 불러오기
+    const [isMessage, setIsMessage] = useState<boolean>(false);
+    const [messageList, setMessageList] = useState<any>([]);
+
+    useEffect(() => {
+        if (testCode && applicantCode) {
+            onSnapshot(query(collection(dbService, "tests", testCode, "applicants", applicantCode, "messages"), orderBy("createdTime")), (snapshot) => {
+                setMessageList(snapshot.docs.map((current) => ({
+                    ...current.data()
+                })));
+            });
+        }
+    }, [isMessage])
+
+
+
+    // 채팅 보내기
+    const [message, setMessage] = useState<string>("");
+
+    async function sendMessage(event: any) {
+        event.preventDefault();
+
+        if (testCode && applicantCode) {
+            try {
+                await setDoc(doc(collection(dbService, "tests", testCode, "applicants", applicantCode, "messages")), {
+                    message: message,
+                    createdTime: Date.now(),
+                    createdBy: "applicant"
+                })
+
+                setMessage("");
+            }
+
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }
 
 
 
@@ -1044,6 +1087,7 @@ export default function TestMode() {
                                         } : {}
                                 }
                             >
+                                {/* 설정 버튼 */}
                                 <div
                                     className={styles.settingsButton}
                                     onClick={() => { setIsSetting(true); }}
@@ -1073,6 +1117,7 @@ export default function TestMode() {
                                     />
                                 </div>
 
+                                {/* 공지사항 버튼 */}
                                 <div
                                     className={
                                         ((notificationList?.length === 0) || (sessionStorage.getItem("notifications") === String(notificationList[notificationList.length - 1]?.createdTime)))
@@ -1085,31 +1130,31 @@ export default function TestMode() {
 
                                             styles.notificationButtonPulse
                                     }
-                                    onClick={() => { 
-                                        setIsNotification(true); 
+                                    onClick={() => {
+                                        setIsNotification(true);
                                         sessionStorage.setItem("notifications", notificationList[notificationList.length - 1]?.createdTime);
                                     }}
                                     style={
                                         sessionStorage.getItem("notifications") !== String(notificationList[notificationList.length - 1]?.createdTime)
 
-                                        ?
+                                            ?
 
                                             {
                                                 backgroundColor: "rgb(250, 50, 50)"
                                             }
 
-                                        :
+                                            :
 
-                                        (
-                                            isDarkMode
+                                            (
+                                                isDarkMode
 
-                                            ?
+                                                    ?
 
-                                            {
-                                                color: "rgb(255, 255, 255)",
-                                                backgroundColor: darkButtonColor
-                                            } : {}
-                                        )
+                                                    {
+                                                        color: "rgb(255, 255, 255)",
+                                                        backgroundColor: darkButtonColor
+                                                    } : {}
+                                            )
                                     }
                                 >
                                     <img
@@ -1117,6 +1162,61 @@ export default function TestMode() {
                                         src={process.env.PUBLIC_URL + "/icons/notice.png"}
                                         style={
                                             isDarkMode || sessionStorage.getItem("notifications") !== String(notificationList[notificationList.length - 1]?.createdTime)
+
+                                                ?
+
+                                                {
+                                                    filter: "invert()"
+                                                } : {}
+                                        }
+                                    />
+                                </div>
+
+                                {/* 채팅 버튼 */}
+                                <div
+                                    className={
+                                        ((messageList?.length === 0) || (sessionStorage.getItem("messages") === String(messageList[messageList.length - 1]?.createdTime)))
+
+                                            ?
+
+                                            styles.notificationButtonNormal
+
+                                            :
+
+                                            styles.notificationButtonPulse
+                                    }
+                                    onClick={() => { 
+                                        setIsMessage(true);
+                                        sessionStorage.setItem("messages", messageList[messageList.length - 1]?.createdTime);
+                                    }}
+                                    style={
+                                        sessionStorage.getItem("messages") !== String(messageList[messageList.length - 1]?.createdTime)
+
+                                            ?
+
+                                            {
+                                                backgroundColor: "rgb(250, 50, 50)"
+                                            }
+
+                                            :
+
+                                            (
+                                                isDarkMode
+
+                                                    ?
+
+                                                    {
+                                                        color: "rgb(255, 255, 255)",
+                                                        backgroundColor: darkButtonColor
+                                                    } : {}
+                                            )
+                                    }
+                                >
+                                    <img
+                                        className={styles.testModeContainerBottomIcon}
+                                        src={process.env.PUBLIC_URL + "/icons/chat.png"}
+                                        style={
+                                            isDarkMode || sessionStorage.getItem("messages") !== String(messageList[messageList.length - 1]?.createdTime)
 
                                                 ?
 
@@ -1171,13 +1271,15 @@ export default function TestMode() {
 
 
                             {
+                                // 설정 창
+
                                 isSetting
 
                                 &&
 
                                 <div className={styles.background}>
-                                    <div className={styles.settingsContainer}>
-                                        <div className={styles.settingsContainerHeader}>
+                                    <div className={styles.backgroundContainer}>
+                                        <div className={styles.backgroundContainerHeaderWithCloseButton}>
                                             설정
 
                                             <img
@@ -1196,10 +1298,10 @@ export default function TestMode() {
                                                 className={!isDarkMode ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
                                                 onClick={() => { setIsDarkMode(false); }}
                                             >
-                                                <img 
-                                                    className={styles.settingsIcon} 
+                                                <img
+                                                    className={styles.settingsIcon}
                                                     src={process.env.PUBLIC_URL + "/icons/bright.png"}
-                                                    style={!isDarkMode ? {filter: "invert()"} : {}}
+                                                    style={!isDarkMode ? { filter: "invert()" } : {}}
                                                 />
 
                                                 밝게
@@ -1209,10 +1311,10 @@ export default function TestMode() {
                                                 className={isDarkMode ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
                                                 onClick={() => { setIsDarkMode(true); }}
                                             >
-                                                <img 
-                                                    className={styles.settingsIcon} 
-                                                    src={process.env.PUBLIC_URL + "/icons/dark.png"} 
-                                                    style={isDarkMode ? {filter: "invert()"} : {}}
+                                                <img
+                                                    className={styles.settingsIcon}
+                                                    src={process.env.PUBLIC_URL + "/icons/dark.png"}
+                                                    style={isDarkMode ? { filter: "invert()" } : {}}
                                                 />
 
                                                 어둡게
@@ -1233,10 +1335,10 @@ export default function TestMode() {
                                                     className={split ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
                                                     onClick={() => { setSplit(true); }}
                                                 >
-                                                    <img 
-                                                        className={styles.settingsIcon} 
-                                                        src={process.env.PUBLIC_URL + "/icons/RL.png"} 
-                                                        style={split ? {filter: "invert()"} : {}}
+                                                    <img
+                                                        className={styles.settingsIcon}
+                                                        src={process.env.PUBLIC_URL + "/icons/RL.png"}
+                                                        style={split ? { filter: "invert()" } : {}}
                                                     />
 
                                                     좌우로 분할
@@ -1246,10 +1348,10 @@ export default function TestMode() {
                                                     className={!split ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
                                                     onClick={() => { setSplit(false); }}
                                                 >
-                                                    <img 
-                                                        className={styles.settingsIcon} 
-                                                        src={process.env.PUBLIC_URL + "/icons/UD.png"} 
-                                                        style={!split ? {filter: "invert()"} : {}}
+                                                    <img
+                                                        className={styles.settingsIcon}
+                                                        src={process.env.PUBLIC_URL + "/icons/UD.png"}
+                                                        style={!split ? { filter: "invert()" } : {}}
                                                     />
 
                                                     위아래로 분할
@@ -1261,13 +1363,15 @@ export default function TestMode() {
                             }
 
                             {
+                                // 공지사항 창
+
                                 isNotification
 
                                 &&
 
                                 <div className={styles.background}>
-                                    <div className={styles.notificationContainer}>
-                                        <div className={styles.settingsContainerHeader}>
+                                    <div className={styles.backgroundContainer}>
+                                        <div className={styles.backgroundContainerHeaderWithCloseButton}>
                                             공지사항
 
                                             <img
@@ -1279,17 +1383,29 @@ export default function TestMode() {
 
                                         <div className={styles.notificationElementsContainer}>
                                             {
-                                                notificationList.map((current: any) => (
-                                                    <div className={styles.notificationElements}>
-                                                        <div className={styles.notificationElementsText}>
-                                                            {current.notification}
-                                                        </div>
+                                                notificationList.length > 0
 
-                                                        <div className={styles.notificationElementsDate}>
-                                                            {new Date(current.createdTime).toLocaleString("ko-KR")}
-                                                        </div>
+                                                    ?
+
+                                                    <div>
+                                                        {
+                                                            notificationList.map((current: any) => (
+                                                                <div className={styles.notificationElements}>
+                                                                    <div className={styles.notificationElementsText}>
+                                                                        {current.notification}
+                                                                    </div>
+
+                                                                    <div className={styles.notificationElementsDate}>
+                                                                        {new Date(current.createdTime).toLocaleString("ko-KR")}
+                                                                    </div>
+                                                                </div>
+                                                            ))
+                                                        }
                                                     </div>
-                                                ))
+
+                                                    :
+
+                                                    "공지사항이 없습니다."
                                             }
                                         </div>
                                     </div>
@@ -1297,13 +1413,87 @@ export default function TestMode() {
                             }
 
                             {
+                                // 채팅 창
+
+                                isMessage
+
+                                &&
+
+                                <div className={styles.background}>
+                                    <div className={styles.messageContainer}>
+                                        <div className={styles.backgroundContainerHeaderWithCloseButton}>
+                                            채팅
+
+                                            <img
+                                                className={styles.closeIcon}
+                                                src={process.env.PUBLIC_URL + "/icons/close.png"}
+                                                onClick={() => { setIsMessage(false); }}
+                                            />
+                                        </div>
+
+
+                                        <div className={styles.messageElementsContainer}>
+                                            {
+                                                messageList.map((current: any) => (
+                                                    <div className={current.createdBy === "supervisor" ? styles.messageElementsWrapperSupervisor : styles.messageElementsWrapperApplicant}>
+
+                                                        {
+                                                            current.createdBy === "supervisor"
+
+                                                                ?
+
+                                                                <div className={styles.messageElementsHeaderSupervisor}>
+                                                                    감독관
+                                                                </div>
+
+                                                                :
+
+                                                                <div className={styles.messageElementsHeaderApplicant}>
+                                                                    {applicantInfo.applicantName}
+                                                                </div>
+                                                        }
+
+                                                        <div className={current.createdBy === "supervisor" ? styles.messageElementsTextSupervisor : styles.messageElementsTextApplicant}>
+                                                            {current.message}
+                                                        </div>
+                                                    </div>
+
+                                                ))
+                                            }
+                                        </div>
+
+                                        <div className={styles.messageBox}>
+                                            <input
+                                                value={message}
+                                                onChange={(event: any) => { setMessage(event.target.value); }}
+                                                className={styles.messageInputBox}
+                                                required
+                                            />
+
+                                            <img
+                                                className={styles.messageSendButton}
+                                                src={process.env.PUBLIC_URL + "/icons/send.png"}
+                                                onClick={() => {
+                                                    if (message) {
+                                                        sendMessage(event);
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            {
+                                // 시험 종료 창
+
                                 isExitingTest
 
                                 &&
 
                                 <div className={styles.background}>
-                                    <div className={styles.exitContainer}>
-                                        <div className={styles.exitContainerHeader}>
+                                    <div className={styles.backgroundContainer}>
+                                        <div className={styles.backgroundContainerHeader}>
                                             시험 종료
                                         </div>
 

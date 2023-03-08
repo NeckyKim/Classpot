@@ -12,7 +12,6 @@ export default function GetNotificationList(testCode: string | undefined) {
         useEffect(() => {
             onSnapshot(query(collection(dbService, "tests", testCode, "notifications"), orderBy("createdTime")), (snapshot) => {
                 setNotificationList(snapshot.docs.map((current) => ({
-                    questionCode: current.id,
                     ...current.data()
                 })));
             });

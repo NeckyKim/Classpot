@@ -1,10 +1,52 @@
-.superviseTabContainer {
+.container {
     width: 100%;
     height: fit-content;
+    display: grid;
+    grid-template-rows: fit-content(100%) fit-content(100%) 1fr;
+}
+
+.containerTop {
+    font-size: 2rem;
+    font-weight: 700;
+    height: 120px;
+    line-height: 120px;
     padding-left: 100px;
     padding-right: 100px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    background-color: rgb(245, 245, 245);
+}
+
+.containerCenter {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: rgb(245, 245, 245);
+}
+
+.tabClicked {
+    font-size: 1.2rem;
+    height: 40px;
+    line-height: 40px;
+    color: rgb(0, 100, 250);
+    border-bottom: 3px solid rgb(0, 100, 250);
+    text-align: center;
+}
+
+.tabNotClicked {
+    font-size: 1.2rem;
+    height: 40px;
+    line-height: 40px;
+    color: rgb(150, 150 ,150);
+    text-align: center;
+    cursor: pointer;
+}
+
+.containerBottom {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .addNotificationButton {
@@ -86,6 +128,15 @@
     text-align: right;
 }
 
+.messageSendBySupervisor {
+    border-radius: 5px;
+    background-color: rgb(220, 220, 220);
+}
+
+.messageSendByApplicant {
+    border-radius: 5px;
+    background-color: rgb(0, 100, 250);
+}
 
 
 
