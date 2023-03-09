@@ -167,7 +167,11 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                                                 본 시험은 &nbsp;
                                                 <span className={styles.highlight}>
-                                                    {new Date(testInfo.startDate).toLocaleString("ko-KR")}
+                                                    {new Date(testInfo.startDate).getFullYear()}년&nbsp;
+                                                    {new Date(testInfo.startDate).getMonth()}월&nbsp;
+                                                    {new Date(testInfo.startDate).getDay()}일&nbsp;
+                                                    {new Date(testInfo.startDate).getHours()}시&nbsp;
+                                                    {new Date(testInfo.startDate).getMinutes()}분&nbsp;
                                                 </span>부터
 
                                                 약&nbsp;
@@ -337,6 +341,27 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                                                 부정행위는 시험 규정 외 불공정하거나 부정한 방법을 이용하여 점수를 취득하거나 취득하려고 하는 행위 등 공정한 시험 평가에 저촉되는 모든 행위를 말합니다.
                                                 시험 진행 중 부정행위가 확인되는 경우, 시험 즉시 종료, 재시험 불가, 시험 성적 무효 처리 등의 조치가 이루어질 수 있으며 이에 동의합니다.<br /><br />
+
+                                                <span style={{ fontWeight: "700" }}>&#91;개인정보 수집·이용 동의&#93;</span><br />
+
+                                                테스트콘이 제공하는 시험 기능 이용을 위하여 아래와 같이 개인 정보를 수집·이용 및 제공하고자 합니다. 아래 사항을 확인하신 후, 동의 여부를 체크해 주시길 바랍니다. 응시자는 개인 정보의 수집·이용 동의를 거부할 권리가 있습니다. 다만 제공받은 정보는 서비스 이용에 필수적인 항목으로 동의 거부 시에는 시험 참여가 제한됩니다.
+                                                <table className={styles.agreementTable}>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>수집 목적</th>
+                                                            <th>수집 항목</th>
+                                                            <th>보유·이용 기간</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>시험 평가 및 진행</td>
+                                                            <td>시험 응시 결과(정답 유무, 점수, 채팅 목록 등)</td>
+                                                            <td>수집 목적 달성 시 까지</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
 
                                             <div className={styles.checkBox}>

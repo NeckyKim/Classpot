@@ -318,6 +318,30 @@
     overflow: auto;
 }
 
+.agreementTable {
+    border-spacing: 0px;
+    border-left: 1px solid rgb(200, 200, 200);
+    border-top: 1px solid rgb(200, 200, 200);
+    margin-top: 10px;
+}
+
+.agreementTable thead tr th {
+    font-weight: 400;
+    padding: 7px;
+    border-right: 1px solid rgb(200, 200, 200);
+    border-bottom: 1px solid rgb(200, 200, 200);
+    background-color: rgb(240, 240, 240);
+    text-align: left;
+}
+
+.agreementTable tbody tr td {
+    font-weight: 400;
+    padding: 7px;
+    border-right: 1px solid rgb(200, 200, 200);
+    border-bottom: 1px solid rgb(200, 200, 200);
+    text-align: center;
+}
+
 .notificationContainer::-webkit-scrollbar,
 .agreementContainer::-webkit-scrollbar {
     width: 20px;

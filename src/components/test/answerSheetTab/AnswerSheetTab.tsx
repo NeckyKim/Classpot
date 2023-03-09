@@ -287,31 +287,31 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
 
                                                                 <div className={styles.choiceAnswerContainer}>
                                                                     <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][0] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                        <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][0] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                             1
                                                                         </div>
 
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][0] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                        <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][0] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                             {current.choices[0]}
                                                                         </div>
                                                                     </div>
 
                                                                     <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][1] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                        <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][1] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                             2
                                                                         </div>
 
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][1] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                        <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][1] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                             {current.choices[1]}
                                                                         </div>
                                                                     </div>
 
                                                                     <div className={styles.choiceAnswerElements}>
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][2] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                        <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][2] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                             3
                                                                         </div>
 
-                                                                        <div className={applicantList[applicantIndex].answerSheet[questionIndex][2] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                        <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][2] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                             {current.choices[2]}
                                                                         </div>
                                                                     </div>
@@ -322,11 +322,11 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                                                         &&
 
                                                                         <div className={styles.choiceAnswerElements}>
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][3] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][3] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                                 4
                                                                             </div>
 
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][3] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][3] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                                 {current.choices[3]}
                                                                             </div>
                                                                         </div>
@@ -338,11 +338,11 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                                                         &&
 
                                                                         <div className={styles.choiceAnswerElements}>
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][4] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][4] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                                 5
                                                                             </div>
 
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][4] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][4] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                                 {current.choices[4]}
                                                                             </div>
                                                                         </div>
@@ -354,11 +354,11 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                                                         &&
 
                                                                         <div className={styles.choiceAnswerElements}>
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][5] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][5] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                                 6
                                                                             </div>
 
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][5] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][5] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                                 {current.choices[5]}
                                                                             </div>
                                                                         </div>
@@ -370,11 +370,11 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                                                         &&
 
                                                                         <div className={styles.choiceAnswerElements}>
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][6] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][6] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                                 7
                                                                             </div>
 
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][6] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][6] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                                 {current.choices[6]}
                                                                             </div>
                                                                         </div>
@@ -386,11 +386,11 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                                                         &&
 
                                                                         <div className={styles.choiceAnswerElements}>
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][7] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][7] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                                 8
                                                                             </div>
 
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][7] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][7] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                                 {current.choices[7]}
                                                                             </div>
                                                                         </div>
@@ -402,11 +402,11 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                                                         &&
 
                                                                         <div className={styles.choiceAnswerElements}>
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][8] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][8] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                                 9
                                                                             </div>
 
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][8] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][8] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                                 {current.choices[8]}
                                                                             </div>
                                                                         </div>
@@ -418,11 +418,11 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                                                         &&
 
                                                                         <div className={styles.choiceAnswerElements}>
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][9] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][9] ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
                                                                                 10
                                                                             </div>
 
-                                                                            <div className={applicantList[applicantIndex].answerSheet[questionIndex][9] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                                            <div className={applicantList[applicantIndex]?.answerSheet[questionIndex][9] ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
                                                                                 {current.choices[9]}
                                                                             </div>
                                                                         </div>
