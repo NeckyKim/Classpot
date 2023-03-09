@@ -99,14 +99,13 @@
 .navigation {
     width: 80px;
     height: calc(100vh - 120px);
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
     border-right: 1px solid rgb(220, 220, 220);
     overflow-x: hidden;
     overflow-y: scroll;
-    display: block;
     background-color: rgb(255, 255, 255);
     position: fixed;
     top: 60px;
@@ -128,34 +127,31 @@
     background-color: transparent;
 }
 
-.navigationInfoType,
-.navigationInfoPoints {
-    font-weight: 300;
-    color: rgb(150, 150, 150);
-}
-
-.navigationNumberSelected,
-.navigationNumberNotSelected {
+.navigationSelected {
     width: 40px;
     height: 40px;
     line-height: 40px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border-radius: 5px;
     text-align: center;
     position: relative;
-}
-
-.navigationNumberSelected {
     color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
 }
 
-.navigationNumberNotSelected {
+.navigationNotSelected {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
     background-color: rgb(230, 230, 230);
     cursor: pointer;
 }
 
-.navigationNumberSolved {
+.navigationSolved {
     width: 20px;
     height: 20px;
     border-radius: 10px;
@@ -167,7 +163,7 @@
     z-index: 1;
 }
 
-.navigationNumberChecked {
+.navigationChecked {
     width: 20px;
     height: 20px;
     border-radius: 10px;

@@ -363,7 +363,7 @@ export default function TestMode() {
         "주관식": "short_answer",
         "참/거짓": "true_false",
         "서술형": "essay"
-    } 
+    }
 
 
 
@@ -517,103 +517,99 @@ export default function TestMode() {
 
                                     questionList.map((current: any, index: number) => (
                                         <div
-                                            className={styles.navigationNumber}
+                                            className={index === questionNumber ? styles.navigationSelected : styles.navigationNotSelected}
                                             onClick={() => {
                                                 setQuestionNumber(index);
                                                 submitAnswerSheet(event);
                                             }}
+                                            style={
+                                                isDarkMode && index !== questionNumber
+
+                                                    ?
+
+                                                    {
+                                                        color: "rgb(255, 255, 255)",
+                                                        backgroundColor: darkButtonColor
+                                                    } : {}
+                                            }
                                         >
-                                            <div
-                                                className={index === questionNumber ? styles.navigationNumberSelected : styles.navigationNumberNotSelected}
-                                                style={
-                                                    isDarkMode && index !== questionNumber
+                                            {index + 1}
 
-                                                        ?
+                                            {
+                                                (
+                                                    current.type === "객관식"
 
-                                                        {
-                                                            color: "rgb(255, 255, 255)",
-                                                            backgroundColor: darkButtonColor
-                                                        } : {}
-                                                }
-                                            >
-                                                {index + 1}
+                                                    && answerSheet[index] !== null
 
-                                                {
-                                                    (
-                                                        current.type === "객관식"
+                                                    && answerSheet[index] !== undefined
 
-                                                        && answerSheet[index] !== null
+                                                    && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0
+                                                )
 
-                                                        && answerSheet[index] !== undefined
+                                                &&
 
-                                                        && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0
-                                                    )
+                                                <img
+                                                    className={styles.navigationSolved}
+                                                    src={process.env.PUBLIC_URL + "/icons/check.png"}
+                                                    style={
+                                                        isDarkMode
 
-                                                    &&
+                                                            ?
 
-                                                    <img
-                                                        className={styles.navigationNumberSolved}
-                                                        src={process.env.PUBLIC_URL + "/icons/check.png"}
-                                                        style={
-                                                            isDarkMode
+                                                            {
+                                                                backgroundColor: darkButtonColor,
+                                                            } : {}
+                                                    }
+                                                />
+                                            }
 
-                                                                ?
+                                            {
+                                                (
+                                                    (current.type === "참/거짓" || current.type === "주관식" || current.type === "서술형")
 
-                                                                {
-                                                                    backgroundColor: darkButtonColor,
-                                                                } : {}
-                                                        }
-                                                    />
-                                                }
+                                                    && answerSheet[index] !== null
 
-                                                {
-                                                    (
-                                                        (current.type === "참/거짓" || current.type === "주관식" || current.type === "서술형")
+                                                    && answerSheet[index] !== undefined
 
-                                                        && answerSheet[index] !== null
+                                                    && answerSheet[index] !== ""
+                                                )
 
-                                                        && answerSheet[index] !== undefined
+                                                &&
 
-                                                        && answerSheet[index] !== ""
-                                                    )
+                                                <img
+                                                    className={styles.navigationSolved}
+                                                    src={process.env.PUBLIC_URL + "/icons/check.png"}
+                                                    style={
+                                                        isDarkMode
 
-                                                    &&
+                                                            ?
 
-                                                    <img
-                                                        className={styles.navigationNumberSolved}
-                                                        src={process.env.PUBLIC_URL + "/icons/check.png"}
-                                                        style={
-                                                            isDarkMode
+                                                            {
+                                                                backgroundColor: darkButtonColor,
+                                                            } : {}
+                                                    }
+                                                />
+                                            }
 
-                                                                ?
+                                            {
+                                                checkedQuestions.includes(index)
 
-                                                                {
-                                                                    backgroundColor: darkButtonColor,
-                                                                } : {}
-                                                        }
-                                                    />
-                                                }
+                                                &&
 
-                                                {
-                                                    checkedQuestions.includes(index)
+                                                <img
+                                                    className={styles.navigationChecked}
+                                                    src={process.env.PUBLIC_URL + "/icons/flag.png"}
+                                                    style={
+                                                        isDarkMode
 
-                                                    &&
+                                                            ?
 
-                                                    <img
-                                                        className={styles.navigationNumberChecked}
-                                                        src={process.env.PUBLIC_URL + "/icons/flag.png"}
-                                                        style={
-                                                            isDarkMode
-
-                                                                ?
-
-                                                                {
-                                                                    backgroundColor: darkButtonColor,
-                                                                } : {}
-                                                        }
-                                                    />
-                                                }
-                                            </div>
+                                                            {
+                                                                backgroundColor: darkButtonColor,
+                                                            } : {}
+                                                    }
+                                                />
+                                            }
                                         </div>
                                     ))
                                 }
