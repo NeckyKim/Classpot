@@ -15,12 +15,14 @@ import PreTestMode from "./PreTestMode";
 
 import ChattingContainer from "./ChattingContainer";
 import NotificationContainer from "./NotificationContainer";
+import ExitContainer from "./ExitContainer";
 
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
 import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./TestMode.module.css";
+
 
 
 
@@ -50,7 +52,7 @@ export default function TestMode() {
     const [isMouseOnNavigation, setIsMouseOnNavigation] = useState<boolean>(false);
 
     // 시험 종료 여부
-    const [isExitingTest, setIsExitingTest] = useState<boolean>(false);
+    const [isExiting, setIsExiting] = useState<boolean>(false);
 
     // 설정
     const [isSetting, setIsSetting] = useState<boolean>(false);
@@ -292,43 +294,45 @@ export default function TestMode() {
 
 
     // 푼 문제
-    const [solved, setSolved] = useState<number[]>([]);
+    const [solvedQuestions, setSolvedQuestions] = useState<number[]>([]);
 
     useEffect(() => {
         questionList.filter((elem: any, index: number) => {
             if (elem.type === "객관식") {
                 if (answerSheet[index] !== null && answerSheet[index] !== undefined && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0) {
-                    if (!solved.includes(index)) {
-                        var temp = [...solved];
+                    if (!solvedQuestions.includes(index)) {
+                        var temp = [...solvedQuestions];
                         temp.push(index);
-                        setSolved(temp);
+                        setSolvedQuestions(temp);
                     }
                 }
 
                 else {
-                    if (solved.includes(index)) {
-                        setSolved([...solved].filter((elem: number) => elem !== index));
+                    if (solvedQuestions.includes(index)) {
+                        setSolvedQuestions([...solvedQuestions].filter((elem: number) => elem !== index));
                     }
                 }
             }
 
             else {
                 if (answerSheet[index] !== "" && answerSheet[index] !== null && answerSheet[index] !== undefined) {
-                    if (!solved.includes(index)) {
-                        var temp = [...solved];
+                    if (!solvedQuestions.includes(index)) {
+                        var temp = [...solvedQuestions];
                         temp.push(index);
-                        setSolved(temp);
+                        setSolvedQuestions(temp);
                     }
                 }
 
                 else {
-                    if (solved.includes(index)) {
-                        setSolved([...solved].filter((elem: number) => elem !== index));
+                    if (solvedQuestions.includes(index)) {
+                        setSolvedQuestions([...solvedQuestions].filter((elem: number) => elem !== index));
                     }
                 }
             }
         })
     }, [answerSheet])
+
+
 
     // 공지사항
     const [isNotification, setIsNotification] = useState<boolean>(false);
@@ -1223,7 +1227,7 @@ export default function TestMode() {
                                             } : {}
                                     }
                                     onClick={() => {
-                                        setIsExitingTest(true);
+                                        setIsExiting(true);
                                     }}
                                 />
                             </div>
@@ -1350,200 +1354,20 @@ export default function TestMode() {
                             }
 
                             {
-                                // 시험 종료 창
-
-                                isExitingTest
+                                isExiting
 
                                 &&
 
-                                <div className={styles.background}>
-                                    <div className={styles.backgroundContainer}>
-                                        <div className={styles.backgroundContainerHeader}>
-                                            시험 종료
-                                        </div>
-
-                                        <div className={styles.exitContainerTop}>
-                                            답안지를 제출하고 시험을 종료하시겠습니까?<br />
-                                            시험 시간이 종료될 때 까지, 다시 접속하여 시험에 응시할 수 있습니다.
-                                        </div>
-
-                                        {
-                                            questionList.length === solved.length
-
-                                                ?
-
-                                                <div className={styles.exitContainerNoticePass}>
-                                                    <img className={styles.exitContainerNoticeIcon} src={process.env.PUBLIC_URL + "/icons/pass.png"} />
-
-                                                    모든 문제를 다 풀었습니다.
-                                                </div>
-
-                                                :
-
-                                                <div className={styles.exitContainerNoticeAlert}>
-                                                    <img className={styles.exitContainerNoticeIcon} src={process.env.PUBLIC_URL + "/icons/alert.png"} />
-
-                                                    풀지 않은 문제가 {questionList.length - solved.length}개 있습니다.
-                                                </div>
-                                        }
-
-                                        <div className={styles.exitContainerQuestionStatus}>
-                                            {
-                                                questionList.length > 0
-
-                                                &&
-
-                                                questionList.map((current: any, index: number) => (
-                                                    current.type === "객관식"
-
-                                                        ?
-
-                                                        (
-                                                            answerSheet[index] !== null
-
-                                                                && answerSheet[index] !== undefined
-
-                                                                && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0
-
-                                                                ?
-
-                                                                <div
-                                                                    className={styles.questionStatusElementsSolved}
-                                                                    onClick={() => {
-                                                                        setIsExitingTest(false);
-                                                                        setQuestionNumber(index);
-                                                                    }}
-                                                                >
-                                                                    <div className={styles.questionStatusElementsNumber}>
-                                                                        {index + 1}
-                                                                    </div>
-
-                                                                    <div className={styles.exitQuestionContainerTextSolved}>
-                                                                        푼 문제
-                                                                    </div>
-                                                                </div>
-
-                                                                :
-
-                                                                <div
-                                                                    className={styles.questionStatusElementsNotSolved}
-                                                                    onClick={() => {
-                                                                        setIsExitingTest(false);
-                                                                        setQuestionNumber(index);
-                                                                    }}
-                                                                >
-                                                                    <div className={styles.questionStatusElementsNumber}>
-                                                                        {index + 1}
-                                                                    </div>
-
-                                                                    <div className={styles.exitQuestionContainerTextNotSolved}>
-                                                                        풀지 않은 문제
-                                                                    </div>
-                                                                </div>
-
-                                                        )
-
-                                                        :
-
-                                                        (
-                                                            answerSheet[index] !== null
-
-                                                                && answerSheet[index] !== undefined
-
-                                                                && answerSheet[index] !== ""
-
-                                                                ?
-
-                                                                <div
-                                                                    className={styles.questionStatusElementsSolved}
-                                                                    onClick={() => {
-                                                                        setIsExitingTest(false);
-                                                                        setQuestionNumber(index);
-                                                                    }}
-                                                                >
-                                                                    <div className={styles.questionStatusElementsNumber}>
-                                                                        {index + 1}
-                                                                    </div>
-
-                                                                    <div className={styles.exitQuestionContainerTextSolved}>
-                                                                        푼 문제
-                                                                    </div>
-                                                                </div>
-
-                                                                :
-
-                                                                <div
-                                                                    className={styles.questionStatusElementsNotSolved}
-                                                                    onClick={() => {
-                                                                        setIsExitingTest(false);
-                                                                        setQuestionNumber(index);
-                                                                    }}
-                                                                >
-                                                                    <div className={styles.questionStatusElementsNumber}>
-                                                                        {index + 1}
-                                                                    </div>
-
-                                                                    <div className={styles.exitQuestionContainerTextNotSolved}>
-                                                                        풀지 않은 문제
-                                                                    </div>
-                                                                </div>
-                                                        )
-                                                ))
-                                            }
-                                        </div>
-
-                                        {
-                                            (checkedQuestions.length > 0 && width > 1200)
-
-                                            &&
-
-                                            <div>
-                                                <div className={styles.exitContainerNoticeChecked}>
-                                                    <img className={styles.exitContainerNoticeIcon} src={process.env.PUBLIC_URL + "/icons/flag.png"} style={{ padding: "0px" }} />
-
-                                                    체크된 문제가 {checkedQuestions.length}개 있습니다.
-                                                </div>
-
-                                                <div className={styles.exitContainerCheckedQuestions}>
-                                                    {checkedQuestions.map((current: any, index: number) => (
-                                                        <div
-                                                            className={styles.checkedQuestionElements}
-                                                            onClick={() => {
-                                                                setIsExitingTest(false);
-                                                                setQuestionNumber(index);
-                                                            }}
-                                                        >
-                                                            {current + 1}
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        }
-
-                                        <div className={styles.exitContainerBottom}>
-                                            <div
-                                                className={styles.exitContainerExitButton}
-                                                onClick={() => {
-                                                    submitAnswerSheet(event);
-                                                    setIsApplyingTest(false);
-                                                    setIsExitingTest(false);
-                                                    setQuestionNumber(0);
-                                                }}
-                                            >
-                                                시험 종료
-                                            </div>
-
-                                            <div
-                                                className={styles.exitContainerCancelButton}
-                                                onClick={() => {
-                                                    setIsExitingTest(false);
-                                                }}
-                                            >
-                                                취소
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <ExitContainer
+                                    questionList={questionList}
+                                    solvedQuestions={solvedQuestions}
+                                    checkedQuestions={checkedQuestions}
+                                    answerSheet={answerSheet}
+                                    setQuestionNumber={setQuestionNumber}
+                                    setIsExiting={setIsExiting}
+                                    setIsApplyingTest={setIsApplyingTest}
+                                    submitAnswerSheet={submitAnswerSheet}
+                                />
                             }
                         </form>
 
