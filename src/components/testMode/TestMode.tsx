@@ -13,6 +13,7 @@ import GetNotificationList from "../hooks/GetNotificationList";
 import TimeCalculator from "../hooks/TimeCalculator";
 import PreTestMode from "./PreTestMode";
 
+import SettingContainer from "./SettingContainer";
 import ChattingContainer from "./ChattingContainer";
 import NotificationContainer from "./NotificationContainer";
 import ExitContainer from "./ExitContainer";
@@ -22,8 +23,6 @@ import { toast } from "react-toastify";
 import { Editor } from '@tinymce/tinymce-react';
 
 import styles from "./TestMode.module.css";
-
-
 
 
 
@@ -823,7 +822,7 @@ export default function TestMode() {
 
                                                         body {
                                                             font-family: 'Pretendard';
-                                                            font-weight: 600;
+                                                            font-weight: 500;
                                                             margin: 0px;
                                                             padding: 0px;
                                                             color: white;
@@ -853,7 +852,7 @@ export default function TestMode() {
 
                                                     body {
                                                         font-family: 'Pretendard';
-                                                        font-weight: 600;
+                                                        font-weight: 500;
                                                         margin: 0px;
                                                         padding: 0px;
                                                         color: black;
@@ -1240,89 +1239,15 @@ export default function TestMode() {
 
                                 &&
 
-                                <div className={styles.background}>
-                                    <div className={styles.backgroundContainer}>
-                                        <div className={styles.backgroundContainerHeaderWithCloseButton}>
-                                            설정
-
-                                            <img
-                                                className={styles.closeIcon}
-                                                src={process.env.PUBLIC_URL + "/icons/close.png"}
-                                                onClick={() => { setIsSetting(false); }}
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <div className={styles.settingsElementsHeader}>
-                                                화면 밝기
-                                            </div>
-
-                                            <div
-                                                className={!isDarkMode ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
-                                                onClick={() => { setIsDarkMode(false); }}
-                                            >
-                                                <img
-                                                    className={styles.settingsIcon}
-                                                    src={process.env.PUBLIC_URL + "/icons/bright.png"}
-                                                    style={!isDarkMode ? { filter: "invert()" } : {}}
-                                                />
-
-                                                밝게
-                                            </div>
-
-                                            <div
-                                                className={isDarkMode ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
-                                                onClick={() => { setIsDarkMode(true); }}
-                                            >
-                                                <img
-                                                    className={styles.settingsIcon}
-                                                    src={process.env.PUBLIC_URL + "/icons/dark.png"}
-                                                    style={isDarkMode ? { filter: "invert()" } : {}}
-                                                />
-
-                                                어둡게
-                                            </div>
-                                        </div>
-
-                                        {
-                                            width > 1200
-
-                                            &&
-
-                                            <div>
-                                                <div className={styles.settingsElementsHeader}>
-                                                    화면 구성
-                                                </div>
-
-                                                <div
-                                                    className={split ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
-                                                    onClick={() => { setSplit(true); }}
-                                                >
-                                                    <img
-                                                        className={styles.settingsIcon}
-                                                        src={process.env.PUBLIC_URL + "/icons/RL.png"}
-                                                        style={split ? { filter: "invert()" } : {}}
-                                                    />
-
-                                                    좌우로 분할
-                                                </div>
-
-                                                <div
-                                                    className={!split ? styles.settingsElementsButtonClicked : styles.settingsElementsButtonNotClicked}
-                                                    onClick={() => { setSplit(false); }}
-                                                >
-                                                    <img
-                                                        className={styles.settingsIcon}
-                                                        src={process.env.PUBLIC_URL + "/icons/UD.png"}
-                                                        style={!split ? { filter: "invert()" } : {}}
-                                                    />
-
-                                                    위아래로 분할
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
+                                <SettingContainer
+                                    width={width}
+                                    isDarkMode={isDarkMode}
+                                    split={split}
+                                    setIsDarkMode={setIsDarkMode}
+                                    setSplit={setSplit}
+                                    setIsNotification={setIsNotification}
+                                    setIsSetting={setIsSetting}
+                                />
                             }
 
                             {

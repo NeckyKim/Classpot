@@ -12,7 +12,7 @@
 }
 
 .container {
-    width: 600px;
+    width: 500px;
     height: fit-content;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
@@ -23,19 +23,16 @@
 .containerHeader {
     font-size: 2rem;
     font-weight: 700;
-    line-height: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+    line-height: 30px;
+    padding: 30px;
     border-bottom: 1px solid rgb(220, 220, 220);
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
 }
 
 .closeIcon {
-    height: 40px;
-    padding: 10px;
+    height: 30px;
+    padding: 5px;
     filter: invert(0.7);
     cursor: pointer;
 }
@@ -152,16 +149,13 @@
 
 @media (max-width: 600px) {
     .container {
-        width: 90vw;
+        width: min(90vw, 500px);
     }
 
     .containerHeader {
         font-size: 1.2rem;
         line-height: 25px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: min(5vw, 30px);
-        padding-right: min(5vw, 30px);
+        padding: min(5vw, 30px);
     }
 
     .closeIcon {

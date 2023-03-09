@@ -199,7 +199,7 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
 
                                                         body {
                                                             font-family:'Pretendard';
-                                                            font-weight: 600;
+                                                            font-weight: 500;
                                                             margin: 0px;
                                                             padding: 0px;
                                                         }

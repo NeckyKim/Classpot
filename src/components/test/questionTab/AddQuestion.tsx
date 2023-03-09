@@ -256,7 +256,7 @@ export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }
 
                         body {
                             font-family: 'Pretendard';
-                            font-weight: 600;
+                            font-weight: 500;
                             line-height: 1;
                         }
 

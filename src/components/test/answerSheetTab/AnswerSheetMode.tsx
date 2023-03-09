@@ -254,7 +254,7 @@ export default function AnswerSheetMode({ userCode, editable }: { userCode: stri
                                             @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
                                             body{
                                                 font-family:'Pretendard';
-                                                font-weight: 600;
+                                                font-weight: 500;
                                                 margin: 0px
                                             }
                                         `

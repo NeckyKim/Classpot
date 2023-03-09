@@ -48,145 +48,169 @@ export default function ExitContainer({ questionList, solvedQuestions, checkedQu
 
                 <div className={styles.questionsStatusContainer}>
                     {
-                        questionList.length === solvedQuestions.length
+                        solvedQuestions.length !== 0
 
-                            ?
+                        &&
 
-                            <div className={styles.questionStatusPass}>
+                        <div>
+                            <div className={styles.questionStatusHeaderSolved}>
                                 <img className={styles.exitContainerIcon} src={process.env.PUBLIC_URL + "/icons/pass.png"} />
 
-                                모든 문제를 다 풀었습니다.
-                            </div>
-
-                            :
-
-                            <div className={styles.questionStatusWarning}>
-                                <img className={styles.exitContainerIcon} src={process.env.PUBLIC_URL + "/icons/alert.png"} />
-
-                                풀지 않은 문제가 {questionList.length - solvedQuestions.length}개 있습니다.
-                            </div>
-                    }
-
-                    <div className={styles.questionsStatusElements}>
-                        {
-                            questionList.length > 0
-
-                            &&
-
-                            questionList.map((current: any, index: number) => (
-                                current.type === "객관식"
+                                {
+                                    solvedQuestions.length === questionList.length
 
                                     ?
 
-                                    (
-                                        answerSheet[index] !== null
-
-                                            && answerSheet[index] !== undefined
-
-                                            && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0
-
-                                            ?
-
-                                            <div
-                                                className={styles.solvedQuestions}
-                                                onClick={() => {
-                                                    setIsExiting(false);
-                                                    setQuestionNumber(index);
-                                                }}
-                                            >
-                                                <div className={styles.solvedQuestionsNumber}>
-                                                    {index + 1}
-                                                </div>
-
-                                                <div className={styles.solvedQuestionsType}>
-                                                    {current.type}
-                                                </div>
-
-                                                <div className={styles.solvedQuestionsText}>
-                                                    푼 문제
-                                                </div>
-                                            </div>
-
-                                            :
-
-                                            <div
-                                                className={styles.notSolvedQuestions}
-                                                onClick={() => {
-                                                    setIsExiting(false);
-                                                    setQuestionNumber(index);
-                                                }}
-                                            >
-                                                <div className={styles.notSolvedQuestionsNumber}>
-                                                    {index + 1}
-                                                </div>
-
-                                                <div className={styles.notSolvedQuestionsType}>
-                                                    {current.type}
-                                                </div>
-
-                                                <div className={styles.notSolvedQuestionsText}>
-                                                    풀지 않은 문제
-                                                </div>
-                                            </div>
-
-                                    )
+                                    "모든 문제를 풀었습니다."
 
                                     :
 
-                                    (
-                                        answerSheet[index] !== null
+                                    solvedQuestions.length + "개 문제를 풀었습니다."
+                                }
+                            </div>
 
-                                            && answerSheet[index] !== undefined
+                            <div className={styles.questionStatusContainerSolved}>
+                                {
+                                    questionList.length > 0
 
-                                            && answerSheet[index] !== ""
+                                    &&
+
+                                    questionList.map((current: any, index: number) => (
+                                        current.type === "객관식"
 
                                             ?
 
-                                            <div
-                                                className={styles.solvedQuestions}
-                                                onClick={() => {
-                                                    setIsExiting(false);
-                                                    setQuestionNumber(index);
-                                                }}
-                                            >
-                                                <div className={styles.solvedQuestionsNumber}>
+                                            (
+                                                answerSheet[index] !== null
+
+                                                && answerSheet[index] !== undefined
+
+                                                && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0
+
+                                                &&
+
+                                                <div
+                                                    className={styles.solvedQuestions}
+                                                    onClick={() => {
+                                                        setIsExiting(false);
+                                                        setQuestionNumber(index);
+                                                    }}
+                                                >
                                                     {index + 1}
                                                 </div>
-
-                                                <div className={styles.solvedQuestionsType}>
-                                                    {current.type}
-                                                </div>
-
-                                                <div className={styles.solvedQuestionsText}>
-                                                    푼 문제
-                                                </div>
-                                            </div>
+                                            )
 
                                             :
 
-                                            <div
-                                                className={styles.notSolvedQuestions}
-                                                onClick={() => {
-                                                    setIsExiting(false);
-                                                    setQuestionNumber(index);
-                                                }}
-                                            >
-                                                <div className={styles.notSolvedQuestionsNumber}>
+                                            (
+                                                answerSheet[index] !== null
+
+                                                && answerSheet[index] !== undefined
+
+                                                && answerSheet[index] !== ""
+
+                                                &&
+
+                                                <div
+                                                    className={styles.solvedQuestions}
+                                                    onClick={() => {
+                                                        setIsExiting(false);
+                                                        setQuestionNumber(index);
+                                                    }}
+                                                >
+                                                    {index + 1}
+                                                </div>
+                                            )
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    }
+
+
+                    {
+                        (solvedQuestions.length !== 0
+                        
+                        &&
+
+                        questionList.length - solvedQuestions.length !== 0)
+
+                        &&
+
+                        <div style={{marginTop: "30px"}} />
+                    }
+
+
+                    {
+                        questionList.length - solvedQuestions.length !== 0
+
+                        &&
+
+                        <div>
+                            <div className={styles.questionStatusHeaderNotSolved}>
+                                <img className={styles.exitContainerIcon} src={process.env.PUBLIC_URL + "/icons/alert.png"} />
+
+                                {questionList.length - solvedQuestions.length}개 문제를 풀지 않았습니다.
+                            </div>
+
+                            <div className={styles.questionStatusContainerNotSolved}>
+                                {
+                                    questionList.length > 0
+
+                                    &&
+
+                                    questionList.map((current: any, index: number) => (
+                                        current.type === "객관식"
+
+                                            ?
+
+                                            (
+                                                !(answerSheet[index] !== null
+
+                                                    && answerSheet[index] !== undefined
+
+                                                    && Object.values(answerSheet[index]).filter((elem: any) => elem === true).length > 0)
+
+                                                &&
+
+                                                <div
+                                                    className={styles.notSolvedQuestions}
+                                                    onClick={() => {
+                                                        setIsExiting(false);
+                                                        setQuestionNumber(index);
+                                                    }}
+                                                >
                                                     {index + 1}
                                                 </div>
 
-                                                <div className={styles.notSolvedQuestionsType}>
-                                                    {current.type}
-                                                </div>
+                                            )
 
-                                                <div className={styles.notSolvedQuestionsText}>
-                                                    풀지 않은 문제
+                                            :
+
+                                            (
+                                                !(answerSheet[index] !== null
+
+                                                    && answerSheet[index] !== undefined
+
+                                                    && answerSheet[index] !== "")
+
+                                                &&
+
+                                                <div
+                                                    className={styles.notSolvedQuestions}
+                                                    onClick={() => {
+                                                        setIsExiting(false);
+                                                        setQuestionNumber(index);
+                                                    }}
+                                                >
+                                                    {index + 1}
                                                 </div>
-                                            </div>
-                                    )
-                            ))
-                        }
-                    </div>
+                                            )
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    }
                 </div>
 
                 {
@@ -201,7 +225,7 @@ export default function ExitContainer({ questionList, solvedQuestions, checkedQu
                             체크된 문제가 {checkedQuestions?.length}개 있습니다.
                         </div>
 
-                        <div className={styles.checkedQuestionElementContainer}>
+                        <div className={styles.checkedQuestionElementsContainer}>
                             {checkedQuestions.map((current: any, index: number) => (
                                 <div
                                     className={styles.checkedQuestionElements}

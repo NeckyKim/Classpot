@@ -23,18 +23,15 @@
 .containerTop {
     font-size: 2rem;
     font-weight: 700;
-    line-height: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+    line-height: 30px;
+    padding: 30px;
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
 }
 
 .closeIcon {
-    height: 40px;
-    padding: 10px;
+    height: 30px;
+    padding: 5px;
     filter: invert(0.7);
     cursor: pointer;
 }
@@ -54,104 +51,64 @@
     max-height: 40vh;
     padding: 30px;
     border-top: 1px solid rgb(220, 220, 220);
-    overflow: auto;
 }
 
-.questionsStatusContainer::-webkit-scrollbar {
-    width: 15px;
-}
-
-.questionsStatusContainer::-webkit-scrollbar-thumb {
-    width: 15px;
-    background-color: rgb(220, 220, 220);
-}
-
-.questionStatusPass {
+.questionStatusHeaderSolved {
     height: 20px;
     line-height: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
     gap: 10px;
     align-items: center;
-}
-
-.questionStatusWarning {
-    height: 20px;
-    line-height: 20px;
-    margin-bottom: 20px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    gap: 10px;
-    align-items: center;
-}
-
-.solvedQuestions {
-    height: 50px;
-    line-height: 50px;
-    display: grid;
-    grid-template-columns: fit-content(100%) 60px 1fr;
-    align-items: center;
-    border-radius: 5px;
-    margin-top: 5px;
-    padding: 10px;
-    background-color: rgb(150, 250, 150);
-}
-
-.notSolvedQuestions {
-    height: 50px;
-    line-height: 50px;
-    display: grid;
-    grid-template-columns: fit-content(100%) 60px 1fr;
-    align-items: center;
-    border-radius: 5px;
-    margin-top: 5px;
-    padding: 10px;
-    background-color: rgb(250, 170, 170);
-}
-
-.solvedQuestionsNumber {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 5px;
-    margin-right: 10px;
-    background-color: rgb(130, 230, 130);
-}
-
-.notSolvedQuestionsNumber {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    border-radius: 5px;
-    margin-right: 10px;
-    background-color: rgb(230, 150, 150);
-}
-
-.solvedQuestionsType {
-    height: 30px;
-    line-height: 30px;
-}
-
-.notSolvedQuestionsType {
-    height: 30px;
-    line-height: 30px;
-}
-
-.solvedQuestionsText {
-    height: 30px;
-    line-height: 30px;
-    text-align: right;
     color: rgb(0, 150, 0);
 }
 
-.notSolvedQuestionsText {
-    height: 30px;
-    line-height: 30px;
-    text-align: right;
+.questionStatusHeaderNotSolved {
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    gap: 10px;
+    align-items: center;
+    color: rgb(250, 50, 50);
+}
+
+.questionStatusContainerSolved {
+    width: 440px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.questionStatusContainerNotSolved {
+    width: 440px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.solvedQuestions {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    color: rgb(0, 150, 0);
+    background-color: rgb(150, 250, 150);
+    text-align: center;
+}
+
+.notSolvedQuestions {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
     color: rgb(250, 0, 0);
+    background-color: rgb(250, 170, 170);
+    text-align: center;
 }
 
 .checkedQuestionContainer {
@@ -162,14 +119,15 @@
 .checkedQuestionHeader {
     height: 20px;
     line-height: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
     gap: 10px;
     align-items: center;
+    color: rgb(250, 150, 50);
 }
 
-.checkedQuestionElementContainer {
+.checkedQuestionElementsContainer {
     width: 440px;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
@@ -208,16 +166,22 @@
 
 
 
+@media (max-width: 1200px) {
+    .checkedQuestionContainer {
+        display: none;
+    }
+}
+
+
 @media (max-width: 600px) {
     .container {
-        width: 90vw;
+        width: min(90vw, 500px);
     }
 
     .containerTop {
         font-size: 1.2rem;
         line-height: 25px;
-        padding-left: min(5vw, 30px);
-        padding-right: min(5vw, 30px);
+        padding: min(5vw, 30px);
     }
 
     .containerGuide {
@@ -231,8 +195,46 @@
         padding: 5px;
     }
 
+    .questionStatusContainerSolved {
+        width: calc(90vw - 2 * min(5vw, 30px));
+        grid-template-columns: repeat(100, fit-content(100%));
+        gap: 0px;
+        overflow: auto;
+    }
+    
+    .questionStatusContainerNotSolved {
+        width: calc(90vw - 2 * min(5vw, 30px));
+        grid-template-columns: repeat(100, fit-content(100%));
+        gap: 0px;
+        overflow: auto;
+    }
+
+    .questionStatusContainerSolved::-webkit-scrollbar,
+    .questionStatusContainerNotSolved::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .questionStatusContainerSolved::-webkit-scrollbar-thumb,
+    .questionStatusContainerNotSolved::-webkit-scrollbar-thumb {
+        width: 5px;
+        background-color: rgb(220, 220, 220);
+    }
+
+    .solvedQuestions {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        margin-right: 5px;
+    }
+    
+    .notSolvedQuestions {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        margin-right: 5px;
+    }
+
     .questionsStatusContainer,
-    .checkedQuestionContainer,
     .containerBottom {
         padding: min(5vw, 30px);
     }

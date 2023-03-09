@@ -255,7 +255,7 @@ export default function EditQuestion({ setIsEditingQuestion, questionInfo }: {
 
                         body {
                             font-family:'Pretendard';
-                            font-weight: 600;
+                            font-weight: 500;
                         }
                     `
                 }}

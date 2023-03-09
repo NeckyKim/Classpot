@@ -97,12 +97,12 @@
 }
 
 .navigation {
-    width: 100px;
+    width: 80px;
     height: calc(100vh - 120px);
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-right: 1px solid rgb(220, 220, 220);
     overflow-x: hidden;
     overflow-y: scroll;
@@ -126,20 +126,6 @@
 
 .navigation::-webkit-scrollbar-track {
     background-color: transparent;
-}
-
-.navigationNumber {
-    display: grid;
-    grid-template-columns: fit-content(100%) 120px;
-}
-
-.navigationInfo {
-    height: 40px;
-    line-height: 40px;
-    margin-left: 20px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    gap: 5px;
 }
 
 .navigationInfoType,
@@ -194,7 +180,7 @@
 }
 
 .questionAnswerHeader {
-    width: calc(100vw - 100px);
+    width: calc(100vw - 80px);
     display: grid;
     grid-template-columns: fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%) fit-content(100%);
     padding-top: 10px;
@@ -204,7 +190,7 @@
     border-bottom: 1px solid rgb(220, 220, 220);
     position: fixed;
     top: 60px;
-    left: 100px;
+    left: 80px;
     z-index: 2;
 }
 
@@ -232,8 +218,8 @@
 
 .questionTypeIcon {
     height: 40px;
-    padding-top: 7px;
-    padding-bottom: 9px;
+    padding-top: 7.5px;
+    padding-bottom: 8.5px;
     padding-left: 8px;
     padding-right: 8px;
     filter: invert(0.6);
@@ -313,23 +299,23 @@
 }
 
 .questionAnswerContentRL {
-    width: calc(100vw - 100px);
+    width: calc(100vw - 80px);
     height: calc(100vh - 180px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: fixed;
     top: 120px;
-    left: 100px;
+    left: 80px;
 }
 
 .questionAnswerContentUD {
-    width: calc(100vw - 100px);
+    width: calc(100vw - 80px);
     height: calc(100vh - 180px);
     display: grid;
     grid-template-rows: fit-content(100%) 1fr;
     position: fixed;
     top: 120px;
-    left: 100px;
+    left: 80px;
     overflow: auto;
 }
 
@@ -538,88 +524,6 @@
     border-radius: 5px;
     background-color: rgb(230, 230, 230);
     cursor: pointer;
-}
-
-.background {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 11;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-}
-
-.backgroundContainer {
-    width: 500px;
-    height: fit-content;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    padding: 30px;
-    text-align: justify;
-    word-break: keep-all;
-}
-
-.backgroundContainerHeader {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.backgroundContainerHeaderWithCloseButton {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    display: grid;
-    grid-template-columns: 1fr fit-content(100%); 
-}
-
-.closeIcon {
-    height: 30px;
-    padding: 5px;
-    filter: invert(0.6);
-    cursor: pointer;
-}
-
-.settingsElementsHeader {
-    font-weight: 300;
-    height: 40px;
-    line-height: 40px;
-    color: rgb(150, 150, 150);
-}
-
-.settingsElementsButtonClicked {
-    height: 50px;
-    line-height: 48px;
-    border-radius: 5px;
-    border: 1px solid rgb(0, 100, 250);
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    margin-bottom: 10px;
-}
-
-.settingsElementsButtonNotClicked {
-    height: 50px;
-    line-height: 48px;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220,220);
-    color: rgb(100, 100, 100);
-    background-color: rgb(255, 255, 255);
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.settingsIcon {
-    height: 48px;
-    padding: 12px;
-    filter: invert(0.5);
 }
 
 .sampleAlertContainer {

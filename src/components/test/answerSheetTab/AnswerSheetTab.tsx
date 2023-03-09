@@ -269,7 +269,7 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
 
                                                         body {
                                                             font-family:'Pretendard';
-                                                            font-weight: 600;
+                                                            font-weight: 500;
                                                             margin: 0px;
                                                             padding: 0px;
                                                         }

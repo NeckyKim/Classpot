@@ -1,0 +1,108 @@
+.background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 11;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 400px;
+    height: fit-content;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    text-align: justify;
+    word-break: keep-all;
+}
+
+.containerHeader {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 30px;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+}
+
+.closeIcon {
+    height: 30px;
+    padding: 5px;
+    filter: invert(0.7);
+    cursor: pointer;
+}
+
+.settingContainer {
+    padding: 30px;
+}
+
+.settingHeader {
+    font-weight: 300;
+    height: 30px;
+    line-height: 30px;
+    color: rgb(150, 150, 150);
+}
+
+.settingsElementsButtonClicked {
+    height: 50px;
+    line-height: 48px;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 100, 250);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    margin-top: 10px;
+}
+
+.settingsElementsButtonNotClicked {
+    height: 50px;
+    line-height: 48px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    color: rgb(100, 100, 100);
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.settingsIcon {
+    height: 48px;
+    padding: 12px;
+    filter: invert(0.5);
+}
+
+
+
+@media (max-width: 600px) {
+    .container {
+        width: min(90vw, 400px);
+    }
+
+    .containerHeader {
+        font-size: 1.2rem;
+        line-height: 25px;
+        padding: min(5vw, 30px);
+    }
+
+    .closeIcon {
+        height: 25px;
+        padding: 5px;
+    }
+
+    .settingHeader {
+        height: 20px;
+        line-height: 20px;
+    }
+
+    .settingContainer {
+        padding: min(5vw, 30px);
+    }
+}
