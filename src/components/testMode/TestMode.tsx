@@ -20,7 +20,8 @@ import ExitContainer from "./ExitContainer";
 
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
-import { Editor } from '@tinymce/tinymce-react';
+import { Editor } from "@tinymce/tinymce-react";
+import { Splitter, SplitterPanel } from "primereact/splitter";
 
 import styles from "./TestMode.module.css";
 
@@ -351,6 +352,20 @@ export default function TestMode() {
     }, [])
 
 
+    interface objType {
+        [index: string]: string
+    }
+
+
+    // 시험 유형
+    const typeDictionary: objType = {
+        "객관식": "multiple_choice",
+        "주관식": "short_answer",
+        "참/거짓": "true_false",
+        "서술형": "essay"
+    } 
+
+
 
     return (
         <div>
@@ -630,37 +645,8 @@ export default function TestMode() {
                                     </div>
 
                                     <div className={styles.questionType}>
-                                        {
-                                            questionList[questionNumber].type === "객관식"
+                                        <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/" + typeDictionary[questionList[questionNumber].type] + ".png"} />
 
-                                            &&
-
-                                            <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/multiple_choice.png"} />
-                                        }
-
-                                        {
-                                            questionList[questionNumber].type === "참/거짓"
-
-                                            &&
-
-                                            <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/true_false.png"} />
-                                        }
-
-                                        {
-                                            questionList[questionNumber].type === "주관식"
-
-                                            &&
-
-                                            <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/short_answer.png"} />
-                                        }
-
-                                        {
-                                            questionList[questionNumber].type === "서술형"
-
-                                            &&
-
-                                            <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/essay.png"} />
-                                        }
                                         {questionList[questionNumber].type}
                                     </div>
 
