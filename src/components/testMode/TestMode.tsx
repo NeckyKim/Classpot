@@ -352,13 +352,9 @@ export default function TestMode() {
     }, [])
 
 
-    interface objType {
-        [index: string]: string
-    }
-
 
     // 시험 유형
-    const typeDictionary: objType = {
+    const typeDictionary: {[index: string]: string} = {
         "객관식": "multiple_choice",
         "주관식": "short_answer",
         "참/거짓": "true_false",

@@ -6,32 +6,217 @@ import styles from "./PreTestMode.module.css";
 
 
 export default function PreTestMode({ testInfo, applicantName, isTestTime, setIsApplyingTest, noOfQuestions, typeOfQuestions, totalPoints }: { testInfo: any, applicantName: any, isTestTime: any, setIsApplyingTest: any, noOfQuestions: number, typeOfQuestions: any, totalPoints: number }) {
+    const { testCode } = useParams();
+
     const [tab, setTab] = useState<number>(1);
 
     const [check1, setCheck1] = useState<boolean>(false);
     const [check2, setCheck2] = useState<boolean>(false);
     const [check3, setCheck3] = useState<boolean>(false);
 
-    const { testCode } = useParams();
 
 
-    // 화면 너비
-    const [width, setWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
-    });
+    // 시험 유형
+    const typeDictionary: { [index: string]: string } = {
+        "객관식": "multiple_choice",
+        "주관식": "short_answer",
+        "참/거짓": "true_false",
+        "서술형": "essay"
+    }
 
 
 
     return (
-        (
-            (isTestTime[0] === "전" || isTestTime[0] === "중")
+        <div className={styles.background}>
+            <div className={styles.wrapper}>
+                <div className={styles.header}>
+                    <div className={styles.headerLeft}>
+                        {testInfo.testName}
+                    </div>
 
-                ?
+                    <div className={styles.headerRight}>
+                        <div className={styles.headerRight1}>
+                            출제자
+                        </div>
 
-                <div className={styles.preTestModeBackground}>
-                    <div className={styles.preTestModeWrapper}>
+                        <div className={styles.headerRight2}>
+                            {testInfo.userName}
+                        </div>
+                    </div>
+                </div>
+
+                {
+                    (isTestTime[0] === "전" || isTestTime[0] === "중")
+
+                        ?
+
+                        <div className={styles.container}>
+                            <div className={styles.containerLeft}>
+                                <div className={styles.tabButton} onClick={() => { setTab(1); }}>
+                                    <div className={tab === 1 ? styles.tabButtonNumberSelected : styles.tabButtonNumberNotSelected}>
+                                        1
+                                    </div>
+
+                                    <div className={tab === 1 ? styles.tabButtonTextSelected : styles.tabButtonTextNotSelected}>
+                                        시험 안내
+                                    </div>
+                                </div>
+
+                                <div className={styles.tabButton} onClick={() => { setTab(2); }}>
+                                    <div className={tab === 2 ? styles.tabButtonNumberSelected : styles.tabButtonNumberNotSelected}>
+                                        2
+                                    </div>
+
+                                    <div className={tab === 2 ? styles.tabButtonTextSelected : styles.tabButtonTextNotSelected}>
+                                        약관 동의
+                                    </div>
+                                </div>
+
+                                <div className={styles.tabButton} onClick={() => { setTab(3); }}>
+                                    <div className={tab === 3 ? styles.tabButtonNumberSelected : styles.tabButtonNumberNotSelected}>
+                                        3
+                                    </div>
+
+                                    <div className={tab === 3 ? styles.tabButtonTextSelected : styles.tabButtonTextNotSelected}>
+                                        준비 완료
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={styles.containerRight}>
+                                {
+                                    tab === 1
+
+                                    &&
+
+                                    <div className={styles.tabContainer}>
+                                        <div className={styles.intro}>
+                                            안내사항을 확인해주세요.
+                                        </div>
+
+                                        <ol className={styles.guideContainer}>
+                                            <li className={styles.guideElements}>
+                                                Chrome 브라우저 환경에서 시험을 진행해주세요. 다른 브라우저에서는 시험이 원할히 진행되지 않을 수 있습니다.
+                                            </li>
+
+                                            <li className={styles.guideElements}>
+                                                데스크탑에서 시험을 응시하길 권장합니다. 모바일 환경(스마트폰, 태블릿)에서도 응시는 가능하나  불편함이 있을 수 있습니다.
+                                            </li>
+
+                                            <li className={styles.guideElements}>
+                                                원할한 시험 진행을 위해 무선 네트워크(Wi-Fi, LTE, 5G)대신 유선 네트워크(LAN)에서 시험을 응시해주세요. 카페, 도서관 등 공용 네트워크를 사용하는 장소는 권장하지 않습니다.
+                                            </li>
+
+                                            <li className={styles.guideElements}>
+                                                개인의 응시 환경 또는 네트워크 연결 문제로 인한 문제로 인해 발생한 불이익은 책임지지 않으며, 응시자 본인에게 있습니다.
+                                            </li>
+                                        </ol>
+
+                                        <div className={styles.checkBoxContainer} onClick={() => {
+                                            setCheck1((prev) => !prev);
+                                        }}>
+                                            <div className={styles.checkBoxText}>
+                                                위의 안내사항을 모두 확인했습니다.
+                                            </div>
+
+                                            <div className={check1 ? styles.checkBoxChecked : styles.checkBoxNotChecked}>
+                                                {check1 && <img className={styles.checkBoxIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />}
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                {
+                                    tab === 2
+
+                                    &&
+
+                                    <div>
+                                    </div>
+                                }
+
+                                {
+                                    tab === 3
+
+                                    &&
+
+                                    <div>
+                                        <div className={styles.intro}>
+                                            시험 준비가 모두 완료되었습니다.
+                                        </div>
+
+                                        <div className={styles.testInfoContainer}>
+                                            <div className={styles.testInfoElements}>
+                                                <div className={styles.testInfoHeader}>
+                                                    시작 일시
+                                                </div>
+
+                                                <div className={styles.testInfoValue}>
+                                                    {new Date(testInfo.startDate).getFullYear()}년&nbsp;
+                                                    {new Date(testInfo.startDate).getMonth()}월&nbsp;
+                                                    {new Date(testInfo.startDate).getDay()}일&nbsp;
+                                                    {new Date(testInfo.startDate).getHours()}시&nbsp;
+                                                    {new Date(testInfo.startDate).getMinutes()}분
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.testInfoElements}>
+                                                <div className={styles.testInfoHeader}>
+                                                    진행 시간
+                                                </div>
+
+                                                <div className={styles.testInfoValue}>
+                                                    {testInfo.duration}분
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.testInfoElements}>
+                                                <div className={styles.testInfoHeader}>
+                                                    문항 수
+                                                </div>
+
+                                                <div className={styles.testInfoValue}>
+                                                    총 {noOfQuestions}문제
+                                                </div>
+                                            </div>
+
+                                            <div className={styles.testInfoElements}>
+                                                <div className={styles.testInfoHeader}>
+                                                    만점
+                                                </div>
+
+                                                <div className={styles.testInfoValue}>
+                                                    총 {totalPoints}점
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.testInfoElements}>
+                                            <div className={styles.testInfoHeader}>
+                                                문제 유형
+                                            </div>
+
+                                            <div className={styles.testInfoValue}>
+                                                {typeOfQuestions}
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        :
+
+                        <div className={styles.container}>
+                            시험이 종료되었습니다.<br />
+                            수고하셨습니다.
+                        </div>
+                }
+
+
+            </div>
+
+            {/* <div className={styles.preTestModeWrapper}>
                         <div className={styles.preTestModeHeader}>
                             <div className={styles.testName}>
                                 {testInfo.testName}
@@ -60,7 +245,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                             ?
 
                                             <div className={styles.tabCheck}>
-                                                <img className={styles.tabCheckIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />
+                                                V
                                             </div>
 
                                             :
@@ -86,7 +271,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                             ?
 
                                             <div className={styles.tabCheck}>
-                                                <img className={styles.tabCheckIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />
+                                                V
                                             </div>
 
                                             :
@@ -112,7 +297,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                             ?
 
                                             <div className={styles.tabCheck}>
-                                                <img className={styles.tabCheckIcon} src={process.env.PUBLIC_URL + "/icons/checked.png"} />
+                                                V
                                             </div>
 
                                             :
@@ -145,16 +330,6 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
 
                             <div className={styles.preTestModeContainerRight}>
-                                {
-                                    width < 1200
-
-                                    &&
-
-                                    <div className={styles.testName}>
-                                        {testInfo.testName}
-                                    </div>
-                                }
-
                                 {
                                     tab === 1
 
@@ -480,59 +655,19 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                                             <div className={styles.questionTypeContainer}>
                                                 {
-                                                    typeOfQuestions.includes("객관식")
+                                                    ["객관식", "참/거짓", "주관식", "서술형"].map((current: string) => (
+                                                        typeOfQuestions.includes(current)
 
-                                                    &&
+                                                        &&
 
-                                                    <div className={styles.questionTypeElements}>
-                                                        <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/multiple_choice.png"} />
+                                                        <div className={styles.questionTypeElements}>
+                                                            <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/" + typeDictionary[current] + ".png"} />
 
-                                                        <div className={styles.questionTypeText}>
-                                                            객관식
+                                                            <div className={styles.questionTypeText}>
+                                                                {current}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                }
-
-                                                {
-                                                    typeOfQuestions.includes("참/거짓")
-
-                                                    &&
-
-                                                    <div className={styles.questionTypeElements}>
-                                                        <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/true_false.png"} />
-
-                                                        <div className={styles.questionTypeText}>
-                                                            참/거짓
-                                                        </div>
-                                                    </div>
-                                                }
-
-                                                {
-                                                    typeOfQuestions.includes("주관식")
-
-                                                    &&
-
-                                                    <div className={styles.questionTypeElements}>
-                                                        <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/short_answer.png"} />
-
-                                                        <div className={styles.questionTypeText}>
-                                                            주관식
-                                                        </div>
-                                                    </div>
-                                                }
-
-                                                {
-                                                    typeOfQuestions.includes("서술형")
-
-                                                    &&
-
-                                                    <div className={styles.questionTypeElements}>
-                                                        <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/essay.png"} />
-
-                                                        <div className={styles.questionTypeText}>
-                                                            서술형
-                                                        </div>
-                                                    </div>
+                                                    ))
                                                 }
                                             </div>
                                         </div>
@@ -590,38 +725,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                 }
                             </div>
                         </div>
-                    </div>
-                </div>
-
-
-                :
-
-                <div className={styles.preTestModeBackground}>
-                    <div className={styles.preTestModeWrapper}>
-                        <div className={styles.preTestModeHeader}>
-                            <div className={styles.testName}>
-                                {testInfo.testName}
-                            </div>
-                        </div>
-
-                        <div className={styles.preTestModeContainerFinished}>
-                            {
-                                width < 1200
-
-                                &&
-
-                                <div className={styles.testName}>
-                                    {testInfo.testName}
-                                </div>
-                            }
-
-                            <div className={styles.tabHeader}>
-                                시험이 종료되었습니다.<br />
-                                수고하셨습니다.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        )
+                    </div> */}
+        </div>
     )
 }
