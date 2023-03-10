@@ -354,7 +354,7 @@ export default function TestMode() {
 
 
     // 시험 유형
-    const typeDictionary: {[index: string]: string} = {
+    const typeDictionary: { [index: string]: string } = {
         "객관식": "multiple_choice",
         "주관식": "short_answer",
         "참/거짓": "true_false",
@@ -398,15 +398,15 @@ export default function TestMode() {
 
                 &&
 
-                <div className={styles.background}>
+                <div className={styles.sampleAlertBackground}>
                     <div className={styles.sampleAlertContainer}>
                         <div className={styles.sampleAlertContainerHeader}>
                             시험 환경 점검
                         </div>
 
                         <ul className={styles.sampleAlertGuide}>
-                            <li>실제 시험 화면과 동일한 화면입니다.</li>
-                            <li>본 시험과는 전혀 연관이 없습니다.</li>
+                            <li>시험 환경 점검은 실제 시험 화면과 동일한 환경에서 진행됩니다.</li>
+                            <li>모든 내용은 본 시험과 전혀 연관이 없습니다.</li>
                             <li>시험 환경을 충분히 점검하신 후 본 시험을 시작해주세요.</li>
                         </ul>
 

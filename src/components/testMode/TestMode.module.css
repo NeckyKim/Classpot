@@ -522,6 +522,19 @@
     cursor: pointer;
 }
 
+.sampleAlertBackground {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
 .sampleAlertContainer {
     width: 500px;
     height: fit-content;
@@ -538,16 +551,14 @@
 .sampleAlertContainerHeader {
     font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .sampleAlertGuide {
     font-family: 500;
     line-height: 30px;
     border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    padding: 20px;
-    padding-left: 40px;
+    padding-left: 20px;
 }
 
 .confirmButton {
@@ -556,7 +567,7 @@
     line-height: 40px;
     text-align: center;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 10px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
     cursor: pointer;
