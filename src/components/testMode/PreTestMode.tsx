@@ -30,6 +30,15 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
 
 
+    // 화면 너비
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
+    });
+
+
+
     return (
         <div className={styles.background}>
             <img className={styles.backgroundPattern} src={process.env.PUBLIC_URL + "/graphics/pattern.png"} />
@@ -107,6 +116,16 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                                 <div className={styles.containerRight}>
                                     <div className={styles.tabContainerTop}>
+                                        {
+                                            width < 1200
+
+                                            &&
+
+                                            <div className={styles.tabContainerTestName}>
+                                                {testInfo.testName}
+                                            </div>
+                                        }
+
                                         <div className={styles.intro}>
                                             안녕하세요, <span className={styles.highlight}>{applicantName}</span>님.
                                         </div>
@@ -145,8 +164,8 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                     </div>
 
                                     <div className={styles.tabContainerBottom}>
-                                        <div 
-                                            className={check1 ? styles.nextButtonAbled : styles.nextButtonDisabled} 
+                                        <div
+                                            className={check1 ? styles.nextButtonAbled : styles.nextButtonDisabled}
                                             onClick={() => {
                                                 if (check1) { setTab(2); }
                                                 else { setAlert(true); }
@@ -154,9 +173,9 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                         >
                                             다음
 
-                                            <img 
+                                            <img
                                                 className={check1 ? styles.nextIconAbled : styles.nextIconDisabled}
-                                                src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} 
+                                                src={process.env.PUBLIC_URL + "/icons/arrow_right.png"}
                                             />
                                         </div>
                                     </div>
@@ -170,6 +189,16 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                                 <div className={styles.containerRight}>
                                     <div className={styles.tabContainerTop}>
+                                        {
+                                            width < 1200
+
+                                            &&
+
+                                            <div className={styles.tabContainerTestName}>
+                                                {testInfo.testName}
+                                            </div>
+                                        }
+
                                         <div className={styles.intro}>
                                             다음 <span className={styles.highlight}>약관 내용</span>을 확인해주세요.
                                         </div>
@@ -184,64 +213,66 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                             </div>
                                         </div>
 
-                                        <div className={styles.agreementContainer}>
-                                            <div className={styles.agreementHeader} onClick={() => { setAgreement1((prev) => !prev); }}>
-                                                문제 저작권 보호 및 유출 금지 동의
+                                        <div className={styles.agreementWrapper}>
+                                            <div className={styles.agreementContainer}>
+                                                <div className={styles.agreementHeader} onClick={() => { setAgreement1((prev) => !prev); }}>
+                                                    문제 저작권 보호 및 유출 금지 동의
 
-                                                <img className={agreement1 ? styles.agreementIconOpened : styles.agreementIconClosed} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} />
+                                                    <img className={agreement1 ? styles.agreementIconOpened : styles.agreementIconClosed} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} />
+                                                </div>
+
+                                                <div className={agreement1 ? styles.agreementTextShow : styles.agreementTextHide}>
+                                                    본 시험 문제는 저작권의 보호를 받으며, 지문 및 보기에 대한 정보를 무단 복제, 공중송신 배포, 활용하거나 2차 저작물을 작성하는 등의 행위를 금합니다. 문제에 대한 정보를 시험 출제자의 동의 없이 타인에게 공개하거나 전달하는 행위는 출제자의 재산을 침해하는 것으로, 이를 위반할 경우 관계법에 의거 민사 또는 형사상의 법적 조치도 취할 수 있음을 알려드립니다.
+                                                </div>
                                             </div>
 
-                                            <div className={agreement1 ? styles.agreementTextShow : styles.agreementTextHide}>
-                                                본 시험 문제는 저작권의 보호를 받으며, 지문 및 보기에 대한 정보를 무단 복제, 공중송신 배포, 활용하거나 2차 저작물을 작성하는 등의 행위를 금합니다. 문제에 대한 정보를 시험 출제자의 동의 없이 타인에게 공개하거나 전달하는 행위는 출제자의 재산을 침해하는 것으로, 이를 위반할 경우 관계법에 의거 민사 또는 형사상의 법적 조치도 취할 수 있음을 알려드립니다.
-                                            </div>
-                                        </div>
+                                            <div className={styles.agreementContainer}>
+                                                <div className={styles.agreementHeader} onClick={() => { setAgreement2((prev) => !prev); }}>
+                                                    부정행위 처리 동의
 
-                                        <div className={styles.agreementContainer}>
-                                            <div className={styles.agreementHeader} onClick={() => { setAgreement2((prev) => !prev); }}>
-                                                부정행위 처리 동의
+                                                    <img className={agreement2 ? styles.agreementIconOpened : styles.agreementIconClosed} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} />
+                                                </div>
 
-                                                <img className={agreement2 ? styles.agreementIconOpened : styles.agreementIconClosed} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} />
-                                            </div>
-
-                                            <div className={agreement2 ? styles.agreementTextShow : styles.agreementTextHide}>
-                                                부정행위는 시험 규정 외 불공정하거나 부정한 방법을 이용하여 점수를 취득하거나 취득하려고 하는 행위 등 공정한 시험 평가에 저촉되는 모든 행위를 말합니다. 시험 진행 중 부정행위가 확인되는 경우, 시험 즉시 종료, 재시험 불가, 시험 성적 무효 처리 등의 조치가 이루어질 수 있으며 이에 동의합니다.
-                                            </div>
-                                        </div>
-
-                                        <div className={styles.agreementContainer}>
-                                            <div className={styles.agreementHeader} onClick={() => { setAgreement3((prev) => !prev); }}>
-                                                개인정보 수집·이용 동의
-
-                                                <img className={agreement3 ? styles.agreementIconOpened : styles.agreementIconClosed} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} />
+                                                <div className={agreement2 ? styles.agreementTextShow : styles.agreementTextHide}>
+                                                    부정행위는 시험 규정 외 불공정하거나 부정한 방법을 이용하여 점수를 취득하거나 취득하려고 하는 행위 등 공정한 시험 평가에 저촉되는 모든 행위를 말합니다. 시험 진행 중 부정행위가 확인되는 경우, 시험 즉시 종료, 재시험 불가, 시험 성적 무효 처리 등의 조치가 이루어질 수 있으며 이에 동의합니다.
+                                                </div>
                                             </div>
 
-                                            <div className={agreement3 ? styles.agreementTextShow : styles.agreementTextHide}>
-                                                테스트콘이 제공하는 시험 기능 이용을 위하여 아래와 같이 개인 정보를 수집·이용 및 제공하고자 합니다. 아래 사항을 확인하신 후, 동의 여부를 체크해 주시길 바랍니다. 응시자는 개인 정보의 수집·이용 동의를 거부할 권리가 있습니다. 다만 제공받은 정보는 서비스 이용에 필수적인 항목으로 동의 거부 시에는 시험 참여가 제한됩니다.
+                                            <div className={styles.agreementContainer}>
+                                                <div className={styles.agreementHeader} onClick={() => { setAgreement3((prev) => !prev); }}>
+                                                    개인정보 수집·이용 동의
 
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>수집 목적</th>
-                                                            <th>수집 항목</th>
-                                                            <th style={{ borderRight: "none" }}>보유·이용 기간</th>
-                                                        </tr>
-                                                    </thead>
+                                                    <img className={agreement3 ? styles.agreementIconOpened : styles.agreementIconClosed} src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} />
+                                                </div>
 
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>시험 평가 및 진행</td>
-                                                            <td>시험 응시 결과(정답 유무, 점수, 채팅 목록 등)</td>
-                                                            <td style={{ borderRight: "none" }}>수집 목적 달성 시 까지</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <div className={agreement3 ? styles.agreementTextShow : styles.agreementTextHide}>
+                                                    테스트콘이 제공하는 시험 기능 이용을 위하여 아래와 같이 개인 정보를 수집·이용 및 제공하고자 합니다. 아래 사항을 확인하신 후, 동의 여부를 체크해 주시길 바랍니다. 응시자는 개인 정보의 수집·이용 동의를 거부할 권리가 있습니다. 다만 제공받은 정보는 서비스 이용에 필수적인 항목으로 동의 거부 시에는 시험 참여가 제한됩니다.
+
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>수집 목적</th>
+                                                                <th>수집 항목</th>
+                                                                <th style={{ borderRight: "none" }}>보유·이용 기간</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>시험 평가 및 진행</td>
+                                                                <td>시험 응시 결과(정답 유무, 점수, 채팅 목록 등)</td>
+                                                                <td style={{ borderRight: "none" }}>수집 목적 달성 시 까지</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className={styles.tabContainerBottom}>
-                                        <div 
-                                            className={check1 && check2 ? styles.nextButtonAbled : styles.nextButtonDisabled} 
+                                        <div
+                                            className={check1 && check2 ? styles.nextButtonAbled : styles.nextButtonDisabled}
                                             onClick={() => {
                                                 if (check1 && check2) { setTab(3); }
                                                 else { setAlert(true); }
@@ -249,9 +280,9 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                         >
                                             다음
 
-                                            <img 
+                                            <img
                                                 className={check1 && check2 ? styles.nextIconAbled : styles.nextIconDisabled}
-                                                src={process.env.PUBLIC_URL + "/icons/arrow_right.png"} 
+                                                src={process.env.PUBLIC_URL + "/icons/arrow_right.png"}
                                             />
                                         </div>
                                     </div>
@@ -265,6 +296,16 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                                 <div className={styles.containerRight}>
                                     <div className={styles.tabContainerTop}>
+                                        {
+                                            width < 1200
+
+                                            &&
+
+                                            <div className={styles.tabContainerTestName}>
+                                                {testInfo.testName}
+                                            </div>
+                                        }
+
                                         {
                                             isTestTime[0] === "전"
 
