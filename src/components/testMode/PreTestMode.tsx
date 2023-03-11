@@ -480,9 +480,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                 <div className={styles.alertBackground}>
                     <div className={styles.alertContainer}>
-                        <div className={styles.alertHeader}>
-                            동의를 해야 다음 단계로 넘어갈 수 있습니다.
-                        </div>
+                        동의를 해야 다음 단계로 넘어갈 수 있습니다.
 
                         <div className={styles.alertButton} onClick={() => { setAlert(false); }}>
                             확인

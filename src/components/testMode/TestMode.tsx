@@ -24,6 +24,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Splitter, SplitterPanel } from "primereact/splitter";
 
 import styles from "./TestMode.module.css";
+import SampleAlertContainer from "./SampleAlertContainer";
 
 
 
@@ -390,37 +391,6 @@ export default function TestMode() {
                         { right: "30px", bottom: "85px" }
                 }
             />
-
-
-
-            {
-                sampleAlert
-
-                &&
-
-                <div className={styles.sampleAlertBackground}>
-                    <div className={styles.sampleAlertContainer}>
-                        <div className={styles.sampleAlertContainerHeader}>
-                            시험 환경 점검
-                        </div>
-
-                        <ul className={styles.sampleAlertGuide}>
-                            <li>시험 환경 점검은 실제 시험 화면과 동일한 환경에서 진행됩니다.</li>
-                            <li>모든 내용은 본 시험과 전혀 연관이 없습니다.</li>
-                            <li>시험 환경을 충분히 점검하신 후 본 시험을 시작해주세요.</li>
-                        </ul>
-
-                        <div
-                            className={styles.confirmButton}
-                            onClick={() => {
-                                setSampleAlert(false);
-                            }}
-                        >
-                            확인
-                        </div>
-                    </div>
-                </div>
-            }
 
 
 
@@ -1290,6 +1260,8 @@ export default function TestMode() {
 
                     <Error message="유효하지 않은 응시자 입니다." />
             }
+
+            {sampleAlert && <SampleAlertContainer setSampleAlert={setSampleAlert} />}
         </div>
     )
 }
