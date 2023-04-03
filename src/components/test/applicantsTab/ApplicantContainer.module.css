@@ -1,132 +1,80 @@
 .applicantContainer {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
     display: grid;
-    grid-template-columns: fit-content(100%) 1fr fit-content(100%) fit-content(100%);
-    position: relative;
+    grid-template-columns: 70px 100px 1fr 80px 150px 70px 70px 70px;
+    align-items: center;
 }
 
-.applicantContainer:last-child {
-    margin-bottom: 0px;
-}
-
-.applicantName {
-    font-size: 1.3rem;
-    font-weight: 700;
+.applicantIndex {
+    font-size: 1.2rem;
+    font-weight: 300;
     height: 40px;
     line-height: 40px;
+    color: rgb(150, 150, 150);
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    text-align: center;
 }
 
 .applicantCode {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 700;
     height: 40px;
     line-height: 40px;
-    margin-left: 10px;
     color: rgb(150, 150, 150);
+    text-align: center;
 }
 
-.optionButtons {
-    display: grid;
-    grid-template-columns: repeat(3, fit-content(100%));
-    gap: 10px;
-}
-
-.optionCopyURLButton {
+.applicantName {
+    font-size: 1.2rem;
+    font-weight: 700;
     height: 40px;
-    line-height: 38px;
-    font-size: 0.9rem;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    padding-right: 10px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
+    line-height: 40px;
+    padding-left: 20px;
 }
 
-.optionEditButton {
+.totalPoints {
+    font-size: 1.2rem;
+    font-weight: 700;
     height: 40px;
-    line-height: 38px;
-    font-size: 0.9rem;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    padding-right: 10px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
+    line-height: 40px;
+    text-align: center;
+    color: rgb(0, 100, 250);
 }
 
-.optionDeleteButton {
-    height: 40px;
-    line-height: 38px;
+.submittedTimeValid {
     font-size: 0.9rem;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    padding-right: 10px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
+    font-weight: 300;
+    height: 30px;
+    line-height: 15px;
+    color: rgb(150, 150, 150);
+    text-align: center;
 }
 
-.moreOptionIcon {
+.submittedTimeInvalid {
+    color: rgb(250, 50, 50);
+    text-align: center;
+}
+
+.optionButton {
     width: 40px;
-    padding: 10px;
-    filter: invert(0.5);
-}
-
-.moreButton {
-    width: 40px;
-    padding: 10px;
-    filter: invert(0.5);
+    height: 40px;
     cursor: pointer;
-    margin-right: -15px;
+    justify-self: center;
 }
 
-.moreContainer {
-    width: fit-content;
-    height: fit-content;
-    padding: 5px;
-    padding-right: 10px;
+.optionButton:hover {
     border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    background-color: rgb(255, 255, 255);
-    position: absolute;
-    top: 65px;
-    right: -1px;
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    z-index: 2;
+    background-color: rgb(230, 230, 230);
 }
 
-.moreContainerCopyURLButton {
+.optionButton img {
+    width: 40px;
     height: 40px;
-    line-height: 38px;
-    border-radius: 5px 5px 0px 0px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
-}
-
-.moreContainerEditButton {
-    height: 40px;
-    line-height: 38px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
-}
-
-.moreContainerDeleteButton {
-    height: 40px;
-    line-height: 38px;
-    border-radius: 0px 0px 5px 5px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
+    padding: 8px;
+    filter: brightness(0) invert(0.5);
 }
 
 .editDeleteApplicantBackground {
@@ -217,39 +165,4 @@
     cursor: pointer;
     margin-top: 10px;
     margin-left: 10px;
-}
-
-
-
-@media (max-width: 1200px)  {
-    .applicantContainer {
-        padding-left: min(30px, 5vw);
-        padding-right: min(30px, 5vw);
-    }
-    
-    .applicantName {
-        font-size: 1.2rem;
-    }
-
-    .applicantCode {
-        font-size: 0.9rem;
-    }
-
-    .editDeleteApplicantContainer {
-        width: 80vw;
-    }
-
-    .editButton {
-        width: 60px;
-    }
-    
-    .deleteButton {
-        width: 60px;
-    }
-    
-    .cancelButton {
-        width: 60px;
-        margin-left: 5px;
-    }
-    
 }

@@ -1,31 +1,144 @@
-.questionTabContainer {
+.container {
     width: 100%;
     height: fit-content;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    display: grid;
+    grid-template-rows: fit-content(100%) fit-content(100%) 1fr;
 }
 
-.addQuestionButton {
-    width: 150px;
+.containerTop {
+    font-size: 2rem;
+    font-weight: 700;
+    height: 120px;
+    line-height: 120px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: rgb(245, 245, 245);
+}
+
+.containerCenter {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: rgb(245, 245, 245);
+}
+
+.tabClicked {
+    font-size: 1.2rem;
     height: 40px;
     line-height: 40px;
-    font-size: 1rem;
+    color: rgb(0, 100, 250);
+    border-bottom: 3px solid rgb(0, 100, 250);
     text-align: center;
-    border: none;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 220, 220);
-    margin-bottom: 40px;
+}
+
+.tabNotClicked {
+    font-size: 1.2rem;
+    height: 40px;
+    line-height: 40px;
+    color: rgb(150, 150 ,150);
+    text-align: center;
     cursor: pointer;
 }
 
+.containerBottom {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 
+.addQuestionButton {
+    font-size: 1rem;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    cursor: pointer;
+}
 
-@media (max-width: 1200px)  {
-    .questionTabContainer {
-        padding-left: min(40px, 5vw);
-        padding-right: min(40px, 5vw);
-    }
+.questionInfoMain {
+    display: grid;
+    grid-template-columns: 100px fit-content(100%);
+    gap: 10px;
+}
+
+.questionInfoMainHeader {
+    font-size: 1.2rem;
+    font-weight: 400;
+    height: 30px;
+    line-height: 30px;
+    color: rgb(150, 150 ,150);
+}
+
+.questionInfoMainValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    height: 30px;
+    line-height: 30px;
+}
+
+.questionInfoTable {
+    width: 100%;
+    border-spacing: 0px;
+    border-top: 1px solid rgb(220, 220, 220);
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.questionInfoTable thead tr th {
+    height: 40px;
+    padding: 5px;
+    border-right: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    background-color: rgb(240, 240, 240);
+    text-align: center;
+}
+
+.questionInfoTable tbody tr td {
+    height: 50px;
+    padding: 5px;
+    border-right: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    text-align: center;
+}
+
+.questionInfoTable td {
+    height: 50px;
+}
+
+.questionInfoTable1 {
+    width: 20%;
+}
+
+.questionInfoTable2 {
+    width: 15%;
+}
+
+.questionInfoTable3 {
+    width: 25%;
+}
+
+.questionInfoTableRight {
+    display: grid;
+    grid-template-columns: 60px 200px;
+    gap: 10px;
+    align-items: center;
+}
+
+.questionInfoTableRightValue {
+    width: 60px;
+    color: rgb(0, 100, 250);
+    text-align: right;
+}
+
+.questionInfoTableRightGraph {
+    width: 200px;
+    height: 20px;
+    background-color: rgb(0, 100, 250);
 }

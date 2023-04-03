@@ -81,17 +81,9 @@ export default function Test({ userCode, email }: { userCode: string; email: str
                     </div>
 
                     <div className={tab === 4 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(4); }} >
-                        <img className={tab === 4 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/answersheets.png"} />
+                        <img className={tab === 4 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/supervisor.png"} />
 
                         <div className={tab === 4 ? styles.tabTextSelected : styles.tabTextNotSelected}>
-                            답안지 확인
-                        </div>
-                    </div>
-
-                    <div className={tab === 5 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(5); }} >
-                        <img className={tab === 5 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/supervisor.png"} />
-
-                        <div className={tab === 5 ? styles.tabTextSelected : styles.tabTextNotSelected}>
                             시험 진행
                         </div>
                     </div>
@@ -101,8 +93,7 @@ export default function Test({ userCode, email }: { userCode: string; email: str
                     {tab === 1 && <SettingsTab testCode={testCode} />}
                     {tab === 2 && <QuestionTab userCode={userCode} testCode={testCode} />}
                     {tab === 3 && <ApplicantsTab testCode={testCode} />}
-                    {tab === 4 && <AnswerSheetTab testCode={testCode} />}
-                    {tab === 5 && <SuperviseTab testCode={testCode} />}
+                    {tab === 4 && <SuperviseTab testCode={testCode} />}
                 </div>
             </div>
 

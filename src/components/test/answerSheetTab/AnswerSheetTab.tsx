@@ -21,84 +21,13 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
     var questionList: any = GetQuestionList(testCode);
 
     const [applicantIndex, setApplicantIndex] = useState<number>(-1);
-
-
-
-    // 화면 너비
-    const [width, setWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        if (width > 1200) {
-            setApplicantListClicked(false);
-        }
-    }, [width])
-
-    useEffect(() => {
-        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
-    });
-
     const [applicantListClicked, setApplicantListClicked] = useState<boolean>(false);
 
-
-
-    useEffect(() => {
-        for (var i = 0; i < applicantList.length; i++) {
-            var reportCard: number[] = new Array(100).fill(null);
-
-            if (applicantList[i].answerSheet && applicantList[i].autoGrading) {
-                for (var j = 0; j < questionList.length; j++) {
-                    if (questionList[j].type === "객관식") {
-                        if (JSON.stringify(questionList[j].answer) === JSON.stringify(applicantList[i].answerSheet[j])) {
-                            reportCard[j] = questionList[j].points;
-                        }
-
-                        else {
-                            reportCard[j] = 0;
-                        }
-                    }
-
-                    else if (questionList[j].type === "주관식" || questionList[j].type === "참/거짓") {
-                        if (questionList[j].answer === applicantList[i].answerSheet[j]) {
-                            reportCard[j] = questionList[j].points;
-                        }
-
-                        else {
-                            reportCard[j] = 0;
-                        }
-                    }
-
-                    else if (questionList[j].type === "서술형") {
-                        if (reportCard[j] !== -1) {
-                            reportCard[j] = -1;
-                        }
-                    }
-                }
-            }
-
-
-            if (testCode && applicantList[i].applicantCode) {
-                try {
-                    updateDoc(doc(dbService, "tests", testCode, "applicants", applicantList[i].applicantCode), {
-                        reportCard: reportCard
-                    })
-                }
-
-                catch (error) {
-                    console.log(error);
-                }
-            }
-        }
-    })
 
 
 
     return (
         <div>
-            {
-                width <= 1200
-
-                &&
-
                 (
                     applicantListClicked
 
@@ -131,7 +60,6 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                             </div>
                         </div>
                 )
-            }
 
             {
                 applicantList.length > 0
@@ -151,23 +79,6 @@ export default function AnswerSheetTab({ testCode }: { testCode: string | undefi
                                     >
                                         {current.applicantName}
                                     </div>
-                                    // <div className={styles.applicantContainer}>
-                                    //     <div className={styles.applicantName}>
-                                    //         {current.applicantName}
-                                    //     </div>
-
-                                    //     <div className={styles.applicantContainer2}>
-                                    //         <div className={styles.scores}>
-                                    //             {current && current.reportCard.filter((elements: any) => elements === null).length !== 100 && current.reportCard.filter((element: any) => (element >= 0 && element !== null)).reduce(function add(sum: number, current: number) { return sum + current })}점
-                                    //         </div>
-
-                                    //         <div
-                                    //             className={styles.checkAnswerSheetButton}
-                                    //             onClick={() => { window.open("/test/" + testCode + "/answersheet/" + current.applicantCode) }}>
-                                    //             답안지 확인
-                                    //         </div>
-                                    //     </div>
-                                    // </div>
                                 ))
                             }
                         </div>

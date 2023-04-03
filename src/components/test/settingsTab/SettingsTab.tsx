@@ -189,7 +189,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                 &&
 
                 <div className={styles.containerBottom}>
-                    <div className={styles.optionsHeader}>
+                    <div className={styles.optionsHeader} style={{ marginTop: "0px" }}>
                         시험 이름
                     </div>
 
@@ -423,7 +423,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                 &&
 
                 <div className={styles.containerBottom}>
-                    <div className={styles.optionsHeader}>
+                    <div className={styles.optionsHeader} style={{ marginTop: "0px" }}>
                         시험 시작 전 정보 공개
                     </div>
 
@@ -511,11 +511,7 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                 &&
 
                 <div className={styles.containerBottom}>
-
-
-
-
-                    <div className={styles.optionsHeader}>
+                    <div className={styles.optionsHeader} style={{ marginTop: "0px" }}>
                         종료 후 성적 공개
                     </div>
 

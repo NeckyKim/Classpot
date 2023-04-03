@@ -3,32 +3,28 @@ import { useState, useEffect, useRef } from "react";
 import { dbService } from "../../../FirebaseModules";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
+import GetQuestionList from "../../hooks/GetQuestionList";
+import GetApplicantList from "../../hooks/GetApplicantList";
+
 import { toast } from "react-toastify";
 
 import styles from "./ApplicantContainer.module.css";
 
 
 
-export default function ApplicantContainer({ testCode, applicantObject }: { testCode: string | undefined, applicantObject: any }) {
+export default function ApplicantContainer({ index, testCode, applicantObject }: { index: number, testCode: string | undefined, applicantObject: any }) {
     const [applicantName, setApplicantName] = useState<string>(applicantObject.applicantName);
 
-    const [isMoreButtonClicked, setIsMoreButtonClicked] = useState<boolean>(false);
     const [isEditingApplicant, setIsEditingApplicant] = useState<boolean>(false);
     const [isDeletingApplicant, setIsDeletingApplicant] = useState<boolean>(false);
 
 
 
-    // 화면 너비
-    const [width, setWidth] = useState(window.innerWidth);
+    // 응시자 목록
+    const applicantList: any = GetApplicantList(testCode);
 
-    useEffect(() => {
-        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
-
-        if (width > 1200) {
-            setIsMoreButtonClicked(false);
-        }
-    });
-
+    // 질문 목록
+    var questionList: any = GetQuestionList(testCode);
 
 
     function copyURL() {
@@ -40,9 +36,58 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
         catch (error) {
             toast.error("응시자 URL 복사에 실패하였습니다.")
         }
-
-        setIsMoreButtonClicked(false);
     }
+
+
+    // 자동 채점 함수
+    useEffect(() => {
+        for (var i = 0; i < applicantList.length; i++) {
+            var reportCard: number[] = new Array(100).fill(null);
+
+            if (applicantList[i].answerSheet && applicantList[i].autoGrading) {
+                for (var j = 0; j < questionList.length; j++) {
+                    if (questionList[j].type === "객관식") {
+                        if (JSON.stringify(questionList[j].answer) === JSON.stringify(applicantList[i].answerSheet[j])) {
+                            reportCard[j] = questionList[j].points;
+                        }
+
+                        else {
+                            reportCard[j] = 0;
+                        }
+                    }
+
+                    else if (questionList[j].type === "주관식" || questionList[j].type === "참/거짓") {
+                        if (questionList[j].answer === applicantList[i].answerSheet[j]) {
+                            reportCard[j] = questionList[j].points;
+                        }
+
+                        else {
+                            reportCard[j] = 0;
+                        }
+                    }
+
+                    else if (questionList[j].type === "서술형") {
+                        if (reportCard[j] !== -1) {
+                            reportCard[j] = -1;
+                        }
+                    }
+                }
+            }
+
+
+            if (testCode && applicantList[i].applicantCode) {
+                try {
+                    updateDoc(doc(dbService, "tests", testCode, "applicants", applicantList[i].applicantCode), {
+                        reportCard: reportCard
+                    })
+                }
+
+                catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+    })
 
 
 
@@ -88,145 +133,62 @@ export default function ApplicantContainer({ testCode, applicantObject }: { test
 
 
 
-    function clickedOutside (ref: any) {
-        useEffect(() => {
-            function handleClickOutside(event: any) {
-                if (ref.current && !ref.current.contains(event.target)) {
-                    setIsMoreButtonClicked(false);
-                }
-            }
-
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }, [ref]);
-    }
-
-    const moreButtonRef = useRef(null);
-    clickedOutside(moreButtonRef);
-
-
-
     return (
         <div className={styles.applicantContainer}>
-            <div className={styles.applicantName}>
-                {applicantObject.applicantName}
+            <div className={styles.applicantIndex}>
+                {String(index).padStart(3, "0")}
             </div>
 
             <div className={styles.applicantCode}>
                 {applicantObject.shortApplicantCode}
             </div>
 
+            <div className={styles.applicantName}>
+                {applicantObject.applicantName}
+            </div>
+
+            <div className={styles.totalPoints}>
+                {applicantObject.reportCard.reduce((sum: number, current: number) => { return sum + current; }, 0)}점
+            </div>
+
+
             {
-                width > 1200
+                applicantObject.submittedTime !== 0
 
                     ?
 
-                    <div className={styles.optionButtons}>
-                        <div
-                            className={styles.optionCopyURLButton}
-                            onClick={copyURL}
-                        >
-                            <img
-                                className={styles.moreOptionIcon}
-                                src={process.env.PUBLIC_URL + "/icons/copy.png"}
-                            />
-                            URL 복사
-                        </div>
-
-                        <div
-                            className={styles.optionEditButton}
-                            onClick={() => {
-                                setIsEditingApplicant(true);
-                                setIsDeletingApplicant(false);
-                                setApplicantName(applicantObject.applicantName);
-                                setIsMoreButtonClicked(false);
-                            }}
-                        >
-                            <img
-                                className={styles.moreOptionIcon}
-                                src={process.env.PUBLIC_URL + "/icons/edit.png"}
-                            />
-                            수정
-                        </div>
-
-                        <div
-                            className={styles.optionDeleteButton}
-                            onClick={() => {
-                                setIsEditingApplicant(false);
-                                setIsDeletingApplicant(true);
-                                setIsMoreButtonClicked(false);
-                            }}
-                        >
-                            <img
-                                className={styles.moreOptionIcon}
-                                src={process.env.PUBLIC_URL + "/icons/delete.png"}
-                            />
-                            삭제
-                        </div>
+                    <div className={styles.submittedTimeValid}>
+                        {new Date(applicantObject.submittedTime).toLocaleDateString("ko-KR")}<br />
+                        {new Date(applicantObject.submittedTime).toLocaleTimeString()}
                     </div>
 
                     :
 
-                    <img
-                        className={styles.moreButton}
-                        src={process.env.PUBLIC_URL + "/icons/more.png"}
-                        onClick={() => {
-                            setIsMoreButtonClicked((prev) => !prev);
-                        }}
-                    />
+                    <div className={styles.submittedTimeInvalid}>
+                        미제출
+                    </div>
             }
 
-            {
-                isMoreButtonClicked
+            <div className={styles.optionButton}>
+                <img
+                    src={process.env.PUBLIC_URL + "/icons/copy.png"}
+                    onClick={copyURL}
+                />
+            </div>
 
-                &&
+            <div className={styles.optionButton}>
+                <img
+                    src={process.env.PUBLIC_URL + "/icons/edit.png"}
+                    onClick={() => { setIsEditingApplicant(true); }}
+                />
+            </div>
 
-                <div className={styles.moreContainer} ref={moreButtonRef}>
-                    <div
-                        className={styles.moreContainerCopyURLButton}
-                        onClick={copyURL}
-                    >
-                        <img
-                            className={styles.moreOptionIcon}
-                            src={process.env.PUBLIC_URL + "/icons/copy.png"}
-                        />
-                        URL 복사
-                    </div>
-
-                    <div
-                        className={styles.moreContainerEditButton}
-                        onClick={() => {
-                            setIsEditingApplicant(true);
-                            setIsDeletingApplicant(false);
-                            setApplicantName(applicantObject.applicantName);
-                            setIsMoreButtonClicked(false);
-                        }}
-                    >
-                        <img
-                            className={styles.moreOptionIcon}
-                            src={process.env.PUBLIC_URL + "/icons/edit.png"}
-                        />
-                        수정
-                    </div>
-
-                    <div
-                        className={styles.moreContainerDeleteButton}
-                        onClick={() => {
-                            setIsEditingApplicant(false);
-                            setIsDeletingApplicant(true);
-                            setIsMoreButtonClicked(false);
-                        }}
-                    >
-                        <img
-                            className={styles.moreOptionIcon}
-                            src={process.env.PUBLIC_URL + "/icons/delete.png"}
-                        />
-                        삭제
-                    </div>
-                </div>
-            }
+            <div className={styles.optionButton}>
+                <img
+                    src={process.env.PUBLIC_URL + "/icons/delete.png"}
+                    onClick={() => { setIsDeletingApplicant(true); }}
+                />
+            </div>
 
             {
                 isEditingApplicant

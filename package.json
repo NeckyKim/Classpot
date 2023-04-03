@@ -15,6 +15,7 @@
     "@types/react-slick": "^0.23.10",
     "@types/slick-carousel": "^1.6.37",
     "axios": "^1.2.1",
+    "file-saver": "^2.0.5",
     "firebase": "^9.16.0",
     "firebase-tools": "^11.21.0",
     "fullpage.js": "^2.9.6",
@@ -36,7 +37,8 @@
     "tinymce": "^6.3.2",
     "typescript": "^4.9.3",
     "uuid": "^9.0.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -57,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/uuid": "^9.0.0"
   }
 }

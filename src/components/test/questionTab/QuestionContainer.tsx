@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { dbService, storageService } from "../../../FirebaseModules";
 import { doc, deleteDoc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
+import AnswerSheetSumbitCheck from "../../hooks/AnswerSheetSumbitCheck";
 
 import { Editor } from '@tinymce/tinymce-react';
 
@@ -28,23 +29,7 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
 
 
 
-    function clickedOutside(ref: any) {
-        useEffect(() => {
-            function handleClickOutside(event: any) {
-                if (ref.current && !ref.current.contains(event.target)) {
-                    setIsMoreButtonClicked(false);
-                }
-            }
-
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }, [ref]);
-    }
-
-    const moreButtonRef = useRef(null);
-    clickedOutside(moreButtonRef);
+    const isAnswerSheetSumbitted: any = AnswerSheetSumbitCheck(testCode);
 
 
 
@@ -55,87 +40,33 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
                     {questionNumber + 1}
                 </div>
 
-                {
-                    width > 1200
+                <div className={styles.questionButton}>
+                    <img
+                        src={process.env.PUBLIC_URL + "/icons/edit.png"}
+                        onClick={() => {
+                            setIndex(questionNumber);
+                            setIsEditingQuestion(true);
+                        }}
+                    />
+                </div>
 
-                        ?
+                <div className={styles.questionButton}>
+                <img
+                    src={process.env.PUBLIC_URL + "/icons/delete.png"}
+                    onClick={async () => {
+                        if (isAnswerSheetSumbitted) {
+                            alert("응시자가 제출한 답안지가 있는 경우, 문제를 삭제할 수 없습니다.");
+                        }
 
-                        <div className={styles.optionButtons}>
-                            <div
-                                className={styles.optionEditButton}
-                                onClick={() => {
-                                    setIndex(questionNumber);
-                                    setIsEditingQuestion(true);
-                                }}>
-
-                                <img className={styles.buttonImage} src={process.env.PUBLIC_URL + "/icons/edit.png"} />
-
-                                수정
-                            </div>
-
-                            <div
-                                className={styles.optionDeleteButton}
-                                onClick={async () => {
-                                    if (testCode && confirm("해당 문제를 삭제하시겠습니까?")) {
-                                        await deleteDoc(doc(dbService, "tests", testCode, "questions", questionObject.questionCode));
-                                        await deleteObject(ref(storageService, userCode + "/" + testCode + "/" + questionObject.questionCode))
-                                    }
-                                }}>
-
-                                <img className={styles.buttonImage} src={process.env.PUBLIC_URL + "/icons/delete.png"} />
-
-                                삭제
-                            </div>
-                        </div>
-
-                        :
-
-                        <img
-                            className={styles.moreButton}
-                            src={process.env.PUBLIC_URL + "/icons/more.png"}
-                            onClick={() => {
-                                setIsMoreButtonClicked((prev) => !prev);
-                            }}
-                        />
-                }
-
-                {
-                    isMoreButtonClicked
-
-                    &&
-
-                    <div className={styles.moreContainer} ref={moreButtonRef}>
-                        <div
-                            className={styles.moreContainerEditButton}
-                            onClick={() => {
-                                setIsEditingQuestion(true);
-                                setIndex(questionNumber);
-                            }}
-                        >
-                            <img
-                                className={styles.moreOptionIcon}
-                                src={process.env.PUBLIC_URL + "/icons/edit.png"}
-                            />
-                            수정
-                        </div>
-
-                        <div
-                            className={styles.moreContainerDeleteButton}
-                            onClick={async () => {
-                                if (testCode && confirm("해당 문제를 삭제하시겠습니까?")) {
-                                    await deleteDoc(doc(dbService, "tests", testCode, "questions", questionObject.questionCode));
-                                    await deleteObject(ref(storageService, userCode + "/" + testCode + "/" + questionObject.questionCode))
-                                }
-                            }}
-                        >
-                            <img
-                                className={styles.moreOptionIcon}
-                                src={process.env.PUBLIC_URL + "/icons/delete.png"}
-                            />
-                            삭제
-                        </div>
-                    </div>
-                }
+                        else {
+                            if (testCode && confirm("해당 문제를 삭제하시겠습니까?")) {
+                                await deleteDoc(doc(dbService, "tests", testCode, "questions", questionObject.questionCode));
+                                await deleteObject(ref(storageService, userCode + "/" + testCode + "/" + questionObject.questionCode))
+                            }
+                        }
+                    }}
+                />
+                </div>
             </div>
 
 

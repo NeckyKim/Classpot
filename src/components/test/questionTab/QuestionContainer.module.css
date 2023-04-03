@@ -1,7 +1,7 @@
 .questionContainer {
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
-    margin-bottom: 40px;
+    margin-top: 50px;
     position: relative;
 }
 
@@ -147,94 +147,24 @@
     border-radius: 10px;
 }
 
-.questionImage {
-    display: block;
-    margin: 0px auto;
-    padding: 40px;
-}
-
-.optionButtons {
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    gap: 10px;
-}
-
-.optionEditButton {
-    height: 40px;
-    line-height: 38px;
-    font-size: 0.9rem;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    padding-right: 10px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
-}
-
-.optionDeleteButton {
-    height: 40px;
-    line-height: 38px;
-    font-size: 0.9rem;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    padding-right: 10px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
-}
-
-.moreOptionIcon {
+.questionButton {
     width: 40px;
-    padding: 10px;
-    filter: invert(0.5);
-}
-
-.moreButton {
-    width: 40px;
-    padding: 10px;
-    filter: invert(0.5);
+    height: 40px;
     cursor: pointer;
-    margin-right: -15px;
 }
 
-.moreContainer {
-    width: fit-content;
-    height: fit-content;
-    padding: 5px;
-    padding-right: 15px;
+.questionButton:hover {
     border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    background-color: rgb(255, 255, 255);
-    position: absolute;
-    top: 65px;
-    right: 40px;
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    z-index: 2;
+    background-color: rgb(230, 230, 230);
 }
 
-.moreContainerEditButton {
+.questionButton img {
+    width: 40px;
     height: 40px;
-    line-height: 38px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
+    padding: 8px;
+    filter: brightness(0) invert(0.5);
 }
 
-.moreContainerDeleteButton {
-    height: 40px;
-    line-height: 38px;
-    border-radius: 0px 0px 5px 5px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    cursor: pointer;
-}
-
-.buttonImage {
-    height: 40px;
-    padding: 10px;
-    filter: invert(0.5);
-}
 
 
 
