@@ -7,7 +7,6 @@ import { authService } from "../../FirebaseModules";
 import QuestionTab from "./questionTab/QuestionTab";
 import SettingsTab from "./settingsTab/SettingsTab";
 import ApplicantsTab from "./applicantsTab/ApplicantsTab";
-import AnswerSheetTab from "./answerSheetTab/AnswerSheetTab";
 import SuperviseTab from "./superviseTab/SuperviseTab";
 
 import Error from "../../Error";

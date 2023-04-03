@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { dbService } from "../../../FirebaseModules";
 import { doc, setDoc, collection, onSnapshot, query, orderBy } from "firebase/firestore";
@@ -12,9 +12,17 @@ import styles from "./SuperviseTab.module.css";
 
 
 
+interface chattingListProps {
+    message: string
+    createdBy: string
+    createdTime: number
+}
+
+
+
 export default function SuperviseTab({ testCode }: { testCode: string | undefined }) {
     const [tab, setTab] = useState<number>(1);
-    const [applicantNumber, setApplicantNumber] = useState<number>(-1);
+    const [applicantIndex, setApplicantIndex] = useState<number>(-1);
     const [applicantCode, setApplicantCode] = useState<string>("");
 
 
@@ -43,7 +51,7 @@ export default function SuperviseTab({ testCode }: { testCode: string | undefine
                 })));
             });
         }
-    }, [applicantNumber])
+    }, [applicantIndex])
 
     const [message, setMessage] = useState<string>("");
 
@@ -93,6 +101,22 @@ export default function SuperviseTab({ testCode }: { testCode: string | undefine
             }
         }
     }
+
+
+
+    // 채팅창 스크롤바 밑으로 보내기
+    const myRef = useRef<any>();
+
+    const scrollToBottom = () => {
+        if (myRef.current) {
+            myRef.current.scrollTop = myRef.current.scrollHeight;
+        }
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+        sessionStorage.setItem("chattings", String(chattingList[chattingList.length - 1]?.createdTime));
+    }, [chattingList]);
 
 
 
@@ -186,56 +210,98 @@ export default function SuperviseTab({ testCode }: { testCode: string | undefine
 
                 &&
 
-                <div className={styles.containerBottom}>
-                    <div className={styles.chattingContainer}>
+                <div className={styles.chattingContainer}>
+                    <div className={styles.chattingContainerLeft}>
                         {
                             applicantList.map((current: any, index: number) => (
-                                <div onClick={() => {
-                                    setApplicantNumber(index);
-                                    setApplicantCode(current.applicantCode);
-                                }}>
+                                <div className={applicantIndex === index ? styles.applicantContainerSelected : styles.applicantContainerNotSelected}
+                                    onClick={() => {
+                                        setApplicantIndex(index);
+                                        setApplicantCode(current.applicantCode);
+                                    }}
+                                >
                                     {current.applicantName}
                                 </div>
                             ))
                         }
-                        <br /><br />
+                    </div>
 
-                        {applicantNumber}
-
+                    <div className={styles.chattingContainerRight}>
                         {
-                            chattingList.length > 0
+                            applicantIndex !== -1
 
                                 ?
 
-                                <div>
+                                <div className={styles.chattingContainerSelected}>
+                                    <div>
                                     {
-                                        chattingList.map((current: any) => (
-                                            <div>
-                                                {current.message}
+                                        chattingList.length > 0
+
+                                            ?
+
+                                            <div className={styles.chattingContainerSelectedTop} ref={myRef}>
+                                                {
+                                                    chattingList.map((current: chattingListProps) => (
+                                                        current.createdBy === "supervisor"
+
+                                                            ?
+
+                                                            <div className={styles.chattingElementsSupervisor}>
+                                                                <div className={styles.chattingHeaderSupervisor}>
+                                                                    감독관
+                                                                </div>
+
+                                                                <div className={styles.chattingMessageSupervisor}>
+                                                                    {current.message}
+                                                                </div>
+                                                            </div>
+
+                                                            :
+
+                                                            <div className={styles.chattingElementsApplicant}>
+                                                                <div className={styles.chattingHeaderApplicant}>
+                                                                    {applicantList[applicantIndex].applicantName}
+                                                                </div>
+
+                                                                <div className={styles.chattingMessageApplicant}>
+                                                                    {current.message}
+                                                                </div>
+                                                            </div>
+                                                    ))
+                                                }
                                             </div>
-                                        ))
+
+                                            :
+
+                                            <div className={styles.chattingContainerEmpty}>
+                                                해당 응시자와 진행한 채팅이 없습니다.
+                                            </div>
                                     }
+                                    </div>
+
+                                    <form className={styles.chattingContainerSelectedBottom} onSubmit={sendChatting}>
+                                        <input
+                                            value={message}
+                                            onChange={(event: any) => { setMessage(event.target.value); }}
+                                            className={styles.messageInputBox}
+                                            required
+                                        />
+
+                                        <input
+                                            type="submit"
+                                            value="전송"
+                                            disabled={!message}
+                                            className={styles.sendButton}
+                                        />
+                                    </form>
                                 </div>
 
                                 :
 
-                                "해당 응시자와 진행한 채팅이 없습니다."
+                                <div className={styles.chattingContainerNotSelected}>
+                                    응시자를 선택하세요.
+                                </div>
                         }
-
-                        <form onSubmit={sendChatting}>
-                            <input
-                                value={message}
-                                onChange={(event: any) => { setMessage(event.target.value); }}
-                                className={styles.notificationInputBox}
-                                required
-                            /><br />
-
-                            <input
-                                type="submit"
-                                value="전송"
-                                className={styles.confirmButton}
-                            />
-                        </form>
                     </div>
                 </div>
             }

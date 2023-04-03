@@ -1,8 +1,8 @@
 .container {
     width: 100%;
-    height: fit-content;
+    height: calc(100vh - 70px);
     display: grid;
-    grid-template-rows: fit-content(100%) fit-content(100%) 1fr;
+    grid-template-rows: 120px 40px 1fr;
 }
 
 .containerTop {
@@ -16,6 +16,8 @@
 }
 
 .containerCenter {
+    height: 40px;
+    line-height: 40px;
     display: grid;
     grid-template-columns: repeat(4, 150px);
     border-bottom: 1px solid rgb(220, 220, 220);
@@ -43,10 +45,20 @@
 }
 
 .containerBottom {
+    height: calc(100vh - 230px);
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 50px;
     padding-bottom: 50px;
+    overflow: auto;
+}
+
+.containerBottom::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.containerBottom::-webkit-scrollbar-thumb {
+    background-color: rgb(220, 220, 220);
 }
 
 .applicantContainerTop {
@@ -122,53 +134,72 @@
 }
 
 .answerSheetContainer {
-    font-size: 1.2rem;
-    font-weight: 700;
+    height: calc(100vh - 230px);
     display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 20px;
+    grid-template-columns: 450px 1fr;
     text-align: center;
 }
 
-.applicantListClicked {
-    line-height: 40px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
+.answerSheetContainerLeft {
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 50px;
+    overflow: auto;
 }
 
-.applicantListNotClicked {
-    line-height: 40px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.answerSheetContainerRight {
+    border-left: 1px solid rgb(220, 220, 220);
+}
+
+.answerSheetContainerLeft::-webkit-scrollbar,
+.answerSheetContainerRight::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.answerSheetContainerLeft::-webkit-scrollbar-thumb,
+.answerSheetContainerRight::-webkit-scrollbar-thumb {
+    background-color: rgb(220, 220, 220);
+}
+
+.applicantContainerSelected {
+    font-size: 1.2rem;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-}
-
-.answerSheetApplicantInfo {
-    border-top: 1px solid rgb(220, 220, 220);
-    margin-top: 10px;
-    padding-top: 10px;
     display: grid;
-    grid-template-columns: repeat(3, fit-content(100%));
-    gap: 10px;
-    justify-content: center;
-    align-items: end;
+    grid-template-columns: 1fr fit-content(100%);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    text-align: left;
 }
 
-.answerSheetApplicantInfo1 {
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 40px;
+.applicantContainerNotSelected {
+    font-size: 1.2rem;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    cursor: pointer;
+    text-align: left;
 }
 
-.answerSheetApplicantInfo2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 36px;
+.applicantContainerNotSelected:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+
+.answerSheetContainerRight {
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 100px;
+    overflow: auto;
 }
 
 .questionContainer {

@@ -33,9 +33,9 @@
     position: absolute;
     top: 0px;
     left: 300px;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255);
     border-bottom: 1px solid rgb(220, 220, 220);
-    z-index: 7;
+    z-index: 11;
 }
 
 .logoutButton {

@@ -2,7 +2,7 @@
     width: 100%;
     height: fit-content;
     display: grid;
-    grid-template-rows: fit-content(100%) fit-content(100%) 1fr;
+    grid-template-rows: 120px 40px 1fr;
 }
 
 .containerTop {
@@ -16,6 +16,8 @@
 }
 
 .containerCenter {
+    height: 40px;
+    line-height: 40px;
     display: grid;
     grid-template-columns: repeat(4, 150px);
     border-bottom: 1px solid rgb(220, 220, 220);
@@ -43,10 +45,12 @@
 }
 
 .containerBottom {
+    height: calc(100vh - 230px);
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 50px;
     padding-bottom: 50px;
+    overflow: auto;
 }
 
 .optionsHeader {
