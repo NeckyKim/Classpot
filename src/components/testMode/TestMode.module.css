@@ -11,10 +11,10 @@
 
 .testModeContainerTop {
     width: 100vw;
-    height: 60px;
+    height: 55px;
     display: grid;
     grid-template-columns: fit-content(100%) 1fr fit-content(100%);
-    padding: 10px;
+    align-items: center;
     padding-left: 30px;
     padding-right: 30px;
     border-bottom: 1px solid rgb(220, 220, 220);
@@ -25,19 +25,16 @@
 }
 
 .testconLogo {
-    height: 40px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    height: 30px;
     padding-left: 0px;
     padding-right: 10px;
     margin-right: 5px;
+    filter: brightness(0) invert(0.6);
 }
 
 .testModeCotainerTopInfo {
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .testName {
@@ -62,12 +59,12 @@
 }
 
 .timer {
-    width: fit-content;
-    height: 40px;
+    height: 35px;
+    line-height: 35px;
     border-radius: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    border: 2px solid rgb(250, 50, 50);
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(250, 200, 200);
     display: grid;
     grid-template-columns: 20px fit-content(100%) fit-content(100%);
     gap: 10px;
@@ -75,30 +72,29 @@
 
 .timerHeader {
     font-weight: 500;
-    height: 36px;
-    line-height: 36px;
+    height: 35px;
+    line-height: 35px;
     color: rgb(250, 50, 50);
 }
 
 .timerIcon {
-    height: 36px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    height: 35px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
 }
 
 .timerValue {
-    font-size: 1.2rem;
-    height: 36px;
-    line-height: 36px;
+    font-weight: 700;
+    height: 35px;
+    line-height: 35px;
     color: rgb(250, 50, 50);
-    text-align: right;
     font-feature-settings: "tnum";
     font-variant-numeric: tabular-nums;
 }
 
 .navigation {
     width: 80px;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 115px);
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 20px;
@@ -108,7 +104,7 @@
     overflow-y: scroll;
     background-color: rgb(255, 255, 255);
     position: fixed;
-    top: 60px;
+    top: 55px;
     left: 0;
     z-index: 1;
 }
@@ -177,15 +173,15 @@
 
 .questionAnswerHeader {
     width: calc(100vw - 80px);
+    height: 55px;
     display: grid;
     grid-template-columns: fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%) fit-content(100%);
-    padding-top: 10px;
-    padding-bottom: 10px;
+    align-items: center;
     padding-left: 30px;
     padding-right: 30px;
     border-bottom: 1px solid rgb(220, 220, 220);
     position: fixed;
-    top: 60px;
+    top: 55px;
     left: 80px;
     z-index: 2;
 }
@@ -193,47 +189,28 @@
 .questionNumber {
     font-size: 2rem;
     font-weight: 500;
-    height: 40px;
-    line-height: 40px;
     color: rgb(0, 100, 250);
     font-feature-settings: "tnum";
     font-variant-numeric: tabular-nums;
 }
 
 .questionType {
-    width: fit-content;
-    height: 40px;
-    line-height: 40px;
     font-size: 1.2rem;
     font-weight: 300;
     color: rgb(150, 150, 150);
-    margin-left: 20px;
-    display: grid;
-    grid-template-columns: 40px fit-content(100%);
-}
-
-.questionTypeIcon {
-    height: 40px;
-    padding-top: 7.5px;
-    padding-bottom: 8.5px;
-    padding-left: 8px;
-    padding-right: 8px;
-    filter: invert(0.6);
+    padding-left: 20px;
 }
 
 .questionPoints {
-    width: fit-content;
-    height: 40px;
-    line-height: 40px;
     font-size: 1.2rem;
     font-weight: 300;
     color: rgb(150, 150, 150);
-    margin-left: 20px;
+    padding-left: 10px;
 }
 
 .checkQuestionButtonNotChecked {
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
     border-radius: 5px;
     background-color: rgb(230, 230, 230);
     text-align: center;
@@ -246,8 +223,8 @@
 }
 
 .checkQuestionButtonChecked {
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
     border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(250, 150, 50);
@@ -261,21 +238,20 @@
 }
 
 .checkQuestionButtonIconNotChecked {
-    height: 40px;
+    height: 35px;
     padding: 7px;
     filter: invert(0.6);
 }
 
 .checkQuestionButtonIconChecked {
-    height: 40px;
+    height: 35px;
     padding: 7px;
 }
 
 .prevNextButtonOn {
-    font-size: 1rem;
     width: 80px;
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
     text-align: center;
     border: none;
     color: rgb(255, 255, 255);
@@ -284,10 +260,9 @@
 }
 
 .prevNextButtonOff {
-    font-size: 1rem;
     width: 80px;
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
     text-align: center;
     border: none;
     color: rgb(255, 255, 255);
@@ -296,27 +271,27 @@
 
 .questionAnswerContentRL {
     width: calc(100vw - 80px);
-    height: calc(100vh - 180px);
+    height: calc(100vh - 170px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: fixed;
-    top: 120px;
+    top: 110px;
     left: 80px;
 }
 
 .questionAnswerContentUD {
     width: calc(100vw - 80px);
-    height: calc(100vh - 180px);
+    height: calc(100vh - 170px);
     display: grid;
     grid-template-rows: fit-content(100%) 1fr;
     position: fixed;
-    top: 120px;
+    top: 110px;
     left: 80px;
     overflow: auto;
 }
 
 .questionContentRL {
-    height: calc(100vh - 180px);
+    height: calc(100vh - 170px);
     padding: 30px;
     padding-top: 10px;
     border-right: 1px solid rgb(220, 220, 220);
@@ -330,7 +305,7 @@
 }
 
 .answerContentRL {
-    height: calc(100vh - 180px);
+    height: calc(100vh - 170px);
     padding: 30px;
     overflow: auto;
 }
@@ -468,29 +443,21 @@
 .settingsButton {
     width: 40px;
     height: 40px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(230, 230, 230);
+    filter: brightness(0) invert(0.5);
     cursor: pointer;
 }
 
 .notificationButtonNormal {
     width: 40px;
     height: 40px;
-    font-size: 1rem;
-    border: none;
     border-radius: 5px;
-    background-color: rgb(230, 230, 230);
+    filter: brightness(0) invert(0.5);
     cursor: pointer;
 }
 
 .notificationButtonPulse {
     width: 40px;
     height: 40px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
     background-color: rgb(250, 50, 50);
 	box-shadow: 0 0 0 0 rgba(250, 50, 50, 1);
 	animation: pulse 3s infinite;

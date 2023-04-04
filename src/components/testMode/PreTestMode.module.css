@@ -1,7 +1,7 @@
 .background {
     width: 100vw;
     height: calc(100vh - 70px);
-    background: linear-gradient(120deg, rgb(60, 70, 90) 10%, rgb(20, 30, 50) 90%);
+    background: linear-gradient(120deg, rgb(40, 50, 70) 10%, rgb(0, 10, 30) 90%);
     display: grid;
     align-items: center;
     justify-items: center;
@@ -15,7 +15,7 @@
     left: 0px;
     z-index: 0;
     opacity: 0.15;
-    filter: invert();
+    filter: brightness(0) invert(0.8);
     object-fit: cover;
 }
 

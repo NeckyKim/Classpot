@@ -354,16 +354,6 @@ export default function TestMode() {
 
 
 
-    // 시험 유형
-    const typeDictionary: { [index: string]: string } = {
-        "객관식": "multiple_choice",
-        "주관식": "short_answer",
-        "참/거짓": "true_false",
-        "서술형": "essay"
-    }
-
-
-
     return (
         <div>
             <ToastContainer
@@ -443,14 +433,14 @@ export default function TestMode() {
                                 </div>
 
                                 <div className={styles.timer}>
-                                    <img className={styles.timerIcon} src={process.env.PUBLIC_URL + "/icons/clock.png"} />
+                                    <img className={styles.timerIcon} src={process.env.PUBLIC_URL + "/icons/timer.png"} />
 
                                     <div className={styles.timerHeader}>
                                         남은 시간
                                     </div>
 
                                     <div className={styles.timerValue}>
-                                        {isTestTime[2][0] !== 0 && <span>{isTestTime[2][0]}:</span>}
+                                        {isTestTime[2][0] !== 0 && <>{isTestTime[2][0]}:</>}
                                         {String(isTestTime[2][1]).padStart(2, "0")}
                                         :
                                         {String(isTestTime[2][2]).padStart(2, "0")}
@@ -607,8 +597,6 @@ export default function TestMode() {
                                     </div>
 
                                     <div className={styles.questionType}>
-                                        <img className={styles.questionTypeIcon} src={process.env.PUBLIC_URL + "/icons/" + typeDictionary[questionList[questionNumber].type] + ".png"} />
-
                                         {questionList[questionNumber].type}
                                     </div>
 
