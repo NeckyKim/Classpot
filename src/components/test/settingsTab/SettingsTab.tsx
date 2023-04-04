@@ -141,6 +141,27 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
     }
 
 
+    // 모바일 응시 허용 설정 변경 함수
+    async function changeAllowMobile(event: any) {
+        event.preventDefault();
+
+        if (testCode) {
+            try {
+                await updateDoc(doc(dbService, "tests", testCode), {
+                    allowMobile: !testInfo.allowMobile,
+                })
+
+                toast.success("모바일 환경 응시 설정이 변경되었습니다.");
+            }
+
+            catch (error) {
+                console.log(error);
+                toast.error("모바일 환경 응시 설정 변경에 실패했습니다.");
+            }
+        }
+    }
+
+
 
     // 시험 삭제 함수
     async function deleteTest(event: any) {
@@ -482,22 +503,22 @@ export default function SettingsTab({ testCode }: { testCode: string | undefined
                     </div>
 
                     <div className={styles.toggleContainer}>
-                        <div className={true ? styles.toggleButtonOn : styles.toggleButtonOff}>
-                            <div className={true ? styles.toggleRight : styles.toggleLeft} />
+                        <div className={testInfo.allowMobile ? styles.toggleButtonOn : styles.toggleButtonOff} onClick={changeAllowMobile}>
+                            <div className={testInfo.allowMobile ? styles.toggleRight : styles.toggleLeft} />
                         </div>
 
 
                         <div className={styles.description}>
                             {
-                                true
+                                testInfo.allowMobile
 
                                     ?
 
-                                    "응시자가 직접 종료하기 버튼을 눌러 시험을 종료한 후, 이후 재입장해서 계속 시험을 응시할 수 있습니다."
+                                    "응시자가 스마트폰과 태블릿으로 시험에 응시할 수 있습니다."
 
                                     :
 
-                                    "응시자가 직접 종료하기 버튼을 눌러 시험을 종료한 후, 이후 재입장해서 계속 시험을 응시할 수 없습니다."
+                                    "응시자가 스마트폰과 태블릿으로 시험에 응시할 수 없습니다. 화면의 너비가 최소 800px 이상인 기기에서만 시험을 응시할 수 있습니다."
                             }
                         </div>
                     </div>

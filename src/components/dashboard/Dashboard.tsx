@@ -83,7 +83,8 @@ export default function Dashboard({ userCode, email }: { userCode: string, email
                 createdTime: Date.now(),
                 shortTestCode: shortTestCode,
                 feedback: false,
-                showInfo: false
+                showInfo: false,
+                allowMobile: false
             })
 
             toast.success("시험 추가가 완료되었습니다.");

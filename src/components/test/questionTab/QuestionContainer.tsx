@@ -307,8 +307,14 @@ export default function QuestionContainer({ testCode, userCode, questionObject, 
                             정답
                         </div>
 
-                        <div className={styles.correctChoice}>
+                        <div className={styles.choiceElements} style={{marginTop: "10px"}}>
+                            <div className={questionObject.answer ? styles.choiceNumberCorrect : styles.choiceNumberIncorrect}>
+                                {questionObject.answer ? "○" : "X"}
+                            </div>
+
+                            <div className={questionObject.answer ? styles.choiceValueCorrect : styles.choiceValueIncorrect}>
                             {questionObject.answer ? "참" : "거짓"}
+                            </div>
                         </div>
                     </div>
                 }

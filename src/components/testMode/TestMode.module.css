@@ -5,20 +5,21 @@
     margin: 0px auto;
     margin-top: -70px;
     position: relative;
-    z-index: 10;
+    z-index: 11;
     background-color: rgb(255, 255, 255);
 }
 
 .testModeContainerTop {
     width: 100vw;
-    height: 55px;
+    height: 50px;
     display: grid;
     grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+    gap: 10px;
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
-    border-bottom: 1px solid rgb(220, 220, 220);
-    background-color: rgb(245, 245, 245);
+    color: rgb(255, 255, 255);
+    background-color: rgb(10, 20, 40);
     position: fixed;
     top: 0px;
     left: 0px;
@@ -28,7 +29,6 @@
     height: 30px;
     padding-left: 0px;
     padding-right: 10px;
-    margin-right: 5px;
     filter: brightness(0) invert(0.6);
 }
 
@@ -38,55 +38,50 @@
 }
 
 .testName {
-    font-size: 1.2rem;
-    height: 20px;
-    line-height: 20px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    height: 25px;
+    line-height: 25px;
     overflow: hidden;
 }
 
 .applicantName {
-    font-size: 1.2rem;
-    height: 20px;
-    line-height: 20px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    height: 25px;
+    line-height: 25px;
     margin-left: 15px;
     padding-left: 15px;
-    border-left: 1px solid rgb(220, 220, 220);
+    border-left: 1px solid rgb(100, 100, 100);
     overflow: hidden;
 }
 
 .timer {
     height: 35px;
-    line-height: 35px;
+    line-height: 31px;
     border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: rgb(250, 200, 200);
+    border-radius: 5px;
+    border: 2px solid rgb(250, 50, 50);
     display: grid;
     grid-template-columns: 20px fit-content(100%) fit-content(100%);
-    gap: 10px;
+    gap: 5px;
 }
 
 .timerHeader {
+    font-size: 0.9rem;
     font-weight: 500;
-    height: 35px;
-    line-height: 35px;
+    line-height: 31px;
     color: rgb(250, 50, 50);
 }
 
 .timerIcon {
-    height: 35px;
-    padding-top: 7.5px;
-    padding-bottom: 7.5px;
+    height: 31px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 .timerValue {
+    font-size: 1.1rem;
     font-weight: 700;
-    height: 35px;
-    line-height: 35px;
+    line-height: 31px;
     color: rgb(250, 50, 50);
     font-feature-settings: "tnum";
     font-variant-numeric: tabular-nums;
@@ -94,9 +89,9 @@
 
 .navigation {
     width: 80px;
-    height: calc(100vh - 115px);
-    padding-top: 10px;
-    padding-bottom: 10px;
+    height: calc(100vh - 105px);
+    padding-top: 15px;
+    padding-bottom: 15px;
     padding-left: 20px;
     padding-right: 20px;
     border-right: 1px solid rgb(220, 220, 220);
@@ -104,7 +99,7 @@
     overflow-y: scroll;
     background-color: rgb(255, 255, 255);
     position: fixed;
-    top: 55px;
+    top: 50px;
     left: 0;
     z-index: 1;
 }
@@ -127,7 +122,7 @@
     width: 40px;
     height: 40px;
     line-height: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border-radius: 5px;
     text-align: center;
     position: relative;
@@ -135,11 +130,11 @@
     background-color: rgb(0, 100, 250);
 }
 
-.navigationNotSelected {
+.navigationNotSelectedLightMode {
     width: 40px;
     height: 40px;
     line-height: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border-radius: 5px;
     text-align: center;
     position: relative;
@@ -147,27 +142,45 @@
     cursor: pointer;
 }
 
+.navigationNotSelectedLightMode:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+.navigationNotSelectedDarkMode {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    background-color: rgb(60, 70, 90);
+    cursor: pointer;
+}
+
+.navigationNotSelectedDarkMode:hover {
+    background-color: rgb(80, 90, 110);
+}
+
 .navigationSolved {
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(0, 100, 250);
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: rgb(50, 250, 50);
     position: absolute;
-    top: -6px;
-    right: -6px;
+    top: -4px;
+    right: -4px;
     z-index: 1;
 }
 
 .navigationChecked {
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(250, 150, 50);
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: rgb(250, 150, 50);
     position: absolute;
-    top: -6px;
-    right: -6px;
+    top: -4px;
+    right: -4px;
     z-index: 2;
 }
 
@@ -175,40 +188,84 @@
     width: calc(100vw - 80px);
     height: 55px;
     display: grid;
-    grid-template-columns: fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%) fit-content(100%);
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%) fit-content(100%);
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
     border-bottom: 1px solid rgb(220, 220, 220);
     position: fixed;
-    top: 55px;
+    top: 50px;
     left: 80px;
     z-index: 2;
 }
 
+.questionInfo {
+    height: 40px;
+    display: grid;
+    grid-template-columns: repeat(5, fit-content(100%));
+    gap: 5px;
+    align-items: center;
+}
+
 .questionNumber {
-    font-size: 2rem;
-    font-weight: 500;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: rgb(0, 100, 250);
     font-feature-settings: "tnum";
     font-variant-numeric: tabular-nums;
+    margin-right: 15px;
 }
 
 .questionType {
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: rgb(150, 150, 150);
-    padding-left: 20px;
+    color: rgb(120, 120, 120);
 }
 
 .questionPoints {
-    font-size: 1.2rem;
-    font-weight: 300;
-    color: rgb(150, 150, 150);
-    padding-left: 10px;
+    color: rgb(120, 120, 120);
 }
 
-.checkQuestionButtonNotChecked {
+.questionStatus {
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    gap: 5px;
+    margin-left: 20px;
+    align-items: center;
+}
+
+.questionSolvedMark {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: rgb(50, 250, 50);
+}
+
+.questionNotSolvedMark {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: rgb(220, 220, 220);
+}
+
+.questionCheckedMark {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: rgb(250, 150, 0);
+}
+
+.questionSolvedText {
+    color: rgb(0, 150, 0);
+}
+
+.questionNotSolvedText {
+    color: rgb(170, 170, 170);
+}
+
+.questionCheckedText {
+    color: rgb(250, 150, 0);
+}
+
+.checkButtonNotCheckedLightMode {
     height: 35px;
     line-height: 35px;
     border-radius: 5px;
@@ -222,7 +279,29 @@
     cursor: pointer;
 }
 
-.checkQuestionButtonChecked {
+.checkButtonNotCheckedLightMode:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+.checkButtonNotCheckedDarkMode {
+    height: 35px;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: rgb(60, 70, 90);
+    text-align: center;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    cursor: pointer;
+}
+
+.checkButtonNotCheckedDarkMode:hover {
+    background-color: rgb(80, 90, 110);
+}
+
+.checkButtonChecked {
     height: 35px;
     line-height: 35px;
     border-radius: 5px;
@@ -237,19 +316,24 @@
     cursor: pointer;
 }
 
-.checkQuestionButtonIconNotChecked {
-    height: 35px;
-    padding: 7px;
-    filter: invert(0.6);
+.checkButtonChecked:hover {
+    background-color: rgb(255, 170, 70);
 }
 
-.checkQuestionButtonIconChecked {
+.checkButtonIconNotChecked {
     height: 35px;
-    padding: 7px;
+    padding: 8px 7px 6px 7px;
+    filter: brightness(0) invert(0.5);
+}
+
+.checkButtonIconChecked {
+    height: 35px;
+    padding: 8px 7px 6px 7px;
+    filter: brightness(0) invert(1);
 }
 
 .prevNextButtonOn {
-    width: 80px;
+    width: 70px;
     height: 35px;
     line-height: 35px;
     text-align: center;
@@ -259,39 +343,53 @@
     cursor: pointer;
 }
 
-.prevNextButtonOff {
-    width: 80px;
+.prevNextButtonOn:hover {
+    background-color: rgb(30, 130, 255);
+}
+
+.prevNextButtonOffLightMode {
+    width: 70px;
     height: 35px;
     line-height: 35px;
     text-align: center;
     border: none;
-    color: rgb(255, 255, 255);
+    color: rgb(150, 150, 150);
     background-color: rgb(200, 200, 200);
+}
+
+.prevNextButtonOffDarkMode {
+    width: 70px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border: none;
+    color: rgb(100, 100, 100);
+    background-color: rgb(30, 40, 60);
 }
 
 .questionAnswerContentRL {
     width: calc(100vw - 80px);
-    height: calc(100vh - 170px);
+    height: calc(100vh - 160px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: fixed;
-    top: 110px;
+    top: 105px;
     left: 80px;
 }
 
 .questionAnswerContentUD {
     width: calc(100vw - 80px);
-    height: calc(100vh - 170px);
+    height: calc(100vh - 160px);
     display: grid;
     grid-template-rows: fit-content(100%) 1fr;
     position: fixed;
-    top: 110px;
+    top: 105px;
     left: 80px;
     overflow: auto;
 }
 
 .questionContentRL {
-    height: calc(100vh - 170px);
+    height: calc(100vh - 160px);
     padding: 30px;
     padding-top: 10px;
     border-right: 1px solid rgb(220, 220, 220);
@@ -305,7 +403,7 @@
 }
 
 .answerContentRL {
-    height: calc(100vh - 170px);
+    height: calc(100vh - 160px);
     padding: 30px;
     overflow: auto;
 }
@@ -345,13 +443,21 @@
     margin-bottom: 10px;
 }
 
+.choiceElements:hover > .choiceValueNotSelected {
+    color: rgb(120, 120, 120);
+}
+
+.choiceElements:hover > .choiceNumberNotSelected {
+    background-color: rgb(220, 220, 220);
+}
+
 .choiceNumberSelected {
     font-weight: 400;
     width: 30px;
     height: 30px;
     line-height: 30px;
     border-radius: 15px;
-    background-color: rgb(0, 100, 250);
+    background-color: rgb(20, 120, 255);
     color: rgb(255, 255, 255);
     text-align: center;
     cursor: pointer;
@@ -363,7 +469,7 @@
     height: 30px;
     line-height: 30px;
     border-radius: 15px;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(230, 230, 230);
     color: rgb(100, 100, 100);
     text-align: center;
     cursor: pointer;
@@ -373,7 +479,6 @@
     font-size: 1.2rem;
     height: fit-content;
     line-height: 30px;
-    border-radius: 10px;
     color: rgb(0, 100, 250);
     cursor: pointer;
 }
@@ -382,7 +487,6 @@
     font-size: 1.2rem;
     height: fit-content;
     line-height: 30px;
-    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -411,11 +515,11 @@
 
 .testModeContainerBottom {
     width: 100vw;
-    height: 60px;
+    height: 55px;
     display: grid;
     grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%);
     gap: 10px;
-    padding: 10px;
+    align-items: center;
     padding-left: 30px;
     padding-right: 30px;
     border-top: 1px solid rgb(220, 220, 220);
@@ -425,10 +529,51 @@
     left: 0px;
 }
 
-.testModeContainerBottomIcon {
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+.bottomButtonNormalLightMode {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    filter: invert(0.7);
+    cursor: pointer;
+}
+
+.bottomButtonNormalLightMode:hover {
+    filter: invert(0.6);
+}
+
+.bottomButtonNormalDarkMode {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    filter: invert(0.5);
+    cursor: pointer;
+}
+
+.bottomButtonNormalDarkMode:hover {
+    filter: invert(0.7);
+}
+
+.bottomButtonAlert {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    opacity: 1;
+	animation: pulse 1s infinite;
+    cursor: pointer;
+}
+
+@keyframes pulse {
+	0% {
+        opacity: 1;
+	}
+	
+	50% {
+        opacity: 0;
+	}
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .submittedTime {
@@ -440,53 +585,33 @@
     color: rgb(180, 180, 180);
 }
 
-.settingsButton {
-    width: 40px;
-    height: 40px;
-    filter: brightness(0) invert(0.5);
-    cursor: pointer;
-}
-
-.notificationButtonNormal {
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    filter: brightness(0) invert(0.5);
-    cursor: pointer;
-}
-
-.notificationButtonPulse {
-    width: 40px;
-    height: 40px;
-    background-color: rgb(250, 50, 50);
-	box-shadow: 0 0 0 0 rgba(250, 50, 50, 1);
-	animation: pulse 3s infinite;
-    cursor: pointer;
-}
-
-@keyframes pulse {
-	0% {
-		box-shadow: 0 0 0 0 rgba(250, 50, 50, 0.7);
-	}
-	
-	70% {
-		box-shadow: 0 0 0 10px rgba(250, 50, 50, 0);
-	}
-
-    100% {
-        box-shadow: 0 0 0 10px rgba(250, 50, 50, 0);
-    }
-}
-
-.submitButton,
-.exitButton {
+.submitExitButtonLightMode {
     width: 120px;
     height: 40px;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(220, 220, 220);
     cursor: pointer;
+}
+
+.submitExitButtonLightMode:hover {
+    background-color: rgb(210, 210, 210);
+}
+
+.submitExitButtonDarkMode {
+    width: 120px;
+    height: 40px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(60, 70, 90);
+    cursor: pointer;  
+}
+
+.submitExitButtonDarkMode:hover {
+    background-color: rgb(80, 90, 110);
 }
 
 .sampleAlertBackground {
@@ -540,6 +665,68 @@
     cursor: pointer;
 }
 
+.disallowMobileContainer {
+    width: 100vw;
+    height: 100vh;
+    padding: 5vw;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    z-index: 12;
+}
+
+.disallowMobileContainerheader {
+    width: 100vw;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-left: min(40px, 5vw);
+    padding-right: min(40px, 5vw);
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    align-items: center;
+    z-index: 13;
+}
+
+.disallowMobileContainerheaderLogo {
+    height: 50px;
+    padding: 2px;
+    margin-left: -8px;
+    cursor: pointer;
+}
+
+.disallowMobileContainerText1 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    word-break: keep-all;
+}
+
+.disallowMobileContainerText2 {
+    font-size: 1rem;
+    text-align: center;
+    word-break: keep-all;
+    margin-top: 20px;
+}
+
+.disallowMobileContainerWidth {
+    width: fit-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: rgb(150, 150, 150);
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    justify-self: center;
+    text-align: center;
+}
 
 
 @media (max-width: 1200px) {
@@ -556,16 +743,24 @@
 
     .questionAnswerHeader {
         width: 100vw;
-        padding: 30px;
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
-        padding-top: 10px;
-        padding-bottom: 10px;
         left: 0px;
     }
 
-    .checkQuestionButtonChecked,
-    .checkQuestionButtonNotChecked {
+    .questionCheckedMark {
+        display: none;
+    }
+
+    .questionCheckedText {
+        display: none;
+    }
+    
+    .checkButtonNotCheckedLightMode,
+    .checkButtonNotCheckedDarkMode, 
+    .checkButtonChecked,
+    .checkButtonIconNotChecked,
+    .checkButtonIconChecked {
         display: none;
     }
 
@@ -619,9 +814,9 @@
     }
 
     .submittedTime {
-        font-size: 0.9rem;
-        height: 20px;
-        line-height: 20px;
+        font-size: 0.85rem;
+        height: 30px;
+        line-height: 15px;
         margin-right: 5px;
     }
 }
@@ -629,6 +824,10 @@
 
 
 @media (max-width: 600px) {
+    .testModeContainerTop {
+        gap: 0px;
+    }
+
     .testModeContainerTop {
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
@@ -645,28 +844,25 @@
     }
 
     .testName {
-        font-size: 0.85rem;
-        height: 16px;
-        line-height: 16px;
-        margin-top: 4px;
-        margin-bottom: 0px;
+        font-size: 0.8rem;
+        height: 14px;
+        line-height: 14px;
     }
 
     .applicantName {
-        font-size: 0.85rem;
-        height: 16px;
-        line-height: 16px;
-        margin-top: 0px;
-        margin-bottom: 4px;
+        font-size: 0.8rem;
+        height: 14px;
+        line-height: 14px;
         margin-left: 0px;
         padding-left: 0px;
         border-left: none;
+        overflow: hidden;
     }
 
     .timer {
         padding-left: 10px;
         padding-right: 10px;
-        grid-template-columns: 20px fit-content(100%);
+        grid-template-columns: repeat(2, fit-content(100%));
     }
 
     .timerHeader {
@@ -675,11 +871,6 @@
 
     .timerValue {
         font-size: 1rem;
-    }
-
-    .questionAnswerHeader {
-        padding-top: 10px;
-        padding-bottom: 10px;
     }
 
     .questionNumber {
@@ -694,19 +885,22 @@
         font-size: 1rem;
     }
 
+    .questionStatus {
+        display: none;
+    }
+
     .prevNextButtonOn {
-        font-size: 0.8rem;
         width: 40px;
     }
 
-    .prevNextButtonOff {
-        font-size: 0.8rem;
+    .prevNextButtonOffLightMode,
+    .prevNextButtonOffDarkMode {
         width: 40px;
     }
 
     .prevNextButtonImage {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         padding: 10px;
         filter: invert();
     }
@@ -717,17 +911,18 @@
     }
 
     .testModeContainerBottom {
+        grid-template-columns: fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%);
         gap: 5px;
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
     }
 
     .submittedTime {
-        font-size: 0;
+        display: none;
     }
 
-    .submitButton,
-    .exitButton {
+    .submitExitButtonLightMode,
+    .submitExitButtonDarkMode {
         width: 70px;
         height: 40px;
         font-size: 0.9rem;
