@@ -160,6 +160,7 @@ details summary::-webkit-details-marker {
 
 .tox.tox-tinymce.tox-tinymce--disabled {
     border: 0px !important;
+    pointer-events: none !important;
 }
 
 .tox .tox-tbtn__select-label {
