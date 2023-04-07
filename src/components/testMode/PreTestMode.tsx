@@ -20,15 +20,6 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
     const [agreement3, setAgreement3] = useState<boolean>(false);
 
 
-    // 시험 유형
-    const typeDictionary: { [index: string]: string } = {
-        "객관식": "multiple_choice",
-        "주관식": "short_answer",
-        "참/거짓": "true_false",
-        "서술형": "essay"
-    }
-
-
 
     // 화면 너비
     const [width, setWidth] = useState(window.innerWidth);
@@ -37,7 +28,7 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
         window.addEventListener("resize", () => { setWidth(window.innerWidth); });
     });
 
-
+    
 
     return (
         <div className={styles.background}>
@@ -342,11 +333,11 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                                 </div>
 
                                                 <div className={styles.testInfoValue}>
-                                                    {new Date(testInfo.startDate).getFullYear()}년&nbsp;
-                                                    {new Date(testInfo.startDate).getMonth()}월&nbsp;
-                                                    {new Date(testInfo.startDate).getDay()}일&nbsp;
-                                                    {new Date(testInfo.startDate).getHours()}시&nbsp;
-                                                    {new Date(testInfo.startDate).getMinutes()}분
+                                                    {new Date(testInfo?.startDate).getFullYear()}년&nbsp;
+                                                    {new Date(testInfo?.startDate).getMonth() + 1}월&nbsp;
+                                                    {new Date(testInfo?.startDate).getDate()}일&nbsp;
+                                                    {new Date(testInfo?.startDate).getHours()}시&nbsp;
+                                                    {new Date(testInfo?.startDate).getMinutes()}분
                                                 </div>
                                             </div>
 

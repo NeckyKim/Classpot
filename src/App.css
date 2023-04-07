@@ -160,6 +160,7 @@ details summary::-webkit-details-marker {
 
 .tox.tox-tinymce.tox-tinymce--disabled {
     border: 0px !important;
+    pointer-events: none !important;
 }
 
 .tox .tox-tbtn__select-label {
@@ -177,4 +178,28 @@ details summary::-webkit-details-marker {
 
 .tox .tox-collection__item-label {
     font-family: "Pretendard" !important;;
+}
+
+
+
+/* Prime React Splitter */
+
+.p-splitter-gutter {
+    background: linear-gradient(90deg, transparent 43%, rgba(150, 150, 150, 0.3) 44%, rgba(150, 150, 150, 0.3) 56%, transparent 57%) !important;
+}
+
+.p-splitter-gutter-handle {
+    height: 100px !important;
+    border-radius: 10px;
+    background-color: rgba(150, 150, 150, 0.3) !important;
+}
+
+@media (max-width: 1200px) {
+    .p-splitter-gutter {
+        height: 0px !important;
+    }
+    
+    .p-splitter-gutter-handle {
+        height: 0px !important;
+    }
 }

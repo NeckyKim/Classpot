@@ -1,7 +1,7 @@
 .background {
     width: 100vw;
     height: calc(100vh - 70px);
-    background-color: rgb(40, 50, 70);
+    background-color: rgb(20, 30, 50);
     display: grid;
     align-items: center;
     justify-items: center;

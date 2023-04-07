@@ -18,13 +18,19 @@ import SettingContainer from "./SettingContainer";
 import ChattingContainer from "./ChattingContainer";
 import NotificationContainer from "./NotificationContainer";
 import ExitContainer from "./ExitContainer";
+import SampleAlertContainer from "./SampleAlertContainer";
 
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
 import { Editor } from "@tinymce/tinymce-react";
 
+import { Splitter, SplitterPanel } from 'primereact/splitter';
+
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeicons/primeicons.css';
+
 import styles from "./TestMode.module.css";
-import SampleAlertContainer from "./SampleAlertContainer";
 
 
 
@@ -33,6 +39,23 @@ export default function TestMode() {
     const { applicantCode } = useParams();
 
     var navigate = useNavigate();
+
+
+
+    // 화면 너비
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
+    });
+
+    useEffect(() => {
+        if (width < 1200) {
+            setSplit(false);
+        }
+    }, [width])
+
+
 
     // 시험 정보
     var testInfo: any = GetTestInfo(testCode);
@@ -67,7 +90,6 @@ export default function TestMode() {
 
     // 화면 구성
     const [split, setSplit] = useState<boolean>(true);
-
 
 
     const [tempDate, setTempDate] = useState<number>(Date.now() + 30000);
@@ -126,21 +148,6 @@ export default function TestMode() {
 
     // 시험 진행 상황
     var isTestTime = TimeCalculator(testInfo.startDate, testInfo.duration);
-
-
-
-    // 화면 너비
-    const [width, setWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
-    });
-
-    useEffect(() => {
-        if (width < 1200) {
-            setSplit(false);
-        }
-    }, [width])
 
 
 
@@ -239,6 +246,13 @@ export default function TestMode() {
 
 
 
+    const Fade = cssTransition({
+        enter: "fadeIn",
+        exit: "fadeOut"
+    });
+
+
+
     // 객관식 선택지 컴포넌트
     function Choices({ choicesNumber }: { choicesNumber: number }) {
         return (
@@ -282,13 +296,6 @@ export default function TestMode() {
             </div>
         )
     }
-
-
-
-    const Fade = cssTransition({
-        enter: "fadeIn",
-        exit: "fadeOut"
-    });
 
 
 
@@ -434,7 +441,6 @@ export default function TestMode() {
                                         {
                                             color: "rgb(255, 255, 255)",
                                             backgroundColor: darkBackgroundColor,
-                                            borderRight: darkBorderColor
                                         } : {}
                                 }
                             >
@@ -534,7 +540,6 @@ export default function TestMode() {
                                             {
                                                 color: "rgb(255, 255, 255)",
                                                 backgroundColor: darkBackgroundColor,
-                                                borderBottom: darkBorderColor
                                             } : {}
                                     }
                                 >
@@ -552,36 +557,36 @@ export default function TestMode() {
                                         </div>
 
                                         {
-                                                questionList[questionNumber].type === "객관식"
+                                            questionList[questionNumber].type === "객관식"
 
                                                 ?
 
                                                 (
                                                     (answerSheet[questionNumber] !== null
 
-                                                && answerSheet[questionNumber] !== undefined
+                                                        && answerSheet[questionNumber] !== undefined
 
-                                                && Object.values(answerSheet[questionNumber]).filter((elem: any) => elem === true).length > 0)
+                                                        && Object.values(answerSheet[questionNumber]).filter((elem: any) => elem === true).length > 0)
 
-                                                ?
+                                                        ?
 
-                                                    <div className={styles.questionStatus}>
-                                                        <div className={styles.questionSolvedMark} />
+                                                        <div className={styles.questionStatus}>
+                                                            <div className={styles.questionSolvedMark} />
 
-                                                        <div className={styles.questionSolvedText}>
-                                                            푼 문제
+                                                            <div className={styles.questionSolvedText}>
+                                                                푼 문제
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    :
+                                                        :
 
-                                                    <div className={styles.questionStatus}>
-                                                        <div className={styles.questionNotSolvedMark} />
+                                                        <div className={styles.questionStatus}>
+                                                            <div className={styles.questionNotSolvedMark} />
 
-                                                        <div className={styles.questionNotSolvedText}>
-                                                            풀지 않은 문제
+                                                            <div className={styles.questionNotSolvedText}>
+                                                                풀지 않은 문제
+                                                            </div>
                                                         </div>
-                                                    </div>
 
                                                 )
 
@@ -591,28 +596,28 @@ export default function TestMode() {
                                                     (answerSheet[questionNumber] !== null
 
                                                         && answerSheet[questionNumber] !== undefined
-        
+
                                                         && answerSheet[questionNumber] !== "")
 
-                                                    ?
+                                                        ?
 
-                                                    <div className={styles.questionStatus}>
-                                                        <div className={styles.questionSolvedMark} />
+                                                        <div className={styles.questionStatus}>
+                                                            <div className={styles.questionSolvedMark} />
 
-                                                        <div className={styles.questionSolvedText}>
-                                                            푼 문제
+                                                            <div className={styles.questionSolvedText}>
+                                                                푼 문제
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    :
+                                                        :
 
-                                                    <div className={styles.questionStatus}>
-                                                        <div className={styles.questionNotSolvedMark} />
+                                                        <div className={styles.questionStatus}>
+                                                            <div className={styles.questionNotSolvedMark} />
 
-                                                        <div className={styles.questionNotSolvedText}>
-                                                            풀지 않은 문제
+                                                            <div className={styles.questionNotSolvedText}>
+                                                                풀지 않은 문제
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                 )
                                         }
 
@@ -627,7 +632,7 @@ export default function TestMode() {
                                                 <div className={styles.questionCheckedText}>
                                                     체크한 문제
                                                 </div>
-                                            </div>  
+                                            </div>
                                         }
                                     </div>
 
@@ -753,13 +758,16 @@ export default function TestMode() {
 
                                 &&
 
-                                <div
-                                    className={split ? styles.questionAnswerContentRL : styles.questionAnswerContentUD}
+                                <div className={styles.temp}>
+                                <Splitter
+                                    className={styles.questionAnswerContentRL}
                                     style={isDarkMode ? { color: "rgb(255, 255, 255)", backgroundColor: darkBackgroundColor } : {}}
+                                    gutterSize={width >= 1200 ? 7 : 0}
                                 >
-                                    <div
-                                        className={split ? styles.questionContentRL : styles.questionContentUD}
-                                        style={isDarkMode && split ? { color: "rgb(255, 255, 255)", borderRight: darkBorderColor } : {}}
+                                    <SplitterPanel
+                                        className={styles.questionContentRL}
+                                        style={isDarkMode ? { color: "rgb(255, 255, 255)" } : {}}
+                                        minSize={20}
                                     >
                                         {
                                             isDarkMode
@@ -779,16 +787,16 @@ export default function TestMode() {
                                                             skin: "borderless",
                                                             content_style:
                                                                 `
-                                                        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+                                                            @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-                                                        body {
-                                                            font-family: 'Pretendard';
-                                                            font-weight: 500;
-                                                            margin: 0px;
-                                                            padding: 0px;
-                                                            color: white;
-                                                        }
-                                                    `
+                                                            body {
+                                                                font-family: 'Pretendard';
+                                                                font-weight: 500;
+                                                                margin: 0px;
+                                                                padding: 0px;
+                                                                color: white;
+                                                            }
+                                                        `
                                                         }}
                                                         value={questionList[questionNumber].question}
                                                     />
@@ -809,26 +817,26 @@ export default function TestMode() {
                                                             skin: "borderless",
                                                             content_style:
                                                                 `
-                                                    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+                                                        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-                                                    body {
-                                                        font-family: 'Pretendard';
-                                                        font-weight: 500;
-                                                        margin: 0px;
-                                                        padding: 0px;
-                                                        color: black;
-                                                    }
-                                                `
+                                                        body {
+                                                            font-family: 'Pretendard';
+                                                            font-weight: 500;
+                                                            margin: 0px;
+                                                            padding: 0px;
+                                                            color: black;
+                                                        }
+                                                    `
                                                         }}
                                                         value={questionList[questionNumber].question}
                                                     />
                                                 </>
                                         }
-                                    </div>
+                                    </SplitterPanel>
 
-                                    <div
-                                        className={split ? styles.answerContentRL : styles.answerContentUD}
-                                        style={!split ? { paddingTop: "0px" } : {}}
+                                    <SplitterPanel
+                                        className={styles.answerContentRL}
+                                        minSize={20}
                                     >
                                         {
                                             questionList[questionNumber].type === "객관식"
@@ -933,7 +941,7 @@ export default function TestMode() {
                                                     setModified(true);
                                                     setAnswerSheet(temp);
                                                 }}
-                                                style={isDarkMode ? { color: "rgb(255, 255, 255)", backgroundColor: darkBackgroundColor, border: darkBorderColor } : {}}
+                                                style={isDarkMode ? { color: "rgb(255, 255, 255)", backgroundColor: darkBackgroundColor } : {}}
                                             />
                                         }
 
@@ -962,7 +970,6 @@ export default function TestMode() {
                                                             {
                                                                 color: "rgb(255, 255, 255)",
                                                                 backgroundColor: darkBackgroundColor,
-                                                                border: darkBorderColor
                                                             } : {}
                                                     }
                                                 />
@@ -972,7 +979,8 @@ export default function TestMode() {
                                                 </div>
                                             </div>
                                         }
-                                    </div>
+                                    </SplitterPanel>
+                                </Splitter>
                                 </div>
                             }
 
@@ -988,7 +996,6 @@ export default function TestMode() {
                                         {
                                             color: "rgb(255, 255, 255)",
                                             backgroundColor: darkBackgroundColorDeep,
-                                            borderTop: darkBorderColor
                                         } : {}
                                 }
                             >

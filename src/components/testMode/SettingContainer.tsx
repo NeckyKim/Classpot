@@ -59,7 +59,7 @@ export default function SettingContainer({ setIsSetting, isDarkMode, setIsDarkMo
                         어둡게
                     </div>
 
-                    {
+                    {/* {
                         width > 1200
 
                         &&
@@ -95,7 +95,7 @@ export default function SettingContainer({ setIsSetting, isDarkMode, setIsDarkMo
                                 위아래로 분할
                             </div>
                         </div>
-                    }
+                    } */}
                 </div>
             </div>
         </div>
