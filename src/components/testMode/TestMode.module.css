@@ -13,7 +13,7 @@
     width: 100vw;
     height: 50px;
     display: grid;
-    grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+    grid-template-columns: 1fr fit-content(100%);
     gap: 10px;
     align-items: center;
     padding-left: 30px;
@@ -25,27 +25,20 @@
     left: 0px;
 }
 
-.testconLogo {
-    height: 30px;
-    padding-left: 0px;
-    padding-right: 10px;
-    filter: brightness(0) invert(0.6);
-}
-
 .testModeCotainerTopInfo {
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
 }
 
 .testName {
-    height: 25px;
-    line-height: 25px;
+    height: 20px;
+    line-height: 20px;
     overflow: hidden;
 }
 
 .applicantName {
-    height: 25px;
-    line-height: 25px;
+    height: 20px;
+    line-height: 20px;
     margin-left: 15px;
     padding-left: 15px;
     border-left: 1px solid rgb(100, 100, 100);
@@ -815,16 +808,9 @@
 
 @media (max-width: 600px) {
     .testModeContainerTop {
-        gap: 0px;
-    }
-
-    .testModeContainerTop {
         padding-left: min(5vw, 30px);
         padding-right: min(5vw, 30px);
-    }
-
-    .testconLogo {
-        margin-right: 0px;
+        gap: 0px;
     }
 
     .testModeCotainerTopInfo {

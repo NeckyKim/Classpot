@@ -1,10 +1,14 @@
 .background {
     width: 100vw;
-    height: calc(100vh - 70px);
-    background-color: rgb(20, 30, 50);
+    height: 100vh;
+    background-color: rgb(30, 40, 60);
     display: grid;
     align-items: center;
     justify-items: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 20;
 }
 
 .backgroundPattern {
@@ -13,236 +17,229 @@
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 0;
+    z-index: 21;
     opacity: 0.15;
-    filter: brightness(0) invert(0.8);
+    filter: brightness(0) invert(0.5);
     object-fit: cover;
 }
 
-.wrapper {
-    width: 1100px;
-    height: 70vh;
-    min-height: 780px;
-    display: grid;
-    grid-template-rows: fit-content(100%) 1fr;
-    gap: 15px;
-}
-
 .header {
+    width: 100vw;
+    height: 50px;
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
-    align-items: end;
+    gap: 10px;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(10, 20, 40);
+    position: fixed;
+    top: 0px;
+    left: 0px;
 }
 
-.headerLeft {
-    font-size: 2rem;
-    font-weight: 700;
-    color: rgb(255, 255, 255);
-}
-
-.headerRight {
-    color: rgb(255, 255, 255);
+.headerInfo {
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
-    gap: 10px;
 }
 
-.headerRight1 {
-    color: rgb(150, 150, 150);
+.testName {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
 }
 
-.headerRight2 {
-    font-weight: 700;
-    color: rgb(255, 255, 255);
+.applicantName {
+    height: 20px;
+    line-height: 20px;
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid rgb(100, 100, 100);
+    overflow: hidden;
 }
 
 .container {
-    border-radius: 10px;
-    border: 1px solid rgb(220, 220, 220);
-    background-color: rgb(255, 255, 255);
+    width: 1100px;
+    height: min(80vh, 900px);
+    align-self: center;
+    justify-self: center;
     display: grid;
-    grid-template-columns: 250px 1fr;
-    z-index: 1;
+    grid-template-rows: fit-content(100%) 1fr;
 }
 
-.containerLeft {
-    background-color: rgb(245, 245, 245);
-    border-radius: 10px 0px 0px 10px;
-    padding: 40px;
+.containerTop {
+    width: 100%;
+    height: 100px;
     display: grid;
-    grid-template-rows: repeat(4, fit-content(100%));
-    gap: 20px;
+    grid-template-columns: repeat(3, 150px);
+    position: relative;
+    align-items: start;
+    justify-self: center;
+    justify-content: space-evenly;
 }
 
-.containerRight {
-    background-color: rgb(255, 255, 255);
-    border-radius: 0px 10px 10px 0px;
-    padding: 40px;
-    display: grid;
-    grid-template-rows: 1fr fit-content(100%);
-}
-
-.button {
-    border: none;
-    background-color: transparent;
-    display: grid;
-    grid-template-columns: fit-content(100%) 1fr;
-    gap: 15px;
-    align-items: center;
-}
-
-.buttonNumberSelected {
-    font-size: 1.2rem;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 15px;
-    text-align: center;
+.tabSelected {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
-    transform: scale(1.2);
+    justify-self: center;
+    text-align: center;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    align-items: center;
+    z-index: 1;
+    transition: 0.5s;
 }
 
-.buttonNumberNotSelected {
-    font-size: 1.2rem;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 15px;
+.tabNotSelected {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    color: rgb(100, 100, 100);
+    justify-self: center;
     text-align: center;
-    color: rgb(255, 255, 255);
-    background-color: rgb(200, 200, 200);
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    align-items: center;
+    z-index: 1;
+    transition: 0.5s;
+    align-items: center;
     cursor: pointer;
 }
 
-.buttonChecked {
-    width: 100%;
-    height: 100%;
-    padding: 25%;
-    filter: invert();
+.tabNotSelected:hover {
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(50, 60, 80);
 }
 
-.buttonTextSelected {
+.tabNumberSelected {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(30, 130, 255);
+    transition: 0.5s;
+}
+
+.tabNumberNotSelected {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    color: rgb(100, 100, 100);
+    background-color: rgb(50, 60, 80);
+    transition: 0.5s;
+}
+
+.containerBottom {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 50px;
+    display: grid;
+    grid-template-rows: fit-content(100%) fit-content(100%) fit-content(100%) 1fr;
+}
+
+.intro {
     font-size: 1.5rem;
-    font-weight: 600;
-    height: 36px;
-    line-height: 36px;
-    text-align: left;
+    font-weight: 700;
+    word-break: keep-all;
+}
+
+.introHighlight {
+    font-weight: 700;
     color: rgb(0, 100, 250);
 }
 
-.buttonTextNotSelected {
-    font-size: 1.2rem;
-    font-weight: 600;
-    height: 36px;
-    line-height: 36px;
-    text-align: left;
-    color: rgb(150, 150, 150);
-    cursor: pointer;
-}
-
-.testInfoContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 40px;
-}
-
-.testInfoElements {
-    border-left: 2px solid rgb(220, 220, 220);
-    padding-left: 20px;
-    margin-bottom: 40px;
-}
-
-.testInfoHeader {
-    font-weight: 300;
-    color: rgb(150, 150, 150);
-    margin-bottom: 10px;
-}
-
-.testInfoValue {
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.questionTypeContainer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.questionTypeElements {
-    padding: 10px;
+.checkBoxContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
 }
 
-.intro {
-    font-size: 1.6rem;
+.checkBoxContainer:hover>.checkBoxNotChecked {
+    border: 1px solid rgba(0, 100, 250, 0.2);;
+    background-color: rgba(0, 100, 250, 0.2);
+}
+
+.checkBoxText {
     font-weight: 700;
-    line-height: 30px;
     word-break: keep-all;
 }
 
-.highlight {
-    font-weight: 700;
-    color: rgb(0, 100, 250);
+.checkBoxChecked {
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    border: 1px solid rgb(0, 100, 250);
+    background-color: rgb(0, 100, 250);
 }
 
-.tabContainerBottom {
-    display: grid;
-    justify-items: right;
+.checkBoxNotChecked {
+    width: 24px;
+    height: 24px;
+    border-radius: 3px;
+    border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(248, 248, 248);
+}
+
+.checkBoxIcon {
+    width: 22px;
+    padding: 4px;
+    filter: invert();
 }
 
 .nextButtonAbled {
-    font-size: 1.2rem;
-    width: 120px;
+    font-size: 1.1rem;
+    width: 100px;
     height: 50px;
-    border: none;
+    line-height: 50px;
+    text-align: center;
+    align-self: end;
+    justify-self: right;
     border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    gap: 5px;
-    padding-left: 10px;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
+}
+
+.nextButtonAbled:hover {
+    background-color: rgb(30, 130, 255);
 }
 
 .nextButtonDisabled {
-    font-size: 1.2rem;
-    width: 120px;
+    font-size: 1.1rem;
+    width: 100px;
     height: 50px;
-    border: none;
+    line-height: 50px;
+    text-align: center;
+    align-self: end;
+    justify-self: right;
     border-radius: 5px;
-    color: rgb(100, 100, 100);
+    color: rgb(255, 255, 255);
     background-color: rgb(150, 150, 150);
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    gap: 5px;
-    padding-left: 10px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.nextIconAbled {
-    height: 15px;
-    filter: invert()
-}
-
-.nextIconDisabled {
-    height: 15px;
-    filter: invert(0.4)
+    cursor: not-allowed;
 }
 
 .guideContainer {
     height: fit-content;
-    max-height: 300px;
-    overflow: auto;
     margin-top: 30px;
     padding: 20px;
     border-top: 1px solid rgb(220, 220, 220);
@@ -259,8 +256,14 @@
     margin-left: 20px;
 }
 
+.guideContainer li::marker {
+    color: rgb(150, 150, 150);
+}
+
 .agreementWrapper {
     height: fit-content;
+    max-height: 100%;
+    overflow-y: auto;
     border-top: 1px solid rgb(220, 220, 220);
     border-bottom: 1px solid rgb(220, 220, 220);
     display: grid;
@@ -291,7 +294,7 @@
     padding: 2px;
     filter: invert(0.3);
     transform: rotate(270deg);
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .agreementIconClosed {
@@ -299,28 +302,38 @@
     padding: 2px;
     filter: invert(0.3);
     transform: rotate(90deg);
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .agreementTextShow {
     font-size: 0.95rem;
     font-weight: 400;
+    height: fit-content;
+    max-height: 300px;
     padding-top: 10px;
+    overflow: hidden;
     text-align: justify;
     word-break: keep-all;
 }
 
 .agreementTextHide {
-    display: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    height: fit-content;
+    max-height: 0px;
+    padding-top: 0px;
+    overflow: hidden;
+    text-align: justify;
+    word-break: keep-all;
 }
 
-.agreementTextShow table {
+table {
     border-spacing: 0px;
     border-top: 1px solid rgb(200, 200, 200);
     margin-top: 10px;
 }
 
-.agreementTextShow table thead tr th {
+table thead tr th {
     padding: 6px;
     border-right: 1px solid rgb(200, 200, 200);
     border-bottom: 1px solid rgb(200, 200, 200);
@@ -328,69 +341,64 @@
     text-align: left;
 }
 
-.agreementTextShow table tbody tr td {
+table tbody tr td {
     padding: 6px;
     border-right: 1px solid rgb(200, 200, 200);
     border-bottom: 1px solid rgb(200, 200, 200);
     text-align: center;
 }
 
-.checkBoxContainer {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
+.infoContainer {
+    margin-top: 40px;
     display: grid;
-    grid-template-columns: 1fr fit-content(100%);
-    gap: 10px;
-    align-items: center;
-    cursor: pointer;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 0px;
 }
 
-.checkBoxContainer:hover>.checkBoxNotChecked {
-    border: 1px solid rgba(0, 100, 250, 0.3);;
-    background-color: rgba(0, 100, 250, 0.3);
+.infoElements {
+    border-left: 2px solid rgb(220, 220, 220);
+    padding-left: 20px;
 }
 
-.checkBoxText {
+.infoHeader {
+    color: rgb(150, 150, 150);
+    margin-bottom: 5px;
+}
+
+.infoValue {
+    font-size: 1.2rem;
     font-weight: 700;
+}
+
+.tipContainer {
+    border-top: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding: 20px;
+    padding-left: 40px;
+    background-color: rgb(245, 245, 245);
+    margin-top: 40px;
+    display: grid;
+    gap: 10px;
+    text-align: justify;
     word-break: keep-all;
 }
 
-.checkBoxChecked {
-    width: 24px;
-    height: 24px;
-    border-radius: 3px;
-    border: 1px solid rgb(0, 100, 250);
-    background-color: rgb(0, 100, 250);
+.tipElements::marker {
+    color: rgb(150, 150, 150);
 }
 
-.checkBoxNotChecked {
-    width: 24px;
-    height: 24px;
-    border-radius: 3px;
-    border: 1px solid rgb(220, 220, 220);
-    background-color: rgb(248, 248, 248);
-}
-
-.checkBoxIcon {
-    width: 22px;
-    padding: 4px;
-    filter: invert();
-}
-
-.tab4ContainerButtonsZone {
+.startDemoButton {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, fit-content(100%));
     gap: 20px;
+    align-self: end;
     justify-content: right;
 }
 
 .demoButton {
     font-size: 1.2rem;
-    width: 100%;
+    width: 300px;
     height: 50px;
     line-height: 50px;
     color: rgb(255, 255, 255);
@@ -401,248 +409,272 @@
     cursor: pointer;
 }
 
-.startButton {
-    font-size: 1.2rem;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-    border-radius: 5px;
-    border: none;
-    text-align: center;
+.demoButton:hover {
+    background-color: rgb(10, 230, 230);
 }
 
-.startButton:disabled {
-    background-color: rgba(0, 100, 250, 0.6);
+.startButtonDisabled {
+    font-size: 1.2rem;
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background-color: rgb(70, 170, 255);
     cursor: not-allowed;
 }
 
-.startButton:enabled {
-	box-shadow: 0 0 0 0 rgba(0, 100, 250, 1);
-	animation: pulse 3s infinite;
-    cursor: pointer;
-}
-
-.startButton:enabled:hover {
-    background-color: rgba(0, 100, 250, 0.7)
-}
-
-@keyframes pulse {
-	0% {
-		box-shadow: 0 0 0 0 rgba(0, 100, 250, 0.7);
-	}
-	
-	70% {
-		box-shadow: 0 0 0 20px rgba(0, 100, 250, 0);
-	}
-
-    100% {
-        box-shadow: 0 0 0 20px rgba(0, 100, 250, 0);
-    }
-}
-
-.alertBackground {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-}
-
-.alertContainer {
+.startButtonEnabled {
     font-size: 1.2rem;
-    width: 400px;
-    height: fit-content;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    padding: 30px;
-    display: grid;
-    grid-template-rows: repeat(2, fit-content(100%));
-    gap: 20px;
-    justify-items: center;
-    word-break: keep-all;
-}
-
-.alertButton {
-    width: 80px;
-    height: 40px;
-    line-height: 40px;
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
     border-radius: 5px;
     color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
     text-align: center;
+    background-color: rgb(0, 100, 250);
     cursor: pointer;
+    position: relative;
 }
 
+.startButtonEnabled:hover {
+    background-color: rgb(30, 130, 255);
+}
+
+.startButtonEnabledInside {
+    width: 0px;
+    height: 50px;
+    border-radius: 5px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(90deg, transparent, rgb(0, 200, 250));
+    opacity: 1;
+    animation: pulse 4s infinite;
+}
+
+
+@keyframes pulse {
+    0% {
+        width: 0px;
+        background-position: 0px 0px;
+        opacity: 1;
+    }
+
+    50% {
+        width: 300px;
+        background-position: 300px 0px;
+    }
+
+    100% {
+        width: 300px;
+        background-position: 300px 0px;
+        opacity: 0;
+    }
+}
 
 
 @media (max-width: 1200px) {
-    .wrapper {
+    .container {
         width: 100vw;
-        height: calc(100vh - 70px);
-        min-height: auto;
-        grid-template-rows: 1fr;
+        height: calc(100vh - 50px);
+        position: fixed;
+        top: 50px;
+        left: 0px;
+    }
+
+    .containerTop {
+        height: 70px;
+        align-items: center;
+    }
+
+    .containerBottom {
+        border-radius: 0px;
+        padding-bottom: 100px;
+    }
+
+    .startDemoButton {
+        grid-template-columns: repeat(1, fit-content(100%));
+        gap: 10px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .header {
+        padding-left: min(5vw, 30px);
+        padding-right: min(5vw, 30px);
         gap: 0px;
     }
-    
-    .header {
-        display: none;
-    }
 
-    .container {
-        border-radius: 0px;
-        border: none;
+    .headerInfo {
         grid-template-columns: none;
-        grid-template-rows: 80px 1fr;
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 
-    .containerLeft {
-        height: 90px;
-        border-radius: 0px;
-        padding-left: min(5vw, 40px);
-        padding-right: min(5vw, 40px);
-        padding-top: 15px;
-        padding-bottom: 10px;
-        grid-template-rows: none;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 5px;
+    .testName {
+        font-size: 0.8rem;
+        height: 14px;
+        line-height: 14px;
     }
 
-    .containerRight {
-        border-radius: 0px;
-        padding-left: min(5vw, 40px);
-        padding-right: min(5vw, 40px);
-        padding-top: 30px;
-        padding-bottom: 120px;
-        gap: 10px;
+    .applicantName {
+        font-size: 0.8rem;
+        height: 14px;
+        line-height: 14px;
+        margin-left: 0px;
+        padding-left: 0px;
+        border-left: none;
+        overflow: hidden;
     }
 
-    .button {
-        grid-template-columns: none;
-        grid-template-rows: fit-content(100%) fit-content(100%);
-        gap: 10px;
-        justify-items: center;
+    .containerTop {
+        grid-template-columns: repeat(3, 100px);
     }
 
-    .buttonNumberSelected {
-        font-size: 1rem;
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        border-radius: 12px;
-    }
-    
-    .buttonNumberNotSelected {
-        font-size: 1rem;
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        border-radius: 12px;
+    .tabSelected {
+        font-size: 0.8rem;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        padding-right: 10px;
     }
 
-    .buttonTextSelected {
-        font-size: 1rem;
+    .tabNotSelected {
+        font-size: 0.8rem;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        padding-right: 10px;
+    }
+
+    .tabNumberSelected {
+        width: 20px;
         height: 20px;
         line-height: 20px;
+        border-radius: 10px;
     }
     
-    .buttonTextNotSelected {
-        font-size: 0.85rem;
+    .tabNumberNotSelected {
+        width: 20px;
         height: 20px;
         line-height: 20px;
+        border-radius: 10px;
     }
 
-    .tabContainerTestName {
-        font-size: 1rem;
-        font-weight: 700;
-        margin-bottom: 15px;
+    .containerBottom {
+        padding-top: 40px;
+        padding-bottom: 100px;
+        padding-left: min(5vw, 50px);
+        padding-right: min(5vw, 50px);
     }
 
     .intro {
-        font-size: 1.3rem;
-        line-height: 25px;
+        font-size: 1.2rem;
     }
-
-    .testInfoContainer {
-        grid-template-columns: 1fr;
-        margin-top: 20px;
-    }
-
-    .testInfoElements {
-        padding-left: 10px;
-        margin-bottom: 15px;
-    }
-
-    .testInfoHeader {
-        margin-bottom: 5px;
-    }
-
-    .testInfoValue {
-        font-size: 1rem;
+    
+    .introHighlight {
         font-weight: 700;
+        color: rgb(0, 100, 250);
     }
 
     .guideContainer {
-        margin-top: 20px;
+        font-size: 0.85rem;
+        padding: 15px;
+        gap: 10px;
     }
 
     .agreementWrapper {
-        height: fit-content;
-        max-height: calc(85vh - 420px);
-        overflow: auto;
+        max-height: 40vh;
     }
 
-    .guideContainer::-webkit-scrollbar,
     .agreementWrapper::-webkit-scrollbar {
-        width: 15px;
+        width: 10px;
     }
-
-    .guideContainer::-webkit-scrollbar-thumb,
+    
     .agreementWrapper::-webkit-scrollbar-thumb {
-        width: 15px;
-        background-color: rgb(220, 220, 220);
+        width: 10px;
+        background-color: rgb(150, 150, 150, 0.3);
+        background-clip: padding-box;
     }
-
-    .guideContainer::-webkit-scrollbar-track,
+    
     .agreementWrapper::-webkit-scrollbar-track {
         background-color: rgb(245, 245, 245);
     }
 
-    .tab4ContainerButtonsZone {
-        width: 100%;
-        grid-template-columns: none;
-        grid-template-rows: repeat(2, 1fr);
-        gap: 10px;
+    .agreementContainer {
+        padding: 15px;
     }
 
-    .demoButton,
-    .startButton {
-        width: calc(100vw - 2 * min(40px, 5vw));
+    .agreementTextShow {
+        font-size: 0.85rem;
+    }
+    
+    .agreementTextHide {
+        font-size: 0.85rem;
     }
 
-    .alertContainer {
+    .infoContainer {
+        margin-top: 20px;
+        grid-template-columns: 1fr;
+        gap: 10px 0px;
+    }
+
+    .infoElements {
+        padding-left: 10px;
+    }
+    
+    .infoHeader {
+        font-size: 0.8rem;
+    }
+    
+    .infoValue {
+        font-size: 1rem;
+    }
+
+    .tipContainer {
+        font-size: 0.85rem;
+        padding: 10px;
+        padding-left: 30px;
+        margin-top: 20px;
+        gap: 5px;
+    }
+
+    .demoButton {
         font-size: 1rem;
         width: 90vw;
-        max-width: 400px;
-        padding: min(5vw, 30px);
-        gap: 20px;
     }
     
-    .alertButton {
-        width: 80px;
-        height: 40px;
-        line-height: 40px;
-        border-radius: 5px;
-        color: rgb(255, 255, 255);
-        background-color: rgb(0, 100, 250);
-        text-align: center;
-        cursor: pointer;
+    .startButtonDisabled {
+        font-size: 1rem;
+        width: 90vw;
     }
     
+    .startButtonEnabled {
+        font-size: 1rem;
+        width: 90vw;
+    }
+
+    @keyframes pulse {
+        0% {
+            width: 0px;
+            background-position: 0px 0px;
+            opacity: 1;
+        }
+    
+        50% {
+            width: 200px;
+            background-position: 200px 0px;
+        }
+    
+        100% {
+            width: 200px;
+            background-position: 200px 0px;
+            opacity: 0;
+        }
+    }
 }

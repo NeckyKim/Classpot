@@ -401,8 +401,6 @@ export default function TestMode() {
 
                         <form onSubmit={submitAnswerSheet} className={styles.testModeContainer}>
                             <div className={styles.testModeContainerTop}>
-                                <img className={styles.testconLogo} src={process.env.PUBLIC_URL + "/logos/icon_gray.png"} />
-
                                 <div className={styles.testModeCotainerTopInfo}>
                                     <div className={styles.testName}>
                                         {testInfo.testName}
@@ -995,7 +993,7 @@ export default function TestMode() {
 
                                         {
                                             color: "rgb(255, 255, 255)",
-                                            backgroundColor: darkBackgroundColorDeep,
+                                            backgroundColor: darkBackgroundColorDeep
                                         } : {}
                                 }
                             >
@@ -1201,7 +1199,7 @@ export default function TestMode() {
                     <Error message="유효하지 않은 응시자 입니다." />
             }
 
-            {sampleAlert && <SampleAlertContainer setSampleAlert={setSampleAlert} />}
+            {/* {sampleAlert && <SampleAlertContainer setSampleAlert={setSampleAlert} />} */}
 
             {
                 !testInfo.allowMobile && width < 800
