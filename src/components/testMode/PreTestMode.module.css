@@ -148,7 +148,7 @@
     padding: 50px;
     display: grid;
     grid-template-rows: fit-content(100%) fit-content(100%) fit-content(100%) 1fr;
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .containerBottom::-webkit-scrollbar {
@@ -498,9 +498,7 @@ table tbody tr td {
     .container {
         width: 100vw;
         height: calc(100vh - 50px);
-        position: fixed;
-        top: 50px;
-        left: 0px;
+        align-self: end;
     }
 
     .containerTop {
