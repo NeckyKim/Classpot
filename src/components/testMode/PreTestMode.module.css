@@ -28,6 +28,16 @@
     background-color: rgb(10, 20, 40);
 }
 
+.headerLine {
+    width: 100%;
+    height: 2px;
+    background-color:rgb(0, 100, 250);
+    position: fixed;
+    top: 49px;
+    left: 0px;
+    transition: 1s;
+}
+
 .headerInfo {
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
@@ -87,27 +97,19 @@
 .tabSelected {
     width: 150px;
     height: 40px;
-    background-color: rgb(0, 100, 250);
+    position: relative;
     border-radius: 20px;
-    padding-right: 5px;
     display: grid;
     grid-template-columns: fit-content(100%) 1fr;
-    align-items: center;
-    z-index: 1;
-    transition: 0.5s;
 }
 
 .tabNotSelected {
     width: 150px;
     height: 40px;
-    justify-self: center;
+    position: relative;
     border-radius: 20px;
-    padding-right: 5px;
     display: grid;
     grid-template-columns: fit-content(100%) 1fr;
-    align-items: center;
-    z-index: 1;
-    transition: 0.5s;
     align-items: center;
     cursor: pointer;
 }
@@ -127,27 +129,61 @@
     color: rgb(255, 255, 255);
 }
 
-.tabNumberSelected {
-    font-size: 1.2rem;
+.tabBackgroundSelected {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: rgb(0, 100, 250);
+    position: absolute;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.tabBackgroundNotSelected {
     width: 40px;
     height: 40px;
-    line-height: 40px;
-    text-align: center;
+    border-radius: 20px;
+    background-color: transparent;
+    position: absolute;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.tabNumberSelected {
+    width: 40px;
+    max-width: 110px;
+    height: 40px;
     border-radius: 20px;
     color: rgb(255, 255, 255);
     background-color: rgb(30, 130, 255);
     transition: 0.5s;
+    z-index: 2;
 }
 
 .tabNumberNotSelected {
-    font-size: 1.2rem;
     width: 40px;
+    max-width: 110px;
     height: 40px;
-    line-height: 40px;
-    text-align: center;
     border-radius: 20px;
     color: rgb(100, 100, 100);
     background-color: rgb(50, 60, 80);
+    transition: 0.5s;
+    z-index: 2;
+}
+
+.tabNumberSelected img {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    filter: brightness(1) invert(1);
+    transition: 0.5s;
+}
+
+.tabNumberNotSelected img {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    filter: brightness(1) invert(0.5);
     transition: 0.5s;
 }
 
@@ -158,6 +194,7 @@
     color: rgb(255, 255, 255);
     text-align: center;
     transition: 0.5s;
+    z-index: 2;
 }
 
 .tabTextNotSelected {
@@ -167,6 +204,7 @@
     color: rgb(100, 100, 100);
     text-align: center;
     transition: 0.5s;
+    z-index: 2;
 }
 
 .mainContainer {
@@ -530,6 +568,15 @@ table tbody tr td {
     }
 }
 
+.notTestTimeContainer {
+    width: 1100px;
+    height: 600px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 50px;
+    margin-top: 100px;
+}
+
 
 
 @media (max-width: 1200px) {
@@ -555,6 +602,13 @@ table tbody tr td {
     
     .mainContainer::-webkit-scrollbar-track {
         border-radius: 0px;
+    }
+
+    .notTestTimeContainer {
+        width: 100vw;
+        height: calc(100vh - 50px);
+        border-radius: 0px;
+        margin-top: 0px;
     }
 }
 
@@ -589,11 +643,14 @@ table tbody tr td {
 
     .exitButton {
         font-size: 0.85rem;
+        gap: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .mainContainer {
         padding-top: 30px;
-        padding-bottom: 100px;
+        padding-bottom: 120px;
         padding-left: min(50px, 5vw);
         padding-right: min(50px, 5vw);
     }
@@ -603,46 +660,28 @@ table tbody tr td {
     }
 
     .tabSelected {
-        width: 110px;
-        height: 30px;
-        line-height: 30px;
+        width: 150px;
+        height: 40px;
+        transition: 0.5s;
     }
 
     .tabNotSelected {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-    }
-
-    .tabNumberSelected {
-        font-size: 1rem;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-    }
-
-    .tabNumberNotSelected {
-        font-size: 1rem;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
+        width: 40px;
+        height: 40px;
+        transition: 0.5s;
     }
 
     .tabTextSelected {
-        font-size: 0.85rem;
-        width: 80px;
-        height: 30px;
-        line-height: 30px;
+        width: 110px;
+        max-width: 110px;
+        transition: none;
     }
 
     .tabTextNotSelected {
-        font-size: 0.85rem;
-        width: 80px;
-        height: 30px;
-        line-height: 30px;
+        width: 110px;
         max-width: 0px;
         overflow: hidden;
-        display: none;
+        transition: none;
     }
 
     .intro {
@@ -726,5 +765,12 @@ table tbody tr td {
     .startButtonEnabled {
         font-size: 1rem;
         width: 100%;
+    }
+
+    .notTestTimeContainer {
+        padding-top: 30px;
+        padding-bottom: 120px;
+        padding-left: min(50px, 5vw);
+        padding-right: min(50px, 5vw);
     }
 }

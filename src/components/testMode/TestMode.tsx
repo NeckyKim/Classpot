@@ -18,7 +18,8 @@ import SettingContainer from "./SettingContainer";
 import ChattingContainer from "./ChattingContainer";
 import NotificationContainer from "./NotificationContainer";
 import ExitContainer from "./ExitContainer";
-import SampleAlertContainer from "./SampleAlertContainer";
+import DisallowMobileContainer from "./DisallowMobileContainer";
+import GuideMode from "./GuideMode";
 
 import { ToastContainer, cssTransition } from "react-toastify";
 import { toast } from "react-toastify";
@@ -31,6 +32,7 @@ import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
 
 import styles from "./TestMode.module.css";
+
 
 
 
@@ -88,11 +90,15 @@ export default function TestMode() {
     const darkButtonColor = "rgb(60, 70, 90)";
     const darkBorderColor = "1px solid rgb(70, 80, 100)";
 
+    // 응시자 가이도 보기
+    const [isGuideMode, setIsGuideMode] = useState<boolean>(false);
+
     // 화면 구성
     const [split, setSplit] = useState<boolean>(true);
 
 
-    const [tempDate, setTempDate] = useState<number>(Date.now() + 30000);
+
+    const [tempDate, setTempDate] = useState<number>(Date.now() + 20000);
 
 
     // 시험 환경 점검 안내 팝업
@@ -400,6 +406,8 @@ export default function TestMode() {
                         ?
 
                         <form onSubmit={submitAnswerSheet} className={styles.testModeContainer}>
+                            <div className={styles.timerLine} style={{ width: String(((testInfo.startDate + testInfo.duration * 60000 - Date.now()) / 1000) / (testInfo.duration * 60) * 100) + "vw" }} />
+
                             <div className={styles.testModeContainerTop}>
                                 <div className={styles.testModeCotainerTopInfo}>
                                     <div className={styles.testName}>
@@ -757,34 +765,34 @@ export default function TestMode() {
                                 &&
 
                                 <div className={styles.temp}>
-                                <Splitter
-                                    className={styles.questionAnswerContentRL}
-                                    style={isDarkMode ? { color: "rgb(255, 255, 255)", backgroundColor: darkBackgroundColor } : {}}
-                                    gutterSize={width >= 1200 ? 7 : 0}
-                                >
-                                    <SplitterPanel
-                                        className={styles.questionContentRL}
-                                        style={isDarkMode ? { color: "rgb(255, 255, 255)" } : {}}
-                                        minSize={20}
+                                    <Splitter
+                                        className={styles.questionAnswerContentRL}
+                                        style={isDarkMode ? { color: "rgb(255, 255, 255)", backgroundColor: darkBackgroundColor } : {}}
+                                        gutterSize={width >= 1200 ? 7 : 0}
                                     >
-                                        {
-                                            isDarkMode
+                                        <SplitterPanel
+                                            className={styles.questionContentRL}
+                                            style={isDarkMode ? { color: "rgb(255, 255, 255)" } : {}}
+                                            minSize={20}
+                                        >
+                                            {
+                                                isDarkMode
 
-                                                ?
+                                                    ?
 
-                                                <div>
-                                                    <Editor
-                                                        apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
-                                                        disabled={true}
-                                                        init={{
-                                                            readonly: true,
-                                                            menubar: false,
-                                                            toolbar: false,
-                                                            statusbar: false,
-                                                            plugins: ["autoresize", "codesample"],
-                                                            skin: "borderless",
-                                                            content_style:
-                                                                `
+                                                    <div>
+                                                        <Editor
+                                                            apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                                                            disabled={true}
+                                                            init={{
+                                                                readonly: true,
+                                                                menubar: false,
+                                                                toolbar: false,
+                                                                statusbar: false,
+                                                                plugins: ["autoresize", "codesample"],
+                                                                skin: "borderless",
+                                                                content_style:
+                                                                    `
                                                             @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
                                                             body {
@@ -795,26 +803,26 @@ export default function TestMode() {
                                                                 color: white;
                                                             }
                                                         `
-                                                        }}
-                                                        value={questionList[questionNumber].question}
-                                                    />
-                                                </div>
+                                                            }}
+                                                            value={questionList[questionNumber].question}
+                                                        />
+                                                    </div>
 
-                                                :
+                                                    :
 
-                                                <>
-                                                    <Editor
-                                                        apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
-                                                        disabled={true}
-                                                        init={{
-                                                            readonly: true,
-                                                            menubar: false,
-                                                            toolbar: false,
-                                                            statusbar: false,
-                                                            plugins: ["autoresize", "codesample"],
-                                                            skin: "borderless",
-                                                            content_style:
-                                                                `
+                                                    <>
+                                                        <Editor
+                                                            apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                                                            disabled={true}
+                                                            init={{
+                                                                readonly: true,
+                                                                menubar: false,
+                                                                toolbar: false,
+                                                                statusbar: false,
+                                                                plugins: ["autoresize", "codesample"],
+                                                                skin: "borderless",
+                                                                content_style:
+                                                                    `
                                                         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
                                                         body {
@@ -825,130 +833,109 @@ export default function TestMode() {
                                                             color: black;
                                                         }
                                                     `
+                                                            }}
+                                                            value={questionList[questionNumber].question}
+                                                        />
+                                                    </>
+                                            }
+                                        </SplitterPanel>
+
+                                        <SplitterPanel
+                                            className={styles.answerContentRL}
+                                            minSize={20}
+                                        >
+                                            {
+                                                questionList[questionNumber].type === "객관식"
+
+                                                &&
+
+                                                <div>
+                                                    <Choices choicesNumber={0} />
+                                                    <Choices choicesNumber={1} />
+                                                    <Choices choicesNumber={2} />
+                                                    {questionList[questionNumber].choices[3] !== "" && <Choices choicesNumber={3} />}
+                                                    {questionList[questionNumber].choices[4] !== "" && <Choices choicesNumber={4} />}
+                                                    {questionList[questionNumber].choices[5] !== "" && <Choices choicesNumber={5} />}
+                                                    {questionList[questionNumber].choices[6] !== "" && <Choices choicesNumber={6} />}
+                                                    {questionList[questionNumber].choices[7] !== "" && <Choices choicesNumber={7} />}
+                                                    {questionList[questionNumber].choices[8] !== "" && <Choices choicesNumber={8} />}
+                                                    {questionList[questionNumber].choices[9] !== "" && <Choices choicesNumber={9} />}
+                                                </div>
+                                            }
+
+                                            {
+                                                questionList[questionNumber].type === "참/거짓"
+
+                                                &&
+
+                                                <div>
+                                                    <div
+                                                        className={styles.choiceElements}
+                                                        onClick={() => {
+                                                            let temp = [...answerSheet];
+                                                            temp[questionNumber] = true;
+                                                            setModified(true);
+                                                            setAnswerSheet(temp);
                                                         }}
-                                                        value={questionList[questionNumber].question}
-                                                    />
-                                                </>
-                                        }
-                                    </SplitterPanel>
-
-                                    <SplitterPanel
-                                        className={styles.answerContentRL}
-                                        minSize={20}
-                                    >
-                                        {
-                                            questionList[questionNumber].type === "객관식"
-
-                                            &&
-
-                                            <div>
-                                                <Choices choicesNumber={0} />
-                                                <Choices choicesNumber={1} />
-                                                <Choices choicesNumber={2} />
-                                                {questionList[questionNumber].choices[3] !== "" && <Choices choicesNumber={3} />}
-                                                {questionList[questionNumber].choices[4] !== "" && <Choices choicesNumber={4} />}
-                                                {questionList[questionNumber].choices[5] !== "" && <Choices choicesNumber={5} />}
-                                                {questionList[questionNumber].choices[6] !== "" && <Choices choicesNumber={6} />}
-                                                {questionList[questionNumber].choices[7] !== "" && <Choices choicesNumber={7} />}
-                                                {questionList[questionNumber].choices[8] !== "" && <Choices choicesNumber={8} />}
-                                                {questionList[questionNumber].choices[9] !== "" && <Choices choicesNumber={9} />}
-                                            </div>
-                                        }
-
-                                        {
-                                            questionList[questionNumber].type === "참/거짓"
-
-                                            &&
-
-                                            <div>
-                                                <div
-                                                    className={styles.choiceElements}
-                                                    onClick={() => {
-                                                        let temp = [...answerSheet];
-                                                        temp[questionNumber] = true;
-                                                        setModified(true);
-                                                        setAnswerSheet(temp);
-                                                    }}
-                                                >
-                                                    <div
-                                                        className={answerSheet[questionNumber] === true ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}
-                                                        style={
-                                                            isDarkMode && answerSheet[questionNumber] !== true
-
-                                                                ?
-
-                                                                {
-                                                                    color: "rgb(255, 255, 255)",
-                                                                    backgroundColor: darkButtonColor
-                                                                } : {}
-                                                        }
                                                     >
-                                                        ○
+                                                        <div
+                                                            className={answerSheet[questionNumber] === true ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}
+                                                            style={
+                                                                isDarkMode && answerSheet[questionNumber] !== true
+
+                                                                    ?
+
+                                                                    {
+                                                                        color: "rgb(255, 255, 255)",
+                                                                        backgroundColor: darkButtonColor
+                                                                    } : {}
+                                                            }
+                                                        >
+                                                            ○
+                                                        </div>
+
+                                                        <div className={answerSheet[questionNumber] === true ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                            참
+                                                        </div>
                                                     </div>
 
-                                                    <div className={answerSheet[questionNumber] === true ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                        참
+                                                    <div
+                                                        className={styles.choiceElements}
+                                                        onClick={() => {
+                                                            let temp = [...answerSheet];
+                                                            temp[questionNumber] = false;
+                                                            setModified(true);
+                                                            setAnswerSheet(temp);
+                                                        }}
+                                                    >
+                                                        <div
+                                                            className={answerSheet[questionNumber] === false ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}
+                                                            style={
+                                                                isDarkMode && answerSheet[questionNumber] !== false
+
+                                                                    ?
+
+                                                                    {
+                                                                        color: "rgb(255, 255, 255)",
+                                                                        backgroundColor: darkButtonColor
+                                                                    } : {}
+                                                            }
+                                                        >
+                                                            X
+                                                        </div>
+
+                                                        <div className={answerSheet[questionNumber] === false ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                            거짓
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            }
 
-                                                <div
-                                                    className={styles.choiceElements}
-                                                    onClick={() => {
-                                                        let temp = [...answerSheet];
-                                                        temp[questionNumber] = false;
-                                                        setModified(true);
-                                                        setAnswerSheet(temp);
-                                                    }}
-                                                >
-                                                    <div
-                                                        className={answerSheet[questionNumber] === false ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}
-                                                        style={
-                                                            isDarkMode && answerSheet[questionNumber] !== false
+                                            {
+                                                questionList[questionNumber].type === "주관식"
 
-                                                                ?
+                                                &&
 
-                                                                {
-                                                                    color: "rgb(255, 255, 255)",
-                                                                    backgroundColor: darkButtonColor
-                                                                } : {}
-                                                        }
-                                                    >
-                                                        X
-                                                    </div>
-
-                                                    <div className={answerSheet[questionNumber] === false ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
-                                                        거짓
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-
-                                        {
-                                            questionList[questionNumber].type === "주관식"
-
-                                            &&
-
-                                            <textarea
-                                                className={styles.answerTextBox}
-                                                value={answerSheet[questionNumber]}
-                                                spellCheck={false}
-                                                placeholder="이곳에 정답을 입력하세요."
-                                                onChange={(event: any) => {
-                                                    let temp = [...answerSheet];
-                                                    temp[questionNumber] = String(event.target.value);
-                                                    setModified(true);
-                                                    setAnswerSheet(temp);
-                                                }}
-                                                style={isDarkMode ? { color: "rgb(255, 255, 255)", backgroundColor: darkBackgroundColor } : {}}
-                                            />
-                                        }
-
-                                        {
-                                            questionList[questionNumber].type === "서술형"
-
-                                            &&
-
-                                            <div style={{ height: "calc(100% - 30px)" }}>
                                                 <textarea
                                                     className={styles.answerTextBox}
                                                     value={answerSheet[questionNumber]}
@@ -960,25 +947,46 @@ export default function TestMode() {
                                                         setModified(true);
                                                         setAnswerSheet(temp);
                                                     }}
-                                                    style={
-                                                        isDarkMode
-
-                                                            ?
-
-                                                            {
-                                                                color: "rgb(255, 255, 255)",
-                                                                backgroundColor: darkBackgroundColor,
-                                                            } : {}
-                                                    }
+                                                    style={isDarkMode ? { color: "rgb(255, 255, 255)", backgroundColor: darkBackgroundColor } : {}}
                                                 />
+                                            }
 
-                                                <div className={styles.answerTextLength}>
-                                                    총 {answerSheet[questionNumber] ? answerSheet[questionNumber].length : 0}자
+                                            {
+                                                questionList[questionNumber].type === "서술형"
+
+                                                &&
+
+                                                <div style={{ height: "calc(100% - 30px)" }}>
+                                                    <textarea
+                                                        className={styles.answerTextBox}
+                                                        value={answerSheet[questionNumber]}
+                                                        spellCheck={false}
+                                                        placeholder="이곳에 정답을 입력하세요."
+                                                        onChange={(event: any) => {
+                                                            let temp = [...answerSheet];
+                                                            temp[questionNumber] = String(event.target.value);
+                                                            setModified(true);
+                                                            setAnswerSheet(temp);
+                                                        }}
+                                                        style={
+                                                            isDarkMode
+
+                                                                ?
+
+                                                                {
+                                                                    color: "rgb(255, 255, 255)",
+                                                                    backgroundColor: darkBackgroundColor,
+                                                                } : {}
+                                                        }
+                                                    />
+
+                                                    <div className={styles.answerTextLength}>
+                                                        총 {answerSheet[questionNumber] ? answerSheet[questionNumber].length : 0}자
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }
-                                    </SplitterPanel>
-                                </Splitter>
+                                            }
+                                        </SplitterPanel>
+                                    </Splitter>
                                 </div>
                             }
 
@@ -1000,17 +1008,7 @@ export default function TestMode() {
                                 {/* 설정 버튼 */}
                                 <img
                                     src={process.env.PUBLIC_URL + "/icons/settings.png"}
-                                    className={
-                                        isDarkMode
-
-                                            ?
-
-                                            styles.bottomButtonNormalDarkMode
-
-                                            :
-
-                                            styles.bottomButtonNormalLightMode
-                                    }
+                                    className={isDarkMode ? styles.bottomButtonNormalDarkMode : styles.bottomButtonNormalLightMode}
                                     onClick={() => { setIsSetting(true); }}
                                 />
 
@@ -1093,6 +1091,13 @@ export default function TestMode() {
                                         setIsChatting(true);
                                         sessionStorage.setItem("chattings", chattingList[chattingList.length - 1]?.createdTime);
                                     }}
+                                />
+
+                                {/* 응시자 가이드 버튼 */}
+                                <img
+                                    src={process.env.PUBLIC_URL + "/icons/guide.png"}
+                                    className={isDarkMode ? styles.bottomButtonNormalDarkMode : styles.bottomButtonNormalLightMode}
+                                    onClick={() => {setIsGuideMode(true);}}
                                 />
 
                                 <div className={styles.submittedTime}>
@@ -1180,6 +1185,14 @@ export default function TestMode() {
                                     submitAnswerSheet={submitAnswerSheet}
                                 />
                             }
+
+                            {
+                                isGuideMode
+
+                                &&
+
+                                <GuideMode setIsGuide={setIsGuideMode} />
+                            }
                         </form>
 
                         :
@@ -1199,30 +1212,7 @@ export default function TestMode() {
                     <Error message="유효하지 않은 응시자 입니다." />
             }
 
-            {
-                !testInfo.allowMobile && width < 800
-
-                &&
-
-                <div className={styles.disallowMobileContainer}>
-                    <div className={styles.disallowMobileContainerheader}>
-                        <img className={styles.disallowMobileContainerheaderLogo} src={process.env.PUBLIC_URL + "/logos/logo_original.png"} onClick={() => { navigate("/") }} />
-                    </div>
-
-                    <div className={styles.disallowMobileContainerText1}>
-                        모바일 환경에서 시험을 응시할 수 없습니다.
-                    </div>
-
-                    <div className={styles.disallowMobileContainerText2}>
-                        브라우저 창을 최대로 키우거나 화면이 확대된 경우에는 원래 상태로 복구해주세요.
-                        화면의 너비가 최소 800px 이상인 기기에서만 시험을 응시할 수 있습니다.<br /><br />
-                    </div>
-
-                    <div className={styles.disallowMobileContainerWidth}>
-                        현재 화면 너비 {width}px
-                    </div>
-                </div>
-            }
+            {!testInfo.allowMobile && width < 800 && <DisallowMobileContainer />}
         </div>
     )
 }

@@ -25,15 +25,6 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
 
 
-    // 화면 너비
-    const [width, setWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
-    });
-
-
-
     return (
         <div className={styles.background}>
             <div className={styles.header}>
@@ -54,19 +45,25 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                 </div>
             </div>
 
+
+
             {
                 (isTestTime[0] === "전" || isTestTime[0] === "중")
 
                     ?
 
                     <>
+                        <div className={styles.headerLine} style={tab === 1 ? { width: "33%" } : tab === 2 ? { width: "66%" } : tab === 3 ? { width: "100%" } : {}} />
+
                         <div className={styles.tabContainer}>
                             <div
                                 className={tab === 1 ? styles.tabSelected : styles.tabNotSelected}
                                 onClick={() => { setTab(1); }}
                             >
-                                <div className={tab === 1 ? styles.tabNumberSelected : styles.tabNumberNotSelected}>
-                                    1
+                                <div className={tab === 1 ? styles.tabBackgroundSelected : styles.tabBackgroundNotSelected} />
+
+                                <div className={tab === 1 ? styles.tabNumberSelected : styles.tabNumberNotSelected} >
+                                    <img src={process.env.PUBLIC_URL + "/icons/list.png"} />
                                 </div>
 
                                 <div className={tab === 1 ? styles.tabTextSelected : styles.tabTextNotSelected}>
@@ -82,8 +79,10 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                     }
                                 }}
                             >
-                                <div className={tab === 2 ? styles.tabNumberSelected : styles.tabNumberNotSelected}>
-                                    2
+                                <div className={tab === 2 ? styles.tabBackgroundSelected : styles.tabBackgroundNotSelected} />
+
+                                <div className={tab === 2 ? styles.tabNumberSelected : styles.tabNumberNotSelected} >
+                                    <img src={process.env.PUBLIC_URL + "/icons/siren.png"} />
                                 </div>
 
                                 <div className={tab === 2 ? styles.tabTextSelected : styles.tabTextNotSelected}>
@@ -99,8 +98,10 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                     }
                                 }}
                             >
-                                <div className={tab === 3 ? styles.tabNumberSelected : styles.tabNumberNotSelected}>
-                                    3
+                                <div className={tab === 3 ? styles.tabBackgroundSelected : styles.tabBackgroundNotSelected} />
+
+                                <div className={tab === 3 ? styles.tabNumberSelected : styles.tabNumberNotSelected} >
+                                    <img src={process.env.PUBLIC_URL + "/icons/idea.png"} />
                                 </div>
 
                                 <div className={tab === 3 ? styles.tabTextSelected : styles.tabTextNotSelected}>
@@ -388,12 +389,13 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
                                                 문제 유형
                                             </div>
 
-                                            {["객관식", "참/거짓", "주관식", "서술형"].map((current: string) => (
+                                            {["객관식", "참/거짓", "주관식", "서술형"].map((current: string, index: number) => (
                                                 typeOfQuestions.includes(current)
 
                                                 &&
 
-                                                <span className={styles.infoValue} style={{ marginRight: "20px" }}>
+                                                <span className={styles.infoValue}>
+                                                    {index !== 0 && ", "}
                                                     {current}
                                                 </span>
                                             ))}
@@ -480,8 +482,14 @@ export default function PreTestMode({ testInfo, applicantName, isTestTime, setIs
 
                     :
 
-                    <div>
+                    <div className={styles.notTestTimeContainer}>
+                        <div className={styles.intro}>
+                            시험이 종료되었습니다.
+                        </div>
 
+                        <div className={styles.intro}>
+                            수고하셨습니다.
+                        </div>
                     </div>
             }
         </div>
