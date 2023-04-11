@@ -2,46 +2,62 @@
     width: 100vw;
     height: 100vh;
     background-color: rgb(30, 40, 60);
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 20;
-}
-
-.backgroundPattern {
-    width: 100vw;
-    height: 100vh;
     position: fixed;
     top: 0px;
     left: 0px;
     z-index: 21;
-    opacity: 0.15;
-    filter: brightness(0) invert(0.5);
-    object-fit: cover;
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    padding-top: 50px;
 }
 
 .header {
     width: 100vw;
     height: 50px;
     display: grid;
-    grid-template-columns: 1fr fit-content(100%);
+    grid-template-columns: fit-content(100%) 1fr;
     gap: 10px;
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(10, 20, 40);
     position: fixed;
     top: 0px;
     left: 0px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(10, 20, 40);
 }
 
 .headerInfo {
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
+}
+
+.exitButton {
+    width: fit-content;  
+    height: 35px;
+    line-height: 35px;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: rgb(60, 70, 90);
+    display: grid;
+    grid-template-columns: repeat(2, fit-content(100%));
+    gap: 10px;
+    text-align: center;
+    justify-self: right;
+    cursor: pointer;
+}
+
+.exitButton:hover {
+    background-color: rgb(80, 90, 110);
+}
+
+.exitButtonIcon {
+    width: 18px;
+    height: 18px;
+    align-self: center;
+    filter: brightness(0) invert(0.75);
 }
 
 .testName {
@@ -59,36 +75,20 @@
     overflow: hidden;
 }
 
-.container {
+.tabContainer {
     width: 1100px;
-    height: min(80vh, 900px);
-    align-self: center;
-    justify-self: center;
-    display: grid;
-    grid-template-rows: fit-content(100%) 1fr;
-}
-
-.containerTop {
-    width: 100%;
     height: 100px;
     display: grid;
-    grid-template-columns: repeat(3, 150px);
-    position: relative;
-    align-items: start;
-    justify-self: center;
+    grid-template-columns: repeat(3, fit-content(100%));
+    align-items: center;
     justify-content: space-evenly;
 }
 
 .tabSelected {
     width: 150px;
     height: 40px;
-    line-height: 40px;
-    color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
-    justify-self: center;
-    text-align: center;
     border-radius: 20px;
-    padding-left: 5px;
     padding-right: 5px;
     display: grid;
     grid-template-columns: fit-content(100%) 1fr;
@@ -100,12 +100,8 @@
 .tabNotSelected {
     width: 150px;
     height: 40px;
-    line-height: 40px;
-    color: rgb(100, 100, 100);
     justify-self: center;
-    text-align: center;
     border-radius: 20px;
-    padding-left: 5px;
     padding-right: 5px;
     display: grid;
     grid-template-columns: fit-content(100%) 1fr;
@@ -122,53 +118,88 @@
     background-color: rgb(50, 60, 80);
 }
 
+.tabNotSelected:hover>.tabNumberNotSelected {
+    color: rgb(255, 255, 255);
+    background-color: rgb(70, 80, 100);
+}
+
+.tabNotSelected:hover>.tabTextNotSelected {
+    color: rgb(255, 255, 255);
+}
+
 .tabNumberSelected {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 15px;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 20px;
     color: rgb(255, 255, 255);
     background-color: rgb(30, 130, 255);
     transition: 0.5s;
 }
 
 .tabNumberNotSelected {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 15px;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 20px;
     color: rgb(100, 100, 100);
     background-color: rgb(50, 60, 80);
     transition: 0.5s;
 }
 
-.containerBottom {
+.tabTextSelected {
+    width: 110px;
+    max-width: 110px;
+    line-height: 40px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    transition: 0.5s;
+}
+
+.tabTextNotSelected {
+    width: 110px;
+    max-width: 110px;
+    line-height: 40px;
+    color: rgb(100, 100, 100);
+    text-align: center;
+    transition: 0.5s;
+}
+
+.mainContainer {
+    width: 1100px;
+    height: fit-content;
+    max-height: calc(100vh - 200px);
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     padding: 50px;
-    display: grid;
-    grid-template-rows: fit-content(100%) fit-content(100%) fit-content(100%) 1fr;
     overflow: auto;
+    display: grid;
+    grid-template-rows: 1fr fit-content(100%);
 }
 
-.containerBottom::-webkit-scrollbar {
+.mainContainer::-webkit-scrollbar {
     width: 15px;
     border-radius: 0px 10px 10px 0px;
 }
 
-.containerBottom::-webkit-scrollbar-thumb {
+.mainContainer::-webkit-scrollbar-thumb {
     width: 15px;
-    background-color: rgb(150, 150, 150, 0.3);
-    background-clip: padding-box;
+    border-radius: 0px 10px 10px 0px;
+    background-color: rgb(220, 220, 220);
 }
 
-.containerBottom::-webkit-scrollbar-track {
-    background-color: rgb(245, 245, 245);
+.mainContainer::-webkit-scrollbar-track {
+    width: 15px;
     border-radius: 0px 10px 10px 0px;
+    background-color: rgb(240, 240, 240);
 }
 
 .intro {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
     word-break: keep-all;
 }
@@ -179,8 +210,7 @@
 }
 
 .checkBoxContainer {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 40px;
     padding: 15px;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
@@ -228,7 +258,7 @@
     width: 100px;
     height: 50px;
     line-height: 50px;
-    margin-top: 20px;
+    margin-top: 40px;
     text-align: center;
     align-self: end;
     justify-self: right;
@@ -247,7 +277,7 @@
     width: 100px;
     height: 50px;
     line-height: 50px;
-    margin-top: 20px;
+    margin-top: 40px;
     text-align: center;
     align-self: end;
     justify-self: right;
@@ -259,48 +289,56 @@
 
 .guideContainer {
     height: fit-content;
-    margin-top: 30px;
-    padding: 20px;
+    margin-top: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     border-top: 1px solid rgb(220, 220, 220);
     border-bottom: 1px solid rgb(220, 220, 220);
-    background-color: rgb(245, 245, 245);
     display: grid;
-    grid-template-rows: repeat(4, fit-content(100%));
-    gap: 15px;
+    gap: 10px;
     text-align: justify;
     word-break: keep-all;
 }
 
-.guideContainer li {
+.guideContainer:nth-of-type(2) {
+    margin-top: 0px;
+    border-top: none;
+}
+
+.guideHeader {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgb(150, 150, 150);
+    margin-bottom: 10px;
+}
+
+.guideElements {
     margin-left: 20px;
 }
 
-.guideContainer li::marker {
+.guideElements::marker {
     color: rgb(150, 150, 150);
 }
 
-.agreementWrapper {
-    height: fit-content;
-    max-height: 100%;
-    border-top: 1px solid rgb(220, 220, 220);
-    border-bottom: 1px solid rgb(220, 220, 220);
-    display: grid;
-    grid-template-rows: repeat(3, fit-content(100%));
+.guideHighlight {
+    font-weight: 700;
+    color: rgb(0, 100, 250);
 }
 
 .agreementContainer {
     padding: 20px;
-    border-top: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
     background-color: rgb(245, 245, 245);
 }
 
-.agreementContainer:first-child {
-    border-top: none;
+.agreementContainer:nth-of-type(3){
+    margin-top: 40px;
+    border-top: 1px solid rgb(220, 220, 220);
 }
 
 .agreementHeader {
+    font-size: 1.1rem;
     font-weight: 700;
-    line-height: 20px;
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
     gap: 15px;
@@ -392,8 +430,8 @@ table tbody tr td {
     border-top: 1px solid rgb(220, 220, 220);
     border-bottom: 1px solid rgb(220, 220, 220);
     padding: 20px;
-    padding-left: 40px;
-    background-color: rgb(245, 245, 245);
+    padding-left: 20px;
+    padding-right: 0px;
     margin-top: 40px;
     display: grid;
     gap: 10px;
@@ -462,8 +500,8 @@ table tbody tr td {
 }
 
 .startButtonEnabledInside {
-    width: 0px;
-    height: 50px;
+    width: 0%;
+    height: 100%;
     border-radius: 5px;
     position: absolute;
     top: 0px;
@@ -473,58 +511,52 @@ table tbody tr td {
     animation: pulse 4s infinite;
 }
 
-
 @keyframes pulse {
     0% {
         width: 0px;
-        background-position: 0px 0px;
+        background-position: 0% 0%;
         opacity: 1;
     }
 
     50% {
-        width: 300px;
-        background-position: 300px 0px;
+        width: 100%;
+        background-position: 100% 0%;
     }
 
     100% {
-        width: 300px;
-        background-position: 300px 0px;
+        width: 100%;
+        background-position: 100% 0%;
         opacity: 0;
     }
 }
 
 
+
 @media (max-width: 1200px) {
-    .container {
+    .tabContainer {
         width: 100vw;
-        height: calc(100vh - 50px);
-        align-self: end;
-    }
-
-    .containerTop {
         height: 70px;
-        align-items: center;
     }
 
-    .containerBottom {
-        border-radius: 0px;
-        padding-bottom: 100px;
-    }
-
-    .containerBottom::-webkit-scrollbar {
-        border-radius: 0px;
-    }
-        
-    .containerBottom::-webkit-scrollbar-track {
+    .mainContainer {
+        width: 100vw;
+        height: calc(100vh - 120px);
+        max-height: none;
         border-radius: 0px;
     }
 
-    .startDemoButton {
-        grid-template-columns: repeat(1, fit-content(100%));
-        gap: 10px;
+    .mainContainer::-webkit-scrollbar {
+        border-radius: 0px;
+    }
+    
+    .mainContainer::-webkit-scrollbar-thumb {
+        border-radius: 0px;
+    }
+    
+    .mainContainer::-webkit-scrollbar-track {
+        border-radius: 0px;
     }
 }
-
 
 @media (max-width: 600px) {
     .header {
@@ -544,7 +576,7 @@ table tbody tr td {
         height: 14px;
         line-height: 14px;
     }
-
+    
     .applicantName {
         font-size: 0.8rem;
         height: 14px;
@@ -555,66 +587,102 @@ table tbody tr td {
         overflow: hidden;
     }
 
-    .containerTop {
-        grid-template-columns: repeat(3, 100px);
+    .exitButton {
+        font-size: 0.85rem;
+    }
+
+    .mainContainer {
+        padding-top: 30px;
+        padding-bottom: 100px;
+        padding-left: min(50px, 5vw);
+        padding-right: min(50px, 5vw);
+    }
+
+    .tabContainer {
+        width: 100vw;
     }
 
     .tabSelected {
-        font-size: 0.8rem;
-        width: 100px;
+        width: 110px;
         height: 30px;
         line-height: 30px;
-        border-radius: 15px;
-        padding-right: 10px;
     }
 
     .tabNotSelected {
-        font-size: 0.8rem;
-        width: 100px;
+        width: 30px;
         height: 30px;
         line-height: 30px;
-        border-radius: 15px;
-        padding-right: 10px;
     }
 
     .tabNumberSelected {
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
-        border-radius: 10px;
-    }
-    
-    .tabNumberNotSelected {
-        width: 20px;
-        height: 20px;
-        line-height: 20px;
-        border-radius: 10px;
+        font-size: 1rem;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
     }
 
-    .containerBottom {
-        padding-top: 40px;
-        padding-bottom: 100px;
-        padding-left: min(5vw, 50px);
-        padding-right: min(5vw, 50px);
+    .tabNumberNotSelected {
+        font-size: 1rem;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .tabTextSelected {
+        font-size: 0.85rem;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .tabTextNotSelected {
+        font-size: 0.85rem;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        max-width: 0px;
+        overflow: hidden;
+        display: none;
     }
 
     .intro {
         font-size: 1.2rem;
     }
-    
-    .introHighlight {
-        font-weight: 700;
-        color: rgb(0, 100, 250);
+
+    .checkBoxContainer {
+        margin-top: 30px;
+    }
+
+    .nextButtonAbled {
+        font-size: 1rem;
+        width: 80px;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 30px;
+    }
+
+    .nextButtonDisabled {
+        font-size: 1rem;
+        width: 80px;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 30px;
     }
 
     .guideContainer {
-        font-size: 0.85rem;
-        padding: 15px;
-        gap: 10px;
+        margin-top: 30px;
     }
 
-    .agreementContainer {
-        padding: 15px;
+    .guideHeader {
+        font-size: 1rem;
+    }
+
+    .guideElements {
+        font-size: 0.85rem;
+    }
+
+    .agreementHeader {
+        font-size: 1rem;
     }
 
     .agreementTextShow {
@@ -626,66 +694,37 @@ table tbody tr td {
     }
 
     .infoContainer {
-        margin-top: 20px;
+        margin-top: 30px;
         grid-template-columns: 1fr;
         gap: 10px 0px;
     }
 
-    .infoElements {
-        padding-left: 10px;
-    }
-    
     .infoHeader {
         font-size: 0.8rem;
     }
-    
+
     .infoValue {
         font-size: 1rem;
     }
 
     .tipContainer {
-        font-size: 0.85rem;
-        padding: 10px;
-        padding-left: 30px;
-        margin-top: 20px;
-        gap: 5px;
+        margin-top: 30px;
     }
 
-    .demoButton {
-        font-size: 1rem;
-        width: 90vw;
+    .tipElements {
+        font-size: 0.85rem;
     }
-    
-    .startButtonDisabled {
-        font-size: 1rem;
-        width: 90vw;
+
+    .startDemoButton {
+        margin-top: 30px;
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
-    
+
+    .demoButton,
+    .startButtonDisabled,
     .startButtonEnabled {
         font-size: 1rem;
-        width: 90vw;
-    }
-
-    .startButtonEnabledInside {
-        width: 90vw;
-    }
-
-    @keyframes pulse {
-        0% {
-            width: 0px;
-            background-position: 0px 0px;
-            opacity: 1;
-        }
-    
-        50% {
-            width: 90vw;
-            background-position: 90vw 0px;
-        }
-    
-        100% {
-            width: 90vw;
-            background-position: 90vw 0px;
-            opacity: 0;
-        }
+        width: 100%;
     }
 }
