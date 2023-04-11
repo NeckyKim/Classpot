@@ -1199,6 +1199,8 @@ export default function TestMode() {
                     <Error message="유효하지 않은 응시자 입니다." />
             }
 
+            {/* {sampleAlert && <SampleAlertContainer setSampleAlert={setSampleAlert} />} */}
+
             {
                 !testInfo.allowMobile && width < 800
 
