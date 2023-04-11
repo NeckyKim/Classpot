@@ -536,6 +536,8 @@ table tbody tr td {
     .tabContainer {
         width: 100vw;
         height: 70px;
+        position: fixed;
+        top: 50px;
     }
 
     .mainContainer {
@@ -543,6 +545,8 @@ table tbody tr td {
         height: calc(100vh - 120px);
         max-height: none;
         border-radius: 0px;
+        position: fixed;
+        bottom: 0px;
     }
 
     .mainContainer::-webkit-scrollbar {
