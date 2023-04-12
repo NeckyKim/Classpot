@@ -8,254 +8,342 @@
     display: none;
 }
 
-.video {
-    height: 120vh;
-    position: fixed;
-    top: -200px;
-    right: 0px;
-    z-index: -1;
-}
-
 .page1 {
     width: 100vw;
-    height: calc(100vh - 70px);
+    height: 500px;
     display: grid;
-    grid-template-rows: 1fr fit-content(100%);
+    align-items: center;
+    justify-items: center;
+    position: relative;
 }
 
-.introContainer {
-    padding-left: 15vw;
-    padding-right: 15vw;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    display: grid;
-    justify-items: left;
-    align-content: start;
+.background {
+    width: 100vw;
+    height: 500px;
 }
 
-.introText {
-    font-size: 1.5rem;
+.page1Text {
+    width: 100vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    position: absolute;
+    text-align: center;
+    display: grid;
+    word-break: keep-all;
+}
+
+.page1SubText {
+    font-size: 1.2rem;
+    color: rgb(255, 255, 255);
     margin-bottom: 10px;
+}
+
+.page1MainText {
+    font-size: 3rem;
+    font-weight: 700;
     color: rgb(255, 255, 255);
 }
 
-.introLogo {
-    height: 100px;
-    filter: invert();
-}
-
-.buttonContainer {
-    width: 100vw;
-    height: 250px;
-    background-color: rgb(255, 255, 255);
-    border-top: 1px solid rgb(220, 220, 220);
-    padding-left: 15vw;
-    padding-right: 15vw;
+.page1ButtonsZone {
+    margin-top: 50px;
+    justify-self: center;
     display: grid;
     grid-template-columns: repeat(2, fit-content(100%));
-    gap: 40px;
-    justify-content: right;
-    align-content: center;
+    gap: 20px;
 }
 
-.buttonHeader {
-    font-weight: 300;
-    color: rgb(150, 150, 150);
-    margin-bottom: 10px;
-}
-
-.applyTestButton {
-    width: 250px;
-    height: 60px;
-    line-height: 60px;
-    font-size: 1.2rem;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-    border-radius: 5px;
+.applyButton {
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 175px;
+    height: 50px;
+    line-height: 50px;
     text-align: center;
-    cursor: pointer;
-}
-
-.sampleTestButton {
-    width: 250px;
-    height: 60px;
-    line-height: 60px;
-    font-size: 1.2rem;
+    border-radius: 5px;
     color: rgb(255, 255, 255);
     background-color: rgb(0, 220, 220);
-    border-radius: 5px;
-    text-align: center;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+.applyButton:hover {
+    background-color: rgb(0, 200, 200);
+}
+
+.demoButton {
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 175px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.demoButton:hover {
+    background-color: rgb(0, 80, 230);
 }
 
 .page2 {
     width: 100vw;
     height: fit-content;
-    background-color: rgb(255, 255, 255);
-    padding-top: 200px;
+    padding-top: 100px;
     padding-bottom: 100px;
-    display: grid;
-    align-content: center;
-    justify-items: center;
+    position: relative;
 }
 
-.aboutTextContainer {
+.page2Text1 {
+    width: 100vw;
+    font-size: 2rem;
+    font-weight: 700;
     text-align: center;
-}
-
-.aboutText1 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: rgb(0, 100, 250);
+    color: rgb(50, 50, 50);
     margin-bottom: 10px;
+    word-break: keep-all;
 }
 
-.aboutText2 {
-    font-size: 2.5rem;
+.page2TextHighlight {
     font-weight: 700;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, rgb(0, 220, 220), rgb(0, 100, 250));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.aboutText3 {
-    font-size: 0.8rem;
-    font-weight: 300;
+.page2Text2 {
+    width: 100vw;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: center;
     color: rgb(150, 150, 150);
     margin-bottom: 50px;
+    word-break: keep-all;
 }
 
-.aboutImage {
-    height: 500px;
+.marquee {
+    width: 100vw;
+    height: 550px;
+    overflow: hidden;
+    position: relative;
+}
+
+.marqueeInner1 {
+    width: 5200px;
+    height: fit-content;
+    position: absolute;
+    animation: marquee1 50s linear infinite;
+}
+
+.marqueeInner2 {
+    width: 5200px;
+    height: fit-content;
+    position: absolute;
+    animation: marquee2 50s linear infinite;
+}
+
+.marqueeImage1 {
+    width: 600px;
+    margin-right: 100px;
+}
+
+.marqueeImage2 {
+    width: 500px;
+    margin-right: 100px;
+}
+
+.marqueeImage3 {
+    width: 700px;
+    margin-right: 100px;
+}
+
+.marqueeImage4 {
+    width: 144px;
+    margin-right: 100px;
+}
+
+.marqueeImage5 {
+    width: 156px;
+    margin-right: 100px;
+}
+
+@keyframes marquee1 {
+    0% {
+        left: 0px;
+    }
+
+    100% {
+        left: -5200px;
+        ;
+    }
+}
+
+@keyframes marquee2 {
+    0% {
+        left: 5200px;
+    }
+
+    100% {
+        left: 0px;
+    }
 }
 
 .page3 {
     width: 100vw;
     height: fit-content;
     background-color: rgb(240, 240, 240);
-    padding-top: 150px;
-    padding-bottom: 150px;
-    display: grid;
-    align-content: center;
-    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 15vw;
+    padding-right: 15vw;
 }
 
-.page3Header {
-    font-size: 1.5rem;
-    font-weight: 700;
-    height: 50px;
-    line-height: 50px;
-    color: rgb(255, 255, 255);
-    text-align: center;
+.manualTab {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(4, fit-content(100%));
+    justify-content: space-evenly;
 }
 
-.processTabContainer {
-    width: 1000px;
+.tabSelected {
+    width: 150px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin-bottom: 20px;
-}
-
-.processTabButton {
-    width: 250px;
-    display: grid;
+    grid-template-rows: repeat(2, fit-content(100%));
     align-items: center;
     justify-items: center;
-}
-
-.processTabButtonNumberSelected {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    font-size: 2rem;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-    border-radius: 30px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.processTabButtonNumberNotSelected {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 1.2rem;
-    color: rgb(150, 150, 150);
-    background-color: rgb(220, 220, 220);
-    border-radius: 20px;
-    margin-bottom: 10px;
-    text-align: center;
     cursor: pointer;
 }
 
-.processTabButtonTextSelected {
-    font-size: 1.6rem;
-    color: rgb(0, 100, 250);
-    margin-bottom: 10px;
-}
-
-.processTabButtonTextNotSelected {
-    font-size: 1.2rem;
-    color: rgb(150, 150, 150);
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.processElements {
-    width: 1000px;
-    height: 440px;
-    border-radius: 10px;
-    padding: 40px;
-    background-color: rgb(255, 255, 255);
+.tabNotSelected {
+    width: 150px;
     display: grid;
-    grid-template-columns: 600px 1fr;
+    grid-template-rows: repeat(2, fit-content(100%));
+    align-items: center;
+    justify-items: center;
+    cursor: pointer;
 }
 
-.processImage {
-    height: 360px;
-}
-
-.processNumber {
-    font-size: 1.5rem;
+.tabNumberSelected {
+    font-size: 1.2rem;
     width: 40px;
     height: 40px;
     line-height: 40px;
     text-align: center;
     border-radius: 20px;
     color: rgb(255, 255, 255);
+    background-color: rgb(40, 140, 255);
+    transition: 0.5s;
+}
+
+.tabNumberNotSelected {
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 20px;
+    color: rgb(100, 100, 100);
+    background-color: rgb(210, 210, 210);
+    transition: 0.5s;
+}
+
+.tabTextSelected {
+    line-height: 20px;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
     background-color: rgb(0, 100, 250);
-}
-
-.processHeader {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: rgb(0, 100, 250);
-    margin-bottom: 20px;
-    display: grid;
-    grid-template-columns: repeat(2, fit-content(100%));
-    gap: 10px;
-}
-
-.processHeaderIcon {
-    height: 60px;
-}
-
-.processHeaderText {
-    height: 60px;
-    line-height: 60px;
-}
-
-.processText,
-.processText>li {
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: rgb(150, 150, 150);
-    text-align: justify;
+    text-align: center;
+    transition: 0.5s;
     word-break: keep-all;
 }
 
+.tabTextNotSelected {
+    line-height: 20px;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 15px;
+    color: rgb(100, 100, 100);
+    text-align: center;
+    transition: 0.5s;
+    word-break: keep-all;
+}
+
+.manualContainer {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 50px;
+}
+
+.manualImage {
+    width: 400px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.manualHeader {
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 20px;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.manualHeaderImage {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(0.5);
+}
+
+.manualHeaderText {
+    font-size: 1.5rem;
+    font-weight: 700;
+    height: 40px;
+    line-height: 40px;
+    color: rgb(0, 100, 250);
+}
+
+.manualDescription {
+    font-size: 1.2rem;
+    font-weight: 600;
+    word-break: keep-all;
+    color: rgb(100, 100, 100);
+    line-height: 30px;
+}
+
+.manualDescriptionList {
+    font-size: 1rem;
+    line-height: 20px;
+    color: rgb(150, 150, 150);
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.manualDescriptionList li {
+    margin-top: 5px;
+
+
+}
+
 .footer {
-    height: 150px;
     background-color: rgb(200, 200, 200);
     text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
     padding-left: 15vw;
     padding-right: 15vw;
     display: grid;
@@ -278,136 +366,175 @@
 
 
 @media (max-width: 1200px) {
-    .video {
-        top: -300px;
-        right: -150px;
+    .manualContainer {
+        grid-template-columns: none;
+        grid-template-rows: fit-content(100%) 1fr;
+        justify-items: center;
     }
 
-    .introContainer,
-    .buttonContainer {
-        padding-left: 5vw;
-        padding-right: 5vw;
-    }
-
-    .buttonContainer {
-        gap: 10px;
+    .manualContainerRight {
+        width: 80%;
     }
 }
 
 
 
 @media (max-width: 600px) {
-    .introText {
+    .page1 {
+        height: calc(100vh - 70px);
+    }
+
+    .background {
+        height: calc(100vh - 70px);
+    }
+
+    .page1Text {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    .page1SubText {
         font-size: 1rem;
     }
 
-    .introLogo {
-        width: 80vw;
-        height: auto;
+    .page1MainText {
+        font-size: 2.4rem;
     }
 
-    .introContainer {
-        justify-items: center;
-    }
-
-    .buttonContainer {
-        width: 100vw;
-        height: fit-content;
-        padding-left: min(40px, 5vw);
-        padding-right: min(40px, 5vw);
-        padding-top: 40px;
-        padding-bottom: 120px;
+    .page1ButtonsZone {
         grid-template-columns: none;
         grid-template-rows: repeat(2, fit-content(100%));
-        gap: 20px;
-        justify-content: center;
-        align-content: center;
     }
 
-    .applyTestButton,
-    .sampleTestButton {
-        width: calc(100vw - 2 * min(40px, 5vw));
+    .applyButton,
+    .demoButton {
+        font-size: 1rem;
+        height: 40px;
+        line-height: 40px;
     }
 
-    .aboutText1 {
+    .page2Text1 {
         font-size: 1.5rem;
-        margin-bottom: 5px;
-    }
-    
-    .aboutText2 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-    
-    .aboutText3 {
-        font-size: 0.6rem;
+        padding-left: 5vw;
+        padding-right: 5vw;
     }
 
-    .aboutImage {
-        width: min(500px, 80vw);
-        height: min(500px, 80vw);
+    .page2Text2 {
+        font-size: 1rem;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        margin-bottom: 30px;
+    }
+
+    .marquee {
+        height: 255px;
+    }
+
+    .marqueeInner1,
+    .marqueeInner2 {
+        width: 2600px;
+    }
+
+    .marqueeImage1 {
+        width: 300px;
+        margin-right: 50px;
+    }
+
+    .marqueeImage2 {
+        width: 250px;
+        margin-right: 50px;
+    }
+
+    .marqueeImage3 {
+        width: 350px;
+        margin-right: 50px;
+    }
+
+    .marqueeImage4 {
+        width: 72px;
+        margin-right: 50px;
+    }
+
+    .marqueeImage5 {
+        width: 78px;
+        margin-right: 50px;
+    }
+
+    @keyframes marquee1 {
+        0% {
+            left: 0px;
+        }
+
+        100% {
+            left: -2600px;
+            ;
+        }
+    }
+
+    @keyframes marquee2 {
+        0% {
+            left: 2600px;
+        }
+
+        100% {
+            left: 0px;
+        }
     }
 
     .page3 {
-        height: 100vh;
+        padding-left: 10vw;
+        padding-right: 10vw;
     }
 
-    .processTabContainer {
-        width: 80vw;
-    }
-    
-    .processTabButton {
-        width: 20vw;
+    .tabSelected {
+        width: 100%;
     }
 
-    .processTabButtonNumberSelected {
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        border-radius: 20px;
-        font-size: 1.2rem;
+    .tabNotSelected {
+        width: 100%;
     }
-    
-    .processTabButtonNumberNotSelected {
+
+    .manualImage {
+        width: min(400px, 80vw);
+    }
+
+    .manualContainer {
+        margin-top: 30px;
+        gap: 30px;
+    }
+
+    .manualContainerRight {
+        width: 100%;
+    }
+
+    .manualHeader {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .manualHeaderImage {
         width: 30px;
         height: 30px;
-        line-height: 30px;
-        border-radius: 15px;
-        font-size: 0.8rem;
-    }
-    
-    .processTabButtonTextSelected {
-        font-size: 1.2rem;
-    }
-    
-    .processTabButtonTextNotSelected {
-        font-size: 0.8rem;
     }
 
-    .processElements {
-        width: 80vw;
-        height: 70vh;
-        padding: min(40px, 5vw);
-        display: grid;
-        grid-template-columns: none;
-        grid-template-rows: fit-content(100%) fit-content(100%);
+    .manualHeaderText {
+        font-size: 1.2rem;
+        height: 30px;
+        line-height: 30px;
     }
-    
-    .processImage {
-        width: calc(80vw - 2 * min(40px, 5vw));
-        height: auto;
+
+    .manualDescription {
+        font-size: 1rem;
+        line-height: 20px;
     }
 
     .footer {
-        padding-left: min(40px, 15vw);
-        padding-right: min(40px, 15vw);
-    }
-
-    .footerImage {
-        height: 30px;
-    }
-
-    .footerText {
-        font-size: 0.8rem;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-left: min(40px, 10vw);
+        padding-right: min(40px, 10vw);
+        grid-template-columns: none;
+        grid-template-rows: repeat(2, fit-content(100%));
+        justify-items: center;
     }
 }
