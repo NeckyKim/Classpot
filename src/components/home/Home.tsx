@@ -1,11 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Slider from "react-slick";
-
 import styles from "./Home.module.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 
 
@@ -14,6 +10,13 @@ export default function Home() {
 
     const [manual, setManual] = useState<number>(1);
 
+
+    // 화면 너비
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => { setWidth(window.innerWidth); });
+    });
 
 
     return (
@@ -25,8 +28,8 @@ export default function Home() {
                     </div>
 
                     <div className={styles.page1MainText}>
-                        테스트콘으로 빠르고 간편하게<br />
-                        온라인 시험을 진행해보세요.
+                        테스트콘으로<span className={styles.enter} />빠르고 간편하게<br />
+                        온라인 시험을<span className={styles.enter} />진행해보세요.
                     </div>
 
                     <div className={styles.page1ButtonsZone}>
@@ -108,7 +111,7 @@ export default function Home() {
 
             <div className={styles.page2}>
                 <div className={styles.page2Text1}>
-                    종이 시험은 더 이상 그만, 이제는 <span className={styles.page2TextHighlight}>디지털</span> 시대입니다.
+                    종이 시험은 더 이상 그만,<span className={styles.enter} />이제는 <span className={styles.page2TextHighlight}>디지털</span> 시대입니다.
                 </div>
 
                 <div className={styles.page2Text2}>
@@ -145,6 +148,85 @@ export default function Home() {
             </div>
 
             <div className={styles.page3}>
+                <div className={styles.page3Text}>
+                    응시자를 위한 최적의 시험 환경을 제공하고 있습니다.
+                </div>
+
+                <div className={styles.featureContainer}>
+                    <div className={styles.featureElements}>
+                        <div className={styles.featureHeader}>
+                            <img className={styles.featureImage} src={process.env.PUBLIC_URL + "/icons/chatting_normal.png"} />
+                        </div>
+
+                        <div className={styles.featureTitle}>
+                            감독관 채팅
+                        </div>
+
+                        <div className={styles.featureDescription}>
+                            응시자와 감독관이 1:1로 실시간 채팅을 진행할 수 있습니다.
+                        </div>
+                    </div>
+
+                    <div className={styles.featureElements}>
+                        <div className={styles.featureHeader}>
+                            <img className={styles.featureImage} src={process.env.PUBLIC_URL + "/icons/notice_normal.png"} />
+                        </div>
+
+                        <div className={styles.featureTitle}>
+                            공지사항 안내
+                        </div>
+
+                        <div className={styles.featureDescription}>
+                            모든 응시자에게 공지사항을 전달할 수 있습니다.
+                        </div>
+                    </div>
+
+                    <div className={styles.featureElements}>
+                        <div className={styles.featureHeader}>
+                            <img className={styles.featureImage} style={{filter: "brightness(0) invert(1)"}} src={process.env.PUBLIC_URL + "/icons/flag.png"} />
+                        </div>
+
+                        <div className={styles.featureTitle}>
+                            다시 풀어 볼 문제 체크
+                        </div>
+
+                        <div className={styles.featureDescription}>
+                            나중에 다시 풀어 볼 문제를 체크할 수 있습니다. 좌측에 주황색으로 표시되어 한 눈에 확인할 수 있습니다.
+                        </div>
+                    </div>
+
+                    <div className={styles.featureElements}>
+                        <div className={styles.featureHeader}>
+                            <img className={styles.featureImage} src={process.env.PUBLIC_URL + "/icons/bright_dark.png"} />
+                        </div>
+
+                        <div className={styles.featureTitle}>
+                            밝은/어두운 화면
+                        </div>
+
+                        <div className={styles.featureDescription}>
+                            밝은 화면과 어두운 화면을 선택하여 응시할 수 있습니다.
+                        </div>
+                    </div>
+
+                    <div className={styles.featureElements}>
+                        <div className={styles.featureHeader}>
+                            <img className={styles.featureImage} style={{filter: "brightness(0) invert(1)"}} src={process.env.PUBLIC_URL + "/icons/width.png"} />
+                        </div>
+
+                        <div className={styles.featureTitle}>
+                            문제/지문 간격 조절
+                        </div>
+
+                        <div className={styles.featureDescription}>
+                            문제와 지문 영역의 크기를 응시자가 직접 조절할 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className={styles.page4}>
                 <div className={styles.manualTab}>
                     <div className={manual === 1 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setManual(1); }}>
                         <div className={manual === 1 ? styles.tabNumberSelected : styles.tabNumberNotSelected}>
