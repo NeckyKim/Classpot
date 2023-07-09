@@ -5,13 +5,16 @@ import { doc, onSnapshot } from "firebase/firestore";
 
 
 
-export default function GetTestInfo(testCode: string | undefined) {
+export default function GetTestInfo(userCode: string | undefined, testCode: string | undefined) {
     const [testInfo, setTestInfo] = useState<any>([]);
 
-    if (testCode) {
+    if (userCode && testCode) {
         useEffect(() => {
-            onSnapshot(doc(dbService, "tests", testCode), (doc) => {
-                setTestInfo(doc.data());
+            onSnapshot(doc(dbService, "users", userCode, "tests", testCode), (doc) => {
+                setTestInfo({
+                    testCode: testCode,
+                    ...doc.data()
+                });
             });
         }, [])
     }

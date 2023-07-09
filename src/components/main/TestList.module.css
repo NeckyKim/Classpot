@@ -1,0 +1,104 @@
+.background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 600px;
+    height: fit-content;
+    border-radius: 10px;
+    border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.testElements {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.testElements:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.testProfile {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+}
+
+.testName {
+    font-size: 1.2rem;
+    color: rgb(0, 0, 0);
+}
+
+.createTestButton {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.createTestButton:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.colorProfile {
+    font-size: 2rem;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 40px;
+    margin: 0px auto;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.colorButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.colorButton {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.colorButton:hover {
+    transform: scale(1.2);
+}

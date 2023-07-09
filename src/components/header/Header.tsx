@@ -2,7 +2,10 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { authService } from "../../FirebaseModules";
 
+import SubmitButton from "../../theme/SubmitButton";
+
 import styles from "./Header.module.css";
+
 
 
 
@@ -13,7 +16,7 @@ type HeaderProps = {
 export default function Header({ loggedIn }: HeaderProps) {
     var navigate = useNavigate();
 
-    
+
 
     return (
         <div>
@@ -31,21 +34,21 @@ export default function Header({ loggedIn }: HeaderProps) {
 
                             ?
 
-
-                            <div 
-                                className={styles.logoutButton} 
-                                onClick={() => { 
+                            <SubmitButton
+                                text="로그아웃"
+                                onClick={() => {
                                     authService.signOut();
                                     navigate("/");
                                 }}
-                            >
-                                로그아웃
-                            </div>
+                            />
 
                             :
 
-                            <Link to="/login" className={styles.loginButton}>
-                                로그인
+                            <Link to="/login">
+                                <SubmitButton
+                                    text="로그인"
+                                    onClick={() => { }}
+                                />
                             </Link>
                     )
                 }

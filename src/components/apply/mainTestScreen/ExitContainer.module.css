@@ -1,0 +1,103 @@
+.unsolvedLabel,
+.flaggedLabel {
+    border-top: 1px solid rgb(220, 220, 220);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.unsolvedContainer,
+.flaggedContainer {
+    width: 418px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.unsolvedContainer::-webkit-scrollbar,
+.flaggedContainer::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.unsolvedContainer::-webkit-scrollbar-thumb,
+.flaggedContainer::-webkit-scrollbar-thumb {
+    background-color: rgb(230, 230, 230);
+}
+
+.unsolvedIcon {
+    width: 20px;
+    height: 20px;
+    filter: invert(33%) sepia(62%) saturate(5612%) hue-rotate(344deg) brightness(108%) contrast(104%);
+}
+
+.flaggedIcon {
+    width: 20px;
+    height: 20px;
+    filter: invert(51%) sepia(91%) saturate(1038%) hue-rotate(7deg) brightness(103%) contrast(106%);
+}
+
+.unsolvedComment {
+    line-height: 20px;
+}
+
+.unsolvedElements {
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid rgb(220, 220 ,220);
+    color: rgb(250, 50, 50);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.unsolvedElements:hover {
+    border: 1px solid rgb(250, 50, 50);
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 50, 50);
+}
+
+.flaggedElements {
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid rgb(220, 220 ,220);
+    color: rgb(250, 150, 0);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.flaggedElements:hover {
+    border: 1px solid rgb(250, 150, 0);
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 150, 0);
+}
+
+.reEntryComment {
+    color: rgb(250, 50, 50);
+    word-break: keep-all;
+}
+
+.checkBoxContainer {
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    padding: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -1,0 +1,82 @@
+.comment {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.agreementContainer {
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    word-break: keep-all;
+}
+
+.agreementHeader{
+    font-weight: 600;
+    color: rgb(150, 150, 150);
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.agreementArrowDown {
+    width: 18px;
+    height: 18px;
+    filter: invert(0.7);
+    transition: 0.5s;
+}
+
+.agreementArrowUp {
+    width: 18px;
+    height: 18px;
+    filter: invert(0.7);
+    transition: 0.5s;
+    transform: rotate(180deg);
+}
+
+.agreementOpen {
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.agreementClosed {
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.agreementContainer table {
+    border-spacing: 0px;
+    border-top: 1px solid rgb(220, 220, 220);
+    margin-top: 10px;
+}
+
+.agreementContainer table thead tr th {
+    padding: 6px;
+    border-right: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    background-color: rgb(245, 245, 245);
+    text-align: left;
+}
+
+.agreementContainer table tbody tr td {
+    padding: 6px;
+    border-right: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    text-align: center;
+}
+
+.agreeCheckBox {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+}

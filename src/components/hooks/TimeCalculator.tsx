@@ -2,9 +2,8 @@ import { useEffect, useState } from "react"
 
 
 
-export default function TimeCalculator( startDate: number, duration: number ) {
-    // 시험 진행 상황
-    const [isTestTime, setIsTestTime] = useState<string>("불");
+export default function TimeCalculator(startDate: number, duration: number) {
+    const [isTime, setIsTime] = useState<string>("none");
 
     const startTime = startDate;
     const [currentTime, setIsCurrentTime] = useState<any>(Date.now());
@@ -20,19 +19,20 @@ export default function TimeCalculator( startDate: number, duration: number ) {
 
     useEffect(() => {
         if (currentTime < startTime) {
-            setIsTestTime("전");
+            setIsTime("before");
         }
 
         else if (currentTime >= startTime && currentTime <= finishTime) {
-            setIsTestTime("중");
+            setIsTime("running");
         }
 
         else if (currentTime > finishTime) {
-            setIsTestTime("후");
+            setIsTime("after");
         }
     })
 
-    // 시험 시작 전 남은 시간
+
+
     var daysBefore = Math.floor((startTime - currentTime) / 86400000)
     var hoursBefore = Math.floor(((startTime - currentTime) - daysBefore * 86400000) / 3600000);
     var minutesBefore = Math.floor(((startTime - currentTime) - daysBefore * 86400000 - hoursBefore * 3600000) / 60000);
@@ -40,11 +40,26 @@ export default function TimeCalculator( startDate: number, duration: number ) {
 
 
 
-    // 시험 응시 중 남은 시간
     var hoursCurrent = Math.floor((finishTime - currentTime) / 3600000);
     var minutesCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000) / 60000);
     var secondsCurrent = Math.floor(((finishTime - currentTime) - hoursCurrent * 3600000 - minutesCurrent * 60000) / 1000);
 
 
-    return [isTestTime, [daysBefore, hoursBefore, minutesBefore, secondsBefore], [hoursCurrent, minutesCurrent, secondsCurrent]]
+
+    var result = {
+        isTime: isTime,
+        beforeTime: {
+            days: daysBefore,
+            hours: hoursBefore,
+            minutes: minutesBefore,
+            seconds: secondsBefore
+        },
+        remainingTime: {
+            hours: hoursCurrent,
+            minutes: minutesCurrent,
+            seconds: secondsCurrent
+        }
+    }
+
+    return result
 }

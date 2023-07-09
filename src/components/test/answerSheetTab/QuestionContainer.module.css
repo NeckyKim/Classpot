@@ -1,0 +1,220 @@
+.container {
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    padding: 30px;
+}
+
+.containerTop {
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%);
+    gap: 30px;
+    align-items: center;
+}
+
+.number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.numberButton {
+    height: 20px;
+    line-height: 20px;
+    color: rgb(150, 150, 150);
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.numberButton:hover {
+    color: rgb(100, 100, 100);
+}
+
+.numberButton:hover>.numberButtonIcon {
+    filter: invert(0.6);
+}
+
+.numberButtonIcon {
+    width: 20px;
+    height: 20px;
+    filter: invert(0.8);
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+    justify-content: flex-start;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.infoElements {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.infoHeader {
+    font-weight: 600;
+    color: rgb(150, 150, 150);
+}
+
+.infoValue {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.header {
+    font-weight: 600;
+    color: rgb(150, 150, 150);
+    margin-bottom: 10px;
+}
+
+.passage {
+    margin-bottom: -35px;
+}
+
+.choiceContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choiceElements {
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 10px;
+}
+
+.choiceNumberCorrect {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 14px;
+    border: 1px solid rgb(0, 100, 250);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    text-align: center;
+}
+
+.choiceNumberIncorrect {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 14px;
+    border: 1px solid rgb(200, 200, 200);
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.choiceNumberTrue {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 14px;
+    background-color: rgb(50, 200, 100);
+    text-align: center;
+}
+
+.choiceNumberFalse {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 14px;
+    background-color: rgb(250, 50, 50);
+    text-align: center;
+}
+
+.choiceNumberTrue img,
+.choiceNumberFalse img {
+    width: 28px;
+    height: 28px;
+    padding: 6px;
+    filter: invert();
+}
+
+.choiceValueCorrect {
+    font-size: 1.1rem;
+    line-height: 24px;
+    margin-top: 2px;    
+    color: rgb(0, 100, 250);
+    word-break: keep-all;
+}
+
+.choiceValueIncorrect {
+    font-size: 1.1rem;
+    line-height: 24px;
+    margin-top: 2px;
+    color: rgb(0, 0, 0);
+    word-break: keep-all;
+}
+
+.choiceValueTrue {
+    font-size: 1.1rem;
+    line-height: 24px;
+    margin-top: 2px;
+    color: rgb(50, 200, 100);
+}
+
+.choiceValueFalse {
+    font-size: 1.1rem;
+    line-height: 24px;
+    margin-top: 2px;
+    color: rgb(250, 50, 50);
+}
+
+.answerSheetEmpty {
+    font-size: 1.1rem;
+    line-height: 24px;
+    margin-top: 2px;
+    color: rgb(200, 200, 200);
+}
+
+.grading {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.gradingText {
+    font-size: 1.1rem;
+    font-weight: 700;
+    height: 28px;
+    line-height: 28px;
+}
+
+.gradingGreen,
+.gradingYellow,
+.gradingRed,
+.gradingGray {
+    font-size: 0.9rem;
+    width: fit-content;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+}
+
+.gradingGreen {
+    background-color: rgb(50, 200, 100);
+}
+
+.gradingYellow {
+    background-color: rgb(250, 180, 0);
+}
+
+.gradingRed {
+    background-color: rgb(250, 50, 50);
+}
+
+.gradingGray {
+    background-color: rgb(180, 180, 180);
+}

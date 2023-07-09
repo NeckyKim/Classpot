@@ -1,57 +1,49 @@
-.loginWrapper {
+.background {
     width: 100vw;
-    height: calc(100vh - 70px);
-    display: grid;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.loginContainer {
+.container {
     width: 400px;
-    height: 400px;
-    padding: 40px;
-    border-radius: 10px;
+    height: fit-content;
+    border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
-    display: grid;
-    grid-template-rows: 100px 1fr 60px;
+    padding: 40px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-.loginHeader {
+.label {
     font-family: "Poppins";
     font-size: 3rem;
     font-weight: 600;
+    line-height: 50px;
     letter-spacing: -2px;
 }
 
-.loginGuide {
+.comment {
     font-size: 1.2rem;
-    font-weight: 400;
+    font-weight: 600;
     color: rgb(150, 150, 150);
     word-break: keep-all;
+    margin-top: 30px;
+    margin-bottom: 80px;
 }
 
-.loginButton {
+.button {
     font-size: 1.5rem;
-    border: none;
+    height: 50px;
+    line-height: 50px;
     border-radius: 5px;
     color: rgb(255, 255, 255);
     background: linear-gradient(135deg, rgb(0, 220, 220) 20%, rgb(0, 100, 250) 90%);
+    text-align: center;
     cursor: pointer;
-}
-
-
-
-@media (max-width: 600px) {
-    .loginContainer {
-        width: 100vw;
-        height: calc(100vh - 70px);
-        padding: min(5vw, 40px);
-        padding-top: 20vh;
-        padding-bottom: 20vh;
-        border-radius: 0px;
-        border: none;
-        display: grid;
-        grid-template-rows: 100px 1fr 60px;
-    }
-    
 }

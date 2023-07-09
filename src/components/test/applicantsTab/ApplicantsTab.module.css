@@ -1,382 +1,63 @@
 .container {
-    width: 100%;
-    height: calc(100vh - 70px);
-    display: grid;
-    grid-template-rows: 120px 40px 1fr;
+    padding-left: 20vh;
+    padding-right: 20vh;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
 .containerTop {
-    font-size: 2rem;
-    font-weight: 700;
-    height: 120px;
-    line-height: 120px;
-    padding-left: 100px;
-    padding-right: 100px;
-    background-color: rgb(245, 245, 245);
-}
-
-.containerCenter {
-    height: 40px;
-    line-height: 40px;
     display: grid;
-    grid-template-columns: repeat(4, 150px);
-    border-bottom: 1px solid rgb(220, 220, 220);
-    padding-left: 100px;
-    padding-right: 100px;
-    background-color: rgb(245, 245, 245);
-}
-
-.tabClicked {
-    font-size: 1.2rem;
-    height: 40px;
-    line-height: 40px;
-    color: rgb(0, 100, 250);
-    border-bottom: 3px solid rgb(0, 100, 250);
-    text-align: center;
-}
-
-.tabNotClicked {
-    font-size: 1.2rem;
-    height: 40px;
-    line-height: 40px;
-    color: rgb(150, 150 ,150);
-    text-align: center;
-    cursor: pointer;
-}
-
-.containerBottom {
-    height: calc(100vh - 230px);
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    overflow: auto;
-}
-
-.containerBottom::-webkit-scrollbar {
-    background-color: transparent;
-}
-
-.containerBottom::-webkit-scrollbar-thumb {
-    background-color: rgb(220, 220, 220);
-}
-
-.applicantContainerTop {
-    display: grid;
-    grid-template-columns: fit-content(100%) 1fr fit-content(100%) fit-content(100%);
+    grid-template-columns: 1fr fit-content(100%) fit-content(100%);
     gap: 10px;
-    margin-bottom: 30px;
-}
-
-.applicantInfo {
-    font-size: 1.5rem;
-    height: 40px;
-    line-height: 40px;
-}
-
-.applicantNumberHeader {
-    font-size: 1.2rem;
-    font-weight: 300;
-    height: 40px;
-    line-height: 40px;
-    color: rgb(150, 150 ,150);
-    margin-right: 10px;
-}
-
-.applicantsNumberValue {
-    font-size: 1.5rem;
-    font-weight: 700;
-    height: 40px;
-    line-height: 40px;
-}
-
-.addApplicantButton {
-    font-size: 1rem;
-    width: 150px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 5px;
-    border: none;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-    cursor: pointer;
-}
-
-.downloadListButton {
-    font-size: 1rem;
-    width: 150px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 5px;
-    border: none;
-    text-align: center;
-    background-color: rgb(220, 220, 220);
-    cursor: pointer;
-}
-
-.applicantContainerHeader {
-    height: 40px;
-    background-color: rgb(240, 240, 240);
-    border-top: 1px solid rgb(220, 220, 220);
-    border-bottom: 1px solid rgb(220, 220, 220);
-    display: grid;
-    grid-template-columns: 70px 100px 1fr 80px 150px 70px 70px 70px;
     align-items: center;
 }
 
-.applicantContainerHeaderTextAlignCenter {
-    text-align: center;
+.info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
 }
 
-.applicantContainerHeaderTextAlignLeft {
-    text-align: left;
-}
-
-.answerSheetContainer {
-    height: calc(100vh - 230px);
-    display: grid;
-    grid-template-columns: 450px 1fr;
-    text-align: center;
-}
-
-.answerSheetContainerLeft {
-    padding-top: 50px;
-    padding-left: 100px;
-    padding-right: 50px;
-    overflow: auto;
-}
-
-.answerSheetContainerRight {
-    border-left: 1px solid rgb(220, 220, 220);
-}
-
-.answerSheetContainerLeft::-webkit-scrollbar,
-.answerSheetContainerRight::-webkit-scrollbar {
-    background-color: transparent;
-}
-
-.answerSheetContainerLeft::-webkit-scrollbar-thumb,
-.answerSheetContainerRight::-webkit-scrollbar-thumb {
-    background-color: rgb(220, 220, 220);
-}
-
-.applicantContainerSelected {
+.infoValue {
     font-size: 1.2rem;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 5px;
-    display: grid;
-    grid-template-columns: 1fr fit-content(100%);
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-    text-align: left;
+    font-weight: 700;
 }
 
-.applicantContainerNotSelected {
-    font-size: 1.2rem;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 5px;
-    display: grid;
-    grid-template-columns: 1fr fit-content(100%);
-    cursor: pointer;
-    text-align: left;
-}
-
-.applicantContainerNotSelected:hover {
-    background-color: rgb(240, 240, 240);
-}
-
-
-.answerSheetContainerRight {
-    padding-top: 50px;
-    padding-left: 50px;
-    padding-right: 100px;
-    overflow: auto;
-}
-
-.questionContainer {
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    margin-bottom: 50px;
-}
-
-.questionContainer1 {
-    border-bottom: 1px solid rgb(220, 220, 220);
-    padding-top: 10px;
+.applicantListHeader {
+    color: rgb(150, 150, 150);
+    border-bottom: 1px solid rgb(120, 120, 120);
     padding-bottom: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
-    text-align: left;
-}
-
-.questionNumberCorrect {
-    font-size: 2rem;
-    font-weight: 500;
-    color: rgb(100, 220, 100);
-}
-
-.questionNumberBefore {
-    font-size: 2rem;
-    font-weight: 500;
-    color: rgb(200, 200, 250);
-}
-
-.questionNumberIncorrect {
-    font-size: 2rem;
-    font-weight: 500;
-    color: rgb(250, 50, 50);
-}
-
-.questionNumberSomeCorrect {
-    font-size: 2rem;
-    font-weight: 500;
-    color: (250, 200, 100);
-}
-
-.questionContainer2 {
-    height: fit-content;
-    padding-top: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
-}
-
-.questionContainer3 {
-    border-bottom: 1px solid rgb(220, 220, 220);
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 20px;
-    text-align: left;
-}
-
-.choiceAnswerContainer {
+    padding-left: 10px;
+    padding-right: 10px;
     display: grid;
-    gap: 10px;
+    grid-template-columns: 60px 90px 1fr 40px 40px 40px;
+    gap: 25px;
 }
 
-.choiceAnswerElements {
-    height: fit-content;
-    display: grid;
-    grid-template-columns: 24px 1fr;
-    gap: 10px;
-    border-radius: 5px;
-    align-items:start;
+.empty {
+    color: rgb(150, 150, 150);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
 }
 
-.choiceNumberSelected {
-    font-weight: 400;
-    height: 24px;
-    line-height: 24px;
-    border-radius: 12px;
-    background-color: rgb(0, 220, 220);
-    color: rgb(255, 255, 255);
-    text-align: center;
+.emptyImage {
+    width: 200px;
+    height: 200px;
+    filter: grayscale(100%);
 }
 
-.choiceNumberNotSelected {
-    font-weight: 400;
-    height: 24px;
-    line-height: 24px;
-    border-radius: 12px;
-    background-color: rgb(220, 220, 220);
-    color: rgb(100, 100, 100);
-    text-align: center;
+.emptyMainText {
+    font-size: 2rem;
+    margin-top: 30px;
 }
 
-.choiceValueSelected {
-    height: fit-content;
-    line-height: 24px;
-    border-radius: 10px;
-    color: rgb(0, 220, 220);
-}
-
-.choiceValueNotSelected {
-    height: fit-content;
-    line-height: 24px;
-    border-radius: 10px;
-}
-
-.questionContainer4 {
-    display: grid;
-    grid-template-columns: 1fr fit-content(100%);
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.resultCorrect {
+.emptySubText {
     font-size: 1rem;
-    width: fit-content;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    background-color: rgb(100, 220, 100);
-    color: rgb(255, 255, 255);
-}
-
-.resultBefore {
-    font-size: 1rem;
-    width: fit-content;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    background-color: rgb(200, 200, 200);
-    color: rgb(255, 255, 255);
-}
-
-.resultIncorrect {
-    font-size: 1rem;
-    width: fit-content;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    background-color: rgb(250, 50, 50);
-    color: rgb(255, 255, 255);
-}
-
-.resultSomeCorrect {
-    font-size: 1rem;
-    width: fit-content;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    background-color: rgb(250, 200, 100);
-    color: rgb(255, 255, 255);
-}
-
-.pointsCorrect {
-    font-size: 1.5rem;
-    height: 30px;
-    line-height: 30px;
-    color: rgb(100, 220, 100);
-}
-
-.pointsIncorrect {
-    font-size: 1.5rem;
-    height: 30px;
-    line-height: 30px;
-    color: rgb(250, 50, 50);
-}
-
-.pointsSomeCorrect {
-    font-size: 1.5rem;
-    height: 30px;
-    line-height: 30px;
-    color: rgb(250, 200, 100);
+    margin-top: 10px;
 }

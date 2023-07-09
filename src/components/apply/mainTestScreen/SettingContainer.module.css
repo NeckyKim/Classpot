@@ -1,0 +1,10 @@
+.settingButton {
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    padding: 12px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}

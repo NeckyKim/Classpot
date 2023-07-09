@@ -1,0 +1,45 @@
+.container {
+    width: 1000px;
+    min-height: 300px;
+    border-radius: 7px;
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+}
+
+.comment {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.header {
+    font-weight: 600;
+    color: rgb(150, 150, 150);
+    margin-bottom: 5px;
+}
+
+.infoContainer {
+    background-color: rgb(245, 245, 245);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.infoElements {
+    display: flex;
+    flex-direction: row;
+}
+
+.infoLabel {
+    width: 110px;
+    color: rgb(100, 100, 100);
+    margin-right: 20px;
+    border-right: 1px solid rgb(200, 200, 200);
+}
+
+.infoValue {
+    font-weight: 700;
+}

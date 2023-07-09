@@ -1,103 +1,188 @@
 import { useState } from "react";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
 
-import { authService } from "../../FirebaseModules";
-
+import SettingTab from "./settingsTab/SettingTab";
 import QuestionTab from "./questionTab/QuestionTab";
-import SettingsTab from "./settingsTab/SettingsTab";
 import ApplicantsTab from "./applicantsTab/ApplicantsTab";
-import SuperviseTab from "./superviseTab/SuperviseTab";
+import MonitoringTab from "./monitoringTab/MonitoringTab";
+import ChattingTab from "./chattingTab/ChattingTab";
 
 import Error from "../../Error";
+import colorPalette from "../../theme/ColorPalette";
+
+import GetUserInfo from "../hooks/GetUserInfo";
 import GetTestInfo from "../hooks/GetTestInfo";
 
 import styles from "./Test.module.css";
+import AnswerSheetTab from "./answerSheetTab/AnswerSheetTab";
 
 
 
-export default function Test({ userCode, email }: { userCode: string; email: string; }) {
+export default function Test({ userCode }: { userCode: string | undefined }) {
     const { testCode } = useParams();
 
-    var navigate = useNavigate();
+    const [tab, setTab] = useState<number>(1);
 
-
+    // 관리자 정보
+    var userInfo: any = GetUserInfo(userCode);
 
     // 시험 정보
-    var testInfo: any | undefined = GetTestInfo(testCode);
+    var testInfo: any = GetTestInfo(userCode, testCode);
 
-    var [tab, setTab] = useState<number>(1)
+
+
+    const [wide, setWide] = useState<boolean>(true);
 
 
 
     return (
-        userCode === testInfo?.userCode
+        (testInfo && testInfo.managerCode === userCode)
 
             ?
 
-            <div>
-                <div className={styles.containerLeftTop}>
-                    <img className={styles.containerLogo} src={process.env.PUBLIC_URL + "/logos/logo_white.png"} onClick={() => { navigate("/") }} />
+            <div className={styles.container}>
+                <div className={wide ? styles.sideBarWide : styles.sideBarNarrow}>
+                    <div className={wide ? styles.sideBarWideTop : styles.sideBarNarrowTop}>
+                        <div
+                            className={styles.sideBarIcon}
+                            style={{ background: `linear-gradient(135deg, rgba(${colorPalette[testInfo.color][0]}, ${colorPalette[testInfo.color][1]}, ${colorPalette[testInfo.color][2]}) 20%, rgb(${colorPalette[testInfo.color][0] - 40}, ${colorPalette[testInfo.color][1] - 40}, ${colorPalette[testInfo.color][2] - 40}) 80%)` }}
+                        >
+                            {testInfo.testName[0]}
+                        </div>
+
+                        <div className={wide ? styles.sideBarWideText : styles.sideBarNarrowText}>
+                            {wide && testInfo.testName}
+                        </div>
+                    </div>
+
+                    <div className={styles.sideBarBottom}>
+                        <div
+                            className={tab === 1 ? styles.tabSelected : styles.tabNotSelected}
+                            onClick={() => {
+                                setTab(1);
+                            }}
+                        >
+                            <img
+                                className={styles.tabIcon}
+                                src={process.env.PUBLIC_URL + "/icons/dashboard/setting.svg"}
+                            />
+
+                            <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
+                                시험 설정
+                            </div>
+                        </div>
+
+
+
+                        <div
+                            className={tab === 2 ? styles.tabSelected : styles.tabNotSelected}
+                            onClick={() => {
+                                setTab(2);
+                            }}
+                        >
+                            <img
+                                className={styles.tabIcon}
+                                src={process.env.PUBLIC_URL + "/icons/dashboard/book.svg"}
+                            />
+
+                            <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
+                                문제 관리
+                            </div>
+                        </div>
+
+
+
+                        <div
+                            className={tab === 3 ? styles.tabSelected : styles.tabNotSelected}
+                            onClick={() => {
+                                setTab(3);
+                            }}
+                        >
+                            <img
+                                className={styles.tabIcon}
+                                src={process.env.PUBLIC_URL + "/icons/dashboard/people.svg"}
+                            />
+
+                            <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
+                                응시자 관리
+                            </div>
+                        </div>
+
+
+
+                        <div
+                            className={tab === 4 ? styles.tabSelected : styles.tabNotSelected}
+                            onClick={() => {
+                                setTab(4);
+                            }}
+                        >
+                            <img
+                                className={styles.tabIcon}
+                                src={process.env.PUBLIC_URL + "/icons/dashboard/monitor.svg"}
+                            />
+
+                            <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
+                                모니터링
+                            </div>
+                        </div>
+
+
+
+                        <div
+                            className={tab === 5 ? styles.tabSelected : styles.tabNotSelected}
+                            onClick={() => {
+                                setTab(5);
+                            }}
+                        >
+                            <img
+                                className={styles.tabIcon}
+                                src={process.env.PUBLIC_URL + "/icons/dashboard/chatting.svg"}
+                            />
+
+                            <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
+                                채팅
+                            </div>
+                        </div>
+
+
+
+                        <div
+                            className={tab === 6 ? styles.tabSelected : styles.tabNotSelected}
+                            onClick={() => {
+                                setTab(6);
+                            }}
+                        >
+                            <img
+                                className={styles.tabIcon}
+                                src={process.env.PUBLIC_URL + "/icons/dashboard/answerSheet.svg"}
+                            />
+
+                            <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
+                                결과 확인
+                            </div>
+                        </div>
+
+
+
+                        <div className={styles.wideNarrowButton} onClick={() => setWide(prev => !prev)}>
+                            <img className={wide ? styles.narrowIcon : styles.wideIcon} src={process.env.PUBLIC_URL + "/icons/dashboard/arrow_right.svg"} />
+                        </div>
+
+                    </div>
                 </div>
 
-                <div className={styles.containerRightTop}>
-                    {testInfo.testName}
-
-                    <div
-                        className={styles.logoutButton}
-                        onClick={() => {
-                            authService.signOut();
-                            navigate("/");
-                        }}
-                    >
-                        로그아웃
-                    </div>
-                </div>
-
-                <div className={styles.containerLeftBottom}>
-                    <div className={tab === 1 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(1); }} >
-                        <img className={tab === 1 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/settings.png"} />
-
-                        <div className={tab === 1 ? styles.tabTextSelected : styles.tabTextNotSelected}>
-                            시험 설정
-                        </div>
-                    </div>
-
-                    <div className={tab === 2 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(2); }} >
-                        <img className={tab === 2 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/questions.png"} />
-
-                        <div className={tab === 2 ? styles.tabTextSelected : styles.tabTextNotSelected}>
-                            문제 관리
-                        </div>
-                    </div>
-
-                    <div className={tab === 3 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(3); }} >
-                        <img className={tab === 3 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/applicants.png"} />
-
-                        <div className={tab === 3 ? styles.tabTextSelected : styles.tabTextNotSelected}>
-                            응시자 관리
-                        </div>
-                    </div>
-
-                    <div className={tab === 4 ? styles.tabSelected : styles.tabNotSelected} onClick={() => { setTab(4); }} >
-                        <img className={tab === 4 ? styles.tabIconSelected : styles.tabIconNotSelected} src={process.env.PUBLIC_URL + "/icons/supervisor.png"} />
-
-                        <div className={tab === 4 ? styles.tabTextSelected : styles.tabTextNotSelected}>
-                            시험 진행
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.containerRightBottom}>
-                    {tab === 1 && <SettingsTab testCode={testCode} />}
-                    {tab === 2 && <QuestionTab userCode={userCode} testCode={testCode} />}
-                    {tab === 3 && <ApplicantsTab testCode={testCode} />}
-                    {tab === 4 && <SuperviseTab testCode={testCode} />}
+                <div className={wide ? styles.contentWide : styles.contentNarrow}>
+                    {tab === 1 && <SettingTab userInfo={userInfo} testInfo={testInfo} />}
+                    {tab === 2 && <QuestionTab userCode={userCode} testCode={testInfo.testCode} />}
+                    {tab === 3 && <ApplicantsTab userCode={userCode} testCode={testInfo.testCode} />}
+                    {tab === 4 && <MonitoringTab userCode={userCode} testCode={testInfo.testCode} />}
+                    {tab === 5 && <ChattingTab userCode={userCode} testCode={testInfo.testCode} />}
+                    {tab === 6 && <AnswerSheetTab userCode={userCode} testCode={testInfo.testCode} />}
                 </div>
             </div>
 
             :
 
-            <Error message="접근 권한이 없습니다." />
+            <Error message="해당 페이지에 접근 권한이 없습니다." />
     )
 }

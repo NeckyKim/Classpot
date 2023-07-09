@@ -1,0 +1,112 @@
+.container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.applicantListContainer {
+    height: 100vh;
+    border-right: 1px solid rgb(220, 220, 220);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.applicantSelected {
+    width: 100%;
+    height: 55px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+    align-items: center;
+    gap: 10px;
+}
+
+.applicantNotSelected {
+    width: 100%;
+    height: 55px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.applicantNotSelected:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.applicantImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    filter: invert(0.7);
+}
+
+.applicantName {
+    font-weight: 700;
+}
+
+.answerSheetContainer {
+    height: 100vh;
+    padding: 40px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.answerSheetContainer::-webkit-scrollbar {
+    width: 16px;
+    background-color: transparent
+}
+
+.answerSheetContainer::-webkit-scrollbar-thumb {
+    background-color: rgb(230, 230, 230);
+}
+
+.infoContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.infoHeader {
+    font-size: 1.2rem;
+    color: rgb(150, 150, 150);
+}
+
+.infoValue {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: flex-end;
+    margin-top: 5px;
+}
+
+.infoValue1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.infoValue2 {
+    font-size: 1.5rem;
+}
+
+.empty {
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(150, 150, 150);
+}

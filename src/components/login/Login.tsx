@@ -35,21 +35,21 @@ export default function Login() {
 
 
     return (
-        <div className={styles.loginWrapper}>
-            <div className={styles.loginContainer}>
-                    <div className={styles.loginHeader}>
+        <div className={styles.background}>
+            <div className={styles.container}>
+                    <div className={styles.label}>
                         login
                     </div>
 
-                    <div className={styles.loginGuide}>
+                    <div className={styles.comment}>
                         별도의 회원 가입 없이<br />
                         Google 계정으로<br />
                         테스트콘을 이용할 수 있습니다.
                     </div>
                     
-                    <button className={styles.loginButton} name="google" onClick={onSocialClick}>
+                    <div className={styles.button} onClick={onSocialClick}>
                         로그인
-                    </button>
+                    </div>
             </div>
         </div>
     )

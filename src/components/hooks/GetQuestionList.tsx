@@ -5,12 +5,12 @@ import { onSnapshot, query, collection, orderBy } from "firebase/firestore";
 
 
 
-export default function GetQuestionList(testCode: string | undefined) {
+export default function GetQuestionList(userCode: string | undefined, testCode: string | undefined) {
     const [questionList, setQuestionList] = useState<any>([]);
 
-    if (testCode) {
+    if (userCode && testCode) {
         useEffect(() => {
-            onSnapshot(query(collection(dbService, "tests", testCode, "questions"), orderBy("createdTime")), (snapshot) => {
+            onSnapshot(query(collection(dbService, "users", userCode, "tests", testCode, "questions"), orderBy("created")), (snapshot) => {
                 setQuestionList(snapshot.docs.map((current) => ({
                     questionCode: current.id,
                     ...current.data()

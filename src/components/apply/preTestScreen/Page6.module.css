@@ -1,0 +1,111 @@
+.comment {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.infoContainer {
+    background-color: rgb(245, 245, 245);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.infoElements {
+    display: flex;
+    flex-direction: row;
+}
+
+.infoLabel {
+    width: 82px;
+    color: rgb(100, 100, 100);
+    margin-right: 20px;
+    border-right: 1px solid rgb(200, 200, 200);
+}
+
+.infoValue {
+    font-weight: 700;
+}
+
+.alertContainer {
+    border-top: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    margin-bottom: 30px;
+    word-break: keep-all;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.alertContainer li {
+    padding-left: 10px;
+}
+
+.alertContainer li::marker {
+    color: rgb(150, 150, 150);
+}
+
+.startButtonDisabled {
+    width: 220px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background-color: rgba(0, 100, 250, 0.3);
+    cursor: not-allowed;
+}
+
+.startButtonEnabled {
+    width: 220px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    position: relative;
+    background-color: rgb(0, 100, 250);
+    cursor: not-allowed;
+}
+
+.startButtonEnabled:hover {
+    background-color: rgba(0, 100, 250, 0.8);
+    cursor: pointer;
+}
+
+.startButtonEnabledInside {
+    width: 0%;
+    height: 100%;
+    border-radius: 5px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(90deg, transparent, rgb(0, 200, 250));
+    opacity: 1;
+    animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        width: 0px;
+        background-position: 0% 0%;
+        opacity: 1;
+    }
+
+    50% {
+        width: 100%;
+        background-position: 100% 0%;
+    }
+
+    100% {
+        width: 100%;
+        background-position: 100% 0%;
+        opacity: 0;
+    }
+}

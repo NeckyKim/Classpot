@@ -1,0 +1,344 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    grid-template-rows: 50px 1fr 60px;
+    z-index: 15;
+}
+
+.containerTop {
+    width: 100vw;
+    height: 50px;
+    background-color: rgb(10, 20, 40);
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.infoTestName {
+    color: rgb(255, 255, 255);
+}
+
+.infoApplicantName {
+    color: rgb(255, 255, 255);
+    border-left: 1px solid rgb(100, 100, 100);
+    padding-left: 20px;
+    margin-left: 20px;
+}
+
+.containerCenter {
+    width: 100vw;
+    height: calc(100vh - 110px);
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+}
+
+.navigatorElementsSelected {
+    font-size: 1.1rem;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 100, 250);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    position: relative;
+}
+
+.navigatorElementsNotSelected {
+    font-size: 1.1rem;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    cursor: pointer;
+}
+
+.navigatorElementsNotSelected:hover {
+    background-color: rgb(248, 248, 248);
+}
+
+.mark {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+}
+
+.solvedMark {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgb(248, 248, 248);
+    border-radius: 7px;
+    background-color: rgb(0, 220, 220);
+}
+
+.flaggedMark {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgb(248, 248, 248);
+    border-radius: 7px;
+    background-color: rgb(250, 150, 0);
+}
+
+.questionHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.questionNumber {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.questionNumberLabel {
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.questionNumberValue {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.questionNumberTotal {
+    font-size: 2rem;
+    font-weight: 200;
+    line-height: 24px;
+    color: rgb(180, 180, 180);
+}
+
+.questionFlagged {
+    font-size: 0.7rem;
+    font-weight: 400;
+    height: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 150, 0);
+    border-radius: 3px;
+    margin-left: 10px;
+    padding-left: 3px;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.questionFlagged:hover {
+    background-color: rgba(250, 150, 0, 0.8);
+}
+
+.questionNotFlagged {
+    font-size: 0.7rem;
+    font-weight: 400;
+    height: 20px;
+    color: rgb(120, 120, 120);
+    background-color: rgb(240, 240, 240);
+    border-radius: 3px;
+    margin-left: 10px;
+    padding-left: 3px;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.questionNotFlagged:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.questionFlaggedIcon {
+    width: 17px;
+    height: 17px;
+    padding: 3px;
+    filter: invert();
+}
+
+.questionNotFlaggedIcon {
+    width: 17px;
+    height: 17px;
+    padding: 3px;
+    filter: invert(66%) sepia(11%) saturate(0%) hue-rotate(162deg) brightness(89%) contrast(97%);
+}
+
+.questionInfo {
+    font-weight: 700;
+    line-height: 15px;
+}
+
+.choiceContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choiceElements {
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.choiceElements:hover {
+    background-color: rgb(245, 245, 245);
+}
+
+.choiceNumberSelected {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 14px;
+    border: 1px solid rgb(0, 100, 250);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    text-align: center;
+}
+
+.choiceNumberNotSelected {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 14px;
+    border: 1px solid rgb(200, 200, 200);
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.choiceValueSelected {
+    font-size: 1.1rem;
+    line-height: 24px;
+    margin-top: 2px;    
+    color: rgb(0, 100, 250);
+    word-break: keep-all;
+}
+
+.choiceValueNotSelected {
+    font-size: 1.1rem;
+    line-height: 24px;
+    margin-top: 2px;
+    color: rgb(0, 0, 0);
+    word-break: keep-all;
+}
+
+.answerInputBoxInfo {
+    font-size: 0.85rem;
+    height: 20px;
+    color: rgb(150, 150, 150);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.answerInputBoxInfoButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    color: rgb(150, 150, 150);
+    cursor: pointer;
+}
+
+.answerInputBoxInfoButton img {
+    width: 16px;
+    height: 16px;
+    filter: invert(0.6);
+}
+
+.answerInputBoxInfoButton:hover {
+    color: rgb(100, 100, 100);
+}
+
+.answerInputBoxInfoButton:hover > img {
+    filter: invert(0.4);
+}
+
+.containerBottomButtonWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.containerBottomButton {
+    width: 22px;
+    height: 22px;
+    filter: invert(0.8);
+    cursor: pointer;
+}
+
+.containerBottomButton:hover {
+    filter: invert(0.6);
+}
+
+.toastContainerShow {
+    font-size: 0.85rem;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 220, 220);
+    border-radius: 5px;
+    padding: 12px;
+    position: absolute;
+    bottom: 70px;
+    right: 30px;
+    z-index: 39; 
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.toastContainerHide {
+    font-size: 0.85rem;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 220, 220);
+    border-radius: 5px;
+    padding: 12px;
+    position: absolute;
+    bottom: 70px;
+    right: 30px;
+    z-index: 39; 
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.pauseScreen {
+    font-size: 2rem;
+    font-weight: 700;
+    width: 100vw;
+    height: calc(100vh - 110px);
+    position: fixed;
+    top: 50px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

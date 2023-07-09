@@ -5,12 +5,12 @@ import { onSnapshot, query, collection, orderBy } from "firebase/firestore";
 
 
 
-export default function GetApplicantList(testCode: string | undefined) {
+export default function GetApplicantList(userCode: string | undefined, testCode: string | undefined) {
     const [applicantList, setApplicantList] = useState<any>([]);
 
-    if (testCode) {
+    if (userCode && testCode) {
         useEffect(() => {
-            onSnapshot(query(collection(dbService, "tests", testCode, "applicants"), orderBy("createdTime")), (snapshot) => {
+            onSnapshot(query(collection(dbService, "users", userCode, "tests", testCode, "applicants"), orderBy("created")), (snapshot) => {
                 setApplicantList(snapshot.docs.map((current) => ({
                     applicantCode: current.id,
                     ...current.data()

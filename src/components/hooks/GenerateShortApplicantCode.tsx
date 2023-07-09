@@ -6,16 +6,13 @@ import { onSnapshot, query } from "firebase/firestore";
 
 
 
-export default function GenerateShortApplicantCode(testCode: string | undefined) {
-    const [usedApplicantCodeList, setUsedApplicantCodeList] = useState<any>([]);
+export default function GenerateShortApplicantCode(userCode: string | undefined, testCode: string | undefined) {
+    const [usedCodeList, setUsedCodeList] = useState<any>([]);
 
-
-
-    // 현재 사용중인 응시 번호 목록
-    if (testCode) {
+    if (userCode && testCode) {
         useEffect(() => {
-            onSnapshot(query(collection(dbService, "tests", testCode, "applicants")), (snapshot) => {
-                setUsedApplicantCodeList(snapshot.docs.map((current) => ({
+            onSnapshot(query(collection(dbService, "users", userCode, "tests", testCode, "applicants")), (snapshot) => {
+                setUsedCodeList(snapshot.docs.map((current) => ({
                     applicantCode: current.data().applicantCode
                 })));
             });
@@ -31,7 +28,7 @@ export default function GenerateShortApplicantCode(testCode: string | undefined)
             results = results + "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".charAt(Math.floor(Math.random() * 36));
         }
 
-        if (!usedApplicantCodeList.includes(results)) {
+        if (!usedCodeList.includes(results)) {
             return Array.from(results).sort(() => Math.random() - 0.5).join("");
         }
     }

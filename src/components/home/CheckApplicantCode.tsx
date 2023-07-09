@@ -4,27 +4,27 @@ import { useParams, useNavigate } from "react-router-dom";
 import { dbService } from "../../FirebaseModules";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
-import GetTestInfo from "../hooks/GetTestInfo";
+import SubmitButton from "../../theme/SubmitButton";
 
 import styles from "./CheckApplicantCode.module.css";
 
 
 
 export default function CheckApplicantCode() {
-    const { testCode }: any = useParams();
+    const { userCode, testCode }: any = useParams();
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
+    const [shortCode, setShortCode] = useState<string>("");
 
-    const [shortApplicantCode, setShortApplicantCode] = useState<string>("");
     const [results, setResults] = useState<any>(undefined);
     const [message, setMessage] = useState<string>("");
 
 
 
-    function shortApplicantCodeToApplicantCode(event: any) {
+    function findApplicantCode(event: any) {
         event?.preventDefault()
 
-        onSnapshot(query(collection(dbService, "tests", testCode, "applicants"), where("shortApplicantCode", "==", shortApplicantCode)), (snapshot) => {
+        onSnapshot(query(collection(dbService, "users", userCode, "tests", testCode, "applicants"), where("shortApplicantCode", "==", shortCode)), (snapshot) => {
             setResults(snapshot.docs.map((current) => (
                 current.id
             )));
@@ -48,23 +48,22 @@ export default function CheckApplicantCode() {
 
 
     return (
-        <div>
-            <form
-                className={styles.homeContainer}
-                onSubmit={shortApplicantCodeToApplicantCode}
-            >
-                <div className={styles.header}>
-                    6자리 응시자 코드를 입력하세요.
+        <div className={styles.background}>
+            <div className={styles.container}>
+            <div className={styles.header}>
+                    이번에는<br />
+                    <span style={{ fontWeight: "700", color: "rgb(0, 100, 250)" }}>6자리 응시자 코드</span>를<br />
+                    입력해주세요.
                 </div>
 
                 <input
                     type="text"
-                    value={shortApplicantCode}
+                    value={shortCode}
                     className={styles.inputBox}
                     maxLength={6}
                     spellCheck={false}
                     onChange={(event: any) => {
-                        setShortApplicantCode(String(event.target.value).toUpperCase());
+                        setShortCode(String(event.target.value).toUpperCase());
                     }}
                 />
 
@@ -72,13 +71,12 @@ export default function CheckApplicantCode() {
                     {message}
                 </div>
 
-                <input
-                    type="submit"
-                    value="응시자 코드 확인"
-                    className={styles.goToTestButton}
-                    disabled={shortApplicantCode.length !== 6}
+                <SubmitButton
+                    text="응시 코드 확인"
+                    onClick={findApplicantCode}
+                    disabled={shortCode.length !== 6}
                 />
-            </form>
+            </div>
         </div>
     )
 }

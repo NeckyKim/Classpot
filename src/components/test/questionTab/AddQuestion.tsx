@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
 import { dbService } from "../../../FirebaseModules";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection } from "firebase/firestore";
 
 import ChoiceContainer from "./ChoiceContainer";
+
+import Title from "../../../theme/Title";
+import Label from "../../../theme/Label";
+import InputBox from "../../../theme/InputBox";
+import Buttons from "../../../theme/Buttons";
+import SubmitButton from "../../../theme/SubmitButton";
+import CancelButton from "../../../theme/CancelButton";
+import RadioButton from "../../../theme/RadioButton";
 
 import { toast } from "react-toastify";
 import { Editor } from '@tinymce/tinymce-react';
@@ -14,384 +20,413 @@ import styles from "./AddQuestion.module.css";
 
 
 
-export default function AddQuestion(this: any, { userCode, setIsAddingQuestion }: { userCode: string, setIsAddingQuestion: any }) {
-    const { testCode } = useParams();
-
-    const [type, setType] = useState<string>("객관식");
+export default function AddQuestion({ userCode, testCode, setIsAddingQuestion }: { userCode: string | undefined, testCode: string | undefined, setIsAddingQuestion: React.Dispatch<React.SetStateAction<boolean>> }) {
+    const [name, setName] = useState<string>("");
+    const [type, setType] = useState<string>("mc");
     const [points, setPoints] = useState<number>(1);
-    const [level, setLevel] = useState<number>(2);
-    const [isLevelClicked, setIsLevelClicked] = useState<boolean>(false);
 
     const [question, setQuestion] = useState<string>("");
-    const [answer, setAnswer] = useState<any>(new Array(10).fill(false));
-    const [numberOfAnswers, setNumberOfAnswers] = useState<number>(0);
+    const [choices, setChoices] = useState<string[]>(new Array(3).fill(""));
+    const [answer, setAnswer] = useState<boolean[] | string | boolean>(new Array(3).fill(false));
 
-    const [choices, setChoices] = useState<string[]>(new Array(10).fill(""));
-    const [numberOfChoices, setNumberOfChoices] = useState<number>(3);
-
-    const levelDictionary: string[] = ["매우 쉬움", "쉬움", "보통", "어려움", "매우 어려움"]
-
-
-
-    useEffect(() => {
-        if (type === "객관식") {
-            setNumberOfAnswers(Object.values(answer).filter(element => element === true).length);
-        }
-    }, [answer])
+    const [grading, setGrading] = useState<number>(0);
 
 
 
     async function addQuestion(event: any) {
         event.preventDefault();
 
-        const id: string = uuidv4();
-
-        if (testCode && numberOfAnswers) {
-            try {
-                await setDoc(doc(dbService, "tests", testCode, "questions", id), {
-                    type: type,
-                    points: points,
-                    level: level,
-                    question: question,
-                    answer: answer,
-                    choices: choices,
-                    createdTime: Date.now(),
-                })
-
-                setIsAddingQuestion(false);
-                setQuestion("");
-                setAnswer(undefined);
-
-                toast.success("문제가 추가되었습니다.");
+        if (userCode && testCode) {
+            if (!name) {
+                toast.error("이름을 입력해주세요.", { toastId: "" });
             }
 
-            catch (error) {
-                console.log(error);
-                toast.error("문제 추가에 실패했습니다.");
+            else if (points === 0) {
+                toast.error("배점은 1점 이상으로 설정해주세요.", { toastId: "" });
+            }
+
+            else if (type === "mc" && question === "") {
+                toast.error("지문을 입력해주세요.", { toastId: "" });
+            }
+
+            else if (type === "mc" && Array.isArray(choices) && choices.filter(x => x.replace(/\s+/g, "") === "").length > 0) {
+                toast.error("보기를 모두 입력해주세요.", { toastId: "" });
+            }
+
+            else if (type === "mc" && Array.isArray(answer) && answer.filter(x => x === true).length === 0) {
+                toast.error("정답을 최소 1개를 설정해주세요.", { toastId: "" });
+            }
+
+            else if (type === "sa" && typeof answer === "string" && answer.replace(/(\s*)/g, "") === "") {
+                toast.error("정답을 입력해주세요.", { toastId: "" });
+            }
+
+            else {
+                try {
+                    await setDoc(doc(collection(dbService, "users", userCode, "tests", testCode, "questions")), {
+                        name: name,
+                        type: type,
+                        points: points,
+                        question: question,
+                        answer: (type === "sa" && !Array.isArray(answer) && typeof answer === "string") ? answer.trim() : answer,
+                        choices: choices,
+                        created: Date.now(),
+                        grading: grading
+                    })
+
+                    setIsAddingQuestion(false);
+                    setQuestion("");
+
+                    toast.success("문제가 추가되었습니다.", { toastId: "" });
+                }
+
+                catch (error) {
+                    console.log(error);
+                    toast.error("문제 추가에 실패했습니다.", { toastId: "" });
+                }
             }
         }
 
         else {
-            toast.error("객관식 문제는 정답을 적어도 하나 이상 설정해야 합니다.");
+            toast.error("문제 추가에 실패했습니다.", { toastId: "" });
         }
     }
 
 
 
     return (
-        <form onSubmit={addQuestion}>
-            <div className={styles.addQuestionsHeader}>
-                유형
-            </div>
+        <div className={styles.container}>
+            <Title>
+                문제 추가
+            </Title>
 
-            <div className={styles.typeButtons}>
-                <div
-                    className={type === "객관식" ? styles.typeSelected : styles.typeNotSelected}
-                    style={{
-                        borderRadius: "5px 0px 0px 5px",
-                        borderRight: "none"
-                    }}
-                    onClick={() => {
-                        setType("객관식");
-                        setAnswer(new Array(10).fill(false));
-                        setNumberOfAnswers(0);
-                    }}>
-                    객관식
-                </div>
 
-                <div
-                    className={type === "참/거짓" ? styles.typeSelected : styles.typeNotSelected}
-                    style={{ borderRight: "none" }}
-                    onClick={() => {
-                        setType("참/거짓");
-                        setAnswer(true);
-                        setNumberOfAnswers(1);
-                    }}>
-                    참/거짓
-                </div>
 
-                <div
-                    className={type === "주관식" ? styles.typeSelected : styles.typeNotSelected}
-                    style={{ borderRight: "none" }}
-                    onClick={() => {
-                        setType("주관식");
-                        setAnswer("");
-                        setNumberOfAnswers(1);
-                    }}>
-                    주관식
-                </div>
+            <div>
+                <Label>
+                    이름
+                </Label>
 
-                <div
-                    className={type === "서술형" ? styles.typeSelected : styles.typeNotSelected}
-                    style={{ borderRadius: "0px 5px 5px 0px" }}
-                    onClick={() => {
-                        setType("서술형");
-                        setAnswer("");
-                        setNumberOfAnswers(1);
-                    }}>
-                    서술형
-                </div>
+                <InputBox 
+                    type="string"
+                    value={name}
+                    onChange={(event: any) => setName(event.target.value)}
+                />
             </div>
 
 
 
-            <div className={styles.pointsLevel}>
-                <div>
-                    <div className={styles.addQuestionsHeader}>
-                        배점
-                    </div>
+            <div>
+                <Label>
+                    유형
+                </Label>
 
-                    <div className={styles.points}>
-                        <input
-                            type="number"
-                            min={1}
-                            max={100}
-                            value={points}
-                            onChange={(event) => {
-                                setPoints(Number(event.target.value));
+                <div className={styles.typeContainer}>
+                    <div className={styles.radioBox} style={{ borderRight: "1px solid rgb(220, 220, 220)" }}>
+                        <RadioButton
+                            value={type === "mc"}
+                            onClick={() => {
+                                if (type !== "mc") {
+                                    setType("mc");
+                                    setChoices(new Array(3).fill(""));
+                                    setAnswer(new Array(3).fill(false));
+                                }
                             }}
-                            className={styles.pointsInputBox}
-                            required
                         />
+                        <img src={process.env.PUBLIC_URL + "/icons/mc.svg"} />
+                        객관식
+                    </div>
 
-                        <div className={styles.pointsUnit}>
-                            점
-                        </div>
+                    <div className={styles.radioBox} style={{ borderRight: "1px solid rgb(220, 220, 220)" }}>
+                        <RadioButton
+                            value={type === "sa"}
+                            onClick={() => {
+                                setType("sa");
+                                setAnswer("");
+                            }}
+                        />
+                        <img src={process.env.PUBLIC_URL + "/icons/sa.svg"} />
+                        주관식
+                    </div>
+
+                    <div className={styles.radioBox} style={{ borderRight: "1px solid rgb(220, 220, 220)" }}>
+                        <RadioButton
+                            value={type === "tf"}
+                            onClick={() => {
+                                setType("tf");
+                                setAnswer(true);
+                            }}
+                        />
+                        <img src={process.env.PUBLIC_URL + "/icons/tf.svg"} />
+                        참/거짓
+                    </div>
+
+                    <div className={styles.radioBox}>
+                        <RadioButton
+                            value={type === "essay"}
+                            onClick={() => {
+                                setType("essay");
+                            }}
+                        />
+                        <img src={process.env.PUBLIC_URL + "/icons/essay.svg"} />
+                        서술형
                     </div>
                 </div>
+            </div>
 
 
 
-                <div>
-                    <div className={styles.addQuestionsHeader}>
-                        난이도
-                    </div>
+            <div>
+                <Label>
+                    배점
+                </Label>
+                
+                <InputBox 
+                    type="number"
+                    value={points}
+                    onChange={(event: any) => setPoints(Number(event.target.value))}
+                    style={{width: "100px"}}
+                    min={1}
+                />
+            </div>
 
-                    <div
-                        className={styles.level}
-                        onClick={() => {
-                            setIsLevelClicked((prev) => !prev);
+
+
+            <div>
+                <Label>
+                    지문
+                </Label>
+
+                <div className={styles.questionContainer}>
+                    <Editor
+                        apiKey={process.env.REACT_APP_TINYMCE_EDITOR_ID}
+                        initialValue=""
+                        value={question}
+                        onEditorChange={(content) => setQuestion(content)}
+                        init={{
+                            height: 500,
+                            menubar: false,
+                            statusbar: false,
+                            plugins: ['lists', 'image', 'table', 'codesample', 'lineheight'],
+                            toolbar: 'fontsize | bold italic underline strikethrough | lineheight alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | image table codesample',
+                            font_size_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
+                            resize: false,
+                            content_style: `
+                                @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+                                body {
+                                    font-family: 'Pretendard';
+                                    font-weight: 500;
+                                    line-height: 1;
+                                }
+
+                                p {
+                                    font-size: 14pt;
+                                }
+                            `
                         }}
-                    >
-                        {levelDictionary[level]}
-
-                        {
-                            isLevelClicked
-
-                            &&
-
-                            <div
-                                className={styles.levelSelector}
-                                onClick={() => {
-                                    setIsLevelClicked((prev) => !prev);
-                                }}
-                            >
-                                <div
-                                    className={styles.levelElements}
-                                    onClick={() => {
-                                        setLevel(0);
-                                        setIsLevelClicked(false);
-                                    }}
-                                >매우 쉬움</div>
-
-                                <div
-                                    className={styles.levelElements}
-                                    onClick={() => {
-                                        setLevel(1);
-                                        setIsLevelClicked(false);
-                                    }}
-                                >쉬움</div>
-
-                                <div
-                                    className={styles.levelElements}
-                                    onClick={() => {
-                                        setLevel(2);
-                                        setIsLevelClicked(false);
-                                    }}
-                                >보통</div>
-
-                                <div
-                                    className={styles.levelElements}
-                                    onClick={() => {
-                                        setLevel(3);
-                                        setIsLevelClicked(false);
-                                    }}
-                                >어려움</div>
-
-                                <div
-                                    className={styles.levelElements}
-                                    onClick={() => {
-                                        setLevel(4);
-                                        setIsLevelClicked(false);
-                                    }}
-                                >매우 어려움</div>
-                            </div>
-                        }
-                    </div>
+                    />
                 </div>
             </div>
 
 
 
-            <div className={styles.addQuestionsHeader}>
-                지문
-            </div>
-
-            <Editor
-                apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
-                initialValue=""
-                value={question}
-                onEditorChange={(content: any) => { setQuestion(content); }}
-                init={{
-                    height: 500,
-                    menubar: false,
-                    statusbar: false,
-                    plugins: ['lists', 'image', 'table', 'lineheight', 'codesample'],
-                    toolbar: 'fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify lineheight | outdent indent | bullist numlist | image table codesample',
-                    font_size_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
-                    line_height_formats: "0.8 1 1.2 1.4 1.6 1.8 2",
-                    resize: false,
-                    content_style: `
-                        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-
-                        body {
-                            font-family: 'Pretendard';
-                            font-weight: 500;
-                            line-height: 1;
-                        }
-
-                        p {
-                            font-size: 14pt;
-                        }
-                    `
-                }}
-            />
-
-
-
-            <div className={styles.choicesHeader}>
-                정답
+            <div>
+                <Label>
+                    {type === "mc" ? "보기" : "정답"}
+                </Label>
 
                 {
-                    type === "객관식"
+                    {
+                        "mc":
+                            (
+                                Array.isArray(answer)
 
-                    &&
+                                &&
 
-                    <div className={styles.choicesButtonContainer}>
-                        <input
-                            type="button"
-                            value="증가 +"
-                            disabled={numberOfChoices === 10}
-                            onClick={() => { setNumberOfChoices(numberOfChoices + 1); }}
-                            className={styles.choicesIncreaseButton}
-                        />
+                                <div className={styles.choices}>
+                                    {[0, 1, 2].map(x => (<ChoiceContainer index={x} choices={choices} setChoices={setChoices} answer={answer} setAnswer={setAnswer} />))}
+                                    {[3, 4, 5, 6, 7, 8, 9].map(x => (choices.length > x && <ChoiceContainer index={x} choices={choices} setChoices={setChoices} answer={answer} setAnswer={setAnswer} />))}
 
-                        <input
-                            type="button"
-                            value="감소 -"
-                            disabled={numberOfChoices === 3}
-                            onClick={() => {
-                                setNumberOfChoices(numberOfChoices - 1);
+                                    <div
+                                        className={styles.addChoiceButton}
+                                        onClick={() => {
+                                            if (Array.isArray(answer) && answer.length < 10) {
+                                                let copy1 = [...choices];
+                                                let copy2 = [...answer];
 
-                                var temp1 = choices;
-                                temp1[numberOfChoices - 1] = "";
+                                                copy1.push("");
+                                                copy2.push(false);
 
-                                var temp2 = answer;
-                                temp2[numberOfChoices - 1] = false;
+                                                setChoices(copy1);
+                                                setAnswer(copy2);
+                                            }
 
-                                setChoices(temp1);
-                                setAnswer(temp2);
-                            }}
-                            className={styles.choicesDecreaseButton}
-                        />
-                    </div>
+                                            else {
+                                                toast.error("보기는 최대 10개 까지 설정할 수 있습니다.", { toastId: "" });
+                                            }
+                                        }}
+                                    >
+                                        <img src={process.env.PUBLIC_URL + "/icons/dashboard/add_fill.svg"} className={styles.addChoiceIcon} />
+                                        보기 추가
+                                    </div>
+                                </div>
+                            ),
+
+                        "sa":
+                            (
+                                !Array.isArray(answer) && typeof answer === "string"
+
+                                &&
+
+                                <input
+                                    type="text"
+                                    value={answer}
+                                    onChange={(event) => setAnswer(event.target.value)}
+                                    className={styles.answerInputBox}
+                                    spellCheck={false}
+                                />
+                            )
+                        ,
+
+                        "tf":
+                            <div className={styles.trueFalseContainer}>
+                                <div className={styles.radioBox} style={{ borderRight: "1px solid rgb(220, 220, 220)" }}>
+                                    <RadioButton
+                                        value={(typeof answer === "boolean") && answer}
+                                        onClick={() => setAnswer(true)}
+                                    />
+
+                                    참
+                                </div>
+
+                                <div className={styles.radioBox}>
+                                    <RadioButton
+                                        value={(typeof answer === "boolean") && !answer}
+                                        onClick={() => setAnswer(false)}
+                                    />
+
+                                    거짓
+                                </div>
+                            </div>,
+
+                        "essay":
+                            <div className={styles.valueBox}>essay 문제는 정답을 설정할 수 없습니다.</div>
+                    }[type]
                 }
             </div>
 
-            {
-                type === "객관식"
-
-                &&
-
-                <div className={styles.choicesContainer}>
-                    <ChoiceContainer index={0} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    <ChoiceContainer index={1} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    <ChoiceContainer index={2} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />
-                    {numberOfChoices >= 4 && <ChoiceContainer index={3} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 5 && <ChoiceContainer index={4} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 6 && <ChoiceContainer index={5} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 7 && <ChoiceContainer index={6} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 8 && <ChoiceContainer index={7} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 9 && <ChoiceContainer index={8} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                    {numberOfChoices >= 10 && <ChoiceContainer index={9} answer={answer} setAnswer={setAnswer} choices={choices} setChoices={setChoices} />}
-                </div>
-            }
-
-            {
-                type === "참/거짓"
-
-                &&
-
-                <div className={styles.trueFalseButtons}>
-                    <div
-                        className={answer ? styles.trueFalseSelected : styles.trueFalseNotSelected}
-                        style={{ borderRadius: "5px 0px 0px 5px" }}
-                        onClick={() => { setAnswer(true); }}
-                    >
-                        참
-                    </div>
-
-                    <div
-                        className={!answer ? styles.trueFalseSelected : styles.trueFalseNotSelected}
-                        style={{ borderRadius: "0px 5px 5px 0px" }}
-                        onClick={() => { setAnswer(false); }}
-                    >
-                        거짓
-                    </div>
-                </div>
-            }
-
-            {
-                type === "주관식"
-
-                &&
-
-                <input
-                    type="text"
-                    value={answer}
-                    onChange={(event) => { setAnswer(event.target.value); }}
-                    className={styles.answerInputBox}
-                    required
-                />
-            }
-
-            {
-                type === "서술형"
-
-                &&
-
-                <div className={styles.answerInputBoxDisabled}>
-                    서술형 문제는 정답을 설정할 수 없습니다.
-                </div>
-            }
 
 
+            <div>
+                <Label>
+                    채점 방식
+                </Label>
 
-            <div className={styles.addQuestionsButtons}>
-                <input type="submit" value="추가" className={styles.submitButton} />
+                {
+                    type !== "essay"
 
-                <button
-                    className={styles.cancelButton}
-                    onClick={() => {
-                        setIsAddingQuestion(false);
-                        setPoints(1);
-                        setQuestion("");
-                        setAnswer("");
-                    }}
-                >
-                    취소
-                </button>
+                        ?
+
+                        <div className={styles.gradingContainer}>
+                            <div className={styles.gradingRadioBox} style={{ borderBottom: "1px solid rgb(220, 220, 220)" }}>
+                                <RadioButton
+                                    value={grading === 0}
+                                    onClick={() => setGrading(0)}
+                                />
+
+                                <div className={styles.gradingText}>
+                                    <div className={styles.gradingTextTop}>
+                                        기본
+                                    </div>
+
+                                    <div className={styles.gradingTextBottom}>
+                                        정답: +{points}점 / 오답: 0점 / 미응답: 0점 으로 채점됩니다.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={styles.gradingRadioBox} style={{ borderBottom: "1px solid rgb(220, 220, 220)" }}>
+                                <RadioButton
+                                    value={grading === 1}
+                                    onClick={() => setGrading(1)}
+                                />
+
+                                <div className={styles.gradingText}>
+                                    <div className={styles.gradingTextTop}>
+                                        오답 시 감점
+                                    </div>
+
+                                    <div className={styles.gradingTextBottom}>
+                                        정답: +{points}점 / 오답: -{points}점 / 미응답: 0점 으로 채점됩니다.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={styles.gradingRadioBox}>
+                                <RadioButton
+                                    value={grading === 2}
+                                    onClick={() => setGrading(2)}
+                                />
+
+                                <div className={styles.gradingText}>
+                                    <div className={styles.gradingTextTop}>
+                                        응답 시 만점
+                                    </div>
+
+                                    <div className={styles.gradingTextBottom}>
+                                        응답: +{points}점 / 미응답: 0점 으로 채점됩니다.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        :
+
+                        <div className={styles.gradingContainer}>
+                            <div className={styles.gradingRadioBox} style={{ borderBottom: "1px solid rgb(220, 220, 220)" }}>
+                                <RadioButton
+                                    value={grading === 0}
+                                    onClick={() => setGrading(0)}
+                                />
+
+                                <div className={styles.gradingText}>
+                                    <div className={styles.gradingTextTop}>
+                                        기본
+                                    </div>
+
+                                    <div className={styles.gradingTextBottom}>
+                                        0~{points}점으로 관리자가 직접 채점합니다.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={styles.gradingRadioBox}>
+                                <RadioButton
+                                    value={grading === 2}
+                                    onClick={() => setGrading(2)}
+                                />
+
+                                <div className={styles.gradingText}>
+                                    <div className={styles.gradingTextTop}>
+                                        응답 시 만점
+                                    </div>
+
+                                    <div className={styles.gradingTextBottom}>
+                                        응답: +{points}점 / 미응답: 0점 으로 채점됩니다.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                }
             </div>
-        </form>
+
+
+
+            <Buttons>
+                <SubmitButton text="추가하기" onClick={addQuestion} />
+                <CancelButton text="취소하기" onClick={() => setIsAddingQuestion(false)} />
+            </Buttons>
+        </div>
     )
 }

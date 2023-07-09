@@ -1,0 +1,216 @@
+.container {
+    width: 100vw;
+    height: calc(100vh - 50px);
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    background-color: rgb(255, 255, 255);
+    z-index: 20;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar {
+    width: 16px;
+    background-color: transparent
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: rgb(230, 230, 230);
+}
+
+.header {
+    width: 100vw;
+    height: 50px;
+    background-color: rgb(10, 20, 40);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.headerTestName {
+    color: rgb(255, 255, 255);
+}
+
+.headerApplicantName {
+    color: rgb(255, 255, 255);
+    border-left: 1px solid rgb(100, 100, 100);
+    padding-left: 20px;
+    margin-left: 20px;
+}
+
+.containerTop {
+    width: 100vw;
+    height: 200px;
+    background-color: rgb(248, 248, 248);
+    padding-left: 20vw;
+    padding-right: 20vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.infoHeader {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgb(150, 150, 150);
+    margin-bottom: 10px;
+}
+
+.infoValue {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.containerBottom {
+    width: 100vw;
+    padding-left: 20vw;
+    padding-right: 20vw;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.menuBar {
+    display: flex;
+    flex-direction: row;
+}
+
+.menuButtonSelected {
+    width: 120px;
+    height: 40px;
+    color: rgb(0, 100, 250);
+    border-bottom: 2px solid rgb(0, 100, 250);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.menuButtonSelected img {
+    filter: invert(28%) sepia(98%) saturate(4714%) hue-rotate(211deg) brightness(100%) contrast(102%);
+}
+
+.menuButtonNotSelected {
+    width: 120px;
+    height: 40px;
+    color: rgb(180, 180, 180);
+    border-bottom: 2px solid rgb(220, 220, 220);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menuButtonNotSelected img {
+    filter: invert(0.8);
+}
+
+.menuButtonNotSelected:hover {
+    color: rgb(160, 160, 160);
+    border-bottom: 2px solid rgb(200, 200, 200);
+}
+
+.menuButtonNotSelected:hover img {
+    filter: invert(0.7);
+}
+
+.label {
+    font-weight: 600;
+    color: rgb(150, 150, 150);
+    margin-bottom: -30px;
+}
+
+.statisticTable {
+    width: 100%;
+    border-spacing: 0px;
+    table-layout: fixed;
+}
+
+.statisticTable th {
+    height: 40px;
+    background-color: rgb(240, 240, 240);
+    border-top: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.statisticTable td {
+    height: 100px;
+    text-align: center;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.statisticTable td div:first-child {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.statisticTable td div:nth-child(2) {
+    font-weight: 400;
+    color: rgb(150, 150, 150);
+}
+
+.detailTable {
+    width: 100%;
+    border-spacing: 0px;
+}
+
+.detailTable th {
+    height: 40px;
+    background-color: rgb(240, 240, 240);
+    border-top: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.detailTable td {
+    height: 40px;
+    text-align: center;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.detailTable td:first-child {
+    font-weight: 700;
+}
+
+.detailTable td span:first-child {
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.detailTable td span:nth-child(2) {
+    font-weight: 400;
+    color: rgb(150, 150, 150);
+}
+
+.statisticTable th+th,
+.statisticTable td+td,
+.detailTable th+th,
+.detailTable td+td,
+.gradingTable th+th,
+.gradingTable td+td {
+    border-left: 1px solid rgb(220, 220, 220);
+}
+
+.gradingTable {
+    width: 100%;
+    border-spacing: 0px;
+    table-layout: fixed;
+}
+
+.gradingTable tr td:first-child {
+    background-color: rgb(240, 240, 240);
+}

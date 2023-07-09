@@ -64,12 +64,12 @@ details summary::-webkit-details-marker {
     padding: 20px;
     border-radius: 5px;
     box-shadow: none;
-    z-index: 5;
+    z-index: 21 !important;
 }
 
 .Toastify__toast-container {
     padding: 0px;
-    z-index: 5;
+    z-index: 21 !important;
 }
 
 @keyframes Toastify__slideInRight {
@@ -128,12 +128,14 @@ details summary::-webkit-details-marker {
         padding: 10px;
         border-radius: 0px;
         box-shadow: none;
+        z-index: 21 !important;
     }
     
     .Toastify__toast-container {
         margin: 0px;
         padding: 0px;
         width: 100vw;
+        z-index: 21 !important;
     }
 }
 
@@ -152,6 +154,7 @@ details summary::-webkit-details-marker {
 
 .tox:not(.tox-tinymce-inline) .tox-editor-header {
     box-shadow: none !important;
+    padding: 0px !important;
 }
 
 .tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {

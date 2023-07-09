@@ -1,0 +1,269 @@
+.container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.applicantListContainer {
+    height: 100vh;
+    border-right: 1px solid rgb(220, 220, 220);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.applicantSelected {
+    width: 100%;
+    height: 55px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.applicantNotSelected {
+    width: 100%;
+    height: 55px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.applicantNotSelected:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.applicantImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    filter: invert(0.7);
+}
+
+.applicantHeader {
+    width: 220px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.applicantName {
+    font-weight: 700;
+}
+
+.applicantUnread {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: rgb(250, 50, 50);
+    margin-top: 2px;
+}
+
+.applicantLastTime {
+    font-size: 0.8rem;
+}
+
+.applicantLastMessage {
+    font-size: 0.8rem;
+    max-height: 16px;
+    overflow: hidden;
+    opacity: 0.6;
+}
+
+.chattingContainer {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr fit-content(100%);
+}
+
+.chattingListContainer {
+    height: 100%;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    overflow: auto;
+}
+
+.chattingListContainer::-webkit-scrollbar {
+    width: 16px;
+    background-color: transparent
+}
+
+.chattingListContainer::-webkit-scrollbar-thumb {
+    background-color: rgb(230, 230, 230);
+}
+
+.time {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr fit-content(100%) 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.timeBorder {
+    border-top: 1px solid rgb(220, 220, 220);
+}
+
+.timeValue {
+    font-size: 0.9rem;
+    color: rgb(180, 180, 180);
+}
+
+.senderManager {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.senderApplicant {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.senderName {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgb(0, 100, 250);
+}
+
+.senderTime {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgb(180, 180, 180);
+}
+
+.textManager {
+    font-size: 1.1rem;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    word-break: keep-all;
+}
+
+.textApplicant {
+    font-size: 1.1rem;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    word-break: keep-all;
+    text-align: right;
+}
+
+.textManager:hover,
+.textApplicant:hover {
+    background-color: rgba(0, 100, 250, 0.1);
+}
+
+.chattingInputBoxZone {
+    padding: 40px;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.chattingInputBox {
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    min-height: 42px;
+    border-radius: 5px 0px 0px 5px;
+    border: 1px solid rgb(220, 220, 220);
+    padding: 10px;
+    resize: none;
+    overflow: hidden;
+}
+
+.chattingInputBox::-webkit-scrollbar {
+    display: none;
+}
+
+.chattingInputBox:hover {
+    padding: 9px;
+    border: 2px solid rgba(0, 100, 250, 0.3);
+}
+
+.chattingInputBox:focus {
+    padding: 9px;
+    border: 2px solid rgb(0, 100, 250);
+}
+
+.chattingInputBox::placeholder {
+    font-weight: 400;
+    color: rgb(180, 180, 180);
+}
+
+.chattingInputBox:disabled {
+    background-color: rgb(220, 220, 220);
+    cursor: not-allowed;
+}
+
+.sendButton {
+    font-size: 1rem;
+    width: 45px;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 100, 250);
+}
+
+.sendButton img {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    filter: invert();
+}
+
+.sendButton:hover {
+    background-color: rgba(0, 100, 250, 0.8);
+    cursor: pointer;
+}
+
+.sendButton:disabled {
+    background-color: rgba(0, 100, 250, 0.3);
+    cursor: not-allowed;
+}
+
+.notSelected {
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(150, 150, 150);
+}
+
+.empty {
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(150, 150, 150);
+}
