@@ -4,7 +4,6 @@ import Page1 from "./Page1";
 import Page2 from "./Page2";
 import Page3 from "./Page3";
 import Page4 from "./Page4";
-import Page6 from "./Page6";
 import AfterPage from "./AfterPage";
 
 import Modal from "../../../theme/Modal";
@@ -108,7 +107,7 @@ export default function PreTestScreen({ testInfo, applicantInfo, questionList, i
                             <img className={styles.arrow} src={process.env.PUBLIC_URL + "/icons/apply/arrow_right.svg"} />
 
 
-                            {
+                            {/* {
                                 testInfo.webCam
 
                                 &&
@@ -139,7 +138,7 @@ export default function PreTestScreen({ testInfo, applicantInfo, questionList, i
 
                                     <img className={styles.arrow} src={process.env.PUBLIC_URL + "/icons/apply/arrow_right.svg"} />
                                 </>
-                            }
+                            } */}
 
 
                             <div
@@ -151,7 +150,7 @@ export default function PreTestScreen({ testInfo, applicantInfo, questionList, i
                                         }
 
                                         else {
-                                            setPage(6);
+                                            setPage(4);
                                         }
                                     }
 
@@ -161,26 +160,27 @@ export default function PreTestScreen({ testInfo, applicantInfo, questionList, i
                                         }
 
                                         else {
-                                            setPage(6);
+                                            setPage(4);
                                         }
                                     }
                                 }}
                             >
-                                <div className={page === 6 ? styles.navigatorIconSelected : styles.navigatorIconNotSelected}>
-                                    {testInfo.webCam ? 5 : 4}
+                                <div className={page === 4 ? styles.navigatorIconSelected : styles.navigatorIconNotSelected}>
+                                    4
                                 </div>
 
-                                <div className={page === 6 ? styles.navigatorTextSelected : styles.navigatorTextNotSelected}>
+                                <div className={page === 4 ? styles.navigatorTextSelected : styles.navigatorTextNotSelected}>
                                     준비 완료
                                 </div>
                             </div>
                         </div>
 
-                        {/* <div style={{
-                            width: `calc(25% * ${page + 1})`,
+                        <div style={{
+                            width: `calc(25% * ${page})`,
+                            maxWidth: "100%",
                             borderBottom: "2px solid rgb(0, 100, 250)",
                             transition: "0.5s"
-                        }} /> */}
+                        }} />
 
                         <div className={styles.containerBottom}>
                             {
@@ -219,7 +219,7 @@ export default function PreTestScreen({ testInfo, applicantInfo, questionList, i
                                 />
                             }
 
-                            {
+                            {/* {
                                 page === 4
 
                                 &&
@@ -228,14 +228,14 @@ export default function PreTestScreen({ testInfo, applicantInfo, questionList, i
                                     setPage={setPage}
                                     checks={checks} setChecks={setChecks}
                                 />
-                            }
+                            } */}
 
                             {
-                                page === 6
+                                page === 4
 
                                 &&
 
-                                <Page6
+                                <Page4
                                     testInfo={testInfo}
                                     questionList={questionList}
                                     setIsApplyingTest={setIsApplyingTest}

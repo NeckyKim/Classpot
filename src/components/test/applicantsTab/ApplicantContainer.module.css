@@ -4,7 +4,7 @@
     padding-left: 10px;
     padding-right: 10px;
     display: grid;
-    grid-template-columns: 60px 90px 1fr 40px 40px 40px;
+    grid-template-columns: 60px 90px 1fr 40px 80px 40px 40px 40px;
     gap: 25px;
     align-items: center;
 }
@@ -29,6 +29,28 @@
 .applicantName {
     font-size: 1.2rem;
     font-weight: 700;
+}
+
+.applicantPauseOnButton {
+    font-size: 0.85rem;
+    height: 24px;
+    line-height: 24px;
+    color: rgb(100, 100, 100);
+    background-color: rgb(220, 220, 220);
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.applicantPauseOffButton {
+    font-size: 0.85rem;
+    height: 24px;
+    line-height: 24px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(250, 0, 0);
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
 }
 
 .applicantIcon {

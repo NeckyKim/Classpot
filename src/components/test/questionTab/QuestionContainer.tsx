@@ -79,7 +79,7 @@ export default function QuestionContainer({ userCode, testCode, questionObject, 
                 </div>
 
                 <img
-                    src={process.env.PUBLIC_URL + "/icons/apply/arrow_down.svg"}
+                    src={process.env.PUBLIC_URL + "/icons/apply/arrow_up.svg"}
                     className={showQuestion ? styles.arrowShow : styles.arrowHide}
                 />
             </div>

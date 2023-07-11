@@ -46,69 +46,10 @@
     grid-template-columns: fit-content(100%) 1fr;
 }
 
-.navigatorElementsSelected {
-    font-size: 1.1rem;
-    font-weight: 700;
-    width: 40px;
-    height: 40px;
-    line-height: 38px;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid rgb(0, 100, 250);
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 100, 250);
-    position: relative;
-}
-
-.navigatorElementsNotSelected {
-    font-size: 1.1rem;
-    font-weight: 700;
-    width: 40px;
-    height: 40px;
-    line-height: 38px;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid rgb(220, 220, 220);
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
-    position: relative;
-    cursor: pointer;
-}
-
-.navigatorElementsNotSelected:hover {
-    background-color: rgb(248, 248, 248);
-}
-
 .mark {
     position: absolute;
     top: -7px;
     right: -7px;
-}
-
-.solvedMark {
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgb(248, 248, 248);
-    border-radius: 7px;
-    background-color: rgb(0, 220, 220);
-}
-
-.flaggedMark {
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgb(248, 248, 248);
-    border-radius: 7px;
-    background-color: rgb(250, 150, 0);
-}
-
-.questionHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-bottom: 1px solid rgb(220, 220, 220);
-    padding-bottom: 30px;
-    margin-bottom: 10px;
 }
 
 .questionNumber {
@@ -116,25 +57,6 @@
     flex-direction: row;
     align-items: flex-end;
     gap: 10px;
-}
-
-.questionNumberLabel {
-    font-size: 1.75rem;
-    font-weight: 400;
-    line-height: 24px;
-}
-
-.questionNumberValue {
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 24px;
-}
-
-.questionNumberTotal {
-    font-size: 2rem;
-    font-weight: 200;
-    line-height: 24px;
-    color: rgb(180, 180, 180);
 }
 
 .questionFlagged {
@@ -187,11 +109,6 @@
     height: 17px;
     padding: 3px;
     filter: invert(66%) sepia(11%) saturate(0%) hue-rotate(162deg) brightness(89%) contrast(97%);
-}
-
-.questionInfo {
-    font-weight: 700;
-    line-height: 15px;
 }
 
 .choiceContainer {

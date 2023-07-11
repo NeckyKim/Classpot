@@ -190,8 +190,8 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
             <div className={styles.containerCenter}>
                 <S.Navigator className={lightMode ? "light" : "dark"}>
                     {questionList.map((elem: any, index: number) => (
-                        <div
-                            className={questionIndex === index ? styles.navigatorElementsSelected : styles.navigatorElementsNotSelected}
+                        <S.NavigatorElements
+                            className={(questionIndex === index ? "selected" : "notselected") + (lightMode ? "light" : "dark")}
                             onClick={() => {
                                 if (questionIndex !== index) {
                                     logSetter(`${index + 1}번 문제 진입`);
@@ -204,10 +204,10 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                             {index + 1}
 
                             <div className={styles.mark}>
-                                {!unsolvedList.includes(index) && <div className={styles.solvedMark} />}
-                                {flaggedList.includes(index) && <div className={styles.flaggedMark} />}
+                                {!unsolvedList.includes(index) && <S.solvedMark className={lightMode ? "light" : "dark"} />}
+                                {flaggedList.includes(index) && <S.flaggedMark className={lightMode ? "light" : "dark"} />}
                             </div>
-                        </div>
+                        </S.NavigatorElements>
                     ))}
                 </S.Navigator>
 
@@ -215,11 +215,19 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
 
                 <S.QuestionAnswerContainer className={(screenMode ? "rl" : "ud") + (lightMode ? "light" : "dark")}>
                     <S.QuestionContainer className={(screenMode ? "rl" : "ud") + (lightMode ? "light" : "dark")}>
-                        <div className={styles.questionHeader}>
+                        <S.QuestionHeader className={lightMode ? "light" : "dark"}>
                             <div className={styles.questionNumber}>
-                                <div className={styles.questionNumberLabel}>문제</div>
-                                <div className={styles.questionNumberValue}>{String(questionIndex + 1)}</div>
-                                <div className={styles.questionNumberTotal}>/ {questionList.length}</div>
+                                <S.QuestionNumberLabel className={lightMode ? "light" : "dark"}>
+                                    문제
+                                </S.QuestionNumberLabel>
+
+                                <S.QuestionNumberValue className={lightMode ? "light" : "dark"}>
+                                    {String(questionIndex + 1)}
+                                </S.QuestionNumberValue>
+
+                                <S.QuestionNumberTotal className={lightMode ? "light" : "dark"}>
+                                    / {questionList.length}
+                                </S.QuestionNumberTotal>
 
                                 <div
                                     className={flaggedList.includes(questionIndex) ? styles.questionFlagged : styles.questionNotFlagged}
@@ -249,21 +257,19 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                 </div>
                             </div>
 
-                            <div>
-                                <div className={styles.questionInfo}>
-                                    {(() => {
-                                        switch (questionList[questionIndex]?.type) {
-                                            case "mc": return "객관식"
-                                            case "sa": return "주관식"
-                                            case "tf": return "참/거짓"
-                                            case "essay": return "서술형"
-                                        }
-                                    })()}
-                                    &nbsp;
-                                    {questionList[questionIndex]?.points}점
-                                </div>
-                            </div>
-                        </div>
+                            <S.QuestionInfo className={lightMode ? "light" : "dark"}>
+                                {(() => {
+                                    switch (questionList[questionIndex]?.type) {
+                                        case "mc": return "객관식"
+                                        case "sa": return "주관식"
+                                        case "tf": return "참/거짓"
+                                        case "essay": return "서술형"
+                                    }
+                                })()}
+                                &nbsp;
+                                {questionList[questionIndex]?.points}점
+                            </S.QuestionInfo>
+                        </S.QuestionHeader>
 
                         <Editor
                             apiKey={process.env.REACT_APP_TINYMCE_EDITOR_ID}
@@ -335,6 +341,7 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                                 copy[questionIndex] = event.target.value;
                                                 setAnswerSheet(copy);
                                             }}
+                                            placeholder="이곳에 정답을 입력하세요."
                                         />
 
                                         <div className={styles.answerInputBoxInfo}>
@@ -412,15 +419,16 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
 
                                 case "essay":
                                     return <>
-                                        <textarea
+                                        <S.AnswerInputBox
                                             value={answerSheet[questionIndex]}
-                                            className={styles.answerInputBoxB}
+                                            className={(questionList[questionIndex]?.type ? "sa" : "essay") + (lightMode ? "light" : "dark")}
                                             spellCheck={false}
                                             onChange={(event) => {
                                                 let copy = JSON.parse(JSON.stringify(answerSheet));
                                                 copy[questionIndex] = event.target.value;
                                                 setAnswerSheet(copy);
                                             }}
+                                            placeholder="이곳에 정답을 입력하세요."
                                         />
 
                                         <div className={styles.answerInputBoxInfo}>

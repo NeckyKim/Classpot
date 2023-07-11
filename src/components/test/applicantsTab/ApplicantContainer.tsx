@@ -25,9 +25,7 @@ export default function ApplicantContainer({ userCode, testCode, applicantObject
 
 
 
-    async function editApplicant(event: any) {
-        event.preventDefault()
-
+    async function editApplicant() {
         if (userCode && testCode) {
             try {
                 await updateDoc(doc(dbService, "users", userCode, "tests", testCode, "applicants", applicantObject.applicantCode), {
@@ -47,9 +45,7 @@ export default function ApplicantContainer({ userCode, testCode, applicantObject
 
 
 
-    async function deleteApplicant(event: any) {
-        event.preventDefault()
-
+    async function deleteApplicant() {
         if (userCode && testCode) {
             try {
                 await deleteDoc(doc(dbService, "users", userCode, "tests", testCode, "applicants", applicantObject.applicantCode));
@@ -67,6 +63,30 @@ export default function ApplicantContainer({ userCode, testCode, applicantObject
 
 
 
+    async function pasueApplicant() {
+        if (userCode && testCode && applicantObject.applicantCode) {
+            try {
+                await updateDoc(doc(dbService, "users", userCode, "tests", testCode, "applicants",applicantObject.applicantCode), {
+                    pause: !applicantObject.pause
+                })
+            }
+
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+
+
+    function sumArray(array: number[]) {
+        return array?.reduce((sum: number, current: number) => {
+            return sum + current
+        }, 0)
+    }
+
+    console.log(applicantObject.reportCard)
+
     return (
         <div>
             <div className={styles.container}>
@@ -81,6 +101,26 @@ export default function ApplicantContainer({ userCode, testCode, applicantObject
 
                 <div className={styles.applicantName}>
                     {applicantObject.applicantName}
+                </div>
+
+                <div className={styles.applicantScore}>
+                    {sumArray(applicantObject.reportCard)}
+                </div>
+
+                <div className={applicantObject.pause ? styles.applicantPauseOffButton : styles.applicantPauseOnButton} onClick={() => {
+                    if (applicantObject.pause) {
+                        if (confirm("일시 정지를 해제하시겠습니까?")) {
+                            pasueApplicant();
+                        }
+                    }
+
+                    else {
+                        if (confirm(`${applicantObject.applicantName} 응시자를 일시 정지 하시겠습니까?`)) {
+                            pasueApplicant();
+                        }
+                    }
+                }}>
+                    {applicantObject.pause ? "일시정지 해제" : "일시정지"}
                 </div>
 
                 <img
@@ -107,6 +147,8 @@ export default function ApplicantContainer({ userCode, testCode, applicantObject
                     onClick={() => setIsDeletingApplicant(true)}
                 />
             </div>
+
+
 
             {
                 isEditingApplicant

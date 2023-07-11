@@ -114,7 +114,7 @@ export default function Page3({ setPage, checks, setChecks }: { setPage: any, ch
             <Buttons>
                 <SubmitButton
                     text="다음"
-                    onClick={() => setPage(6)}
+                    onClick={() => setPage(4)}
                     disabled={!checks[2]}
                 />
             </Buttons>

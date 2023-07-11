@@ -55,23 +55,23 @@ export default function MonitoringTab({ userCode, testCode }: { userCode: string
 
 
             
-    useEffect(() => {
-        function onVideoTrack(user: any) {
-            setUserList((prev: any) => [...prev, user]);
-        };
+    // useEffect(() => {
+    //     function onVideoTrack(user: any) {
+    //         setUserList((prev: any) => [...prev, user]);
+    //     };
         
-        const { connect } = createAgoraClient({ onVideoTrack });
+    //     const { connect } = createAgoraClient({ onVideoTrack });
 
 
-        async function setup() {
-            const { tracks, uid } = await connect();
+    //     async function setup() {
+    //         const { tracks, uid } = await connect();
 
-            setUid(uid);
-            setUserList(tracks);
-        }
+    //         setUid(uid);
+    //         setUserList(tracks);
+    //     }
 
-        agoraCommandQueue = agoraCommandQueue.then(setup);
-    }, [])
+    //     agoraCommandQueue = agoraCommandQueue.then(setup);
+    // }, [])
 
 
 

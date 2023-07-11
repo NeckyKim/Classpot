@@ -106,6 +106,8 @@ export default function ApplicantsTab({ userCode, testCode }: { userCode: string
                             <div style={{ textAlign: "center" }}>프로필</div>
                             <div>응시자 코드</div>
                             <div>이름</div>
+                            <div>점수</div>
+                            <div style={{ justifySelf: "center" }}>일시정지</div>
                             <div style={{ justifySelf: "center" }}>URL</div>
                             <div style={{ justifySelf: "center" }}>수정</div>
                             <div style={{ justifySelf: "center" }}>삭제</div>

@@ -55,6 +55,8 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
                         </div>
                     </div>
 
+
+
                     <div className={styles.sideBarBottom}>
                         <div
                             className={tab === 1 ? styles.tabSelected : styles.tabNotSelected}
@@ -154,7 +156,7 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
                         >
                             <img
                                 className={styles.tabIcon}
-                                src={process.env.PUBLIC_URL + "/icons/dashboard/answerSheet.svg"}
+                                src={process.env.PUBLIC_URL + "/icons/dashboard/answersheet.svg"}
                             />
 
                             <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
@@ -167,7 +169,6 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
                         <div className={styles.wideNarrowButton} onClick={() => setWide(prev => !prev)}>
                             <img className={wide ? styles.narrowIcon : styles.wideIcon} src={process.env.PUBLIC_URL + "/icons/dashboard/arrow_right.svg"} />
                         </div>
-
                     </div>
                 </div>
 
