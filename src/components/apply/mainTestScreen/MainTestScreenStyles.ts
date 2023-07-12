@@ -328,7 +328,6 @@ export const AnswerInputBox = styled.textarea`
         height: 45px;
         border: 1px solid rgb(220, 220, 220);
         resize: none;
-        color: rgb(0, 0, 0);
     }
 
     &.sadark {
@@ -342,7 +341,6 @@ export const AnswerInputBox = styled.textarea`
         height: 300px;
         border: 1px solid rgb(220, 220, 220);
         resize: vertical;
-        color: rgb(250, 0, 0);
     }
 
     &.essaydark {
