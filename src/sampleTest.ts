@@ -27,3 +27,5 @@ const sampleTest = {
     testName: "시험 환경 테스트",
     webCam: false
 }
+
+export default sampleTest;
