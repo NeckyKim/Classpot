@@ -67,7 +67,14 @@ export default function QuestionContainer({ userCode, testCode, applicantCode, q
                     </div>
 
                     <div className={styles.infoValue}>
-                        {questionObject.type}
+                        {(() => {
+                            switch (questionObject?.type) {
+                                case "mc": return "객관식"
+                                case "sa": return "주관식"
+                                case "tf": return "참/거짓"
+                                case "essay": return "서술형"
+                            }
+                        })()}
                     </div>
                 </div>
 

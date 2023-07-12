@@ -156,7 +156,10 @@ export default function Page1({ setPage, checks, setChecks, testInfo, applicantI
                             </div>
 
                             <div className={styles.infoValue}>
-                                {new Set(questionList.map((x: any) => x.type + "　"))}
+                                {new Set(questionList.map((x: any) => x.type)).has("mc") && "객관식　"}
+                                {new Set(questionList.map((x: any) => x.type)).has("sa") && "주관식　"}
+                                {new Set(questionList.map((x: any) => x.type)).has("tf") && "참/거짓　"}
+                                {new Set(questionList.map((x: any) => x.type)).has("essay") && "서술형"}
                             </div>
                         </div>
                     </div>

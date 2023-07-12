@@ -14,6 +14,7 @@
     border-right: 1px solid rgb(220, 220, 220);
     position: relative;
     transition: 0.5s;
+    z-index: 10;
 }
 
 .sideBarNarrow {
@@ -22,60 +23,66 @@
     border-right: 1px solid rgb(220, 220, 220);
     position: relative;
     transition: 0.5s;
+    z-index: 10;
 }
 
 .sideBarWideTop {
     width: 300px;
     max-width: 300px;
     overflow: hidden;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
 .sideBarNarrowTop {
     width: 300px;
     max-width: 60px;
     overflow: hidden;
-    display: flex;
-    flex-direction: row;
-}
-
-.sideBarIcon {
-    font-size: 1.2rem;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 20px;
-    margin: 10px;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    background-color: blue;
-}
-
-.sideBarWideText {
-    font-weight: 700;
-    width: 240px;
-    max-width: 240px;
-    height: 40px;
-    margin-top: 10px;
-    word-break: keep-all;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 60px 1fr;
     align-items: center;
-    overflow: hidden;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
-.sideBarNarrowText {
-    font-weight: 700;
-    width: 240px;
+.sideBarLogoIcon {
+    width: 60px;
+    height: 50px;
+    padding: 10px;
+    object-fit: contain;
+}
+
+.sideBarLogoShow {
+    font-family: "Poppins";
+    font-size: 1.3rem;
+    font-weight: 500;
+    width: 200px;
+    max-width: 200px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: -10px;
+    opacity: 1;
+    overflow: hidden;
+    letter-spacing: -0.5px;
+    transition: 0.5s;
+}
+
+.sideBarLogoHide {
+    font-family: "Poppins";
+    font-size: 1.3rem;
+    font-weight: 500;
+    width: 200px;
     max-width: 0px;
-    height: 40px;
-    margin-top: 10px;
-    word-break: keep-all;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    height: 30px;
+    line-height: 30px;
+    margin-left: -10px;
+    opacity: 0;
     overflow: hidden;
+    letter-spacing: -0.5px;
+    transition: 0.5s;
 }
 
 .sideBarBottom {
@@ -173,6 +180,7 @@
 .contentWide {
     width: calc(100vw - 300px);
     height: 100%;
+    padding-top: 50px;
     background-color: rgb(255, 255, 255);
     overflow-y: auto;
     transition: 0.5s;
@@ -181,6 +189,7 @@
 .contentNarrow {
     width: calc(100vw - 60px);
     height: 100%;
+    padding-top: 50px;
     background-color: rgb(255, 255, 255);
     overflow-y: auto;
     transition: 0.5s;
@@ -195,4 +204,34 @@
 .contentWide::-webkit-scrollbar-thumb,
 .contentNarrow::-webkit-scrollbar-thumb {
     background-color: rgb(230, 230, 230);
+}
+
+.headerWide {
+    font-size: 1.1rem;
+    font-weight: 700;
+    width: calc(100vw - 300px);
+    height: 51px;
+    line-height: 51px;
+    padding-left: 30px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    transition: 0.5s;
+}
+
+.headerNarrow {
+    font-size: 1.1rem;
+    font-weight: 700;
+    width: calc(100vw - 60px);
+    height: 51px;
+    line-height: 51px;
+    padding-left: 30px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    transition: 0.5s;
 }

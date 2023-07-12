@@ -22,7 +22,7 @@ export default function ApplicantContainer({ userCode, testCode, applicantObject
 
     const [isEditingApplicant, setIsEditingApplicant] = useState<boolean>(false);
     const [isDeletingApplicant, setIsDeletingApplicant] = useState<boolean>(false);
-
+    const [isShowingLog, setIsShowingLog] = useState<boolean>(false);
 
 
     async function editApplicant() {
@@ -85,7 +85,7 @@ export default function ApplicantContainer({ userCode, testCode, applicantObject
         }, 0)
     }
 
-    console.log(applicantObject.reportCard)
+
 
     return (
         <div>
@@ -104,7 +104,7 @@ export default function ApplicantContainer({ userCode, testCode, applicantObject
                 </div>
 
                 <div className={styles.applicantScore}>
-                    {sumArray(applicantObject.reportCard)}
+                    {sumArray(applicantObject.reportCard)}점
                 </div>
 
                 <div className={applicantObject.pause ? styles.applicantPauseOffButton : styles.applicantPauseOnButton} onClick={() => {

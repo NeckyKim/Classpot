@@ -52,82 +52,84 @@ export default function QuestionTab({ userCode, testCode }: { userCode: string |
 
                     :
 
-                    <div className={styles.container}>
-                        <Title>
-                            문제 관리
-                        </Title>
+                    <div className={styles.wrapper}>
+                        <div className={styles.container}>
+                            <Title>
+                                문제 관리
+                            </Title>
 
 
 
-                        <div className={styles.containerTop}>
-                            <div className={styles.info}>
-                                <Label style={{ marginBottom: 0 }}>
-                                    총 문항 수
-                                </Label>
+                            <div className={styles.containerTop}>
+                                <div className={styles.info}>
+                                    <Label style={{ marginBottom: 0 }}>
+                                        총 문항 수
+                                    </Label>
 
-                                <div className={styles.infoValue}>
-                                    {questionList.length} / 100개
+                                    <div className={styles.infoValue}>
+                                        {questionList.length} / 100개
+                                    </div>
                                 </div>
+
+                                <SubmitButton
+                                    text="문제 추가"
+                                    onClick={() => {
+                                        if (questionList.length === 100) {
+                                            toast.error("문제를 더 이상 추가할 수 없습니다.", { toastId: "" });
+                                        }
+
+                                        else {
+                                            setIsAddingQuestion(true);
+                                        }
+                                    }}
+                                />
                             </div>
 
-                            <SubmitButton
-                                text="문제 추가"
-                                onClick={() => {
-                                    if (questionList.length === 100) {
-                                        toast.error("문제를 더 이상 추가할 수 없습니다.", { toastId: "" });
-                                    }
 
-                                    else {
-                                        setIsAddingQuestion(true);
-                                    }
-                                }}
-                            />
+
+                            {
+                                questionList.length > 0
+
+                                    ?
+
+                                    <div>
+                                        <div className={styles.questionListHeader}>
+                                            <div>번호</div>
+                                            <div style={{ textAlign: "left" }}>이름</div>
+                                            <div>유형</div>
+                                            <div>배점</div>
+                                            <div>채점 방식</div>
+                                        </div>
+
+                                        {
+                                            questionList.map((elem: any, index: number) => (
+                                                <QuestionContainer
+                                                    userCode={userCode}
+                                                    testCode={testCode}
+                                                    questionObject={elem}
+                                                    index={index}
+                                                    setIsEditingQuestion={setIsEditingQuestion}
+                                                    setQuestionIndex={setQuestionIndex}
+                                                />
+                                            ))
+                                        }
+                                    </div>
+
+                                    :
+
+                                    <div className={styles.empty}>
+                                        <img className={styles.emptyImage} src={process.env.PUBLIC_URL + "/graphics/empty_folder.png"} />
+
+                                        <div className={styles.emptyMainText}>
+                                            문제가 없습니다.
+                                        </div>
+
+                                        <div className={styles.emptySubText}>
+                                            오른쪽 상단의 [문제 추가] 버튼을 눌러서 문제를 추가해주세요.
+                                        </div>
+                                    </div>
+                            }
                         </div>
-
-
-
-                        {
-                            questionList.length > 0
-
-                                ?
-
-                                <div>
-                                    <div className={styles.questionListHeader}>
-                                        <div>번호</div>
-                                        <div style={{textAlign: "left"}}>이름</div>
-                                        <div>유형</div>
-                                        <div>배점</div>
-                                        <div>채점 방식</div>
-                                    </div>
-
-                                    {
-                                        questionList.map((elem: any, index: number) => (
-                                            <QuestionContainer
-                                                userCode={userCode}
-                                                testCode={testCode}
-                                                questionObject={elem}
-                                                index={index}
-                                                setIsEditingQuestion={setIsEditingQuestion}
-                                                setQuestionIndex={setQuestionIndex}
-                                            />
-                                        ))
-                                    }
-                                </div>
-
-                                :
-
-                                <div className={styles.empty}>
-                                    <img className={styles.emptyImage} src={process.env.PUBLIC_URL + "/graphics/empty_folder.png"} />
-
-                                    <div className={styles.emptyMainText}>
-                                        문제가 없습니다.
-                                    </div>
-
-                                    <div className={styles.emptySubText}>
-                                        오른쪽 상단의 [문제 추가] 버튼을 눌러서 문제를 추가해주세요.
-                                    </div>
-                                </div>
-                        }
                     </div>
             )
     )

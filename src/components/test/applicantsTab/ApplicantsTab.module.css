@@ -1,6 +1,11 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .container {
-    padding-left: 20vh;
-    padding-right: 20vh;
+    width: 80vw;
+    max-width: 1000px;
     padding-top: 60px;
     padding-bottom: 60px;
     display: flex;
@@ -34,7 +39,7 @@
     padding-left: 10px;
     padding-right: 10px;
     display: grid;
-    grid-template-columns: 60px 90px 1fr 40px 80px 40px 40px 40px;
+    grid-template-columns: 50px 80px 1fr 70px 80px 40px 40px 40px;
     gap: 25px;
 }
 

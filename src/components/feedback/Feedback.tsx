@@ -265,9 +265,13 @@ export default function Feedback() {
                                                     </tr>
 
                                                     {
-                                                        ["mc", "tf", "sa", "essay"].map((elem: any, index: number) => (
+                                                        [["mc", "객관식"], ["tf", "참/거짓"], ["sa", "주관식"], ["essay", "서술형"]].map((elem: any, index: number) => (
+                                                            typeNumbers[index] > 0
+
+                                                            &&
+
                                                             <tr>
-                                                                <td>{elem}</td>
+                                                                <td>{elem[1]}</td>
                                                                 <td>
                                                                     <span>{correctNumbers[index]} / {typeNumbers[index]}</span>
                                                                     <span>({(correctNumbers[index] / typeNumbers[index] * 100).toFixed(1)}%)</span>
@@ -280,72 +284,6 @@ export default function Feedback() {
                                                         ))
                                                     }
                                                 </table>
-
-
-
-                                                <div className={styles.label}>
-                                                    채점표
-                                                </div>
-
-                                                <div>
-                                                    <table className={styles.gradingTable}>
-                                                        <tr>
-                                                            <td>번호</td>
-                                                            {
-                                                                createArray(1, 10).map((elem: any) => (
-                                                                    elem - 1 < questionList.length && <td>{elem}</td>
-                                                                ))
-                                                            }
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>득점</td>
-                                                            {
-                                                                createArray(1, 10).map((elem: any) => (
-                                                                    elem - 1 < questionList.length && <td>{applicantInfo.reportCard[elem - 1] ? applicantInfo.reportCard[elem - 1] : 0}</td>
-                                                                ))
-                                                            }
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>배점</td>
-                                                            {
-                                                                createArray(1, 10).map((elem: any) => (
-                                                                    elem - 1 < questionList.length && <td>{questionList[elem - 1].points}</td>
-                                                                ))
-                                                            }
-                                                        </tr>
-                                                    </table>
-
-                                                    <table className={styles.gradingTable}>
-                                                        <tr>
-                                                            <td>번호</td>
-                                                            {
-                                                                createArray(11, 20).map((elem: any) => (
-                                                                    elem - 1 < questionList.length && <td>{elem}</td>
-                                                                ))
-                                                            }
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>득점</td>
-                                                            {
-                                                                createArray(11, 20).map((elem: any) => (
-                                                                    elem - 1 < questionList.length && <td>{applicantInfo.reportCard[elem - 1] ? applicantInfo.reportCard[elem - 1] : 0}</td>
-                                                                ))
-                                                            }
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>배점</td>
-                                                            {
-                                                                createArray(11, 20).map((elem: any) => (
-                                                                    elem - 1 < questionList.length && <td>{questionList[elem - 1].points}</td>
-                                                                ))
-                                                            }
-                                                        </tr>
-                                                    </table>
-                                                </div>
                                             </>
 
                                             :

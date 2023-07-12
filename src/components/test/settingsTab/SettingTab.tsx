@@ -106,10 +106,10 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
                     reEntry: reEntry,
                     preview: preview
                 })
-    
+
                 toast.success("시험 설정을 수정했습니다.", { toastId: "" });
             }
-    
+
             catch (error) {
                 console.log(error);
                 toast.error("시험 설정을 수정하지 못했습니다.", { toastId: "" });
@@ -136,115 +136,116 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
 
 
     return (
-        <div className={styles.container}>
-            <div className={styles.subContainer}>
-                <Title>
-                    기본 정보
-                </Title>
+        <div className={styles.wrapper}>
+            <div className={styles.container}>
+                <div className={styles.subContainer}>
+                    <Title>
+                        기본 정보
+                    </Title>
 
-                <div>
-                    <div className={styles.subHeader}>
-                        시험 이름
-                    </div>
-
-                    <input
-                        type="textbox"
-                        value={testName}
-                        className={styles.inputBox}
-                        onChange={(event) => setTestName(event.target.value)}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <div className={styles.subHeader}>
-                        시험 코드
-                    </div>
-
-                    <div className={styles.codeBox}>
-                        <div className={styles.codeBoxValue}>
-                            {userInfo.shortUserCode + testInfo.shortTestCode}
-                        </div>
-
-                        <div
-                            className={styles.codeBoxButton} onClick={() => {
-                                navigator.clipboard.writeText(userInfo.shortUserCode + testInfo.shortTestCode);
-                                toast.success("시험 코드를 복사했습니다.", { toastId: "" });
-                            }}
-                        >
-                            <img className={styles.codeBoxButtonIcon} src={process.env.PUBLIC_URL + "/icons/dashboard/copy.svg"} />
-                            복사
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.flexBox}>
-                    <div style={{ width: "80%" }}>
+                    <div>
                         <div className={styles.subHeader}>
-                            시작 일시
+                            시험 이름
                         </div>
 
                         <input
-                            type="datetime-local"
-                            value={startDate}
+                            type="textbox"
+                            value={testName}
                             className={styles.inputBox}
-                            onChange={(event) => setStartDate(event.target.value)}
+                            onChange={(event) => setTestName(event.target.value)}
                             required
                         />
                     </div>
 
-                    <div style={{ width: "20%" }}>
+                    <div>
                         <div className={styles.subHeader}>
-                            진행 시간
+                            시험 코드
                         </div>
 
-                        <input
-                            type="number"
-                            value={duration}
-                            className={styles.inputBox}
-                            onChange={(event) => setDuration(Number(event.target.value))}
-                            required
-                        />
+                        <div className={styles.codeBox}>
+                            <div className={styles.codeBoxValue}>
+                                {userInfo.shortUserCode + testInfo.shortTestCode}
+                            </div>
+
+                            <div
+                                className={styles.codeBoxButton} onClick={() => {
+                                    navigator.clipboard.writeText(userInfo.shortUserCode + testInfo.shortTestCode);
+                                    toast.success("시험 코드를 복사했습니다.", { toastId: "" });
+                                }}
+                            >
+                                <img className={styles.codeBoxButtonIcon} src={process.env.PUBLIC_URL + "/icons/dashboard/copy.svg"} />
+                                복사
+                            </div>
+                        </div>
                     </div>
-                    
-                </div>
-            </div>
 
+                    <div className={styles.flexBox}>
+                        <div style={{ width: "80%" }}>
+                            <div className={styles.subHeader}>
+                                시작 일시
+                            </div>
 
+                            <input
+                                type="datetime-local"
+                                value={startDate}
+                                className={styles.inputBox}
+                                onChange={(event) => setStartDate(event.target.value)}
+                                required
+                            />
+                        </div>
 
-            <div className={styles.subContainer}>
-                <Title>
-                    시험 진행
-                </Title>
+                        <div style={{ width: "20%" }}>
+                            <div className={styles.subHeader}>
+                                진행 시간
+                            </div>
 
-                <div className={styles.toggle}>
-                    <Toggle value={preview} onClick={() => setPreview((prev) => !prev)} />
+                            <input
+                                type="number"
+                                value={duration}
+                                className={styles.inputBox}
+                                onChange={(event) => setDuration(Number(event.target.value))}
+                                required
+                            />
+                        </div>
 
-                    <div className={styles.toggleHeader}>
-                       문제 정보 사전 공개(문항 수, 총점, 문제 유형)
                     </div>
                 </div>
 
-                <div className={styles.toggle}>
-                    <Toggle value={noticeChatting} onClick={() => setNoticeChatting((prev) => !prev)} />
 
-                    <div className={styles.toggleHeader}>
-                        공지사항 및 채팅 기능 허용
+
+                <div className={styles.subContainer}>
+                    <Title>
+                        시험 진행
+                    </Title>
+
+                    <div className={styles.toggle}>
+                        <Toggle value={preview} onClick={() => setPreview((prev) => !prev)} />
+
+                        <div className={styles.toggleHeader}>
+                            문제 정보 사전 공개(문항 수, 총점, 문제 유형)
+                        </div>
+                    </div>
+
+                    <div className={styles.toggle}>
+                        <Toggle value={noticeChatting} onClick={() => setNoticeChatting((prev) => !prev)} />
+
+                        <div className={styles.toggleHeader}>
+                            공지사항 및 채팅 기능 허용
+                        </div>
+                    </div>
+
+                    <div className={styles.toggle}>
+                        <Toggle value={reEntry} onClick={() => setReEntry((prev) => !prev)} />
+
+                        <div className={styles.toggleHeader}>
+                            재입장 응시 허용
+                        </div>
                     </div>
                 </div>
 
-                <div className={styles.toggle}>
-                    <Toggle value={reEntry} onClick={() => setReEntry((prev) => !prev)} />
-
-                    <div className={styles.toggleHeader}>
-                        재입장 응시 허용
-                    </div>
-                </div>
-            </div>
 
 
-
-            {/* <div className={styles.subContainer}>
+                {/* <div className={styles.subContainer}>
                 <Title text="시험 감독 기능" />
 
                 <div className={styles.toggle}>
@@ -266,235 +267,236 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
 
 
 
-            <div className={styles.subContainer}>
-                <Title>
-                    성적 공개
-                </Title>
-
-                <div className={styles.toggle}>
-                    <Toggle value={feedback} onClick={() => setFeedback((prev) => !prev)} />
-
-                    <div className={styles.toggleHeader}>
+                <div className={styles.subContainer}>
+                    <Title>
                         성적 공개
+                    </Title>
+
+                    <div className={styles.toggle}>
+                        <Toggle value={feedback} onClick={() => setFeedback((prev) => !prev)} />
+
+                        <div className={styles.toggleHeader}>
+                            성적 공개
+                        </div>
                     </div>
+
+                    {
+                        feedback
+
+                        &&
+
+                        <>
+                            <div className={styles.flexBox}>
+                                <div style={{ width: "50%" }}>
+                                    <div className={styles.subHeader}>
+                                        공개 시작 일시
+                                    </div>
+
+                                    <input
+                                        type="datetime-local"
+                                        value={feedbackStart}
+                                        className={styles.inputBox}
+                                        onChange={(event) => setFeedbackStart(event.target.value)}
+                                        required
+                                    />
+                                </div>
+
+                                <div style={{ width: "50%" }}>
+                                    <div className={styles.subHeader}>
+                                        공개 종료 일시
+                                    </div>
+
+                                    <input
+                                        type="datetime-local"
+                                        value={feedbackFinish}
+                                        className={styles.inputBox}
+                                        onChange={(event) => setFeedbackFinish(event.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className={styles.subHeader}>
+                                    점수 공개
+                                </div>
+
+                                <div className={styles.checkBoxContainer}>
+                                    <div className={styles.checkBox}>
+                                        <CheckBox
+                                            value={feedbackScore}
+                                            onClick={() => {
+                                                if (feedbackScore) {
+                                                    setFeedbackScore(false);
+                                                    setFeedbackAverage(false);
+                                                }
+
+                                                else {
+                                                    setFeedbackScore(true);
+                                                }
+                                            }}
+                                        />
+                                        본인 점수
+                                    </div>
+
+                                    <div className={styles.checkBox}>
+                                        <CheckBox
+                                            value={feedbackAverage}
+                                            onClick={() => {
+                                                if (feedbackAverage) {
+                                                    setFeedbackAverage(false);
+                                                }
+
+                                                else {
+                                                    setFeedbackScore(true);
+                                                    setFeedbackAverage(true);
+                                                }
+                                            }}
+                                        />
+                                        전체 평균 점수
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className={styles.subHeader}>
+                                    등수 공개
+                                </div>
+
+                                <div className={styles.checkBoxContainer}>
+                                    <div className={styles.checkBox}>
+                                        <CheckBox
+                                            value={feedbackRank}
+                                            onClick={() => {
+                                                setFeedbackRank((prev) => !prev);
+                                            }}
+                                        />
+                                        등수
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className={styles.subHeader}>
+                                    문제와 정답
+                                </div>
+
+                                <div className={styles.checkBoxContainer}>
+                                    <div className={styles.checkBox}>
+                                        <CheckBox
+                                            value={feedbackQuestion}
+                                            onClick={() => {
+                                                if (feedbackQuestion) {
+                                                    setFeedbackQuestion(false);
+                                                    setFeedbackAnswer(false);
+                                                }
+
+                                                else {
+                                                    setFeedbackQuestion(true);
+                                                }
+                                            }}
+                                        />
+                                        문제
+                                    </div>
+
+                                    <div className={styles.checkBox}>
+                                        <CheckBox
+                                            value={feedbackAnswer}
+                                            onClick={() => {
+                                                if (feedbackAnswer) {
+                                                    setFeedbackAnswer(false);
+                                                }
+
+                                                else {
+                                                    setFeedbackQuestion(true);
+                                                    setFeedbackAnswer(true);
+                                                }
+                                            }}
+                                        />
+                                        정답
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    }
                 </div>
 
+
+
+                <div className={styles.subContainer}>
+                    <Title>
+                        시험 삭제
+                    </Title>
+
+                    <DeleteButton
+                        text="삭제하기"
+                        onClick={() => {
+                            setIsDeletingTest(true);
+                            setDeleteConfirmText("");
+                        }}
+                    />
+                </div>
+
+
+
                 {
-                    feedback
+                    isDeletingTest
 
                     &&
 
-                    <>
-                        <div className={styles.flexBox}>
-                            <div style={{ width: "50%" }}>
-                                <div className={styles.subHeader}>
-                                    공개 시작 일시
-                                </div>
-
-                                <input
-                                    type="datetime-local"
-                                    value={feedbackStart}
-                                    className={styles.inputBox}
-                                    onChange={(event) => setFeedbackStart(event.target.value)}
-                                    required
-                                />
-                            </div>
-
-                            <div style={{ width: "50%" }}>
-                                <div className={styles.subHeader}>
-                                    공개 종료 일시
-                                </div>
-
-                                <input
-                                    type="datetime-local"
-                                    value={feedbackFinish}
-                                    className={styles.inputBox}
-                                    onChange={(event) => setFeedbackFinish(event.target.value)}
-                                    required
-                                />
-                            </div>
+                    <Modal title="시험 삭제" onClose={() => setIsDeletingTest(false)}>
+                        <div>
+                            시험을 삭제하시겠습니까?<br />
+                            해당 시험의 모든 데이터가 완전히 삭제됩니다.
                         </div>
+                        <br />
+
+                        <div style={{ color: "rgb(250, 50, 50)" }}>
+                            다음 내용이 삭제됩니다.
+                        </div>
+
+                        <ul className={styles.deleteInfo}>
+                            <li>시험 설정</li>
+                            <li>문제 </li>
+                            <li>응시자 정보</li>
+                            <li>응시자별 제출 답안지</li>
+                            <li>공지사항</li>
+                            <li>응시자별 채팅 기록</li>
+                        </ul>
+                        <br />
 
                         <div>
-                            <div className={styles.subHeader}>
-                                점수 공개
-                            </div>
-
-                            <div className={styles.checkBoxContainer}>
-                                <div className={styles.checkBox}>
-                                    <CheckBox
-                                        value={feedbackScore}
-                                        onClick={() => {
-                                            if (feedbackScore) {
-                                                setFeedbackScore(false);
-                                                setFeedbackAverage(false);
-                                            }
-
-                                            else {
-                                                setFeedbackScore(true);
-                                            }
-                                        }}
-                                    />
-                                    본인 점수
-                                </div>
-
-                                <div className={styles.checkBox}>
-                                    <CheckBox
-                                        value={feedbackAverage}
-                                        onClick={() => {
-                                            if (feedbackAverage) {
-                                                setFeedbackAverage(false);
-                                            }
-
-                                            else {
-                                                setFeedbackScore(true);
-                                                setFeedbackAverage(true);
-                                            }
-                                        }}
-                                    />
-                                    전체 평균 점수
-                                </div>
-                            </div>
+                            시험을 삭제하려면 시험 이름을 입력하세요.<br />
                         </div>
+                        <br />
 
-                        <div>
-                            <div className={styles.subHeader}>
-                                등수 공개
-                            </div>
-
-                            <div className={styles.checkBoxContainer}>
-                                <div className={styles.checkBox}>
-                                    <CheckBox
-                                        value={feedbackRank}
-                                        onClick={() => {
-                                            setFeedbackRank((prev) => !prev);
-                                        }}
-                                    />
-                                    등수
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className={styles.subHeader}>
-                                문제와 정답
-                            </div>
-
-                            <div className={styles.checkBoxContainer}>
-                                <div className={styles.checkBox}>
-                                    <CheckBox
-                                        value={feedbackQuestion}
-                                        onClick={() => {
-                                            if (feedbackQuestion) {
-                                                setFeedbackQuestion(false);
-                                                setFeedbackAnswer(false);
-                                            }
-
-                                            else {
-                                                setFeedbackQuestion(true);
-                                            }
-                                        }}
-                                    />
-                                    문제
-                                </div>
-
-                                <div className={styles.checkBox}>
-                                    <CheckBox
-                                        value={feedbackAnswer}
-                                        onClick={() => {
-                                            if (feedbackAnswer) {
-                                                setFeedbackAnswer(false);
-                                            }
-
-                                            else {
-                                                setFeedbackQuestion(true);
-                                                setFeedbackAnswer(true);
-                                            }
-                                        }}
-                                    />
-                                    정답
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                }
-            </div>
-
-
-
-            <div className={styles.subContainer}>
-                <Title>
-                    시험 삭제
-                </Title>
-
-                <DeleteButton
-                    text="삭제하기"
-                    onClick={() => {
-                        setIsDeletingTest(true);
-                        setDeleteConfirmText("");
-                    }}
-                />
-            </div>
-
-
-
-            {
-                isDeletingTest
-
-                &&
-
-                <Modal title="시험 삭제" onClose={() => setIsDeletingTest(false)}>
-                    <div>
-                        시험을 삭제하시겠습니까?<br />
-                        해당 시험의 모든 데이터가 완전히 삭제됩니다.
-                    </div>
-                    <br />
-
-                    <div style={{ color: "rgb(250, 50, 50)" }}>
-                        다음 내용이 삭제됩니다.
-                    </div>
-
-                    <ul className={styles.deleteInfo}>
-                        <li>시험 설정</li>
-                        <li>문제 </li>
-                        <li>응시자 정보</li>
-                        <li>응시자별 제출 답안지</li>
-                        <li>공지사항</li>
-                        <li>응시자별 채팅 기록</li>
-                    </ul>
-                    <br />
-
-                    <div>
-                        시험을 삭제하려면 시험 이름을 입력하세요.<br />
-                    </div>
-                    <br />
-
-                    <InputBox
-                        type="text"
-                        value={deleteConfirmText}
-                        onChange={(event: any) => setDeleteConfirmText(event.target.value)}
-                        placeholder={testInfo.testName}
-                    />
-                    <br /><br /><br />
-
-                    <Buttons>
-                        <DeleteButton
-                            text="삭제"
-                            onClick={deleteTest}
-                            disabled={deleteConfirmText !== testInfo.testName}
+                        <InputBox
+                            type="text"
+                            value={deleteConfirmText}
+                            onChange={(event: any) => setDeleteConfirmText(event.target.value)}
+                            placeholder={testInfo.testName}
                         />
-                    </Buttons>
-                </Modal>
-            }
+                        <br /><br /><br />
+
+                        <Buttons>
+                            <DeleteButton
+                                text="삭제"
+                                onClick={deleteTest}
+                                disabled={deleteConfirmText !== testInfo.testName}
+                            />
+                        </Buttons>
+                    </Modal>
+                }
 
 
 
-            <Buttons>
-                <SubmitButton
-                    text="수정하기"
-                    onClick={editTestInfo}
-                />
-            </Buttons>
+                <Buttons>
+                    <SubmitButton
+                        text="수정하기"
+                        onClick={editTestInfo}
+                    />
+                </Buttons>
+            </div>
         </div>
     )
 }

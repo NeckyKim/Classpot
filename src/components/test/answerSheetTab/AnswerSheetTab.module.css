@@ -4,7 +4,7 @@
 }
 
 .applicantListContainer {
-    height: 100vh;
+    height: calc(100vh - 50px);
     border-right: 1px solid rgb(220, 220, 220);
     padding: 10px;
     display: flex;
@@ -54,7 +54,7 @@
 }
 
 .answerSheetContainer {
-    height: 100vh;
+    height: calc(100vh - 50px);
     padding: 40px;
     overflow: auto;
     display: flex;

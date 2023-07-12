@@ -4,7 +4,7 @@
     padding-left: 10px;
     padding-right: 10px;
     display: grid;
-    grid-template-columns: 60px 90px 1fr 40px 80px 40px 40px 40px;
+    grid-template-columns: 50px 80px 1fr 70px 80px 40px 40px 40px;
     gap: 25px;
     align-items: center;
 }
@@ -22,13 +22,19 @@
 }
 
 .applicantCode {
-    font-size: 1.2rem;
     color: rgb(150, 150, 150);
+    text-align: center;
 }
 
 .applicantName {
     font-size: 1.2rem;
     font-weight: 700;
+}
+
+.applicantScore {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
 }
 
 .applicantPauseOnButton {

@@ -1,6 +1,11 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .container {
-    padding-left: 20vh;
-    padding-right: 20vh;
+    width: 80vw;
+    max-width: 1000px;
     padding-top: 60px;
     padding-bottom: 60px;
     display: flex;

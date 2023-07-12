@@ -59,7 +59,7 @@ export default function QuestionContainer({ userCode, testCode, questionObject, 
                 <div className={styles.infoType}>
                     <img src={process.env.PUBLIC_URL + `/icons/${questionObject.type}.svg`} />
                     {(() => {
-                        switch (questionObject.type) {
+                        switch (questionObject?.type) {
                             case "mc": return "객관식"
                             case "sa": return "주관식"
                             case "tf": return "참/거짓"

@@ -232,63 +232,66 @@ export default function AnswerSheetTab({ userCode, testCode }: { userCode: any, 
 
 
 
-    if (applicantIndex) {
-        useEffect(() => {
+
+    useEffect(() => {
+        if (applicantIndex) {
             let copy1 = [...correctNumbers];
             let copy2 = [...correctPoints];
             let copy3 = [...typeNumbers];
             let copy4 = [...typePoints];
-    
-            for (let i = 0; i < questionList.length; i++) {
-                if (questionList[i].type === "mc") {
-                    if (questionList[i].points === applicantList[applicantIndex]?.reportCard[i]) {
+
+            for (let i = 0; i < questionList?.length; i++) {
+                if (questionList[i]?.type === "mc") {
+                    if (questionList[i]?.points === applicantList[applicantIndex]?.reportCard[i]) {
                         copy1[0] = copy1[0] + 1;
                     }
-    
+
                     copy2[0] = copy2[0] + applicantList[applicantIndex]?.reportCard[i];
                     copy3[0] = copy3[0] + 1;
                     copy4[0] = copy4[0] + questionList[i].points;
                 }
-    
-                else if (questionList[i].type === "tf") {
-                    if (questionList[i].points === applicantList[applicantIndex]?.reportCard[i]) {
+
+                else if (questionList[i]?.type === "tf") {
+                    if (questionList[i]?.points === applicantList[applicantIndex]?.reportCard[i]) {
                         copy1[1] = copy1[1] + 1;
                     }
-    
+
                     copy2[1] = copy2[1] + applicantList[applicantIndex]?.reportCard[i];
                     copy3[1] = copy3[1] + 1;
                     copy4[1] = copy4[1] + questionList[i].points;
                 }
-    
-                else if (questionList[i].type === "sa") {
-                    if (questionList[i].points === applicantList[applicantIndex]?.reportCard[i]) {
+
+                else if (questionList[i]?.type === "sa") {
+                    if (questionList[i]?.points === applicantList[applicantIndex]?.reportCard[i]) {
                         copy1[2] = copy1[2] + 1;
                     }
-    
+
                     copy2[2] = copy2[2] + applicantList[applicantIndex]?.reportCard[i];
                     copy3[2] = copy3[2] + 1;
                     copy4[2] = copy4[2] + questionList[i].points;
                 }
-    
-                else if (questionList[i].type === "essay") {
-                    if (questionList[i].points === applicantList[applicantIndex]?.reportCard[i]) {
+
+                else if (questionList[i]?.type === "essay") {
+                    if (questionList[i]?.points === applicantList[applicantIndex]?.reportCard[i]) {
                         copy1[3] = copy1[3] + 1;
                     }
-    
+
                     copy2[3] = copy2[3] + applicantList[applicantIndex]?.reportCard[i];
                     copy3[3] = copy3[3] + 1;
                     copy4[3] = copy4[3] + questionList[i].points;
                 }
             }
-    
+
             setCorrectNumbers(copy1);
             setCorrectPoints(copy2);
             setTypeNumbers(copy3);
             setTypePoints(copy4);
 
             setMyScore(sumArray(applicantList[applicantIndex]?.reportCard));
-        }, [applicantList[applicantIndex]])
-    }
+        }
+
+    }, [applicantIndex])
+    
 
 
 
@@ -337,7 +340,7 @@ export default function AnswerSheetTab({ userCode, testCode }: { userCode: any, 
                                 </div>
 
                                 <div className={styles.applicantScore}>
-                                    0점
+                                    {sumArray(elem.reportCard)}점
                                 </div>
                             </div>
                         ))

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import SettingTab from "./settingsTab/SettingTab";
 import QuestionTab from "./questionTab/QuestionTab";
@@ -8,7 +8,6 @@ import MonitoringTab from "./monitoringTab/MonitoringTab";
 import ChattingTab from "./chattingTab/ChattingTab";
 
 import Error from "../../Error";
-import colorPalette from "../../theme/ColorPalette";
 
 import GetUserInfo from "../hooks/GetUserInfo";
 import GetTestInfo from "../hooks/GetTestInfo";
@@ -20,6 +19,8 @@ import AnswerSheetTab from "./answerSheetTab/AnswerSheetTab";
 
 export default function Test({ userCode }: { userCode: string | undefined }) {
     const { testCode } = useParams();
+
+    const navigate = useNavigate();
 
     const [tab, setTab] = useState<number>(1);
 
@@ -42,16 +43,17 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
 
             <div className={styles.container}>
                 <div className={wide ? styles.sideBarWide : styles.sideBarNarrow}>
-                    <div className={wide ? styles.sideBarWideTop : styles.sideBarNarrowTop}>
-                        <div
-                            className={styles.sideBarIcon}
-                            style={{ background: `linear-gradient(135deg, rgba(${colorPalette[testInfo.color][0]}, ${colorPalette[testInfo.color][1]}, ${colorPalette[testInfo.color][2]}) 20%, rgb(${colorPalette[testInfo.color][0] - 40}, ${colorPalette[testInfo.color][1] - 40}, ${colorPalette[testInfo.color][2] - 40}) 80%)` }}
-                        >
-                            {testInfo.testName[0]}
-                        </div>
+                    <div 
+                        className={wide ? styles.sideBarWideTop : styles.sideBarNarrowTop}
+                        onClick={() => navigate("/")}
+                    >
+                        <img
+                            src={process.env.PUBLIC_URL + "/logos/icon_color.png"}
+                            className={styles.sideBarLogoIcon}
+                        />
 
-                        <div className={wide ? styles.sideBarWideText : styles.sideBarNarrowText}>
-                            {wide && testInfo.testName}
+                        <div className={wide ? styles.sideBarLogoShow : styles.sideBarLogoHide}>
+                            testcon
                         </div>
                     </div>
 
@@ -112,7 +114,7 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
 
 
 
-                        <div
+                        {/* <div
                             className={tab === 4 ? styles.tabSelected : styles.tabNotSelected}
                             onClick={() => {
                                 setTab(4);
@@ -126,7 +128,7 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
                             <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
                                 모니터링
                             </div>
-                        </div>
+                        </div> */}
 
 
 
@@ -172,7 +174,13 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
                     </div>
                 </div>
 
+
+
                 <div className={wide ? styles.contentWide : styles.contentNarrow}>
+                    <div className={wide ? styles.headerWide : styles.headerNarrow}>
+                        {testInfo.testName}
+                    </div>
+
                     {tab === 1 && <SettingTab userInfo={userInfo} testInfo={testInfo} />}
                     {tab === 2 && <QuestionTab userCode={userCode} testCode={testInfo.testCode} />}
                     {tab === 3 && <ApplicantsTab userCode={userCode} testCode={testInfo.testCode} />}

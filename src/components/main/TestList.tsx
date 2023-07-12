@@ -93,16 +93,16 @@ export default function TestList({ userCode, userName }: { userCode: string, use
                 </div>
 
                 {
-                    testList.map((current: any) => (
-                        <Link to={"/test/" + current.testCode} style={{ textDecoration: "none" }}>
+                    testList.map((elem: any) => (
+                        <Link to={"/test/" + elem.testCode} style={{ textDecoration: "none" }}>
                             <div className={styles.testElements}>
                                 <div
                                     className={styles.testProfile}
-                                    style={{ background: `linear-gradient(135deg, rgba(${colorPalette[colorIndex][0]}, ${colorPalette[colorIndex][1]}, ${colorPalette[colorIndex][2]}) 20%, rgb(${colorPalette[colorIndex][0] - 40}, ${colorPalette[colorIndex][1] - 40}, ${colorPalette[colorIndex][2] - 40}) 80%)` }}
+                                    style={{ background: `linear-gradient(135deg, rgba(${colorPalette[elem.color][0]}, ${colorPalette[elem.color][1]}, ${colorPalette[elem.color][2]}) 20%, rgb(${colorPalette[elem.color][0] - 40}, ${colorPalette[elem.color][1] - 40}, ${colorPalette[elem.color][2] - 40}) 80%)` }}
                                 />
 
                                 <div className={styles.testName}>
-                                    {current.testName}
+                                    {elem.testName}
                                 </div>
                             </div>
                         </Link>

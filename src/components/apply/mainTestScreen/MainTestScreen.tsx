@@ -229,8 +229,8 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                     / {questionList.length}
                                 </S.QuestionNumberTotal>
 
-                                <div
-                                    className={flaggedList.includes(questionIndex) ? styles.questionFlagged : styles.questionNotFlagged}
+                                <S.FlagButton
+                                    className={(flaggedList.includes(questionIndex) ? "flagged" : "notflagged") + (lightMode ? "light" : "dark")}
                                     onClick={() => {
                                         let copy = [...flaggedList];
 
@@ -248,13 +248,13 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                         setFlaggedList(copy);
                                     }}
                                 >
-                                    <img
-                                        className={flaggedList.includes(questionIndex) ? styles.questionFlaggedIcon : styles.questionNotFlaggedIcon}
+                                    <S.FlagIcon
+                                        className={flaggedList.includes(questionIndex) ? "flagged" : "notflagged"}
                                         src={process.env.PUBLIC_URL + (flaggedList.includes(questionIndex) ? "/icons/apply/flag_filled.svg" : "/icons/apply/flag_empty.svg")}
                                     />
 
                                     {flaggedList.includes(questionIndex) ? "문제 체크 취소" : "문제 체크"}
-                                </div>
+                                </S.FlagButton>
                             </div>
 
                             <S.QuestionInfo className={lightMode ? "light" : "dark"}>
@@ -271,17 +271,23 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                             </S.QuestionInfo>
                         </S.QuestionHeader>
 
-                        <Editor
-                            apiKey={process.env.REACT_APP_TINYMCE_EDITOR_ID}
-                            disabled={true}
-                            value={questionList[questionIndex]?.question}
-                            init={{
-                                readonly: true,
-                                menubar: false,
-                                toolbar: false,
-                                statusbar: false,
-                                plugins: ['autoresize', 'codesample'],
-                                content_style: `
+                        {
+                            lightMode
+
+                                ?
+
+                                <>
+                                    <Editor
+                                        apiKey={process.env.REACT_APP_TINYMCE_EDITOR_ID}
+                                        disabled={true}
+                                        value={questionList[questionIndex]?.question}
+                                        init={{
+                                            readonly: true,
+                                            menubar: false,
+                                            toolbar: false,
+                                            statusbar: false,
+                                            plugins: ['autoresize', 'codesample'],
+                                            content_style: `
                                     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
                                     body {
@@ -289,10 +295,41 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                         font-weight: 500;
                                         margin: 0px;
                                         padding: 0px;
+                                        color: black;
                                     }
                                 `
-                            }}
-                        />
+                                        }}
+                                    />
+                                </>
+
+                                :
+
+                                <div>
+                                    <Editor
+                                        apiKey={process.env.REACT_APP_TINYMCE_EDITOR_ID}
+                                        disabled={true}
+                                        value={questionList[questionIndex]?.question}
+                                        init={{
+                                            readonly: true,
+                                            menubar: false,
+                                            toolbar: false,
+                                            statusbar: false,
+                                            plugins: ['autoresize', 'codesample'],
+                                            content_style: `
+                                    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+                                    body {
+                                        font-family:'Pretendard';
+                                        font-weight: 500;
+                                        margin: 0px;
+                                        padding: 0px;
+                                        color: white;
+                                    }
+                                `
+                                        }}
+                                    />
+                                </div>
+                        }
                     </S.QuestionContainer>
 
 
@@ -318,13 +355,13 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                                         setAnswerSheet(copy);
                                                     }}
                                                 >
-                                                    <div className={(answerSheet[questionIndex] !== null && answerSheet[questionIndex][index]) ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                                    <S.ChoiceNumber className={((answerSheet[questionIndex] !== null && answerSheet[questionIndex][index]) ? "selected" : "notselected") + (lightMode ? "light" : "dark")}>
                                                         {index + 1}
-                                                    </div>
+                                                    </S.ChoiceNumber>
 
-                                                    <div className={(answerSheet[questionIndex] !== null && answerSheet[questionIndex][index]) ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                                    <S.ChoiceValue className={((answerSheet[questionIndex] !== null && answerSheet[questionIndex][index]) ? "selected" : "notselected")+ (lightMode ? "light" : "dark")}>
                                                         {elem}
-                                                    </div>
+                                                    </S.ChoiceValue>
                                                 </S.ChoiceElements>
                                             ))
                                         }
@@ -334,7 +371,7 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                     return <>
                                         <S.AnswerInputBox
                                             value={answerSheet[questionIndex]}
-                                            className={(questionList[questionIndex]?.type ? "sa" : "essay") + (lightMode ? "light" : "dark")}
+                                            className={"sa" + (lightMode ? "light" : "dark")}
                                             spellCheck={false}
                                             onChange={(event) => {
                                                 let copy = JSON.parse(JSON.stringify(answerSheet));
@@ -421,7 +458,7 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                     return <>
                                         <S.AnswerInputBox
                                             value={answerSheet[questionIndex]}
-                                            className={(questionList[questionIndex]?.type ? "sa" : "essay") + (lightMode ? "light" : "dark")}
+                                            className={"essay" + (lightMode ? "light" : "dark")}
                                             spellCheck={false}
                                             onChange={(event) => {
                                                 let copy = JSON.parse(JSON.stringify(answerSheet));

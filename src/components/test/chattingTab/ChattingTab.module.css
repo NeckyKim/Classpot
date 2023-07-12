@@ -4,7 +4,7 @@
 }
 
 .applicantListContainer {
-    height: 100vh;
+    height: calc(100vh - 50px);
     border-right: 1px solid rgb(220, 220, 220);
     padding: 10px;
     display: flex;
@@ -80,7 +80,7 @@
 }
 
 .chattingContainer {
-    height: 100vh;
+    height: calc(100vh - 50px);
     display: grid;
     grid-template-rows: 1fr fit-content(100%);
 }

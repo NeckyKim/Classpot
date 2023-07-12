@@ -12,7 +12,7 @@ export const Navigator = styled.div`
     overflow: auto;
 
     &.light {
-        background-color: rgb(248, 248, 248);
+        background-color: rgb(255, 255, 255);
         border-right: 1px solid rgb(220, 220, 220);
     }
 
@@ -64,11 +64,19 @@ export const NavigatorElements = styled.div`
         cursor: pointer;
     }
 
+    &.notselectedlight:hover {
+        background-color: rgb(248, 248, 248);
+    }
+
     &.notselecteddark {
         border: 1px solid rgb(70, 80, 100);
         color: rgb(255, 255, 255);
         background-color: rgb(50, 60, 80);
         cursor: pointer;
+    }
+
+    &.notselecteddark:hover {
+        background-color: rgb(70, 80, 100);
     }
 `
 
@@ -200,6 +208,57 @@ export const QuestionInfo = styled.div`
     }
 `
 
+export const FlagButton = styled.div`
+    font-size: 0.7rem;
+    font-weight: 400;
+    height: 20px;
+    border-radius: 3px;
+    margin-left: 10px;
+    padding-left: 3px;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &.flaggedlight,
+    &.flaggeddark {
+        color: rgb(255, 255, 255);
+        background-color: rgb(250, 150, 0);
+    }
+
+    &.notflaggedlight {
+        color: rgb(120, 120, 120);
+        background-color: rgb(240, 240, 240);
+    }
+
+    &.notflaggedlight:hover {
+        background-color: rgb(230, 230, 230);
+    }
+
+    &.notflaggeddark {
+        color: rgb(150, 150, 150);
+        background-color: rgb(60, 70, 90);
+    }
+
+    &.notflaggeddark:hover {
+        background-color: rgb(70, 80, 100);
+    }
+`
+
+export const FlagIcon = styled.img`
+    width: 17px;
+    height: 17px;
+    padding: 3px;
+
+    &.flagged {
+        filter: invert();
+    }
+
+    &.notflagged {
+        filter: invert(66%) sepia(11%) saturate(0%) hue-rotate(162deg) brightness(89%) contrast(97%);
+    }
+`
+
 export const QuestionContainer = styled.div`
     &.rllight {
         height: 100%;
@@ -237,8 +296,8 @@ export const QuestionContainer = styled.div`
 export const AnswerContainer = styled.div`
     &.rl {
         height: 100%;
-        padding-left: 75px;
-        padding-right: 75px;
+        padding-left: 80px;
+        padding-right: 80px;
         padding-top: 40px;
         padding-bottom: 20px;
         overflow: auto;
@@ -246,8 +305,8 @@ export const AnswerContainer = styled.div`
 
     &.ud {
         height: fit-content;
-        padding-left: calc(15vw - 5px);
-        padding-right: calc(15vw - 5px);
+        padding-left: 15vw;
+        padding-right: 15vw;
         padding-bottom: 20px;
         margin-top: -40px;
     }
@@ -281,7 +340,6 @@ export const AnswerInputBox = styled.textarea`
 
     &.essaylight {
         height: 300px;
-        min-height: 45px;
         border: 1px solid rgb(220, 220, 220);
         resize: vertical;
         color: rgb(250, 0, 0);
@@ -289,7 +347,6 @@ export const AnswerInputBox = styled.textarea`
 
     &.essaydark {
         height: 300px;
-        min-height: 45px;
         border: 1px solid rgb(70, 80, 100);
         resize: vertical;
         color: rgb(255, 255, 255);
@@ -344,7 +401,6 @@ export const ChoiceElements = styled.div`
     display: grid;
     grid-template-columns: fit-content(100%) 1fr;
     gap: 10px;
-    padding: 5px;
     border-radius: 5px;
     cursor: pointer;
 
@@ -353,7 +409,7 @@ export const ChoiceElements = styled.div`
     }
 
     &.light:hover {
-        background-color: red;
+        background-color: rgb(240, 240, 240);
     }
 
     &.dark {
@@ -361,7 +417,7 @@ export const ChoiceElements = styled.div`
     }
 
     &.dark:hover {
-        background-color: red;
+        background-color: rgb(40, 50, 70);
     }
 `
 
@@ -372,21 +428,38 @@ export const ChoiceNumber = styled.div`
     border-radius: 14px;
     text-align: center;
 
-    &.light {
-
+    &.selectedlight,
+    &.selecteddark {
+        border 1px solid rgb(0, 100, 250);
+        background-color: rgb(0, 100, 250);
+        color: rgb(255, 255, 255);
     }
 
-    &.dark {
-        
+    &.notselecteddark {
+        border: 1px solid rgb(70, 80, 100);
+        background-color: rgb(50, 60, 80);
+    }
+
+    &.notselectedlight {
+        border: 1px solid rgb(220, 220, 220);
+        background-color: rgb(248, 248, 248);
     }
 `
 
 export const ChoiceValue = styled.div`
-    &.light {
+    font-size: 1.1rem;
+    line-height: 28px;
 
+    &.selectedlight,
+    &.selecteddark {
+        color: rgb(0, 100, 250);
     }
 
-    &.dark {
+    &.notselecteddark {
+        color: rgb(255, 255, 255);
+    }
 
+    &.notselectedlight {
+        color: rgb(0, 0, 0);
     }
 `
