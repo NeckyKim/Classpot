@@ -93,7 +93,7 @@ export default function QuestionContainer({ userCode, testCode, questionObject, 
 
                 <div className={styles.passage}>
                     <Editor
-                        apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                        apiKey={process.env.REACT_APP_TINYMCE_EDITOR_ID}
                         disabled={true}
                         value={questionObject.question}
                         init={{

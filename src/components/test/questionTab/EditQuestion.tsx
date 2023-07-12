@@ -198,7 +198,7 @@ export default function EditQuestion({ userCode, testCode, questionObject, setIs
 
                 <div className={styles.questionContainer}>
                     <Editor
-                        apiKey="8q7n1e2sd7e0wh0gt9d3vyc8p1kkznty14inel82mcodryjw"
+                        apiKey={process.env.REACT_APP_TINYMCE_EDITOR_ID}
                         value={question}
                         onEditorChange={(content) => setQuestion(content)}
                         init={{
