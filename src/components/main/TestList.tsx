@@ -68,7 +68,7 @@ export default function TestList({ userCode, userName }: { userCode: string, use
                 noticeChatting: false,
                 reEntry: false,
                 preview: true,
-                color: 0
+                color: colorIndex
             })
 
             toast.success("시험 추가가 완료되었습니다.", { toastId: "" });
@@ -125,18 +125,11 @@ export default function TestList({ userCode, userName }: { userCode: string, use
                     &&
 
                     <Modal title="시험 추가" onClose={() => setIsCreatingTest(false)}>
-                        <div
-                            className={styles.colorProfile}
-                            style={{ background: `linear-gradient(135deg, rgba(${colorPalette[colorIndex][0]}, ${colorPalette[colorIndex][1]}, ${colorPalette[colorIndex][2]}) 20%, rgb(${colorPalette[colorIndex][0] - 40}, ${colorPalette[colorIndex][1] - 40}, ${colorPalette[colorIndex][2] - 40}) 80%)` }}
-                        >
-                            {testName[0]}
-                        </div>
-
                         <div className={styles.colorButtonContainer}>
-                            {colorPalette.map((elem, index) => (
+                            {colorPalette.map((elem: any, index: number) => (
                                 <div
-                                    className={styles.colorButton}
-                                    style={{ backgroundColor: String(`rgb(${elem[0]}, ${elem[1]}, ${elem[2]})`) }}
+                                    className={colorIndex === index ? styles.colorSelected : styles.colorNotSelected}
+                                    style={{ background: `linear-gradient(135deg, rgba(${colorPalette[index][0]}, ${colorPalette[index][1]}, ${colorPalette[index][2]}) 20%, rgb(${colorPalette[index][0] - 40}, ${colorPalette[index][1] - 40}, ${colorPalette[index][2] - 40}) 80%)` }}
                                     onClick={() => setColorIndex(index)}
                                 />
                             ))}

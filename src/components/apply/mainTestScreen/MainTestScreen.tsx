@@ -403,8 +403,8 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
 
                                 case "tf":
                                     return <div className={styles.choiceContainer}>
-                                        <div
-                                            className={styles.choiceElements}
+                                        <S.ChoiceElements
+                                            className={lightMode ? "light" : "dark"}
                                             onClick={() => {
                                                 let copy = JSON.parse(JSON.stringify(answerSheet));
 
@@ -419,17 +419,17 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                                 setAnswerSheet(copy);
                                             }}
                                         >
-                                            <div className={(answerSheet[questionIndex] !== null && answerSheet[questionIndex]) ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                            <S.ChoiceNumber className={((answerSheet[questionIndex] !== null && answerSheet[questionIndex]) ? "selected" : "notselected")  + (lightMode ? "light" : "dark")}>
                                                 O
-                                            </div>
-
-                                            <div className={(answerSheet[questionIndex] !== null && answerSheet[questionIndex]) ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                            </S.ChoiceNumber>
+                                            
+                                            <S.ChoiceValue>
                                                 참
-                                            </div>
-                                        </div>
+                                            </S.ChoiceValue>
+                                        </S.ChoiceElements>
 
-                                        <div
-                                            className={styles.choiceElements}
+                                        <S.ChoiceElements
+                                            className={lightMode ? "light" : "dark"}
                                             onClick={() => {
                                                 let copy = JSON.parse(JSON.stringify(answerSheet));
 
@@ -444,14 +444,14 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                                 setAnswerSheet(copy);
                                             }}
                                         >
-                                            <div className={(answerSheet[questionIndex] !== null && !answerSheet[questionIndex]) ? styles.choiceNumberSelected : styles.choiceNumberNotSelected}>
+                                            <S.ChoiceNumber className={((answerSheet[questionIndex] !== null && !answerSheet[questionIndex]) ? "selected" : "notselected")  + (lightMode ? "light" : "dark")}>
                                                 X
-                                            </div>
-
-                                            <div className={(answerSheet[questionIndex] !== null && !answerSheet[questionIndex]) ? styles.choiceValueSelected : styles.choiceValueNotSelected}>
+                                            </S.ChoiceNumber>
+                                            
+                                            <S.ChoiceValue>
                                                 거짓
-                                            </div>
-                                        </div>
+                                            </S.ChoiceValue>
+                                        </S.ChoiceElements>
                                     </div>
 
                                 case "essay":

@@ -4,14 +4,14 @@
     background-color: rgb(255, 255, 255);
     border-bottom: 1px solid rgb(220, 220, 220);
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     padding-left: 20vh;
     padding-right: 20vh;
     display: grid;
     grid-template-columns: 1fr fit-content(100%);
     align-items: center;
-    z-index: 11;
+    z-index: 1;
 }
 
 .headerLogo {
