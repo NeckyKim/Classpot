@@ -212,11 +212,10 @@ export default function AnswerSheetTab({ userCode, testCode }: { userCode: any, 
             }
         }
 
-        if (JSON.stringify(reportCard) !== JSON.stringify(applicantList[i].reportCard)) {
-            updateDoc(doc(dbService, "users", userCode, "tests", testCode, "applicants", applicantList[i].applicantCode), {
-                reportCard: reportCard
-            })
-        }
+        
+        updateDoc(doc(dbService, "users", userCode, "tests", testCode, "applicants", applicantList[i].applicantCode), {
+            reportCard: reportCard
+        })        
     }
 
 
@@ -292,7 +291,6 @@ export default function AnswerSheetTab({ userCode, testCode }: { userCode: any, 
 
     }, [applicantIndex])
     
-
 
 
     const [correct, setCorrect] = useState<number>(0);

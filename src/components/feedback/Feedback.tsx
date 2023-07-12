@@ -26,12 +26,6 @@ export default function Feedback() {
     }
 
 
-
-    function createArray(start: number, finish: number) {
-        return [...Array(finish - start + 1)].map((v, i) => i + start)
-    }
-
-
     
     let testInfo = GetTestInfo(userCode, testCode);
     let applicantList = GetApplicantList(userCode, testCode);

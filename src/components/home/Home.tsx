@@ -37,7 +37,7 @@ export default function Home() {
                             시험 응시하기
                         </div>
 
-                        <div className={styles.demoButton} onClick={() => { navigate("/apply/sample/applicant/sample") }}>
+                        <div className={styles.demoButton} onClick={() => { navigate("apply/manager/sample/test/sample/applicant/sample") }}>
                             테스트콘 체험하기
                         </div>
                     </div>

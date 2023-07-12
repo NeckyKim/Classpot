@@ -1,8 +1,8 @@
-const sampleTest = {
+export const sampleTestInfo = {
     color: 1,
     created: Date.now(),
-    duration: 6000,
-    feedback: true,
+    duration: 60,
+    feedback: false,
     feedbackQnA: {
         answer: true,
         question: true
@@ -14,7 +14,7 @@ const sampleTest = {
     },
     feedbackTime: {
         start: Date.now(),
-        finish: 2002019111000
+        finish: Date.now() + 36000000
     },
     idCard: false,
     managerCode: "AGrRbUSDWXW1HEVRLgM5M1LDLB42",
@@ -28,4 +28,15 @@ const sampleTest = {
     webCam: false
 }
 
-export default sampleTest;
+export const sampleApplicantInfo = {
+    answerSheet: new Array(100).fill(null),
+    applicantName: "체험 응시자",
+    chatting: [],
+    created: Date.now(),
+    finished: false,
+    log: [],
+    pause: false,
+    reportCard: new Array(100).fill(null),
+    shortApplicantCode: "SAMPLE",
+    submitted: 0
+}
