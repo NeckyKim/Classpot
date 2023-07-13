@@ -132,7 +132,7 @@ export default function Page4({ questionList, testInfo, setIsApplyingTest }: { q
                             {(isTestTime.beforeTime.days > 0) && (String(isTestTime.beforeTime.days) + "일 ")}
                             {(isTestTime.beforeTime.hours > 0) && (String(isTestTime.beforeTime.hours) + "시간 ")}
                             {(isTestTime.beforeTime.minutes > 0) && (String(isTestTime.beforeTime.minutes) + "분 ")}
-                            {(isTestTime.beforeTime.seconds > 0) && (String(isTestTime.beforeTime.seconds) + "초 ")}
+                            {(isTestTime.beforeTime.seconds >= 0) && (String(isTestTime.beforeTime.seconds) + "초 ")}
                             후 시작
                         </div>
 

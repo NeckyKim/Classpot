@@ -26,12 +26,6 @@ export default function Feedback() {
     }
 
 
-
-    function createArray(start: number, finish: number) {
-        return [...Array(finish - start + 1)].map((v, i) => i + start)
-    }
-
-
     
     let testInfo = GetTestInfo(userCode, testCode);
     let applicantList = GetApplicantList(userCode, testCode);
@@ -67,68 +61,56 @@ export default function Feedback() {
 
 
 
-    const [myScore, setMyScore] = useState<number>(0);
+    let myScore: number = sumArray(applicantInfo.reportCard);
 
-    const [correctNumbers, setCorrectNumbers] = useState<number[]>([0, 0, 0, 0]);
-    const [correctPoints, setCorrectPoints] = useState<number[]>([0, 0, 0, 0]);
-    const [typeNumbers, setTypeNumbers] = useState<number[]>([0, 0, 0, 0]);
-    const [typePoints, setTypePoints] = useState<number[]>([0, 0, 0, 0]);
+    let correctNumbers: number[] = [0, 0, 0, 0];
+    let correctPoints: number[] = [0, 0, 0, 0];
+    let typeNumbers: number[] =[0, 0, 0, 0];
+    let typePoints: number[] = [0, 0, 0, 0];
 
-    useEffect(() => {
-        let copy1 = [...correctNumbers];
-        let copy2 = [...correctPoints];
-        let copy3 = [...typeNumbers];
-        let copy4 = [...typePoints];
 
-        for (let i = 0; i < questionList.length; i++) {
-            if (questionList[i].type === "mc") {
-                if (questionList[i].points === applicantInfo.reportCard[i]) {
-                    copy1[0] = copy1[0] + 1;
-                }
-
-                copy2[0] = copy2[0] + applicantInfo.reportCard[i];
-                copy3[0] = copy3[0] + 1;
-                copy4[0] = copy4[0] + questionList[i].points;
+    console.log()
+    for (let i = 0; i < questionList.length; i++) {
+        if (questionList[i].type === "mc") {
+            if (questionList[i].points === applicantInfo.reportCard[i]) {
+                correctNumbers[0] = correctNumbers[0] + 1;
             }
 
-            else if (questionList[i].type === "tf") {
-                if (questionList[i].points === applicantInfo.reportCard[i]) {
-                    copy1[1] = copy1[1] + 1;
-                }
-
-                copy2[1] = copy2[1] + applicantInfo.reportCard[i];
-                copy3[1] = copy3[1] + 1;
-                copy4[1] = copy4[1] + questionList[i].points;
-            }
-
-            else if (questionList[i].type === "sa") {
-                if (questionList[i].points === applicantInfo.reportCard[i]) {
-                    copy1[2] = copy1[2] + 1;
-                }
-
-                copy2[2] = copy2[2] + applicantInfo.reportCard[i];
-                copy3[2] = copy3[2] + 1;
-                copy4[2] = copy4[2] + questionList[i].points;
-            }
-
-            else if (questionList[i].type === "essay") {
-                if (questionList[i].points === applicantInfo.reportCard[i]) {
-                    copy1[3] = copy1[3] + 1;
-                }
-
-                copy2[3] = copy2[3] + applicantInfo.reportCard[i];
-                copy3[3] = copy3[3] + 1;
-                copy4[3] = copy4[3] + questionList[i].points;
-            }
+            correctPoints[0] = correctPoints[0] + applicantInfo.reportCard[i];
+            typeNumbers[0] = typeNumbers[0] + 1;
+            typePoints[0] = typePoints[0] + questionList[i].points;
         }
 
-        setCorrectNumbers(copy1);
-        setCorrectPoints(copy2);
-        setTypeNumbers(copy3);
-        setTypePoints(copy4);
+        else if (questionList[i].type === "tf") {
+            if (questionList[i].points === applicantInfo.reportCard[i]) {
+                correctNumbers[1] = correctNumbers[1] + 1;
+            }
 
-        setMyScore(sumArray(applicantInfo.reportCard));
-    }, [applicantInfo.reportCard])
+            correctPoints[1] = correctPoints[1] + applicantInfo.reportCard[i];
+            typeNumbers[1] = typeNumbers[1] + 1;
+            typePoints[1] = typePoints[1] + questionList[i].points;
+        }
+
+        else if (questionList[i].type === "sa") {
+            if (questionList[i].points === applicantInfo.reportCard[i]) {
+                correctNumbers[2] = correctNumbers[2] + 1;
+            }
+
+            correctPoints[2] = correctPoints[2] + applicantInfo.reportCard[i];
+            typeNumbers[2] = typeNumbers[2] + 1;
+            typePoints[2] = typePoints[2] + questionList[i].points;
+        }
+
+        else if (questionList[i].type === "essay") {
+            if (questionList[i].points === applicantInfo.reportCard[i]) {
+                correctNumbers[3] = correctNumbers[3] + 1;
+            }
+
+            correctPoints[3] = correctPoints[3] + applicantInfo.reportCard[i];
+            typeNumbers[3] = typeNumbers[3] + 1;
+            typePoints[3] = typePoints[3] + questionList[i].points;
+        }
+    }
 
 
 

@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-const Style = styled.input`
+const InputBoxWrapperStyle = styled.div`
+
+    
+`
+
+const InputBoxContainerStyle = styled.input`
     font-size: 1.1rem;
     font-weight: 600;
     width: 100%;
@@ -22,20 +27,32 @@ const Style = styled.input`
     &:placeholder {
         font-weight: 400;
         color: rgb(180, 180, 180);
-    }
 `
 
-export default function InputBox({ type, value, onChange, placeholder, style, min, max }: { type: string, value: any, onChange: any, placeholder?: string, style?: object, min?: number, max?: number }) {
+export default function InputBox({ type, value, onChange, placeholder, style, min, max, showDigit }: {
+    type: string,
+    value: string | number,
+    onChange: React.ChangeEventHandler<HTMLInputElement>,
+    placeholder?: string,
+    style?: object,
+    min?: number,
+    max?: number,
+    showDigit?: boolean
+}) {
     return (
-        <Style
-            type={String(type)}
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            spellCheck={false}
-            style={style}
-            min={min}
-            max={max}
-        />
+        <InputBoxWrapperStyle>
+            <InputBoxContainerStyle
+                type={String(type)}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+                spellCheck={false}
+                style={style}
+                min={min}
+                max={max}
+            />
+
+            {value}
+        </InputBoxWrapperStyle>
     )
 }

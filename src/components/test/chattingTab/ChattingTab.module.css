@@ -251,7 +251,7 @@
 .notSelected {
     font-size: 1.5rem;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 50px);
     display: flex;
     align-items: center;
     justify-content: center;
