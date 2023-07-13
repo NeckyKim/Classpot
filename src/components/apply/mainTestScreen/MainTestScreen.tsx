@@ -88,7 +88,12 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
 
 
     async function submitAnswerSheet() {
-        if (userCode && testCode && applicantCode && (JSON.stringify([...answerSheet]) !== JSON.stringify(applicantInfo.answerSheet))) {
+        if (userCode === "sample") {
+            sessionStorage.setItem("sampleAnswerSheet", JSON.stringify(answerSheet));
+            toastAction("답안지가 제출되었습니다.");
+        }
+
+        else if (userCode && testCode && applicantCode && (JSON.stringify([...answerSheet]) !== JSON.stringify(applicantInfo.answerSheet))) {
             try {
                 logSetter("답안지 제출");
 
@@ -359,7 +364,7 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                                         {index + 1}
                                                     </S.ChoiceNumber>
 
-                                                    <S.ChoiceValue className={((answerSheet[questionIndex] !== null && answerSheet[questionIndex][index]) ? "selected" : "notselected")+ (lightMode ? "light" : "dark")}>
+                                                    <S.ChoiceValue className={((answerSheet[questionIndex] !== null && answerSheet[questionIndex][index]) ? "selected" : "notselected") + (lightMode ? "light" : "dark")}>
                                                         {elem}
                                                     </S.ChoiceValue>
                                                 </S.ChoiceElements>
@@ -419,10 +424,10 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                                 setAnswerSheet(copy);
                                             }}
                                         >
-                                            <S.ChoiceNumber className={((answerSheet[questionIndex] !== null && answerSheet[questionIndex]) ? "selected" : "notselected")  + (lightMode ? "light" : "dark")}>
+                                            <S.ChoiceNumber className={((answerSheet[questionIndex] !== null && answerSheet[questionIndex]) ? "selected" : "notselected") + (lightMode ? "light" : "dark")}>
                                                 O
                                             </S.ChoiceNumber>
-                                            
+
                                             <S.ChoiceValue>
                                                 참
                                             </S.ChoiceValue>
@@ -444,10 +449,10 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                                                 setAnswerSheet(copy);
                                             }}
                                         >
-                                            <S.ChoiceNumber className={((answerSheet[questionIndex] !== null && !answerSheet[questionIndex]) ? "selected" : "notselected")  + (lightMode ? "light" : "dark")}>
+                                            <S.ChoiceNumber className={((answerSheet[questionIndex] !== null && !answerSheet[questionIndex]) ? "selected" : "notselected") + (lightMode ? "light" : "dark")}>
                                                 X
                                             </S.ChoiceNumber>
-                                            
+
                                             <S.ChoiceValue>
                                                 거짓
                                             </S.ChoiceValue>
@@ -506,15 +511,25 @@ export default function MainTestScreen({ testInfo, applicantInfo, questionList, 
                         }}
                     />
 
-                    <img
-                        src={process.env.PUBLIC_URL + "/icons/apply/chatting.svg"}
-                        className={styles.containerBottomButton}
-                        onClick={() => {
-                            setShowChatting(true);
-                            setChattingText("");
-                            logSetter("채팅창 열기");
-                        }}
-                    />
+                    {
+                        testInfo.noticeChatting
+
+                            ?
+
+                            <img
+                                src={process.env.PUBLIC_URL + "/icons/apply/chatting.svg"}
+                                className={styles.containerBottomButton}
+                                onClick={() => {
+                                    setShowChatting(true);
+                                    setChattingText("");
+                                    logSetter("채팅창 열기");
+                                }}
+                            />
+
+                            :
+
+                            <div />
+                    }
                 </div>
 
                 <Buttons>

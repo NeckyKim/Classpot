@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 
 import GetTestInfo from "../hooks/GetTestInfo";
@@ -10,14 +10,33 @@ import PreTestScreen from "./preTestScreen/PreTestScreen";
 import MainTestScreen from "./mainTestScreen/MainTestScreen";
 import Error from "../../Error";
 
+import { sampleTestInfo, sampleApplicantInfo } from "../../sampleTest";
+
 
 
 export default function Apply() {
     const { userCode, testCode, applicantCode } = useParams();
 
-    var testInfo = GetTestInfo(userCode, testCode);
-    var applicantInfo = GetApplicantInfo(userCode, testCode, applicantCode);
-    let questionList = GetQuestionList(userCode, testCode);
+
+
+    let testInfo: any;
+    let applicantInfo: any;
+    let questionList: any;
+
+    if (userCode === "sample") {
+        testInfo = sampleTestInfo;
+        applicantInfo = sampleApplicantInfo;
+        questionList = GetQuestionList("AGrRbUSDWXW1HEVRLgM5M1LDLB42", "HuXwp26wwo0yqAUqqNXb");
+    }
+
+    else {
+        testInfo = GetTestInfo(userCode, testCode);
+        applicantInfo = GetApplicantInfo(userCode, testCode, applicantCode);
+        questionList = GetQuestionList(userCode, testCode);
+    }
+
+
+
     let isTestTime = TimeCalculator(testInfo.startDate, testInfo.duration);
 
     const [isApplyingTest, setIsApplyingTest] = useState<boolean>(false);
