@@ -2,8 +2,6 @@ import { useEffect, useRef } from "react";
 
 import styled, { keyframes } from "styled-components";
 
-
-
 const fadeIn = keyframes`
     0% {
         opacity: 0;
@@ -83,9 +81,11 @@ const Icon = styled.img`
     }
 `
 
-
-
-export default function Modal({ children, title, onClose }: { children: any, title: string, onClose: any }) {
+export default function Modal({ children, title, onClose }: {
+    children: any,
+    title: string,
+    onClose: any
+}) {
     const modalRef = useRef(null);
 
     useEffect(() => {
@@ -95,8 +95,6 @@ export default function Modal({ children, title, onClose }: { children: any, tit
             }
         })
     })
-
-
 
     return (
         <Background ref={modalRef}>

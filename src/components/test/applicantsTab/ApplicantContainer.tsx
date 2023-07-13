@@ -5,13 +5,13 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 import { toast } from "react-toastify";
 
-import Modal from "../../../theme/Modal";
-import Label from "../../../theme/Label";
-import InputBox from "../../../theme/InputBox";
-import Buttons from "../../../theme/Buttons";
-import SubmitButton from "../../../theme/SubmitButton";
-import DeleteButton from "../../../theme/DeleteButton";
-import CancelButton from "../../../theme/CancelButton";
+import Modal from "../../../style/Modal";
+import Label from "../../../style/Label";
+import InputBox from "../../../style/InputBox";
+import Buttons from "../../../style/Buttons";
+import SubmitButton from "../../../style/SubmitButton";
+import DeleteButton from "../../../style/DeleteButton";
+import CancelButton from "../../../style/CancelButton";
 
 import styles from "./ApplicantContainer.module.css";
 

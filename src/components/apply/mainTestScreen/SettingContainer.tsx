@@ -1,6 +1,6 @@
-import Modal from "../../../theme/Modal";
-import Label from "../../../theme/Label";
-import RadioButton from "../../../theme/RadioButton";
+import Modal from "../../../style/Modal";
+import Label from "../../../style/Label";
+import RadioButton from "../../../style/RadioButton";
 
 import styles from "./SettingContainer.module.css";
 

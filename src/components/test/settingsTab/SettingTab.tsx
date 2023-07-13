@@ -4,15 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { dbService } from "../../../FirebaseModules";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
-import Modal from "../../../theme/Modal";
-import Title from "../../../theme/Title";
-import Buttons from "../../../theme/Buttons";
-import SubmitButton from "../../../theme/SubmitButton";
-import DeleteButton from "../../../theme/DeleteButton";
-import InputBox from "../../../theme/InputBox";
-import Toggle from "../../../theme/Toggle";
-import CheckBox from "../../../theme/CheckBox";
-import colorPalette from "../../../theme/ColorPalette";
+import Modal from "../../../style/Modal";
+import Title from "../../../style/Title";
+import Label from "../../../style/Label";
+import Buttons from "../../../style/Buttons";
+import SubmitButton from "../../../style/SubmitButton";
+import DeleteButton from "../../../style/DeleteButton";
+import InputBox from "../../../style/InputBox";
+import Toggle from "../../../style/Toggle";
+import CheckBox from "../../../style/CheckBox";
 
 import { toast } from "react-toastify";
 
@@ -144,23 +144,21 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
                     </Title>
 
                     <div>
-                        <div className={styles.subHeader}>
+                        <Label style={{ fontSize: "1rem" }}>
                             시험 이름
-                        </div>
+                        </Label>
 
-                        <input
-                            type="textbox"
+                        <InputBox
+                            type="text"
                             value={testName}
-                            className={styles.inputBox}
                             onChange={(event) => setTestName(event.target.value)}
-                            required
                         />
                     </div>
 
                     <div>
-                        <div className={styles.subHeader}>
+                        <Label style={{ fontSize: "1rem" }}>
                             시험 코드
-                        </div>
+                        </Label>
 
                         <div className={styles.codeBox}>
                             <div className={styles.codeBoxValue}>
@@ -181,30 +179,27 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
 
                     <div className={styles.flexBox}>
                         <div style={{ width: "80%" }}>
-                            <div className={styles.subHeader}>
+                            <Label style={{ fontSize: "1rem" }}>
                                 시작 일시
-                            </div>
+                            </Label>
 
-                            <input
+                            <InputBox
                                 type="datetime-local"
                                 value={startDate}
-                                className={styles.inputBox}
                                 onChange={(event) => setStartDate(event.target.value)}
-                                required
+                                style={{ resize: "none" }}
                             />
                         </div>
 
                         <div style={{ width: "20%" }}>
-                            <div className={styles.subHeader}>
+                            <Label style={{ fontSize: "1rem" }}>
                                 진행 시간
-                            </div>
+                            </Label>
 
-                            <input
+                            <InputBox
                                 type="number"
                                 value={duration}
-                                className={styles.inputBox}
                                 onChange={(event) => setDuration(Number(event.target.value))}
-                                required
                             />
                         </div>
 
@@ -221,49 +216,27 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
                     <div className={styles.toggle}>
                         <Toggle value={preview} onClick={() => setPreview((prev) => !prev)} />
 
-                        <div className={styles.toggleHeader}>
+                        <Label style={{ fontSize: "1rem", marginBottom: 0 }}>
                             문제 정보 사전 공개(문항 수, 총점, 문제 유형)
-                        </div>
+                        </Label>
                     </div>
 
                     <div className={styles.toggle}>
                         <Toggle value={noticeChatting} onClick={() => setNoticeChatting((prev) => !prev)} />
 
-                        <div className={styles.toggleHeader}>
+                        <Label style={{ fontSize: "1rem", marginBottom: 0 }}>
                             공지사항 및 채팅 기능 허용
-                        </div>
+                        </Label>
                     </div>
 
                     <div className={styles.toggle}>
                         <Toggle value={reEntry} onClick={() => setReEntry((prev) => !prev)} />
 
-                        <div className={styles.toggleHeader}>
+                        <Label style={{ fontSize: "1rem", marginBottom: 0 }}>
                             재입장 응시 허용
-                        </div>
+                        </Label>
                     </div>
                 </div>
-
-
-
-                {/* <div className={styles.subContainer}>
-                <Title text="시험 감독 기능" />
-
-                <div className={styles.toggle}>
-                    <Toggle value={webCam} onClick={() => setWebCam((prev) => !prev)} />
-
-                    <div className={styles.toggleHeader}>
-                        화면 공유
-                    </div>
-                </div>
-
-                <div className={styles.toggle}>
-                    <Toggle value={idCard} onClick={() => setIdCard((prev) => !prev)} />
-
-                    <div className={styles.toggleHeader}>
-                        신분증 촬영
-                    </div>
-                </div>
-            </div> */}
 
 
 
@@ -275,9 +248,9 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
                     <div className={styles.toggle}>
                         <Toggle value={feedback} onClick={() => setFeedback((prev) => !prev)} />
 
-                        <div className={styles.toggleHeader}>
+                        <Label style={{ fontSize: "1rem" }}>
                             성적 공개
-                        </div>
+                        </Label>
                     </div>
 
                     {
@@ -288,38 +261,36 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
                         <>
                             <div className={styles.flexBox}>
                                 <div style={{ width: "50%" }}>
-                                    <div className={styles.subHeader}>
+                                    <Label style={{ fontSize: "1rem" }}>
                                         공개 시작 일시
-                                    </div>
+                                    </Label>
 
-                                    <input
+                                    <InputBox
                                         type="datetime-local"
                                         value={feedbackStart}
-                                        className={styles.inputBox}
                                         onChange={(event) => setFeedbackStart(event.target.value)}
-                                        required
+                                        style={{ resize: "none" }}
                                     />
                                 </div>
 
                                 <div style={{ width: "50%" }}>
-                                    <div className={styles.subHeader}>
+                                    <Label style={{ fontSize: "1rem" }}>
                                         공개 종료 일시
-                                    </div>
+                                    </Label>
 
-                                    <input
+                                    <InputBox
                                         type="datetime-local"
                                         value={feedbackFinish}
-                                        className={styles.inputBox}
                                         onChange={(event) => setFeedbackFinish(event.target.value)}
-                                        required
+                                        style={{ resize: "none" }}
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <div className={styles.subHeader}>
+                                <Label style={{ fontSize: "1rem" }}>
                                     점수 공개
-                                </div>
+                                </Label>
 
                                 <div className={styles.checkBoxContainer}>
                                     <div className={styles.checkBox}>
@@ -359,17 +330,15 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
                             </div>
 
                             <div>
-                                <div className={styles.subHeader}>
+                                <Label style={{ fontSize: "1rem" }}>
                                     등수 공개
-                                </div>
+                                </Label>
 
                                 <div className={styles.checkBoxContainer}>
                                     <div className={styles.checkBox}>
                                         <CheckBox
                                             value={feedbackRank}
-                                            onClick={() => {
-                                                setFeedbackRank((prev) => !prev);
-                                            }}
+                                            onClick={() => setFeedbackRank((prev) => !prev)}
                                         />
                                         등수
                                     </div>
@@ -377,9 +346,9 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
                             </div>
 
                             <div>
-                                <div className={styles.subHeader}>
-                                    문제와 정답
-                                </div>
+                                <Label style={{ fontSize: "1rem" }}>
+                                    문제 및 정답
+                                </Label>
 
                                 <div className={styles.checkBoxContainer}>
                                     <div className={styles.checkBox}>

@@ -37,7 +37,10 @@ const Icon = styled.div`
     background-color: rgb(255, 255, 255);
 `
 
-export default function RadioButton({ value, onClick }: { value: boolean, onClick: any }) {
+export default function RadioButton({ value, onClick }: {
+    value: boolean,
+    onClick: React.MouseEventHandler
+}) {
     return (
         (value)
 

@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
-import Buttons from "../../../theme/Buttons";
-import SubmitButton from "../../../theme/SubmitButton";
+import Buttons from "../../../style/Buttons";
+import SubmitButton from "../../../style/SubmitButton";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { createAgoraClient } from "../../../AgoraModules"

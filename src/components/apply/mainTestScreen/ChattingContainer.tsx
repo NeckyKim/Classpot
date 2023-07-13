@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import Modal from "../../../theme/Modal";
+import Modal from "../../../style/Modal";
 
 import styles from "./ChattingContainer.module.css";
 

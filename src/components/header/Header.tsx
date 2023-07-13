@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { authService } from "../../FirebaseModules";
 
-import SubmitButton from "../../theme/SubmitButton";
+import SubmitButton from "../../style/SubmitButton";
 
 import styles from "./Header.module.css";
 

@@ -6,9 +6,9 @@ import Page3 from "./Page3";
 import Page4 from "./Page4";
 import AfterPage from "./AfterPage";
 
-import Modal from "../../../theme/Modal";
-import CancelButton from "../../../theme/CancelButton";
-import Buttons from "../../../theme/Buttons";
+import Modal from "../../../style/Modal";
+import CancelButton from "../../../style/CancelButton";
+import Buttons from "../../../style/Buttons";
 
 import styles from "./PreTestScreen.module.css";
 

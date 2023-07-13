@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { dbService } from "../../FirebaseModules";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
-import SubmitButton from "../../theme/SubmitButton";
+import SubmitButton from "../../style/SubmitButton";
 
 import styles from "./CheckApplicantCode.module.css";
 

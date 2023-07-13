@@ -6,9 +6,9 @@ import QuestionContainer from "./QuestionContainer";
 
 import GetQuestionList from "../../hooks/GetQuestionList";
 
-import Title from "../../../theme/Title";
-import Label from "../../../theme/Label";
-import SubmitButton from "../../../theme/SubmitButton";
+import Title from "../../../style/Title";
+import Label from "../../../style/Label";
+import SubmitButton from "../../../style/SubmitButton";
 
 import { toast } from "react-toastify";
 

@@ -7,9 +7,9 @@ import GetApplicantList from "../../hooks/GetApplicantList";
 import GetTestInfo from "../../hooks/GetTestInfo";
 import TimeCalculator from "../../hooks/TimeCalculator";
 
-import Modal from "../../../theme/Modal";
-import Title from "../../../theme/Title";
-import Label from "../../../theme/Label";
+import Modal from "../../../style/Modal";
+import Title from "../../../style/Title";
+import Label from "../../../style/Label";
 
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { createAgoraClient } from "../../../AgoraModules"

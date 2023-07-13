@@ -5,14 +5,14 @@ import { doc, setDoc, collection } from "firebase/firestore";
 
 import GenerateShortApplicantCode from "../../hooks/GenerateShortApplicantCode";
 
-import Modal from "../../../theme/Modal";
-import Label from "../../../theme/Label";
-import InputBox from "../../../theme/InputBox";
-import Buttons from "../../../theme/Buttons";
-import SubmitButton from "../../../theme/SubmitButton";
+import Modal from "../../../style/Modal";
+import Label from "../../../style/Label";
+import InputBox from "../../../style/InputBox";
+import Buttons from "../../../style/Buttons";
+import SubmitButton from "../../../style/SubmitButton";
 
 import { toast } from "react-toastify";
-import CancelButton from "../../../theme/CancelButton";
+import CancelButton from "../../../style/CancelButton";
 
 
 

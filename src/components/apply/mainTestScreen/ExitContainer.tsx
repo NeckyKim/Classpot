@@ -1,7 +1,7 @@
-import Buttons from "../../../theme/Buttons";
-import CheckBox from "../../../theme/CheckBox";
-import DeleteButton from "../../../theme/DeleteButton";
-import Modal from "../../../theme/Modal";
+import Buttons from "../../../style/Buttons";
+import CheckBox from "../../../style/CheckBox";
+import DeleteButton from "../../../style/DeleteButton";
+import Modal from "../../../style/Modal";
 
 import styles from "./ExitContainer.module.css";
 

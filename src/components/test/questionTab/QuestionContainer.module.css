@@ -30,29 +30,6 @@
     font-weight: 700;
 }
 
-.infoType {
-    font-size: 0.8rem;
-    font-weight: 700;
-    width: fit-content;
-    height: 28px;
-    border-radius: 14px;
-    color: rgb(100, 100, 100);
-    background-color: rgb(235, 235, 235);
-    padding-left: 12px;
-    padding-right: 12px;
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    justify-content: center;
-    align-items: center;
-}
-
-.infoType img {
-    width: 16px;
-    height: 16px;
-    filter: invert(0.5);
-}
-
 .button {
     height: 20px;
     line-height: 20px;

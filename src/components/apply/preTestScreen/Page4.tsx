@@ -4,7 +4,7 @@ import { createAgoraClient } from "../../../AgoraModules"
 
 import TimeCalculator from "../../hooks/TimeCalculator";
 
-import Buttons from "../../../theme/Buttons";
+import Buttons from "../../../style/Buttons";
 
 import styles from "./Page4.module.css";
 

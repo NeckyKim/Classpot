@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import Buttons from "../../../theme/Buttons";
-import SubmitButton from "../../../theme/SubmitButton";
-import CheckBox from "../../../theme/CheckBox";
+import Buttons from "../../../style/Buttons";
+import SubmitButton from "../../../style/SubmitButton";
+import CheckBox from "../../../style/CheckBox";
 
 import styles from "./Page3.module.css";
 

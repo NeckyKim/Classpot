@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Style = styled.input`
+const DeleteButtonStyle = styled.input`
     font-size: 1rem;
     width: fit-content;
     height: 40px;
@@ -24,9 +24,14 @@ const Style = styled.input`
     }
 `
 
-export default function DeleteButton({ text, onClick, disabled, style }: { text: string, onClick: any, disabled?: boolean, style?: any }) {
+export default function DeleteButton({ text, onClick, disabled, style }: {
+    text: string,
+    onClick: React.MouseEventHandler,
+    disabled?: boolean,
+    style?: any
+}) {
     return (
-        <Style
+        <DeleteButtonStyle
             type="button"
             value={text}
             onClick={onClick}

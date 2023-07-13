@@ -3,10 +3,11 @@ import { useState } from "react";
 import { dbService } from "../../../FirebaseModules";
 import { doc, deleteDoc } from "firebase/firestore";
 
-import Modal from "../../../theme/Modal";
-import Buttons from "../../../theme/Buttons";
-import DeleteButton from "../../../theme/DeleteButton";
-import CancelButton from "../../../theme/CancelButton";
+import Modal from "../../../style/Modal";
+import Buttons from "../../../style/Buttons";
+import DeleteButton from "../../../style/DeleteButton";
+import CancelButton from "../../../style/CancelButton";
+import QuestionType from "../../../style/QuestionType";
 
 import { Editor } from "@tinymce/tinymce-react";
 import { toast } from "react-toastify";
@@ -56,26 +57,20 @@ export default function QuestionContainer({ userCode, testCode, questionObject, 
                     {questionObject.name}
                 </div>
 
-                <div className={styles.infoType}>
-                    <img src={process.env.PUBLIC_URL + `/icons/${questionObject.type}.svg`} />
-                    {(() => {
-                        switch (questionObject?.type) {
-                            case "mc": return "객관식"
-                            case "sa": return "주관식"
-                            case "tf": return "참/거짓"
-                            case "essay": return "서술형"
-                        }
-                    })()}
-                </div>
+                <QuestionType type={questionObject.type} />
 
                 <div className={styles.infoValue}>
                     {questionObject.points}점
                 </div>
 
                 <div className={styles.infoValue}>
-                    {questionObject.grading === 0 && "기본"}
-                    {questionObject.grading === 1 && "오답 시 감점"}
-                    {questionObject.grading === 2 && "응답 시 만점"}
+                    {(() => {
+                        switch(questionObject.grading) {
+                            case 0: return questionObject.type === "essay" ? "직접 채점" : "정답 시 만점"
+                            case 1: return "오답 시 감점"
+                            case 2: return "응답 시 만점"
+                        }
+                    })()}
                 </div>
 
                 <img
@@ -124,8 +119,8 @@ export default function QuestionContainer({ userCode, testCode, questionObject, 
                     &&
 
                     <div className={styles.label}>
-                    정답
-                </div>
+                        정답
+                    </div>
                 }
 
                 {

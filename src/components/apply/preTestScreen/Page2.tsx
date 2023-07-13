@@ -1,5 +1,5 @@
-import Buttons from "../../../theme/Buttons";
-import SubmitButton from "../../../theme/SubmitButton";
+import Buttons from "../../../style/Buttons";
+import SubmitButton from "../../../style/SubmitButton";
 
 import styles from "./Page2.module.css";
 

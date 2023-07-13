@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 import styles from "./ChoiceContainer.module.css";
-import CheckBox from "../../../theme/CheckBox";
+import CheckBox from "../../../style/CheckBox";
 
 
 

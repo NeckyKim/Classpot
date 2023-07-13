@@ -7,12 +7,12 @@ import { doc, setDoc, collection } from "firebase/firestore";
 import GetTestList from "../hooks/GetTestLists";
 import GenerateShortTestCode from "../hooks/GenerateShortTestCode";
 
-import Modal from "../../theme/Modal";
-import Label from "../../theme/Label";
-import InputBox from "../../theme/InputBox";
-import Buttons from "../../theme/Buttons";
-import SubmitButton from "../../theme/SubmitButton";
-import colorPalette from "../../theme/ColorPalette";
+import Modal from "../../style/Modal";
+import Label from "../../style/Label";
+import InputBox from "../../style/InputBox";
+import Buttons from "../../style/Buttons";
+import SubmitButton from "../../style/SubmitButton";
+import colorPalette from "../../style/ColorPalette";
 
 import { toast } from "react-toastify";
 

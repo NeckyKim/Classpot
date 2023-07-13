@@ -5,13 +5,13 @@ import { doc, updateDoc } from "firebase/firestore";
 
 import ChoiceContainer from "./ChoiceContainer";
 
-import Title from "../../../theme/Title";
-import Label from "../../../theme/Label";
-import InputBox from "../../../theme/InputBox";
-import Buttons from "../../../theme/Buttons";
-import SubmitButton from "../../../theme/SubmitButton";
-import CancelButton from "../../../theme/CancelButton";
-import RadioButton from "../../../theme/RadioButton";
+import Title from "../../../style/Title";
+import Label from "../../../style/Label";
+import InputBox from "../../../style/InputBox";
+import Buttons from "../../../style/Buttons";
+import SubmitButton from "../../../style/SubmitButton";
+import CancelButton from "../../../style/CancelButton";
+import RadioButton from "../../../style/RadioButton";
 
 import { toast } from "react-toastify";
 import { Editor } from '@tinymce/tinymce-react';
@@ -235,82 +235,87 @@ export default function EditQuestion({ userCode, testCode, questionObject, setIs
                 </Label>
 
                 {
-                    {
-                        "mc":
-                            (
-                                Array.isArray(answer)
+                    (() => {
+                        switch (type) {
+                            case "mc":
+                                return (
+                                    Array.isArray(answer)
 
-                                &&
+                                    &&
 
-                                <div className={styles.choices}>
-                                    {[0, 1, 2].map(x => (<ChoiceContainer index={x} choices={choices} setChoices={setChoices} answer={answer} setAnswer={setAnswer} />))}
-                                    {[3, 4, 5, 6, 7, 8, 9].map(x => (choices.length > x && <ChoiceContainer index={x} choices={choices} setChoices={setChoices} answer={answer} setAnswer={setAnswer} />))}
+                                    <div className={styles.choices}>
+                                        {[0, 1, 2].map(x => (<ChoiceContainer index={x} choices={choices} setChoices={setChoices} answer={answer} setAnswer={setAnswer} />))}
+                                        {[3, 4, 5, 6, 7, 8, 9].map(x => (choices.length > x && <ChoiceContainer index={x} choices={choices} setChoices={setChoices} answer={answer} setAnswer={setAnswer} />))}
 
-                                    <div
-                                        className={styles.addChoiceButton}
-                                        onClick={() => {
-                                            if (Array.isArray(answer) && answer.length < 10) {
-                                                let copy1 = [...choices];
-                                                let copy2 = [...answer];
+                                        <div
+                                            className={styles.addChoiceButton}
+                                            onClick={() => {
+                                                if (Array.isArray(answer) && answer.length < 10) {
+                                                    let copy1 = [...choices];
+                                                    let copy2 = [...answer];
 
-                                                copy1.push("");
-                                                copy2.push(false);
+                                                    copy1.push("");
+                                                    copy2.push(false);
 
-                                                setChoices(copy1);
-                                                setAnswer(copy2);
-                                            }
+                                                    setChoices(copy1);
+                                                    setAnswer(copy2);
+                                                }
 
-                                            else {
-                                                toast.error("보기는 최대 10개 까지 설정할 수 있습니다.", { toastId: "" });
-                                            }
-                                        }}
-                                    >
-                                        <img src={process.env.PUBLIC_URL + "/icons/dashboard/add_fill.svg"} className={styles.addChoiceIcon} />
-                                        보기 추가
+                                                else {
+                                                    toast.error("보기는 최대 10개 까지 설정할 수 있습니다.", { toastId: "" });
+                                                }
+                                            }}
+                                        >
+                                            <img src={process.env.PUBLIC_URL + "/icons/dashboard/add_fill.svg"} className={styles.addChoiceIcon} />
+                                            보기 추가
+                                        </div>
                                     </div>
-                                </div>
-                            ),
+                                )
 
-                        "sa":
-                            (
-                                !Array.isArray(answer) && typeof answer === "string"
+                            case "sa":
+                                return (
+                                    !Array.isArray(answer) && typeof answer === "string"
 
-                                &&
+                                    &&
 
-                                <input
-                                    type="text"
-                                    value={answer}
-                                    onChange={(event) => setAnswer(event.target.value)}
-                                    className={styles.answerInputBox}
-                                    spellCheck={false}
-                                />
-                            )
-                        ,
-
-                        "tf":
-                            <div className={styles.trueFalseContainer}>
-                                <div className={styles.radioBox} style={{ borderRight: "1px solid rgb(220, 220, 220)" }}>
-                                    <RadioButton
-                                        value={(typeof answer === "boolean") && answer}
-                                        onClick={() => setAnswer(true)}
+                                    <input
+                                        type="text"
+                                        value={answer}
+                                        onChange={(event) => setAnswer(event.target.value)}
+                                        className={styles.answerInputBox}
+                                        spellCheck={false}
                                     />
+                                )
 
-                                    참
-                                </div>
+                            case "tf":
+                                return (
+                                    <div className={styles.trueFalseContainer}>
+                                        <div className={styles.radioBox} style={{ borderRight: "1px solid rgb(220, 220, 220)" }}>
+                                            <RadioButton
+                                                value={(typeof answer === "boolean") && answer}
+                                                onClick={() => setAnswer(true)}
+                                            />
 
-                                <div className={styles.radioBox}>
-                                    <RadioButton
-                                        value={(typeof answer === "boolean") && !answer}
-                                        onClick={() => setAnswer(false)}
-                                    />
+                                            참
+                                        </div>
 
-                                    거짓
-                                </div>
-                            </div>,
+                                        <div className={styles.radioBox}>
+                                            <RadioButton
+                                                value={(typeof answer === "boolean") && !answer}
+                                                onClick={() => setAnswer(false)}
+                                            />
 
-                        "essay":
-                            <div className={styles.valueBox}>essay 문제는 정답을 설정할 수 없습니다.</div>
-                    }[type]
+                                            거짓
+                                        </div>
+                                    </div>
+                                )
+
+                            case "essay":
+                                return (
+                                    <div className={styles.valueBox}>서술형 문제는 정답을 설정할 수 없습니다.</div>
+                                )
+                        }
+                    })()
                 }
             </div>
 
@@ -335,7 +340,7 @@ export default function EditQuestion({ userCode, testCode, questionObject, setIs
 
                                 <div className={styles.gradingText}>
                                     <div className={styles.gradingTextTop}>
-                                        기본
+                                        응답 시 만점
                                     </div>
 
                                     <div className={styles.gradingTextBottom}>
@@ -390,7 +395,7 @@ export default function EditQuestion({ userCode, testCode, questionObject, setIs
 
                                 <div className={styles.gradingText}>
                                     <div className={styles.gradingTextTop}>
-                                        기본
+                                        직점 채점
                                     </div>
 
                                     <div className={styles.gradingTextBottom}>

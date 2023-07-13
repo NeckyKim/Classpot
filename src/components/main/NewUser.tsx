@@ -5,10 +5,10 @@ import { doc, setDoc } from "firebase/firestore";
 
 import GenerateShortUserCode from "../hooks/GenerateShortUserCode";
 
-import Label from "../../theme/Label";
-import InputBox from "../../theme/InputBox";
-import Buttons from "../../theme/Buttons";
-import SubmitButton from "../../theme/SubmitButton";
+import Label from "../../style/Label";
+import InputBox from "../../style/InputBox";
+import Buttons from "../../style/Buttons";
+import SubmitButton from "../../style/SubmitButton";
 
 import { toast } from "react-toastify";
 

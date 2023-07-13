@@ -42,7 +42,10 @@ const IconOff = styled.img`
     opacity: 0;
 `
 
-export default function CheckBox({ value, onClick }: { value: boolean, onClick: any }) {
+export default function CheckBox({ value, onClick }: {
+    value: boolean,
+    onClick: React.MouseEventHandler
+}) {
     return (
         (value)
 

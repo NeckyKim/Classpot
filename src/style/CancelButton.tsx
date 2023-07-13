@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Style = styled.input`
+const CancelButtonStyle = styled.input`
     font-size: 1rem;
     width: fit-content;
     height: 40px;
@@ -23,9 +23,13 @@ const Style = styled.input`
     }
 `
 
-export default function CancelButton({ text, onClick, style }: { text: any, onClick: any, style?: any }) {
+export default function CancelButton({ text, onClick, style }: {
+    text: any,
+    onClick: React.MouseEventHandler,
+    style?: any
+}) {
     return (
-        <Style
+        <CancelButtonStyle
             type="button"
             value={text}
             onClick={onClick}

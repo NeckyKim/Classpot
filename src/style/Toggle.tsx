@@ -29,7 +29,10 @@ const Switch = styled.div`
     }
 `
 
-export default function Toggle({ value, onClick }: { value: boolean, onClick: any }) {
+export default function Toggle({ value, onClick }: {
+    value: boolean,
+    onClick: React.MouseEventHandler
+}) {
     return (
         <Container className={value ? "on" : "off"} onClick={onClick}>
             <Switch className={value ? "on" : ""} />

@@ -9,8 +9,8 @@ import SettingContainer from "./SettingContainer";
 import ChattingContainer from "./ChattingContainer";
 import ExitContainer from "./ExitContainer";
 
-import Buttons from "../../../theme/Buttons";
-import SubmitButton from "../../../theme/SubmitButton";
+import Buttons from "../../../style/Buttons";
+import SubmitButton from "../../../style/SubmitButton";
 
 import { Editor } from "@tinymce/tinymce-react";
 import { toast } from "react-toastify";
