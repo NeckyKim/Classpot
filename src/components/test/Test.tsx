@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
+import DashboardTab from "./dashboardTab/DashboardTab";
 import SettingTab from "./settingsTab/SettingTab";
 import QuestionTab from "./questionTab/QuestionTab";
 import ApplicantsTab from "./applicantsTab/ApplicantsTab";
-import MonitoringTab from "./monitoringTab/MonitoringTab";
+// import MonitoringTab from "./monitoringTab/MonitoringTab";
 import ChattingTab from "./chattingTab/ChattingTab";
+import AnswerSheetTab from "./answerSheetTab/AnswerSheetTab";
 
 import Error from "../../Error";
 
@@ -13,7 +15,7 @@ import GetUserInfo from "../hooks/GetUserInfo";
 import GetTestInfo from "../hooks/GetTestInfo";
 
 import styles from "./Test.module.css";
-import AnswerSheetTab from "./answerSheetTab/AnswerSheetTab";
+
 
 
 
@@ -61,10 +63,24 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
 
                     <div className={styles.sideBarBottom}>
                         <div
+                            className={tab === 0 ? styles.tabSelected : styles.tabNotSelected}
+                            onClick={() => setTab(0)}
+                        >
+                            <img
+                                className={styles.tabIcon}
+                                src={process.env.PUBLIC_URL + "/icons/dashboard/dashboard.svg"}
+                            />
+
+                            <div className={wide ? styles.tabTextWide : styles.tabTextNarrow}>
+                                대시보드
+                            </div>
+                        </div>
+
+
+
+                        <div
                             className={tab === 1 ? styles.tabSelected : styles.tabNotSelected}
-                            onClick={() => {
-                                setTab(1);
-                            }}
+                            onClick={() => setTab(1) }
                         >
                             <img
                                 className={styles.tabIcon}
@@ -80,9 +96,7 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
 
                         <div
                             className={tab === 2 ? styles.tabSelected : styles.tabNotSelected}
-                            onClick={() => {
-                                setTab(2);
-                            }}
+                            onClick={() => setTab(2) }
                         >
                             <img
                                 className={styles.tabIcon}
@@ -98,9 +112,7 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
 
                         <div
                             className={tab === 3 ? styles.tabSelected : styles.tabNotSelected}
-                            onClick={() => {
-                                setTab(3);
-                            }}
+                            onClick={() => setTab(3) }
                         >
                             <img
                                 className={styles.tabIcon}
@@ -134,9 +146,7 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
 
                         <div
                             className={tab === 5 ? styles.tabSelected : styles.tabNotSelected}
-                            onClick={() => {
-                                setTab(5);
-                            }}
+                            onClick={() => setTab(5) }
                         >
                             <img
                                 className={styles.tabIcon}
@@ -152,9 +162,7 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
 
                         <div
                             className={tab === 6 ? styles.tabSelected : styles.tabNotSelected}
-                            onClick={() => {
-                                setTab(6);
-                            }}
+                            onClick={() => setTab(6) }
                         >
                             <img
                                 className={styles.tabIcon}
@@ -181,10 +189,11 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
                         {testInfo.testName}
                     </div>
 
+                    {tab === 0 && <DashboardTab userInfo={userInfo} testInfo={testInfo} />}
                     {tab === 1 && <SettingTab userInfo={userInfo} testInfo={testInfo} />}
                     {tab === 2 && <QuestionTab userCode={userCode} testCode={testInfo.testCode} />}
                     {tab === 3 && <ApplicantsTab userCode={userCode} testCode={testInfo.testCode} />}
-                    {tab === 4 && <MonitoringTab userCode={userCode} testCode={testInfo.testCode} />}
+                    {/* {tab === 4 && <MonitoringTab userCode={userCode} testCode={testInfo.testCode} />} */}
                     {tab === 5 && <ChattingTab userCode={userCode} testCode={testInfo.testCode} />}
                     {tab === 6 && <AnswerSheetTab userCode={userCode} testCode={testInfo.testCode} />}
                 </div>
