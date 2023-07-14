@@ -24,7 +24,7 @@ export default function Test({ userCode }: { userCode: string | undefined }) {
 
     const navigate = useNavigate();
 
-    const [tab, setTab] = useState<number>(1);
+    const [tab, setTab] = useState<number>(0);
 
     // 관리자 정보
     var userInfo: any = GetUserInfo(userCode);

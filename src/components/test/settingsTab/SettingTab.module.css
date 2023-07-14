@@ -63,6 +63,17 @@
     filter: invert(0.7);
 }
 
+.qrCodeBox {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+    background-color: rgb(230, 230, 230);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .flexBox {
     display: flex;
     flex-direction: row;

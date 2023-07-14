@@ -342,7 +342,7 @@ export default function AddQuestion({ userCode, testCode, setIsAddingQuestion }:
 
                                 <div className={styles.gradingText}>
                                     <div className={styles.gradingTextTop}>
-                                        응답 시 만점
+                                        정답 시 만점
                                     </div>
 
                                     <div className={styles.gradingTextBottom}>

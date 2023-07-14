@@ -15,6 +15,7 @@ import Toggle from "../../../style/Toggle";
 import CheckBox from "../../../style/CheckBox";
 
 import { toast } from "react-toastify";
+import QR from "qrcode.react";
 
 import styles from "./SettingTab.module.css";
 
@@ -174,6 +175,22 @@ export default function SettingsTab({ userInfo, testInfo }: { userInfo: any, tes
                                 <img className={styles.codeBoxButtonIcon} src={process.env.PUBLIC_URL + "/icons/dashboard/copy.svg"} />
                                 복사
                             </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <Label style={{ fontSize: "1rem" }}>
+                            시험장 QR 코드
+                        </Label>
+
+                        <div className={styles.qrCodeBox}>
+                            <QR
+                                value={`https://testcon.site/apply/manager/${testInfo.managerCode}/test/${testInfo.testCode}`}
+                                size={150}
+                                level={"L"}
+                                includeMargin={false}
+                                bgColor="#E6E6E6"
+                            />
                         </div>
                     </div>
 

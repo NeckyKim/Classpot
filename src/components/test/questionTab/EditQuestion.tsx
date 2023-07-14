@@ -340,7 +340,7 @@ export default function EditQuestion({ userCode, testCode, questionObject, setIs
 
                                 <div className={styles.gradingText}>
                                     <div className={styles.gradingTextTop}>
-                                        응답 시 만점
+                                        정답 시 만점
                                     </div>
 
                                     <div className={styles.gradingTextBottom}>

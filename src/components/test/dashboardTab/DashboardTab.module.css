@@ -1,0 +1,68 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 80vw;
+    max-width: 1100px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.guideWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.guideContainer {
+    border-radius: 5px;
+    padding: 25px;
+    background-color: rgb(245, 245, 245);
+}
+
+.guideLabel {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.guideGraphicsContainer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.guideGraphic {
+    width: 120px;
+    height: 120px;
+    filter: invert(67%) sepia(0%) saturate(37%) hue-rotate(142deg) brightness(97%) contrast(84%);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.guideArrow {
+    width: 20px;
+    height: 20px;
+    filter: invert(0.7);
+}
+
+.guideContainer ol {
+    margin-left: 20px;
+}
+
+.guideContainer li {
+    padding-left: 5px;
+}
+
+.guideContainer li::marker {
+    font-weight: 300;
+    color: rgb(150, 150, 150);
+}
+
+.guideContainer li:not(:last-child) {
+    margin-bottom: 10px;
+}
