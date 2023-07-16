@@ -24,11 +24,12 @@ const SubmitButtonStyle = styled.input`
   }
 
   @media (max-width: 600px) {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     height: 36px;
     line-height: 36px;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-radius: 3px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 `;
 

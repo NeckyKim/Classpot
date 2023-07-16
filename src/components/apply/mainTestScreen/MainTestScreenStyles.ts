@@ -135,6 +135,11 @@ export const QuestionHeader = styled.div`
   @media (max-width: 1000px) {
     grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%) 1fr fit-content(100%) fit-content(100%);
   }
+
+  @media (max-width: 600px) {
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+  }
 `;
 
 export const QuestionNumberLabel = styled.div`
@@ -153,7 +158,7 @@ export const QuestionNumberLabel = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 `;
 
@@ -171,7 +176,7 @@ export const QuestionNumberValue = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 `;
 
@@ -189,7 +194,7 @@ export const QuestionNumberTotal = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 `;
 
@@ -217,7 +222,7 @@ export const QuestionPrevNext = styled.img`
 
 export const QuestionAnswerContainer = styled.div`
   width: 100%;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 100px);
   display: grid;
   overflow: auto;
 
@@ -290,7 +295,7 @@ export const QuestionInfo = styled.div`
   }
 
   @media (max-width: 600px) {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -395,6 +400,15 @@ export const QuestionContainer = styled.div`
       border-right: none;
     }
   }
+
+  @media (max-width: 600px) {
+    &.rllight,
+    &.rldark,
+    &.udlight,
+    &.uddark {
+      padding-top: 20px;
+    }
+  }
 `;
 
 export const AnswerContainer = styled.div`
@@ -490,9 +504,11 @@ export const AnswerInputBox = styled.textarea`
 
 export const ContainerBottom = styled.div`
   width: 100vw;
-  height: 100%;
+  height: 50px;
   padding-left: 30px;
   padding-right: 30px;
+  position: fixed;
+  bottom: 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -506,6 +522,11 @@ export const ContainerBottom = styled.div`
   &.dark {
     border-top: 1px solid rgb(70, 80, 100);
     background-color: rgb(30, 40, 60);
+  }
+
+  @media (max-width: 600px) {
+    padding-left: min(30px, 5vw);
+    padding-right: min(30px, 5vw);
   }
 `;
 

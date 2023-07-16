@@ -21,6 +21,15 @@ const CancelButtonStyle = styled.input`
     background-color: rgba(220, 220, 220, 0.3);
     cursor: not-allowed;
   }
+
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 3px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 `;
 
 export default function CancelButton({
