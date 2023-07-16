@@ -39,3 +39,19 @@
     font-variant-numeric: tabular-nums;
     color: rgb(250, 50, 50);
 }
+
+@media (max-width: 600px) {
+    .timer {
+        gap: 5px;
+    }
+
+    .timerLabelWhite,
+    .timerLabelRed {
+        display: none;
+    }
+
+    .timerValueWhite,
+    .timerValueRed {
+        font-size: 1rem;
+    }
+}

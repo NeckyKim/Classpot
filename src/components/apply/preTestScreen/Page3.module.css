@@ -2,6 +2,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 30px;
+    word-break: keep-all;
 }
 
 .agreementContainer {
@@ -79,4 +80,17 @@
     padding: 15px;
     border-radius: 5px;
     border: 1px solid rgb(220, 220, 220);
+    word-break: keep-all;
+}
+
+@media (max-width: 1000px) {
+    .comment {
+        font-size: 1.2rem;
+    }
+
+    .agreementOpen,
+    .agreementClosed,
+    .agreeCheckBox {
+        font-size: 0.85rem;
+    }
 }

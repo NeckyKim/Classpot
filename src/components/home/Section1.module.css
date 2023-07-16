@@ -1,0 +1,50 @@
+.container {
+    width: 100vw;
+    height: 500px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    position: relative;
+}
+
+.text {
+    width: 100vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    position: absolute;
+    text-align: center;
+    display: grid;
+    word-break: keep-all;
+}
+
+.subText {
+    font-size: 1.2rem;
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+
+.mainText {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+}
+
+@media (max-width: 600px) {
+    .container {
+        height: calc(100vh - 70px);
+    }
+
+    .text {
+        padding-left: 5vw;
+        padding-right: 5vw;
+        padding-bottom: 100px;
+    }
+
+    .subText {
+        font-size: 1rem;
+    }
+
+    .mainText {
+        font-size: 2.4rem;
+    }
+}

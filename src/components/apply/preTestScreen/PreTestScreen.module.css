@@ -13,7 +13,7 @@
     z-index: 20;
 }
 
-.header {
+.info {
     width: 100vw;
     height: 50px;
     background-color: rgb(10, 20, 40);
@@ -27,18 +27,18 @@
     padding-right: 30px;
 }
 
-.headerTestName {
+.infoTestName {
     color: rgb(255, 255, 255);
 }
 
-.headerApplicantName {
+.infoApplicantName {
     color: rgb(255, 255, 255);
     border-left: 1px solid rgb(100, 100, 100);
     padding-left: 20px;
     margin-left: 20px;
 }
 
-.container1 {
+.container {
     width: 1000px;
     border-radius: 7px;
     background-color: rgb(255, 255, 255);
@@ -47,8 +47,6 @@
 .containerTop {
     width: 100%;
     height: 80px;
-    padding-left: 16px;
-    padding-right: 16px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,11 +56,9 @@
 }
 
 .navigator {
-    height: 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
     cursor: pointer;
 }
 
@@ -108,6 +104,7 @@
     height: 26px;
     line-height: 26px;
     color: rgb(0, 100, 250);
+    margin-left: 15px;
 }
 
 .navigatorTextNotSelected {
@@ -116,6 +113,7 @@
     height: 26px;
     line-height: 26px;
     color: rgb(150, 150, 150);
+    margin-left: 15px;
 }
 
 .arrow {
@@ -139,4 +137,63 @@
 
 .containerBottom::-webkit-scrollbar-thumb {
     background-color: rgb(230, 230, 230);
+}
+
+@media (max-width: 1000px) {
+    .background {
+        padding-top: 50px;
+    }
+
+    .container {
+        width: 100vw;
+        height: calc(100vh - 50px);
+        border-radius: 0px;
+    }
+
+    .containerBottom {
+        max-height: calc(100vh - 110px);        
+        padding-left: min(40px, 5vw);
+        padding-right: min(40px, 5vw);
+    }
+
+    .containerTop {
+        height: 60px;
+        border-radius: 0px;
+    }
+
+    .navigatorTextSelected {
+        max-width: 100px;
+        margin-left: 10px;
+        white-space: nowrap;
+        transition: 0.5s;
+    }
+
+    .navigatorTextNotSelected {
+        max-width: 0px;
+        margin-left: 0px;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: 0.5s;
+    }
+}
+
+@media (max-width: 600px) {
+    .info {
+        padding-left: 5vw;
+        padding-right: 5vw;
+        flex-direction: column;
+        align-items: normal;
+        justify-content: center;
+    }
+
+    .infoTestName {
+        font-size: 0.85rem;
+    }
+
+    .infoApplicantName {
+        font-size: 0.85rem;
+        border-left: none;
+        padding-left: 0px;
+        margin-left: 0px;
+    }
 }

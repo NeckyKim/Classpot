@@ -1,0 +1,11 @@
+.background {
+    width: 100vw;
+    height: 500px;
+}
+
+@media (max-width: 600px) {
+    .background {
+        width: 100vw;
+        height: calc(100vh - 70px);
+    }
+}

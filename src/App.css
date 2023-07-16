@@ -130,7 +130,7 @@ details summary::-webkit-details-marker {
         box-shadow: none;
         z-index: 21 !important;
     }
-    
+
     .Toastify__toast-container {
         margin: 0px;
         padding: 0px;
@@ -157,17 +157,23 @@ details summary::-webkit-details-marker {
     padding: 0px !important;
 }
 
-.tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {
+.tox .tox-toolbar,
+.tox .tox-toolbar__overflow,
+.tox .tox-toolbar__primary {
     border-bottom: 1px solid rgb(220, 220, 220);
 }
 
 .tox.tox-tinymce.tox-tinymce--disabled {
     border: 0px !important;
-    pointer-events: none !important;
+}
+
+.tox.tox-tinymce.tox-tinymce--disabled::-webkit-scrollbar {
+    background-color: transparent !important;
 }
 
 .tox .tox-tbtn__select-label {
-    font-family: "Pretendard" !important;;
+    font-family: "Pretendard" !important;
+    ;
     font-weight: 600 !important;
 }
 
@@ -180,7 +186,8 @@ details summary::-webkit-details-marker {
 }
 
 .tox .tox-collection__item-label {
-    font-family: "Pretendard" !important;;
+    font-family: "Pretendard" !important;
+    ;
 }
 
 
@@ -201,7 +208,7 @@ details summary::-webkit-details-marker {
     .p-splitter-gutter {
         height: 0px !important;
     }
-    
+
     .p-splitter-gutter-handle {
         height: 0px !important;
     }

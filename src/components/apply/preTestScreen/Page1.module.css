@@ -2,6 +2,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 30px;
+    word-break: keep-all;
 }
 
 .header {
@@ -21,8 +22,8 @@
 }
 
 .infoElements {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
 }
 
 .infoLabel {
@@ -34,4 +35,28 @@
 
 .infoValue {
     font-weight: 700;
+    word-break: keep-all;
+}
+
+@media (max-width: 1000px) {
+    .comment {
+        font-size: 1.2rem;
+    }
+
+    .infoContainer {
+        padding: min(20px, 5vw);
+        word-break: keep-all;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .infoLabel {
+        width: 100px;
+        font-size: 0.85rem;
+    }
+
+    .infoValue {
+        font-size: 0.85rem;
+    }
 }

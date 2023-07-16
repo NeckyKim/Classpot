@@ -8,3 +8,9 @@
     align-items: center;
     gap: 10px;
 }
+
+@media (max-width: 1000px) {
+    .screenModeContainer {
+        display: none;
+    }
+}

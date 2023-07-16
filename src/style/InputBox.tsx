@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const InputBoxStyle = styled.input`
     font-size: 1.1rem;
@@ -25,27 +25,35 @@ const InputBoxStyle = styled.input`
     &:placeholder {
         font-weight: 400;
         color: rgb(180, 180, 180);
-`
+`;
 
-export default function InputBox({ type, value, onChange, placeholder, style, min, max }: {
-    type: string,
-    value: string | number,
-    onChange: React.ChangeEventHandler<HTMLInputElement>,
-    placeholder?: string,
-    style?: object,
-    min?: number,
-    max?: number
+export default function InputBox({
+  type,
+  value,
+  onChange,
+  placeholder,
+  style,
+  min,
+  max,
+}: {
+  type: string;
+  value: string | number;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  placeholder?: string;
+  style?: object;
+  min?: number;
+  max?: number;
 }) {
-    return (
-        <InputBoxStyle
-            type={String(type)}
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            spellCheck={false}
-            style={style}
-            min={min}
-            max={max}
-        />
-    )
+  return (
+    <InputBoxStyle
+      type={String(type)}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      spellCheck={false}
+      style={style}
+      min={min}
+      max={max}
+    />
+  );
 }

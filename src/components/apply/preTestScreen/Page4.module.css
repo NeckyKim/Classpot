@@ -2,6 +2,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 30px;
+    word-break: keep-all;
 }
 
 .infoContainer {
@@ -15,8 +16,8 @@
 }
 
 .infoElements {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
 }
 
 .infoLabel {
@@ -107,5 +108,40 @@
         width: 100%;
         background-position: 100% 0%;
         opacity: 0;
+    }
+}
+
+@media (max-width: 1000px) {
+    .comment {
+        font-size: 1.2rem;
+    }
+
+    .infoContainer {
+        padding: min(20px, 5vw);
+        word-break: keep-all;
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr;
+        gap: 10px;
+    }
+
+    .infoLabel {
+        width: 70px;
+        font-size: 0.85rem;
+    }
+
+    .infoValue {
+        font-size: 0.85rem;
+    }
+
+    .alertContainer li {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .startButtonEnabled,
+    .startButtonDisabled {
+        width: 100%;
     }
 }

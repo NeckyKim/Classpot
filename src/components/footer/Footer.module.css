@@ -1,0 +1,35 @@
+.footer {
+    background-color: rgb(240, 240, 240);
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.footerImage {
+    height: 50px;
+    filter: invert(0.5);
+}
+
+.footerText {
+    font-weight: 400;
+    color: rgb(120, 120, 120);
+    text-align: right;
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-left: min(40px, 10vw);
+        padding-right: min(40px, 10vw);
+        grid-template-columns: none;
+        grid-template-rows: repeat(2, fit-content(100%));
+        justify-items: center;
+    }
+}

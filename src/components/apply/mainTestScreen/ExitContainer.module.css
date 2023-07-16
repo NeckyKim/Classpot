@@ -10,7 +10,7 @@
 
 .unsolvedContainer,
 .flaggedContainer {
-    width: 418px;
+    width: 100%;
     padding-top: 15px;
     padding-bottom: 20px;
     margin-bottom: 30px;
@@ -53,7 +53,7 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
-    border: 1px solid rgb(220, 220 ,220);
+    border: 1px solid rgb(220, 220, 220);
     color: rgb(250, 50, 50);
     border-radius: 5px;
     cursor: pointer;
@@ -72,7 +72,7 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
-    border: 1px solid rgb(220, 220 ,220);
+    border: 1px solid rgb(220, 220, 220);
     color: rgb(250, 150, 0);
     border-radius: 5px;
     cursor: pointer;
@@ -87,6 +87,7 @@
 .reEntryComment {
     color: rgb(250, 50, 50);
     word-break: keep-all;
+    margin-top: 30px;
 }
 
 .checkBoxContainer {
@@ -100,4 +101,39 @@
     gap: 10px;
     align-items: center;
     justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+
+    .flaggedLabel,
+    .flaggedContainer {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .unsolvedContainer,
+    .flaggedContainer {
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+
+    .unsolvedElements,
+    .flaggedElements {
+        font-size: 1rem;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 3px;
+    }
+
+    .reEntryComment {
+        font-size: 0.85rem;
+        margin-top: 20px;
+    }
+
+    .checkBoxContainer {
+        font-size: 0.85rem;
+    }
 }
