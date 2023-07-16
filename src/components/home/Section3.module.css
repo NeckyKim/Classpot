@@ -1,0 +1,131 @@
+.container {
+    background-color: rgb(0, 100, 250);
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 25vw;
+    padding-right: 25vw;
+}
+
+.mainText {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    word-break: keep-all;
+}
+
+.subText {
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    word-break: keep-all;
+}
+
+.stepContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.stepElements {
+    width: 100%;
+    height: 240px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 1));
+    border-radius: 10px;
+    position: relative;
+}
+
+.stepNumber {
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: rgb(0, 100, 250);
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.stepElements img {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    filter: invert(32%) sepia(39%) saturate(6549%) hue-rotate(207deg) brightness(92%) contrast(113%);
+}
+
+.stepText {
+    position: absolute;
+    text-align: right;
+    bottom: 20px;
+    right: 20px;
+}
+
+.stepLabel {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(0, 100, 250);
+}
+
+.stepComment {
+    word-break: keep-all;
+    margin-top: 5px;
+}
+
+@media (max-width: 1000px) {
+    .stepContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    .mainText {
+        font-size: 2rem;
+    }
+
+    .subText {
+        font-size: 1.2rem;
+    }
+
+    .stepElements {
+        height: 180px;
+    }
+
+    .stepNumber {
+        font-size: 1.2rem;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        top: min(5vw, 20px);
+        left: min(5vw, 20px);
+    }
+
+    .stepElements img {
+        width: 40px;
+        height: 40px;
+        top: min(5vw, 20px);
+        right: min(5vw, 20px);
+    }
+}
