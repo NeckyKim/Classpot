@@ -190,6 +190,7 @@ export default function EditQuestion({
                                     font-family: 'Pretendard';
                                     font-weight: 500;
                                     line-height: 1;
+                                    word-break: keep-all;
                                 }
 
                                 p {

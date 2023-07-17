@@ -187,6 +187,7 @@ export default function AddQuestion({
                                     font-family: 'Pretendard';
                                     font-weight: 500;
                                     line-height: 1;
+                                    word-break: keep-all;
                                 }
 
                                 p {

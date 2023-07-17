@@ -108,6 +108,7 @@ export default function QuestionContainer({
                                 font-weight: 500;
                                 margin: 0px;
                                 padding: 0px;
+                                word-break: keep-all;
                             }
                         `,
             }}

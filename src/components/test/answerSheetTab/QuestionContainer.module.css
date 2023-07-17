@@ -10,13 +10,13 @@
     grid-template-columns: 60px 1fr 90px 60px 100px;
     align-items: center;
     gap: 20px;
-    border-bottom: 1px solid rgb(220, 220, 220);    
+    border-bottom: 1px solid rgb(220, 220, 220);
 }
 
 .containerTopNumber {
     font-size: 1.4rem;
     font-weight: 700;
-    text-align: center;
+    text-align: center
 }
 
 .containerTopValue {
@@ -94,7 +94,7 @@
 .choiceValueCorrect {
     font-size: 1.1rem;
     line-height: 24px;
-    margin-top: 2px;    
+    margin-top: 2px;
     color: rgb(0, 100, 250);
     word-break: keep-all;
 }

@@ -214,3 +214,76 @@
 .gradingTable tr td:first-child {
     background-color: rgb(240, 240, 240);
 }
+
+@media (max-width: 1000px) {
+
+    .containerTop,
+    .containerBottom {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .header {
+        padding-left: 5vw;
+        padding-right: 5vw;
+        flex-direction: column;
+        align-items: normal;
+        justify-content: center;
+    }
+
+    .headerTestName {
+        font-size: 0.85rem;
+    }
+
+    .headerApplicantName {
+        font-size: 0.85rem;
+        border-left: none;
+        padding-left: 0px;
+        margin-left: 0px;
+    }
+
+    .containerTop {
+        height: 120px;
+    }
+
+    .infoHeader {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    .infoValue {
+        font-size: 1.5rem;
+    }
+
+    .menuButtonSelected,
+    .menuButtonNotSelected {
+        width: 50%;
+    }
+
+    .statisticTable th {
+        font-size: 0.85rem;
+    }
+
+    .statisticTable td div:first-child {
+        font-size: 1.2rem;
+    }
+
+    .statisticTable td div:nth-child(2) {
+        font-size: 0.85rem;
+    }
+
+    .detailTable {
+        font-size: 1rem;
+    }
+
+    .detailTable th {
+        font-size: 0.85rem;
+    }
+
+    .detailTable td {
+        font-size: 0.85rem;
+    }
+}

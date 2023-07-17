@@ -10,10 +10,20 @@
     padding-bottom: 60px;
 }
 
+.timeContainer {
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding: 25px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    background-color: rgb(245, 245, 245);
+}
+
 .guideWrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 10px;
 }
 
 .guideContainer {
