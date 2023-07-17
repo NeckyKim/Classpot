@@ -208,6 +208,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    word-break: keep-all;
+    text-align: center;
 }
 
 @media (max-width: 1000px) {
@@ -237,5 +239,9 @@
         border-left: none;
         padding-left: 0px;
         margin-left: 0px;
+    }
+
+    .pauseScreen {
+        font-size: 1.5rem;
     }
 }
