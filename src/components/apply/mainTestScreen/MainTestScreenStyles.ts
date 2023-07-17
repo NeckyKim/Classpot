@@ -569,7 +569,7 @@ export const ChoiceNumber = styled.div`
 
     &.selectedlight,
     &.selecteddark {
-        border 1px solid rgb(0, 100, 250);
+        border: 1px solid rgb(0, 100, 250);
         background-color: rgb(0, 100, 250);
         color: rgb(255, 255, 255);
     }
