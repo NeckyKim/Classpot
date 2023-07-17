@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Navigator = styled.div`
   width: 80px;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 100px);
   padding-top: 15px;
   padding-bottom: 15px;
   display: flex;
@@ -204,15 +204,20 @@ export const QuestionPrevNext = styled.img`
   cursor: pointer;
 
   &.lightenabled {
-    filter: invert(0.5);
+    filter: invert(0.6);
   }
 
   &.darkenabled {
     filter: invert();
   }
 
+  &.lightenabled:hover,
+  &.darkenabled:hover {
+    filter: invert(56%) sepia(89%) saturate(7494%) hue-rotate(210deg) brightness(97%) contrast(104%);
+  }
+
   &.lightdisabled {
-    filter: invert(0.8);
+    filter: invert(0.85);
   }
 
   &.darkdisabled {
@@ -359,8 +364,8 @@ export const QuestionContainer = styled.div`
   &.rllight {
     height: 100%;
     border-right: 1px solid rgb(220, 220, 220);
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: min(3vw, 80px);
+    padding-right: min(3vw, 80px);
     padding-top: 40px;
     overflow: auto;
   }
@@ -368,8 +373,8 @@ export const QuestionContainer = styled.div`
   &.rldark {
     height: 100%;
     border-right: 1px solid rgb(70, 80, 100);
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: min(3vw, 80px);
+    padding-right: min(3vw, 80px);
     padding-top: 40px;
     overflow: auto;
   }
@@ -414,8 +419,8 @@ export const QuestionContainer = styled.div`
 export const AnswerContainer = styled.div`
   &.rl {
     height: 100%;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: min(3vw, 80px);
+    padding-right: min(3vw, 80px);
     padding-top: 40px;
     padding-bottom: 20px;
     overflow: auto;
@@ -435,6 +440,7 @@ export const AnswerContainer = styled.div`
       padding-left: 5vw;
       padding-right: 5vw;
       padding-top: 0px;
+      padding-bottom: 80px;
       overflow: visible;
     }
   }

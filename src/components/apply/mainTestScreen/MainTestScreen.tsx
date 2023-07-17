@@ -108,7 +108,7 @@ export default function MainTestScreen({
           submitted: Date.now(),
           log: log,
         });
-
+        3;
         toastAction('답안지가 제출되었습니다.');
       } catch (error) {
         console.log(error);

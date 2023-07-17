@@ -6,25 +6,31 @@ import styles from './DashboardTab.module.css';
 export default function DashboardTab({ userInfo, testInfo }: { userInfo: any; testInfo: any }) {
   var isTestTime = TimeCalculator(testInfo.startDate, testInfo.duration);
 
-  console.log(isTestTime);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <Title>시험 진행 상황</Title>
 
-        <div className={styles.timeContainer}>
-          {(() => {
-            switch (isTestTime.isTime) {
-              case 'before':
-                return '시험 시작 전';
-              case 'running':
-                return '시험 진행 중';
-              case 'after':
-                return '시험 종료';
-            }
-          })()}
-        </div>
+        {(() => {
+          switch (isTestTime.isTime) {
+            case 'before':
+              return (
+                <div className={styles.timeContainer}>
+                  <div className={styles.timeLabel}>시작 이전</div>
+                  <div className={styles.timeValue}>
+                    {isTestTime.beforeTime.days > 0 && String(isTestTime.beforeTime.days) + '일 '}
+                    {isTestTime.beforeTime.hours > 0 && String(isTestTime.beforeTime.hours) + '시간 '}
+                    {isTestTime.beforeTime.minutes > 0 && String(isTestTime.beforeTime.minutes) + '분 '}
+                    {isTestTime.beforeTime.seconds >= 0 && String(isTestTime.beforeTime.seconds) + '초 '}후 시작
+                  </div>
+                </div>
+              );
+            case 'running':
+              return '시험 진행 중';
+            case 'after':
+              return '시험 종료';
+          }
+        })()}
 
         <Title>응시자 접속 가이드</Title>
 
