@@ -26,9 +26,22 @@ export default function DashboardTab({ userInfo, testInfo }: { userInfo: any; te
                 </div>
               );
             case 'running':
-              return '시험 진행 중';
+              return (
+                <div className={styles.timeContainer}>
+                  <div className={styles.timeLabel}>진행 중</div>
+                  <div className={styles.timeValue}>
+                    {isTestTime.remainingTime.hours > 0 && String(isTestTime.beforeTime.hours) + '시간 '}
+                    {isTestTime.remainingTime.minutes > 0 && String(isTestTime.beforeTime.minutes) + '분 '}
+                    {isTestTime.remainingTime.seconds >= 0 && String(isTestTime.beforeTime.seconds) + '초 '} 남음
+                  </div>
+                </div>
+              );
             case 'after':
-              return '시험 종료';
+              return (
+                <div className={styles.timeContainer}>
+                  <div className={styles.timeLabel}>종료</div>
+                </div>
+              );
           }
         })()}
 
